@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
+
+:root {
+  --brand-darkest: #000;
+  --brand-lightest: #fff;
+  --gray-base: #323232;
+  --brand-primary--inverted: #fff;
+  --brand-secondary: #f43;
+  --brand-secondary--inverted: #fff;
+  
+  --brand-primary: #000;
+  --main-navigation-color: #000;
+}
+
+.item:not([disabled]),
+.title,
+button:not([disabled]) {
+  cursor: pointer !important;
+}
+
+.isCollapsed .title {
+  cursor: e-resize !important;
+}
+
+
+/* high-fidelity renders */
+
+.btn {
+  display: inline-block;
+  padding: .5em 1em;
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.is-statement {
+  font-size: 1.5em;
+}
+
+.is-note {
+  margin: 0;
+  padding: 1em;
+  background: #ccc;
+}
+
+.is-important {
+  margin: 0;
+  padding: 1em;
+  background: #000 !important;
+  color: #fff !important;
+}
+
+.is-important *::-moz-selection {
+  background: #fff !important;
+  color: #000 !important;
+}
+
+.is-important *::selection {
+  background: #fff !important;
+  color: #000 !important;
+}

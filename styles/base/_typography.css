@@ -1,0 +1,131 @@
+body {
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: normal;
+  background: var(--pageBG);
+  color: var(--pageText);
+
+  @media (--md) {
+    font-size: 16px;
+  }
+}
+
+p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+
+  &:not(:last-child) {
+    margin-bottom: 1.5rem;
+  }
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .rc & {
+    padding: 0 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+
+    &:not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+    
+    li {
+      margin-bottom: .25rem;
+      
+      &::before {
+        content: "+";
+        display: inline-block;
+        position: relative;
+        top: -.125rem;
+        width: 1rem;
+        margin-left: -1rem;
+      }
+    }
+  }
+}
+
+/* Headers */
+
+h1 {
+  margin: 0 0 .5rem;
+  font-size: 2.5rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h2,
+.is-h2 {
+  margin: 0 0 .5rem;
+  font-size: 2rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h3,
+.is-h3 {
+  margin: 0 0 .5rem;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h4 {
+  margin: 0 0 .5rem;
+  font-size: 1.5rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h5 {
+  margin: 0 0 .5rem;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+h6 {
+  margin: 0 0 .5rem;
+  font-size: 1rem;
+  line-height: 1.2;
+  font-weight: normal;
+}
+
+/* Links */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Misc. */
+
+hr {
+  margin: 4rem 0;
+  border: none;
+  height: 1px;
+  background: var(--pageText);
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+::-moz-selection {
+  background: var(--pageText);
+  color: var(--pageBG);
+}
+::selection {
+  background: var(--pageText);
+  color: var(--pageBG);
+}

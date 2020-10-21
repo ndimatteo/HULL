@@ -1,0 +1,17 @@
+@font-face {
+  font-family: "666";
+  src: url("/fonts/666.woff2") format("woff2"),
+       url("/fonts/666.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "satan";
+  src: url("/fonts/satan.woff2") format("woff2"),
+       url("/fonts/satan.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

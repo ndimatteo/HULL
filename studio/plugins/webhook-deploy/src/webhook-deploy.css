@@ -1,0 +1,48 @@
+@import 'part:@sanity/base/theme/variables-style';
+@import 'part:@sanity/base/theme/variables/code-style';
+
+.appContainer {
+	padding: 2rem;
+}
+
+
+.container {
+  composes: container from 'part:@sanity/dashboard/widget-styles';
+}
+
+.header {
+	composes: header from 'part:@sanity/dashboard/widget-styles';
+}
+
+.title {
+  composes: title from 'part:@sanity/dashboard/widget-styles';
+}
+
+.list {
+	composes: content from 'part:@sanity/dashboard/widget-styles';
+	padding: 0;
+	border-top: 1px solid var(--hairline-color);
+	min-height: 0 !important;
+	height: auto !important;
+
+  /* @nest .container & {
+    padding-top: var(--small-padding);
+    padding-bottom: var(--medium-padding);
+  } */
+}
+
+.emptyList {
+	margin: 1rem;
+}
+
+.footer {
+  composes: footer from 'part:@sanity/dashboard/widget-styles';
+	border-top: 1px solid var(--hairline-color);
+	cursor: pointer;
+}
+
+.fieldWrapper {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: var(--large-padding);
+}

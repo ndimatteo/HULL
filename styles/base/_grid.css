@@ -1,0 +1,31 @@
+.grid {
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: repeat(12, 1fr);
+
+  &.is-x-centered {
+    align-items: center;
+  }
+
+  @mixin grid;
+
+  @media (--xs) {
+    @mixin grid -xs;
+  }
+
+  @media (--sm) {
+    @mixin grid -sm;
+  }
+
+  @media (--md) {
+    @mixin grid -md;
+  }
+
+  @media (--lg) {
+    @mixin grid -lg;
+  }
+
+  @media (--xl) {
+    @mixin grid -xl;
+  }
+}

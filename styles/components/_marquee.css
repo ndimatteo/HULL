@@ -1,0 +1,10 @@
+.marquee {
+  position: relative;
+  overflow: hidden;
+
+  span {
+    display: block;
+    padding: .5em 0;
+    white-space: nowrap;
+  }
+}

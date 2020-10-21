@@ -1,0 +1,136 @@
+
+.seoItem {
+  margin: 2rem 0 3rem;
+  padding: 0 1rem;
+  border-top: 1px solid rgba(23, 23, 23, 0.1);
+}
+
+.imagePlaceholder {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 52.5%;
+  background: #ddd;
+}
+
+.imagePlaceholder::after {
+  content: '(no share image set)';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+.tweetWrapper {
+  position: relative;
+  width: 506px;
+  padding: 12px 12px 8px 54px;
+  text-align: left;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: #f6f6f6;
+}
+
+.tweetAuthor {
+  position: relative;
+  margin-right: 75px;
+  margin-bottom: 10px;
+}
+
+.tweetAuthorAvatar {
+  position: absolute;
+  top: 3px;
+  left: -42px;
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}
+
+.tweetAuthorName {
+  margin-right: 4px;
+  font-weight: 700;
+  color: #333;
+}
+
+.tweetAuthorHandle {
+  padding: 0;
+  margin-top: 2px;
+  margin-left: 2px;
+  font-size: 12px;
+  color: #999;
+}
+
+.tweetText p {
+  margin: 0 0 10px;
+}
+
+.tweetUrlWrapper {
+  text-decoration: none;
+  color: inherit;
+}
+
+.tweetCardPreview {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: rgba(136,153,166,.5);
+  border-radius: 0.85714em;
+  border-width: 1px;
+  border-style: solid;
+  overflow: hidden;
+}
+
+.tweetCardContent {
+  padding: 0.75em;
+  width: calc(100% - 8.81667em - 2px);
+  overflow: hidden;
+}
+
+.tweetCardImage {
+  display: flex;
+  border-right-width: 1px;
+  overflow: hidden;
+  width: 100%;
+  flex-shrink: 0;
+  border-right-width: 1px;
+}
+
+.tweetCardImage img {
+  width: 100%;
+  height: auto;
+  object-fit: fit;
+}
+
+.tweetCardTitle {
+  max-height: 1.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1em;
+  margin: 0 0 0.15em;
+}
+
+.tweetCardDescription {
+  max-height: 3.9em;
+  overflow: hidden;
+}
+
+.tweetCardDescription p {
+  overflow: hidden;
+  margin-top: 0.32333em;
+}
+
+.tweetCardDestination {
+  margin-top: 0.32333em;
+  text-transform: lowercase;
+  color: #8899A6;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

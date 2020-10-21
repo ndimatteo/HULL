@@ -1,0 +1,26 @@
+@import 'part:@sanity/base/theme/variables-style';
+
+.notice {
+  composes: root from 'part:@sanity/base/theme/layout/box-style';
+  border-radius: var(--border-radius-large);
+  background-color: var(--gray-lightest) !important;
+  color: var(--gray);
+  font-size: var(--font-size-small);
+}
+
+.notice p {
+  margin: 0;
+}
+
+.notice p:not(:last-child) {
+  margin: 0 0 1em;
+}
+
+.notice code {
+  display: inline-block;
+  padding: 0 .25em;
+  background: var(--gray-lighter);
+  color: var(--gray-darkest);
+  border-radius: var(--border-radius-small);
+  font-size: var(--font-size-xsmall);
+}

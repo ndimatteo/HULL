@@ -1,0 +1,47 @@
+{
+  "name": "hull",
+  "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "author": "Nick DiMatteo <hello@nickdimatteo.com>",
+  "scripts": {
+    "build": "sanity build",
+    "dev": "sanity start",
+    "test": "sanity check"
+  },
+  "dependencies": {
+    "@sanity/base": "^2.0.6",
+    "@sanity/cli": "^2.0.5",
+    "@sanity/components": "^2.0.6",
+    "@sanity/core": "^2.0.5",
+    "@sanity/dashboard": "^2.0.5",
+    "@sanity/default-layout": "^2.0.6",
+    "@sanity/default-login": "^2.0.5",
+    "@sanity/desk-tool": "^2.0.6",
+    "@sanity/vision": "^2.0.5",
+    "axios": "^0.20.0",
+    "bcp47": "^1.1.2",
+    "nanoid": "^3.1.10",
+    "prop-types": "^15.7.2",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-icons": "^3.11.0",
+    "react-polling": "^1.0.9",
+    "sanity-plugin-dashboard-widget-document-list": "^0.0.11",
+    "sanity-plugin-dashboard-widget-netlify": "^1.0.1",
+    "spacetime": "^6.6.0",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-config-standard-react": "^9.2.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-standard": "^4.0.1",
+    "prettier-eslint-cli": "^5.0.0"
+  }
+}

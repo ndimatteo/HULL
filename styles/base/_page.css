@@ -1,0 +1,33 @@
+html,
+body {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  &.is-loading,
+  &.is-loading * {
+    cursor: wait !important;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+.section {
+  position: relative;
+  padding: 4rem 0;
+
+  &.is-error {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+}

@@ -1,0 +1,198 @@
+body {
+  font-family: Courier;
+}
+
+.main-navigation,
+.footer-navigation {
+  font-family: 'satan';
+  
+  > ul {
+    > li {
+      margin: 0 .5rem;
+
+      > a:not(.btn) {
+        transition: background 0s .5s;
+      }
+    }
+  }
+  
+  a:not(.btn),
+  button {
+    font-size: .666em;
+    text-transform: uppercase;
+  }
+
+  .is-active {
+    > a:not(.btn),
+    > button {
+      background: var(--pageText);
+    }
+  }
+
+  .dropdown {
+    a:not(.btn) {
+      font-size: 1.25rem;
+      letter-spacing: .25em;
+      color: inherit;
+      -webkit-text-fill-color: var(--pageBG);
+      -webkit-text-stroke-color: inherit;
+      -webkit-text-stroke-width: .05em;
+      text-stroke: .05em inherit;
+    }
+  }
+}
+
+.section {
+  text-align: center;
+}
+
+.hero {
+  margin: 0 auto 4rem;
+  max-width: 42rem;
+}
+
+.marquee {
+  font-family: 'satan';
+  font-size: .666em;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  background: var(--pageText);
+  color: var(--pageBG);
+
+  &.is-white {
+    background: white;
+    color: var(--pageBG);
+  }
+}
+
+.accordion {
+  max-width: 42rem;
+  margin: 0 auto;
+  border-top: 1px solid;
+  border-left: 1px solid;
+  border-right: 1px solid;
+  text-align: left;
+
+  &:last-child {
+    border-bottom: 1px solid;
+  }
+
+  &--toggle {
+    display: block;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  &--inner {
+    padding: 1rem;
+    border-top: 1px solid;
+  }
+}
+
+.carousel {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.drawer {
+  &--title {
+    font-family: 'satan';
+    text-transform: uppercase;
+  }
+}
+
+.form {
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.control {
+  margin-bottom: 1rem;
+
+  &--group {
+    column-gap: 1rem;
+  }
+
+  &--error {
+    top: 0;
+    left: auto;
+    padding: .125rem .5rem calc(.25rem + 1px);
+    background: var(--pageText);
+    color: var(--pageBG);
+    font-size: .625rem;
+    font-weight: bold;
+  }
+}
+
+p {
+  font-size: .75em;
+}
+
+h1 {
+  font-family: '666';
+
+  .is-error & {
+    font-size: 3rem;
+  }
+}
+
+h2, h3 {
+  font-family: 'satan';
+}
+
+.btn {
+  padding: 1em 2em;
+  border: 1px solid;
+  font-family: 'satan';
+  font-size: .666em;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+}
+
+.is-disclaimer {
+  font-family: Courier;
+}
+
+.logo {
+  margin: 2rem auto;
+}
+
+.social-nav {
+  &--link {
+    position: relative;
+    margin: 0 -.5px;
+    border: 1px solid var(--pageText);
+
+    &:hover {
+      background: var(--pageText);
+
+      path {
+        stroke: var(--pageBG);
+      }
+    }
+    
+    path {
+      fill: none;
+      stroke: var(--pageText);
+      stroke-width: 3px;
+    }
+  }
+}
+
+.grid {
+  max-width: 80rem;
+  padding: 0 2rem;
+  margin: 0 auto;
+  
+  &.has-wireframe {
+    [class^="is-col"] {
+      border: 1px solid;
+      margin: -.5px;
+    }
+
+    span {
+      display: block;
+      padding: 1rem;
+    }
+  }
+}
