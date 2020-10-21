@@ -13,6 +13,7 @@
 @import "components/_footer.css";
 @import "components/_hero.css";
 @import "components/_marquee.css";
+@import "components/_page-transitions.css";
 
 @import "utilities/_accordions.css";
 @import "utilities/_buttons.css";

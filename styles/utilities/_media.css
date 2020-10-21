@@ -57,17 +57,28 @@ img.photo {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1.2);
   width: calc(100% + 1px);
   height: calc(100% + 1px);
   object-fit: cover;
 
   opacity: 0;
   z-index: 1;
-  transition: opacity .2s linear;
+  transition: opacity .15s linear, transform 1s cubic-bezier(.215,.61,.355,1);
 
   &.is-loaded,
   .is-loaded & {
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    animation: revealRight .6s cubic-bezier(0.85, 0, 0.15, 1) both;
+  }
+}
+
+@keyframes revealRight {
+  from {
+    clip-path: inset(100% 0 0);
+  }
+  to {
+    clip-path: inset(0% 0 0 0);
   }
 }

@@ -2,6 +2,30 @@ body {
   font-family: Courier;
 }
 
+.panel-swipe {
+  &--bg {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    mix-blend-mode: difference;
+  }
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: -5vh;
+    width: auto;
+    height: 110vh;
+
+    svg {
+      width: auto;
+      height: 100%;
+    }
+  }
+}
+
 .main-navigation,
 .footer-navigation {
   font-family: 'satan';
@@ -62,6 +86,16 @@ body {
   &.is-white {
     background: white;
     color: var(--pageBG);
+  }
+
+  &.is-inverted {
+    background: var(--pageBG);
+    color: var(--pageText);
+  }
+
+  &.is-large {
+    font-size: 2rem;
+    line-height: .15;
   }
 }
 

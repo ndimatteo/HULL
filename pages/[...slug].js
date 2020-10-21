@@ -16,8 +16,6 @@ const Page = ({ data }) => {
 
   const { site, menus, page } = data
 
-  console.log(page)
-
   return (
     <>
       {!router.isFallback && (

@@ -9,8 +9,6 @@ import Hero from '../modules/hero'
 const Home = ({ data }) => {
   const { site, menus, page } = data
 
-  console.log(page)
-
   return (
     <Layout
       site={{
