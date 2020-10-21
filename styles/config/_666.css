@@ -163,7 +163,9 @@ p {
 }
 
 h1 {
+  margin: 2rem 0 1rem;
   font-family: '666';
+  font-size: 6rem;
 
   .is-error & {
     font-size: 3rem;
