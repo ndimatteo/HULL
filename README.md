@@ -1,5 +1,6 @@
-# :skull: HULL
-Website built on [Next.js](https://nextjs.org) 🤘
+<img src="https://raw.githubusercontent.com/ndimatteo/HULL-next/master/public/HULL-Logo.svg?token=AAFT7JG4767DJK54KQ53VRK7SCRW6" align="center" height="150" />
+
+Website built on [Next.js](https://nextjs.org) 🤘 <br />
 Headless CMS powered by [Sanity.io](https://sanity.io)
 
 
