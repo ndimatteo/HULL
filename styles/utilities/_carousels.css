@@ -75,7 +75,7 @@
     margin: 0 1.5em;
     width: 3em;
     height: 1px;
-    background: var(--white);
+    background: rgba(var(--pageText-rgb), .25);
 
     span {
       display: block;

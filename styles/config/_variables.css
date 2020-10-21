@@ -5,6 +5,9 @@
 
   --pageBG: #000000;
   --pageText: #72ff27;
+
+  --pageBG-rgb: 0,0,0;
+  --pageText-rgb: 114,255,39;
 }
 
 @custom-media --xs (min-width: 480px);
