@@ -9,6 +9,7 @@ import homePage from './documents/page-home'
 import samplePage from './documents/page-sample'
 import errorPage from './documents/page-error'
 import page from './documents/page'
+import product from './documents/product'
 
 import generalSettings from './documents/settings-general'
 import seoSettings from './documents/settings-seo'
@@ -46,6 +47,7 @@ export default createSchema({
     samplePage,
     errorPage,
     page,
+    product,
 
     generalSettings,
     seoSettings,

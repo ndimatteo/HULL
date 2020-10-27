@@ -95,7 +95,7 @@ body {
 
   &.is-large {
     font-size: 2rem;
-    line-height: .15;
+    line-height: .5;
   }
 }
 

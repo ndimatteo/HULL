@@ -26,6 +26,7 @@ const hiddenDocTypes = listItem =>
     'samplePage',
     'errorPage',
     'page',
+    'product',
 
     'generalSettings',
     'seoSettings',
@@ -116,6 +117,27 @@ export default () =>
               S.document()
                 .documentId(documentId)
                 .schemaType('page')
+                .views([
+                  S.view.form().icon(EditIcon),
+                  S.view
+                    .component(SeoPreview)
+                    .options({ previewURL })
+                    .icon(EyeIcon)
+                    .title('SEO Preview')
+                ])
+            )
+        ),
+      S.divider(),
+      S.listItem()
+        .title('Products')
+        .schemaType('product')
+        .child(
+          S.documentTypeList('product')
+            .title('Products')
+            .child(documentId =>
+              S.document()
+                .documentId(documentId)
+                .schemaType('product')
                 .views([
                   S.view.form().icon(EditIcon),
                   S.view
