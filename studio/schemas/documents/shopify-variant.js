@@ -9,11 +9,19 @@ export default {
     {
       title: 'Shopify',
       name: 'shopify',
+      description: 'Synced from Shopify',
       options: { columns: 2, collapsible: true }
     }
   ],
   icon: FiGift,
   fields: [
+    {
+      name: 'productTitle',
+      title: 'Product Title',
+      type: 'string',
+      readOnly: true,
+      fieldset: 'shopify'
+    },
     {
       name: 'variantTitle',
       title: 'Variant Title',
@@ -64,14 +72,19 @@ export default {
     select: {
       variantTitle: 'variantTitle',
       title: 'title',
-      productID: 'productID',
+      productTitle: 'productTitle',
       media: 'hero'
     },
-    prepare({ variantTitle, title, productID = '(missing ID)', media }) {
+    prepare({
+      variantTitle,
+      title,
+      productTitle = '(missing product)',
+      media
+    }) {
       return {
         title: title ? title : variantTitle,
         media,
-        subtitle: productID
+        subtitle: productTitle
       }
     }
   }

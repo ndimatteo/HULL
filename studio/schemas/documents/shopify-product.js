@@ -9,6 +9,7 @@ export default {
     {
       title: 'Shopify',
       name: 'shopify',
+      description: 'Synced from Shopify',
       options: { columns: 2, collapsible: true }
     }
   ],

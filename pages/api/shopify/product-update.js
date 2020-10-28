@@ -87,9 +87,9 @@ export default async function send(req, res) {
 
   // patch (update) product document with core shopify data
   stx = stx.patch(`product.${id}`, (patch) => patch.set(productFields))
-  // patch (update) slug if none has been set
+  // patch (update) title & slug if none has been set
   stx = stx.patch(`product.${id}`, (patch) =>
-    patch.setIfMissing({ slug: { current: handle } })
+    patch.setIfMissing({ title: title, slug: { current: handle } })
   )
 
   // define productVariant documents
@@ -100,8 +100,9 @@ export default async function send(req, res) {
 
   // define productVariant fields
   const productVariantFields = variants.map((variant) => ({
-    variantTitle: variant.title,
+    productTitle: title,
     productID: id,
+    variantTitle: variant.title,
     variantID: variant.id,
     price: variant.price,
     sku: variant.sku,
