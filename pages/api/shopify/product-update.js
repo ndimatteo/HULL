@@ -70,7 +70,7 @@ export default async function send(req, res) {
   // setup product document
   const product = {
     _type: 'product',
-    _id: `product.${id}`,
+    _id: `product-${id}`,
   }
 
   // define produt fields
@@ -86,9 +86,9 @@ export default async function send(req, res) {
   stx = stx.createIfNotExists(product)
 
   // patch (update) product document with core shopify data
-  stx = stx.patch(`product.${id}`, (patch) => patch.set(productFields))
+  stx = stx.patch(`product-${id}`, (patch) => patch.set(productFields))
   // patch (update) title & slug if none has been set
-  stx = stx.patch(`product.${id}`, (patch) =>
+  stx = stx.patch(`product-${id}`, (patch) =>
     patch.setIfMissing({ title: title, slug: { current: handle } })
   )
 

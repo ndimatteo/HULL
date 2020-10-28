@@ -167,7 +167,7 @@ export default () =>
                 .filter('_type == $type')
                 .params({
                   type: 'productVariant',
-                  productID: Number(productID.replace('product.', ''))
+                  productID: Number(productID.replace('product-', ''))
                 })
                 .child(documentId =>
                   S.document()
