@@ -1,4 +1,5 @@
 import sanityClient from '@sanity/client'
+import { Base64 } from 'base64-string'
 
 const options = {
   dataset: process.env.SANITY_PROJECT_DATASET,
@@ -8,6 +9,7 @@ const options = {
 }
 
 const sanity = sanityClient(options)
+const enc = new Base64()
 
 export default async function send(req, res) {
   // extract shopify data
@@ -16,10 +18,11 @@ export default async function send(req, res) {
   } = req
 
   // get request integrity header
-  const shopifyIntegrity = req.headers['x-shopify-hmac-sha256']
-  console.log(req.headers)
+  const shopifyIntegrity = enc.decode(req.headers['x-shopify-hmac-sha256'])
 
   console.log('starting Shopify sync...')
+
+  console.log(`integrity decoded: ${shopifyIntegrity}`)
 
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !id) {
@@ -35,6 +38,7 @@ export default async function send(req, res) {
     shopifyIntegrity !== process.env.SHOPIFY_WEBHOOK_INTEGRITY
   ) {
     console.log('not verified from Shopify')
+    console.log(`env integrity: ${process.env.SHOPIFY_WEBHOOK_INTEGRITY}`)
     return res.status(404).json({ error: 'not verified from Shopify' })
   }
 
