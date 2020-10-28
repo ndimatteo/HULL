@@ -42,6 +42,10 @@ export default async function send(req, res) {
     body: { id, title, handle, variants },
   } = req
 
+  console.log('---REQ BODY---')
+  console.log(req.body)
+  console.log('------')
+
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !req.body) {
     console.log('must be a POST request with a product ID')
