@@ -1,5 +1,6 @@
 import sanityClient from '@sanity/client'
 import crypto from 'crypto'
+const getRawBody = require('raw-body')
 
 const options = {
   dataset: process.env.SANITY_PROJECT_DATASET,
@@ -10,32 +11,50 @@ const options = {
 
 const sanity = sanityClient(options)
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+}
+
+const runMiddleware = (req, res, fn) => {
+  new Promise((resolve) => {
+    if (!req.body) {
+      req.body = ''
+      req.on('data', (chunk) => {
+        req.body += chunk
+      })
+
+      req.on('end', () => {
+        resolve()
+        return JSON.parse(Buffer.from(req.body).toString())
+      })
+    }
+  })
+}
+
 export default async function send(req, res) {
+  await runMiddleware(req, res)
+  const rawBody = await getRawBody(req)
+
   // extract shopify data
-  // const {
-  //   body: { id, title, handle, variants },
-  // } = req
+  const {
+    body: { id, title, handle, variants },
+  } = req
 
   // bail if it's not a post request or it's missing an ID
-  // if (req.method !== 'POST' || !req.body) {
-  //   console.log('must be a POST request with a product ID')
-  //   return res
-  //     .status(200)
-  //     .json({ error: 'must be a POST request with a product ID' })
-  // }
-
-  console.log('REQ BODY:')
-  console.log(req.body)
-  console.log('------')
-  console.log('STRINGIFIED BODY:')
-  console.log(JSON.stringify(req.body))
-  console.log('------')
+  if (req.method !== 'POST' || !req.body) {
+    console.log('must be a POST request with a product ID')
+    return res
+      .status(200)
+      .json({ error: 'must be a POST request with a product ID' })
+  }
 
   // get request integrity header
   const hmac = req.headers['x-shopify-hmac-sha256']
   const generatedHash = await crypto
     .createHmac('sha256', process.env.SHOPIFY_WEBHOOK_INTEGRITY)
-    .update(JSON.stringify(req.body))
+    .update(rawBody, 'utf8', 'hex')
     .digest('base64')
 
   console.log(`header value: ${hmac}`)
@@ -46,6 +65,8 @@ export default async function send(req, res) {
     console.log('not verified from Shopify')
     return res.status(200).json({ error: 'not verified from Shopify' })
   }
+
+  return res.status(200).json({ success: 'temporary bail' })
 
   let stx = sanity.transaction()
 
@@ -102,9 +123,3 @@ export default async function send(req, res) {
   res.statusCode = 200
   res.json(JSON.stringify(result))
 }
-
-// export const config = {
-//   api: {
-//     bodyParser: false,
-//   },
-// }
