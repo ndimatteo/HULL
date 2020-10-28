@@ -57,16 +57,13 @@ export default async function send(req, res) {
     .update(rawBody, 'utf8', 'hex')
     .digest('base64')
 
-  console.log(`header value: ${hmac}`)
-  console.log(`local hash: ${generatedHash}`)
-
   // bail if shopify integrity doesn't match
   if (hmac !== generatedHash) {
     console.log('not verified from Shopify')
     return res.status(200).json({ error: 'not verified from Shopify' })
   }
 
-  return res.status(200).json({ success: 'temporary bail' })
+  console.log('sync starting...')
 
   let stx = sanity.transaction()
 
