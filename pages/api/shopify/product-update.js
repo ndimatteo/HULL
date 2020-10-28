@@ -78,7 +78,7 @@ export default async function send(req, res) {
     productTitle: title,
     productID: id,
     variantID: variants[0].id,
-    price: variants[0].price,
+    price: variants[0].price * 100,
     sku: variants[0].sku,
   }
 
@@ -104,7 +104,7 @@ export default async function send(req, res) {
     productID: id,
     variantTitle: variant.title,
     variantID: variant.id,
-    price: variant.price,
+    price: variant.price * 100,
     sku: variant.sku,
   }))
 
