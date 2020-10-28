@@ -18,7 +18,8 @@ export default async function send(req, res) {
   } = req
 
   // get request integrity header
-  const shopifyIntegrity = enc.decode(req.headers['x-shopify-hmac-sha256'])
+  console.log(`integrity header: ${req.headers['x-shopify-hmac-sha256']}`)
+  const shopifyIntegrity = enc.decode(`${req.headers['x-shopify-hmac-sha256']}`)
 
   console.log('starting Shopify sync...')
 
