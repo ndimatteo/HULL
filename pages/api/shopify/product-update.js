@@ -12,25 +12,30 @@ const sanity = sanityClient(options)
 
 export default async function send(req, res) {
   // extract shopify data
-  const {
-    body: { id, title, handle, variants },
-  } = req
-
-  console.log('starting Shopify sync...')
+  // const {
+  //   body: { id, title, handle, variants },
+  // } = req
 
   // bail if it's not a post request or it's missing an ID
-  if (req.method !== 'POST' || !req.body) {
-    console.log('must be a POST request with a product ID')
-    return res
-      .status(200)
-      .json({ error: 'must be a POST request with a product ID' })
-  }
+  // if (req.method !== 'POST' || !req.body) {
+  //   console.log('must be a POST request with a product ID')
+  //   return res
+  //     .status(200)
+  //     .json({ error: 'must be a POST request with a product ID' })
+  // }
+
+  console.log('REQ BODY:')
+  console.log(req.body)
+  console.log('------')
+  console.log('STRINGIFIED BODY:')
+  console.log(JSON.stringify(req.body))
+  console.log('------')
 
   // get request integrity header
   const hmac = req.headers['x-shopify-hmac-sha256']
   const generatedHash = await crypto
     .createHmac('sha256', process.env.SHOPIFY_WEBHOOK_INTEGRITY)
-    .update(JSON.stringify(req.body, null, 2), 'utf8', 'hex')
+    .update(JSON.stringify(req.body))
     .digest('base64')
 
   console.log(`header value: ${hmac}`)
