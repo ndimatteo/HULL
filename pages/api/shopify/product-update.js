@@ -43,7 +43,10 @@ export default async function send(req, res) {
   } = req
 
   console.log('---REQ BODY---')
-  console.log(req.body)
+  console.log(id)
+  console.log(title)
+  console.log(handle)
+  console.log(variants)
   console.log('------')
 
   // bail if it's not a post request or it's missing an ID
