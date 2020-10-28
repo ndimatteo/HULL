@@ -1,5 +1,5 @@
 import sanityClient from '@sanity/client'
-import { Base64 } from 'base64-string'
+import crypto from 'crypto'
 
 const options = {
   dataset: process.env.SANITY_PROJECT_DATASET,
@@ -9,7 +9,6 @@ const options = {
 }
 
 const sanity = sanityClient(options)
-const enc = new Base64()
 
 export default async function send(req, res) {
   // extract shopify data
@@ -17,30 +16,30 @@ export default async function send(req, res) {
     body: { id, title, handle, variants },
   } = req
 
-  // get request integrity header
-  console.log(`integrity header: ${req.headers['x-shopify-hmac-sha256']}`)
-  const shopifyIntegrity = enc.decode(`${req.headers['x-shopify-hmac-sha256']}`)
-
   console.log('starting Shopify sync...')
-
-  console.log(`integrity decoded: ${shopifyIntegrity}`)
 
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !id) {
     console.log('must be a POST request with a product ID')
     return res
-      .status(404)
+      .status(200)
       .json({ error: 'must be a POST request with a product ID' })
   }
 
+  // get request integrity header
+  const hmac = req.headers['x-shopify-hmac-sha256']
+  const generatedHash = await crypto
+    .createHmac('sha256', process.env.SHOPIFY_WEBHOOK_INTEGRITY)
+    .update(JSON.stringify(req.body))
+    .digest('base64')
+
+  console.log(`header value: ${hmac}`)
+  console.log(`local hash: ${generatedHash}`)
+
   // bail if shopify integrity doesn't match
-  if (
-    !shopifyIntegrity ||
-    shopifyIntegrity !== process.env.SHOPIFY_WEBHOOK_INTEGRITY
-  ) {
+  if (hmac !== generatedHash) {
     console.log('not verified from Shopify')
-    console.log(`env integrity: ${process.env.SHOPIFY_WEBHOOK_INTEGRITY}`)
-    return res.status(404).json({ error: 'not verified from Shopify' })
+    return res.status(200).json({ error: 'not verified from Shopify' })
   }
 
   let stx = sanity.transaction()
