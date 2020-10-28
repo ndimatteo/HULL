@@ -38,8 +38,8 @@ export default {
     },
     {
       name: 'price',
-      title: 'Price',
-      type: 'string',
+      title: 'Price (cents)',
+      type: 'number',
       readOnly: true,
       fieldset: 'shopify'
     },
