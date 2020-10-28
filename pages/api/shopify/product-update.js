@@ -20,14 +20,14 @@ export const config = {
 const runMiddleware = (req, res, fn) => {
   new Promise((resolve) => {
     if (!req.body) {
-      req.body = ''
+      let buffer = ''
       req.on('data', (chunk) => {
-        req.body += chunk
+        buffer += chunk
       })
 
       req.on('end', () => {
         resolve()
-        return JSON.parse(Buffer.from(req.body).toString())
+        req.body = JSON.parse(Buffer.from(buffer).toString())
       })
     }
   })
@@ -41,13 +41,6 @@ export default async function send(req, res) {
   const {
     body: { id, title, handle, variants },
   } = req
-
-  console.log('---REQ BODY---')
-  console.log(id)
-  console.log(title)
-  console.log(handle)
-  console.log(variants)
-  console.log('------')
 
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !req.body) {
