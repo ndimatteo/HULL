@@ -19,7 +19,7 @@ export default async function send(req, res) {
   console.log('starting Shopify sync...')
 
   // bail if it's not a post request or it's missing an ID
-  if (req.method !== 'POST' || !id) {
+  if (req.method !== 'POST' || !req.body) {
     console.log('must be a POST request with a product ID')
     return res
       .status(200)
@@ -30,7 +30,7 @@ export default async function send(req, res) {
   const hmac = req.headers['x-shopify-hmac-sha256']
   const generatedHash = await crypto
     .createHmac('sha256', process.env.SHOPIFY_WEBHOOK_INTEGRITY)
-    .update(JSON.stringify(req.body))
+    .update(JSON.stringify(req.body, null, 2), 'utf8', 'hex')
     .digest('base64')
 
   console.log(`header value: ${hmac}`)
@@ -97,3 +97,9 @@ export default async function send(req, res) {
   res.statusCode = 200
   res.json(JSON.stringify(result))
 }
+
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// }
