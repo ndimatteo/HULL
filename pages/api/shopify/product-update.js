@@ -18,8 +18,11 @@ export default async function send(req, res) {
   // get request integrity header
   const shopifyIntegrity = req.headers['x-shopify-hmac-sha256']
 
+  console.log('starting Shopify sync...')
+
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !id) {
+    console.log('must be a POST request with a product ID')
     return res
       .status(404)
       .json({ error: 'must be a POST request with a product ID' })
@@ -30,6 +33,7 @@ export default async function send(req, res) {
     !shopifyIntegrity ||
     shopifyIntegrity !== process.env.SHOPIFY_WEBHOOK_INTEGRITY
   ) {
+    console.log('not verified from Shopify')
     return res.status(404).json({ error: 'not verified from Shopify' })
   }
 
@@ -82,6 +86,8 @@ export default async function send(req, res) {
   })
 
   const result = await stx.commit()
+
+  console.log('sync complete!')
 
   res.statusCode = 200
   res.json(JSON.stringify(result))
