@@ -9,7 +9,8 @@ import homePage from './documents/page-home'
 import samplePage from './documents/page-sample'
 import errorPage from './documents/page-error'
 import page from './documents/page'
-import product from './documents/product'
+import product from './documents/shopify-product'
+import productVariant from './documents/shopify-variant'
 
 import generalSettings from './documents/settings-general'
 import seoSettings from './documents/settings-seo'
@@ -48,6 +49,7 @@ export default createSchema({
     errorPage,
     page,
     product,
+    productVariant,
 
     generalSettings,
     seoSettings,
