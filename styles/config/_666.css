@@ -8,6 +8,7 @@ body {
     top: 50%;
     transform: translateY(-50%);
     left: 0;
+    right: 0;
     mix-blend-mode: difference;
   }
 
@@ -75,7 +76,8 @@ body {
   max-width: 42rem;
 }
 
-.marquee {
+.marquee,
+.farquee {
   font-family: 'satan';
   font-size: .666em;
   text-transform: uppercase;

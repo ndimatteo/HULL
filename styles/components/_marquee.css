@@ -1,10 +1,50 @@
 .marquee {
-  position: relative;
   overflow: hidden;
 
-  span {
-    display: block;
-    padding: .5rem 0;
+  * {
     white-space: nowrap;
   }
+
+  &--inner {
+    display: inline-flex;
+    flex: 1 0 auto;
+    animation-name: marqueeL;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 30s;
+
+    .is-reversed & {
+      animation-name: marqueeR;
+    }
+  }
+
+  &--content {
+    display: inline-flex;
+    flex: 1 0 auto;
+
+    .is-reversed & {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  &--item {
+    display: flex;
+    padding: .5rem 0;
+    flex: 1 0 auto;
+
+    span {
+      display: block;
+      white-space: pre;
+    }
+  }
+}
+
+@keyframes marqueeL {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marqueeR {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(50%, 0, 0); }
 }
