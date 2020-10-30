@@ -6,19 +6,22 @@ const Marquee = ({ line, reverse, className }) => {
   const inner = useRef(null)
   const content = useRef(null)
   const item = useRef(null)
+
   const [bounds, setBounds] = useState(false)
-  const [reps, setReps] = useState(0)
+  const [reps, setReps] = useState(false)
   const previousReps = usePrevious(reps)
   const [isRendered, setIsRendered] = useState(false)
 
   // set bounds after refs exist
   useEffect(() => {
+    console.log('STEP 1: setBounds triggered by refs')
     setInstanceBounds()
   }, [container, content])
 
   // calculate clones
   useEffect(() => {
     if (bounds) {
+      console.log('STEP 2: calculateReps triggered by [bounds]')
       calculateReps()
     }
   }, [bounds])
@@ -27,16 +30,24 @@ const Marquee = ({ line, reverse, className }) => {
   useEffect(() => {
     // set initial render
     if (reps && !isRendered) {
+      console.log('STEP 3A: initial cloneItems')
       cloneItem(reps)
     }
 
     // re-render if clone count is different than before
     if (isRendered) {
+      console.log('STEP 3B: re-render happened')
       if (reps !== previousReps) {
+        console.log('STEP 3C: cloneItems triggered by mismatched reps')
         cloneItem(reps)
       }
     }
   }, [reps])
+
+  useEffect(() => {
+    console.log(`STEP 4: reset bounds triggered by [isRendered]: ${isRendered}`)
+    setInstanceBounds()
+  }, [isRendered])
 
   // setup resize listener
   useEffect(() => {
@@ -54,10 +65,12 @@ const Marquee = ({ line, reverse, className }) => {
     setTimeout(() => {
       if (container.current && item.current) {
         const containerBounds = container.current.getBoundingClientRect()
+        const contentBounds = content.current.getBoundingClientRect()
         const itemBounds = item.current.getBoundingClientRect()
 
         setBounds({
           container: containerBounds,
+          content: contentBounds,
           item: itemBounds,
         })
       }
@@ -100,18 +113,18 @@ const Marquee = ({ line, reverse, className }) => {
   return (
     <div
       ref={container}
-      className={`marquee${reverse ? ' is-reversed' : ''}${
-        className ? ` ${className}` : ''
-      }`}
+      className={`marquee${isRendered ? ' is-running' : ''}${
+        reverse ? ' is-reversed' : ''
+      }${className ? ` ${className}` : ''}`}
     >
       <div
         ref={inner}
         className="marquee--inner"
         style={{
           animationDuration: `${
-            bounds
-              ? Math.ceil((bounds.item.width + bounds.container.width) / 50)
-              : 30
+            isRendered && bounds
+              ? Math.ceil((bounds.content.width / 20) * 0.5)
+              : 0
           }s`,
         }}
       >

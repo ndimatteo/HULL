@@ -11,7 +11,11 @@
     animation-name: marqueeL;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-duration: 30s;
+    animation-play-state: paused;
+
+    .is-running & {
+      animation-play-state: running;
+    }
 
     .is-reversed & {
       animation-name: marqueeR;
