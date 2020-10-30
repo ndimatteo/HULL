@@ -26,8 +26,6 @@ const Product = ({ data, error }) => {
     checkout: { products },
   } = useContext(ShopifyContext)
 
-  console.log(products)
-
   let cartItems = products.map((i, idx) => {
     return (
       <div key={idx} className="cart-item--container">

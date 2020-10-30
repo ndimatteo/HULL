@@ -28,6 +28,7 @@
     "react-gtm-module": "^2.0.11",
     "react-hook-form": "^6.9.6",
     "react-intersection-observer": "^8.29.1",
+    "react-use": "^15.3.4",
     "shopify-buy": "^2.11.0",
     "sitemap": "^6.3.2",
     "spacetime": "^6.8.0",
