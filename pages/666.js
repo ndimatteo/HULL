@@ -33,7 +33,11 @@ const SixSixSix = ({ data }) => {
         <h3 className="is-mb0">The Marquee</h3>
         <section className="section">
           <Marquee line="The Magician / The Devil / The Emperor / The Hermit / The Fool / Justice / The High Priestess / Death / The Hierophant /" />
-          <Marquee className="is-white" line="Marilyn Manson" />
+          <Marquee
+            reverse
+            className="is-white"
+            line="The Magician / The Devil / The Emperor / The Hermit / The Fool / Justice / The High Priestess / Death / The Hierophant /"
+          />
         </section>
         <hr />
         <h3 className="is-mb0">The Carousel</h3>

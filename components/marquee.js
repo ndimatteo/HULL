@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import { debounce, usePrevious } from '../lib/helpers'
 
-const Marquee = ({ line, reverse, className }) => {
+const Marquee = ({ line, speed = 0.5, reverse, className }) => {
   const container = useRef(null)
   const inner = useRef(null)
   const content = useRef(null)
@@ -10,48 +10,49 @@ const Marquee = ({ line, reverse, className }) => {
   const [bounds, setBounds] = useState(false)
   const [reps, setReps] = useState(false)
   const previousReps = usePrevious(reps)
+
   const [isRendered, setIsRendered] = useState(false)
+  const [isReady, setIsReady] = useState(false)
 
   // set bounds after refs exist
   useEffect(() => {
-    console.log('STEP 1: setBounds triggered by refs')
     setInstanceBounds()
-  }, [container, content])
+  }, [container, content, item])
 
-  // calculate clones
+  // calculate clones if not already rendered, otherwise you're done!
   useEffect(() => {
-    if (bounds) {
-      console.log('STEP 2: calculateReps triggered by [bounds]')
+    if (isRendered) {
+      setIsReady(true)
+    } else if (bounds) {
       calculateReps()
     }
   }, [bounds])
 
-  // build clones
+  // build clones if more/less than before or it hasn't been rendered before
   useEffect(() => {
-    // set initial render
-    if (reps && !isRendered) {
-      console.log('STEP 3A: initial cloneItems')
-      cloneItem(reps)
-    }
-
-    // re-render if clone count is different than before
-    if (isRendered) {
-      console.log('STEP 3B: re-render happened')
+    if (previousReps) {
       if (reps !== previousReps) {
-        console.log('STEP 3C: cloneItems triggered by mismatched reps')
         cloneItem(reps)
       }
+    } else if (reps && !isRendered) {
+      cloneItem(reps)
     }
   }, [reps])
 
+  // recalculate widths after render, but before it's "ready"
   useEffect(() => {
-    console.log(`STEP 4: reset bounds triggered by [isRendered]: ${isRendered}`)
-    setInstanceBounds()
+    if (isRendered && !isReady) {
+      setInstanceBounds()
+    }
   }, [isRendered])
 
   // setup resize listener
   useEffect(() => {
-    const resizeBounds = debounce(setInstanceBounds, 400)
+    const resizeBounds = debounce(() => {
+      setIsReady(false)
+      setIsRendered(false)
+      setInstanceBounds()
+    }, 400)
 
     window.addEventListener('resize', resizeBounds)
 
@@ -60,10 +61,10 @@ const Marquee = ({ line, reverse, className }) => {
     }
   }, [])
 
-  // determine item sizes
+  // set marquee bounds
   const setInstanceBounds = () => {
-    setTimeout(() => {
-      if (container.current && item.current) {
+    if (container.current && content.current && item.current) {
+      setTimeout(() => {
         const containerBounds = container.current.getBoundingClientRect()
         const contentBounds = content.current.getBoundingClientRect()
         const itemBounds = item.current.getBoundingClientRect()
@@ -73,19 +74,26 @@ const Marquee = ({ line, reverse, className }) => {
           content: contentBounds,
           item: itemBounds,
         })
-      }
-    }, 100)
+      }, 100)
+    }
   }
 
-  // determine how many items to duplicate
+  // determine how many items to clone
   const calculateReps = () => {
-    const repetitions = bounds.container.width / bounds.item.width
-    setReps(Math.ceil(repetitions))
+    const repetitions = Math.ceil(bounds.container.width / bounds.item.width)
+
+    // no change? Just be done then!
+    if (repetitions === previousReps) {
+      setIsRendered(true)
+      setIsReady(true)
+    } else {
+      setReps(repetitions)
+    }
   }
 
-  // clone function
+  // clone items
   const cloneItem = (amount) => {
-    // remove duplicates
+    // remove previous duplicates
     inner.current.querySelectorAll('.is-clone').forEach((el) => el.remove())
 
     // items
@@ -106,6 +114,8 @@ const Marquee = ({ line, reverse, className }) => {
       contentClone.setAttribute('role', 'presentation')
       contentClone.classList.add('is-clone')
       inner.current.appendChild(contentClone)
+
+      // done rendering clones
       setIsRendered(true)
     }
   }
@@ -113,7 +123,7 @@ const Marquee = ({ line, reverse, className }) => {
   return (
     <div
       ref={container}
-      className={`marquee${isRendered ? ' is-running' : ''}${
+      className={`marquee${isReady ? ' is-ready' : ''}${
         reverse ? ' is-reversed' : ''
       }${className ? ` ${className}` : ''}`}
     >
@@ -122,9 +132,7 @@ const Marquee = ({ line, reverse, className }) => {
         className="marquee--inner"
         style={{
           animationDuration: `${
-            isRendered && bounds
-              ? Math.ceil((bounds.content.width / 20) * 0.5)
-              : 0
+            isReady ? Math.ceil((bounds.content.width / 24) * speed) : 0
           }s`,
         }}
       >

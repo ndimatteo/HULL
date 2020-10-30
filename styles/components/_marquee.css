@@ -1,5 +1,11 @@
 .marquee {
   overflow: hidden;
+  opacity: 0;
+  transition: opacity .15s linear;
+
+  &.is-ready {
+    opacity: 1;
+  }
 
   * {
     white-space: nowrap;
@@ -12,8 +18,9 @@
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-play-state: paused;
+    will-change: transform;
 
-    .is-running & {
+    .is-ready & {
       animation-play-state: running;
     }
 
