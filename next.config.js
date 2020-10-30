@@ -32,6 +32,8 @@ module.exports = withBundleAnalyzer({
     SANITY_PROJECT_DATASET: process.env.SANITY_PROJECT_DATASET,
     SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
     SANITY_API_TOKEN: process.env.SANITY_API_TOKEN,
+    SHOPIFY_STORE_ID: process.env.SHOPIFY_STORE_ID,
+    SHOPIFY_API_TOKEN: process.env.SHOPIFY_API_TOKEN,
   },
   async redirects() {
     const sanityRedirects = await fetchSanityRedirects()
