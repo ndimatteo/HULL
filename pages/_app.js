@@ -4,6 +4,8 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/app.css'
 import PageTransition from '../components/page-transition'
 
+import ShopifyProvider from '../contexts/ShopifyContext'
+
 // import TagManager from 'react-gtm-module'
 
 // const tagManagerArgs = {
@@ -68,7 +70,9 @@ const MyApp = ({ Component, pageProps, router }) => {
       {isLoading ? (
         <PageTransition />
       ) : (
-        <Component {...pageProps} key={router.asPath} />
+        <ShopifyProvider>
+          <Component {...pageProps} key={router.asPath} />
+        </ShopifyProvider>
       )}
     </AnimatePresence>
   )
