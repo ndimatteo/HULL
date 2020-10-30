@@ -1,6 +1,6 @@
 import React, { createContext, useReducer, useEffect } from 'react'
 import useLocalStorage from 'react-use/lib/useLocalStorage'
-import client from '../lib/shopify'
+import shopify from '../lib/shopify'
 import { unique } from '../lib/helpers'
 
 export const ShopifyContext = createContext()
@@ -63,57 +63,53 @@ const ShopifyProvider = ({ children }) => {
     webUrl: '',
   })
 
-  async function addItemToCart(variantId, quantity = 1) {
+  // add to cart
+  const addItemToCart = async (variantId, quantity = 1) => {
     dispatch({
       type: shopifyActions.addItemToCart,
       payload: { variantId, quantity },
     })
   }
 
-  useEffect(() => {
-    if (!client || !client.checkout) return
+  // create new checkout
+  const createNewCheckout = async () => {
+    const checkout = await shopify.checkout.create().then((checkout) => {
+      return JSON.parse(JSON.stringify(checkout))
+    })
 
-    async function createNewCheckout() {
-      const checkout = await client.checkout.create().then((checkout) => {
-        return JSON.parse(JSON.stringify(checkout))
-      })
-      setShopifyCheckoutId(checkout.id)
-      return checkout
-    }
+    setShopifyCheckoutId(checkout.id)
+  }
 
-    // async function fetchProducts() {
-    //   const products = await client.product.fetchAll()
-    //   return products
-    // }
-
-    async function checkCartExistance() {
-      let temporalCheckout = null
-      if (shopifyCheckoutId === '') {
+  // check for existing cart
+  const checkCartExistance = async () => {
+    let temporalCheckout = null
+    if (shopifyCheckoutId === '') {
+      temporalCheckout = createNewCheckout()
+    } else {
+      temporalCheckout = await shopify.checkout.fetch(shopifyCheckoutId)
+      if (temporalCheckout === null || temporalCheckout.completedAt !== null) {
         temporalCheckout = createNewCheckout()
-      } else {
-        temporalCheckout = await client.checkout.fetch(shopifyCheckoutId)
-        if (
-          temporalCheckout === null ||
-          temporalCheckout.completedAt !== null
-        ) {
-          temporalCheckout = createNewCheckout()
-        }
       }
-
-      // dispatch({
-      //   type: shopifyActions.setCheckout,
-      //   payload: temporalCheckout,
-      // })
-
-      // const products = await fetchProducts()
-      // dispatch({
-      //   type: shopifyActions.setProducts,
-      //   payload: products,
-      // })
     }
 
+    // dispatch({
+    //   type: shopifyActions.setCheckout,
+    //   payload: temporalCheckout,
+    // })
+
+    // const products = await fetchProducts()
+    // dispatch({
+    //   type: shopifyActions.setProducts,
+    //   payload: products,
+    // })
+  }
+
+  useEffect(() => {
+    if (!shopify || !shopify.checkout) return
+
+    createNewCheckout()
     checkCartExistance()
-  }, [shopifyCheckoutId, setShopifyCheckoutId, client])
+  }, [shopifyCheckoutId, setShopifyCheckoutId, shopify])
 
   return (
     <ShopifyContext.Provider
