@@ -1,19 +1,17 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import { ShopifyContext } from '../../contexts/ShopifyContext'
 import { getProduct, getErrorPage } from '../../lib/api'
+import { Context } from '../../contexts/MainContext'
 import { centsToPrice } from '../../lib/helpers'
 import ErrorPage from '../404'
 
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
 import AddToCart from '../../components/product/addToCart'
-import Drawer from '../../components/drawer'
 
 const Product = ({ data, error }) => {
   const router = useRouter()
-  const [showDrawer, setShowDrawer] = useState(false)
 
   // ERROR: show 404 page
   if (!router.isFallback && !data?.product.id) {
@@ -21,19 +19,21 @@ const Product = ({ data, error }) => {
   }
 
   const { site, menus, product, shopify } = data
-
   const {
-    checkout: { products },
-  } = useContext(ShopifyContext)
+    store: { isCartOpen },
+    setIsCartOpen,
+  } = useContext(Context)
 
-  let cartItems = products.map((i, idx) => {
-    return (
-      <div key={idx} className="cart-item--container">
-        <p>{`product: ${i.variantId}`}</p>
-        <p>{`quantity: ${i.quantity}`}</p>
-      </div>
-    )
-  })
+  const variantId =
+    product.slug === 'satans-sweatshirt' ? 37388313624749 : 37247397822637
+
+  product.variants = [
+    {
+      size: 'large',
+      color: 'red',
+      id: variantId,
+    },
+  ]
 
   return (
     <Layout
@@ -53,25 +53,16 @@ const Product = ({ data, error }) => {
         {product.available ? (
           <>
             <AddToCart product={product} />
-            <button
-              style={{ marginTop: `2em` }}
-              onClick={() => setShowDrawer(!showDrawer)}
-              className="btn"
-            >
-              show cart
-            </button>
+            <div>
+              <button
+                style={{ marginBottom: `3em` }}
+                className="btn"
+                onClick={() => setIsCartOpen(!isCartOpen)}
+              >
+                Open Cart
+              </button>
+            </div>
             <Marquee line="For Sale /&nbsp;" />
-            <Drawer open={showDrawer} toggle={setShowDrawer} title="Cart">
-              <div>
-                {products.length > 0 ? (
-                  cartItems
-                ) : (
-                  <div className="cart-item--container">
-                    <p>Cart is empty</p>
-                  </div>
-                )}
-              </div>
-            </Drawer>
           </>
         ) : (
           <Marquee line="Out of Stock /&nbsp;" />

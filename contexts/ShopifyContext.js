@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useEffect } from 'react'
 import useLocalStorage from 'react-use/lib/useLocalStorage'
 import shopify from '../lib/shopify'
 import { unique } from '../lib/helpers'
+import { Base64 } from 'base64-string'
 
 export const ShopifyContext = createContext()
 
@@ -31,13 +32,10 @@ function shopifyCheckoutReducer(state, action) {
 
     case shopifyActions.setCheckout:
       const { lineItems = [], subtotalPrice = 0, webUrl = '' } = action.payload
-      const count = lineItems
-        .map((i) => i.customAttributes[0].value)
-        .filter(unique).length
 
       return {
         ...state,
-        itemCount: count,
+        itemCount: lineItems.length,
         lineItems,
         subtotalPrice,
         webUrl,
@@ -54,21 +52,60 @@ const ShopifyProvider = ({ children }) => {
     persistedStateId,
     ''
   )
-
   const [checkout, dispatch] = useReducer(shopifyCheckoutReducer, {
     loaded: false,
     subtotalPrice: 0,
     itemCount: 0,
-    products: [],
+    lineItems: null,
     webUrl: '',
   })
 
+  // handle quantity increment + decrement
+  const updateItemQuantity = async (variantId, quantity) => {
+    console.log('handle quantity change')
+  }
+
+  const removeItemFromCart = async (variantId) => {
+    const temporalCheckout = await shopify.checkout.removeLineItems(
+      shopifyCheckoutId,
+      [variantId]
+    )
+    dispatch({
+      type: shopifyActions.setCheckout,
+      payload: temporalCheckout,
+    })
+  }
+
   // add to cart
   const addItemToCart = async (variantId, quantity = 1) => {
+    const enc = new Base64()
+    const variantIdUrl = enc.urlEncode(
+      `gid://shopify/ProductVariant/${variantId}`
+    )
+    const lineItems = {
+      variantId: variantIdUrl,
+      quantity: quantity,
+    }
+
+    const temporalCheckout = await shopify.checkout.addLineItems(
+      shopifyCheckoutId,
+      lineItems
+    )
+
     dispatch({
       type: shopifyActions.addItemToCart,
       payload: { variantId, quantity },
     })
+    dispatch({
+      type: shopifyActions.setCheckout,
+      payload: temporalCheckout,
+    })
+  }
+
+  // fetch all products
+  async function fetchProducts() {
+    const products = await client.product.fetchAll()
+    return products
   }
 
   // create new checkout
@@ -78,6 +115,7 @@ const ShopifyProvider = ({ children }) => {
     })
 
     setShopifyCheckoutId(checkout.id)
+    return checkout
   }
 
   // check for existing cart
@@ -92,10 +130,10 @@ const ShopifyProvider = ({ children }) => {
       }
     }
 
-    // dispatch({
-    //   type: shopifyActions.setCheckout,
-    //   payload: temporalCheckout,
-    // })
+    dispatch({
+      type: shopifyActions.setCheckout,
+      payload: temporalCheckout,
+    })
 
     // const products = await fetchProducts()
     // dispatch({
@@ -106,15 +144,15 @@ const ShopifyProvider = ({ children }) => {
 
   useEffect(() => {
     if (!shopify || !shopify.checkout) return
-
-    createNewCheckout()
     checkCartExistance()
-  }, [shopifyCheckoutId, setShopifyCheckoutId, shopify])
+  }, [])
 
   return (
     <ShopifyContext.Provider
       value={{
         addItemToCart,
+        updateItemQuantity,
+        removeItemFromCart,
         checkout,
       }}
     >

@@ -127,7 +127,6 @@ const Layout = ({ site = {}, page = {}, schema = {}, hasHero, children }) => {
             transparent={hasHero ? true : false}
           />
         )}
-
         <main id="content">{children}</main>
 
         {site.menus && <Footer menu={site.menus.footer} social={site.social} />}

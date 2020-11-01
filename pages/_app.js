@@ -5,6 +5,8 @@ import '../styles/app.css'
 import PageTransition from '../components/page-transition'
 
 import ShopifyProvider from '../contexts/ShopifyContext'
+import ContextProvider from '../contexts/MainContext'
+import Cart from '../components/cart'
 
 // import TagManager from 'react-gtm-module'
 
@@ -67,13 +69,16 @@ const MyApp = ({ Component, pageProps, router }) => {
         document.body.classList.remove('nav-open')
       }}
     >
-      {isLoading ? (
-        <PageTransition />
-      ) : (
+      <ContextProvider>
         <ShopifyProvider>
-          <Component {...pageProps} key={router.asPath} />
+          <Cart />
+          {isLoading ? (
+            <PageTransition />
+          ) : (
+            <Component {...pageProps} key={router.asPath} />
+          )}
         </ShopifyProvider>
-      )}
+      </ContextProvider>
     </AnimatePresence>
   )
 }

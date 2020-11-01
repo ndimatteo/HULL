@@ -1,0 +1,21 @@
+.cart {
+  &--is-empty {
+
+  }
+  &--content {
+    margin: 1em 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    &-remove {
+      cursor: pointer;
+    }
+    &-quantity-selectors {
+      display: flex;
+      cursor: pointer;
+      .decrement {
+        margin: 0 .75em;
+      }
+    }
+  }
+}

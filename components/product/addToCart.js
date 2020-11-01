@@ -11,7 +11,7 @@ const addToCart = ({ product }) => {
     <button
       className="btn"
       style={{ marginBottom: '2em' }}
-      onClick={() => addItemToCart(product.id, 1)}
+      onClick={() => addItemToCart(product.variants[0].id, 1)}
     >
       Add To Cart
     </button>
