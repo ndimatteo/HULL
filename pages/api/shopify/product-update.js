@@ -95,7 +95,7 @@ export default async function send(req, res) {
   // define productVariant documents
   const productVariants = variants.map((variant) => ({
     _type: 'productVariant',
-    _id: `productVariant.${variant.id}`,
+    _id: `productVariant-${variant.id}`,
   }))
 
   // define productVariant fields
