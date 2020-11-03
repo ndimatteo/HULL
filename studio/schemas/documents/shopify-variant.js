@@ -77,19 +77,22 @@ export default {
   ],
   preview: {
     select: {
-      variantTitle: 'variantTitle',
+      wasDeleted: 'wasDeleted',
       title: 'title',
+      variantTitle: 'variantTitle',
       productTitle: 'productTitle',
       media: 'hero'
     },
     prepare({
-      variantTitle,
+      wasDeleted = false,
       title,
+      variantTitle,
       productTitle = '(missing product)',
       media
     }) {
       return {
-        title: title ? title : variantTitle,
+        title:
+          (title ? title : variantTitle) + (wasDeleted ? ' (removed)' : ''),
         media,
         subtitle: productTitle
       }

@@ -72,9 +72,6 @@ export default async function send(req, res) {
     }`
   )
 
-  console.log('old variants:')
-  console.log(currentVariants)
-
   let stx = sanity.transaction()
 
   // setup product document

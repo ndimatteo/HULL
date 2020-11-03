@@ -237,6 +237,9 @@ h2, h3 {
 }
 
 .product {
+  max-width: 50rem;
+  margin: 0 auto;
+  
   &--title {
     margin: 0;
   }
@@ -245,5 +248,19 @@ h2, h3 {
     padding: 2rem;
     border-left: 1px solid;
     border-right: 1px solid;
+  }
+
+  &--options {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: .5rem;
+    column-gap: .5rem;
+
+    .is-active {
+      .btn {
+        background: var(--pageText);
+        color: var(--pageBG);
+      }
+    }
   }
 }
