@@ -1,4 +1,5 @@
 .marquee {
+  position: relative;
   overflow: hidden;
   opacity: 0;
   transition: opacity .15s linear;

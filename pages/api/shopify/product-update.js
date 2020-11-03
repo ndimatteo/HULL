@@ -63,7 +63,7 @@ export default async function send(req, res) {
     return res.status(200).json({ error: 'not verified from Shopify' })
   }
 
-  console.log('sync starting...')
+  console.log('[update] product sync starting...')
 
   let stx = sanity.transaction()
 
@@ -80,6 +80,7 @@ export default async function send(req, res) {
     variantID: variants[0].id,
     price: variants[0].price * 100,
     sku: variants[0].sku,
+    wasDeleted: false,
   }
 
   // create product if doesn't exist
@@ -106,6 +107,7 @@ export default async function send(req, res) {
     variantID: variant.id,
     price: variant.price * 100,
     sku: variant.sku,
+    wasDeleted: false,
   }))
 
   // create variant if doesn't exist & patch (update) variant with core shopify data

@@ -235,3 +235,15 @@ h2, h3 {
     }
   }
 }
+
+.product {
+  &--title {
+    margin: 0;
+  }
+
+  &--details {
+    padding: 2rem;
+    border-left: 1px solid;
+    border-right: 1px solid;
+  }
+}

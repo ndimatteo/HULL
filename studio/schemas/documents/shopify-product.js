@@ -51,6 +51,13 @@ export default {
       fieldset: 'shopify'
     },
     {
+      name: 'wasDeleted',
+      title: 'Deleted from Shopify?',
+      type: 'boolean',
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
       title: 'Display Title',
       name: 'title',
       type: 'string'

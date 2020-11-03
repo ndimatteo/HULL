@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { getProduct, getErrorPage } from '../../../lib/api'
@@ -16,7 +16,13 @@ const Product = ({ data, error }) => {
     return <ErrorPage data={error} statusCode={404} />
   }
 
-  const { site, menus, product, shopify } = data
+  const { site, menus, product } = data
+
+  const defaultVariant = product.variants.find(
+    (v) => v.id === product.activeVariant
+  )
+
+  const [activeVariant, setActiveVariant] = useState(defaultVariant)
 
   console.log(product)
 
@@ -33,13 +39,18 @@ const Product = ({ data, error }) => {
       }}
     >
       <section className="section">
-        <h1>{product.title}</h1>
-        <p>${centsToPrice(product.price)}</p>
-        {product.available ? (
-          <Marquee line="For Sale /&nbsp;" />
-        ) : (
-          <Marquee line="Out of Stock /&nbsp;" />
-        )}
+        <div className="grid">
+          <div className="is-col-12 is-col-md-6">[gallery]</div>
+          <div className="is-col-12 is-col-md-6">
+            <Marquee line="For Sale /" />
+            <div className="product--details">
+              <h1 className="product--title">{product.title}</h1>
+              <h2>${centsToPrice(activeVariant.price)}</h2>
+              <p>{activeVariant.title}</p>
+            </div>
+            <Marquee line="For Sale /" reverse />
+          </div>
+        </div>
       </section>
     </Layout>
   )

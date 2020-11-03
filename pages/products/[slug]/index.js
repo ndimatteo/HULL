@@ -40,12 +40,13 @@ const Product = ({ data, error }) => {
         <div className="grid">
           <div className="is-col-12 is-col-md-6">[gallery]</div>
           <div className="is-col-12 is-col-md-6">
+            <Marquee line="For Sale /" />
             <div className="product--details">
-              <Marquee line="For Sale /" />
-              <h1>{product.title}</h1>
-              <h2>${centsToPrice(product.price)}</h2>
-              <p>{product.activeVariant}</p>
+              <h1 className="product--title">{product.title}</h1>
+              <h2>${centsToPrice(activeVariant.price)}</h2>
+              <p>{activeVariant.title}</p>
             </div>
+            <Marquee line="For Sale /" reverse />
           </div>
         </div>
       </section>
