@@ -65,13 +65,15 @@ export default async function send(req, res) {
 
   console.log('[update] product sync starting...')
 
-  console.log('variants:')
-  console.log(variants)
-
   // grab current variants
   const currentVariants = await sanity.fetch(
-    `*[_type == "product" && _id == "product-${id}"][0].variants`
+    `*[_type == "productVariant" && productID == "${id}"]{
+      _id
+    }`
   )
+
+  console.log('old variants:')
+  console.log(currentVariants)
 
   let stx = sanity.transaction()
 
