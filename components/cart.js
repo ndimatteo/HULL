@@ -26,11 +26,22 @@ const Cart = ({}) => {
           <div>{`product: ${variant.product.handle}`}</div>
           <div>{`variant: ${variant.title}`}</div>
           <div>{`price: ${variant.price}`}</div>
+          <div>{`quantity: ${i.quantity}`}</div>
         </div>
         <div>
           <div className="cart--content-quantity-selectors">
-            <div className="decrement">-</div>
-            <div className="increment">+</div>
+            <div
+              className="decrement"
+              onClick={() => updateItemQuantity('decrease', i.id, 1)}
+            >
+              -
+            </div>
+            <div
+              className="increment"
+              onClick={() => updateItemQuantity('increase', i.id, 1)}
+            >
+              +
+            </div>
           </div>
           <div
             className="cart--content-remove"

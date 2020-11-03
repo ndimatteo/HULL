@@ -1,8 +1,8 @@
-import React, { createContext, useReducer, useEffect } from 'react'
+import React, { createContext, useContext, useReducer, useEffect } from 'react'
 import useLocalStorage from 'react-use/lib/useLocalStorage'
-import shopify from '../lib/shopify'
-import { unique } from '../lib/helpers'
 import { Base64 } from 'base64-string'
+import shopify from '../lib/shopify'
+import { Context } from './MainContext'
 
 export const ShopifyContext = createContext()
 
@@ -48,6 +48,11 @@ function shopifyCheckoutReducer(state, action) {
 }
 
 const ShopifyProvider = ({ children }) => {
+  const {
+    store: { isCartOpen },
+    setIsCartOpen,
+  } = useContext(Context)
+
   const [shopifyCheckoutId, setShopifyCheckoutId] = useLocalStorage(
     persistedStateId,
     ''
@@ -61,8 +66,27 @@ const ShopifyProvider = ({ children }) => {
   })
 
   // handle quantity increment + decrement
-  const updateItemQuantity = async (variantId, quantity) => {
-    console.log('handle quantity change')
+  const updateItemQuantity = async (direction, variantId, quantity) => {
+    const item = checkout.lineItems.filter((i) => i.id === variantId)
+    const id = item[0].id
+    const currentQuantity = item[0].quantity
+    const newQuantity =
+      direction === 'decrease' ? currentQuantity - 1 : currentQuantity + 1
+
+    const updatedLineItem = {
+      id: id,
+      quantity: newQuantity,
+    }
+
+    const temporalCheckout = await shopify.checkout.updateLineItems(
+      shopifyCheckoutId,
+      [updatedLineItem]
+    )
+
+    dispatch({
+      type: shopifyActions.setCheckout,
+      payload: temporalCheckout,
+    })
   }
 
   const removeItemFromCart = async (variantId) => {
@@ -100,6 +124,8 @@ const ShopifyProvider = ({ children }) => {
       type: shopifyActions.setCheckout,
       payload: temporalCheckout,
     })
+
+    setIsCartOpen(true)
   }
 
   // fetch all products
