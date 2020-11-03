@@ -113,7 +113,7 @@ export default async function send(req, res) {
     stx = stx.createIfNotExists(variant)
     stx = stx.patch(variant._id, (patch) => patch.set(productVariantFields[i]))
     stx = stx.patch(variant._id, (patch) =>
-      patch.setIfMissing({ title: variant.title })
+      patch.setIfMissing({ title: productVariantFields[i].variantTitle })
     )
   })
 
