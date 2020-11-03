@@ -69,9 +69,6 @@ export default async function send(req, res) {
 
   // patch (update) product document with core shopify data
   stx = stx.patch(`product-${id}`, (patch) => patch.set({ wasDeleted: true }))
-  stx = stx.patch(`productVariant-${id}`, (patch) =>
-    patch.set({ wasDeleted: true })
-  )
 
   const result = await stx.commit()
 
