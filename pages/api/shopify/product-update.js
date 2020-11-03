@@ -67,7 +67,7 @@ export default async function send(req, res) {
 
   // grab current variants
   const currentVariants = await sanity.fetch(
-    `*[_type == "productVariant" && productID == "${id}"]{
+    `*[_type == "productVariant" && productID == ${id}]{
       _id
     }`
   )
