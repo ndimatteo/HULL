@@ -127,6 +127,14 @@ export default async function send(req, res) {
     )
   })
 
+  // mark deleted variants
+  currentVariants.forEach((cv) => {
+    const active = productVariants.some((v) => v._id === cv._id)
+    if (!active) {
+      stx = stx.patch(cv._id, (patch) => patch.set({ wasDeleted: true }))
+    }
+  })
+
   const result = await stx.commit()
 
   console.log('sync complete!')
