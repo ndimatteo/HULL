@@ -8,6 +8,8 @@ const Marquee = ({ line, speed = 0.5, reverse, className }) => {
   const item = useRef(null)
 
   const [bounds, setBounds] = useState(false)
+  const previousBounds = usePrevious(bounds)
+
   const [reps, setReps] = useState(false)
   const previousReps = usePrevious(reps)
 
@@ -19,11 +21,24 @@ const Marquee = ({ line, speed = 0.5, reverse, className }) => {
     setInstanceBounds()
   }, [container, content, item])
 
-  // calculate clones if not already rendered, otherwise you're done!
+  // calculate reps after bounds update
   useEffect(() => {
-    if (isRendered) {
-      setIsReady(true)
-    } else if (bounds) {
+    // calculate a re-render
+    if (previousBounds) {
+      // no change? Just be done then!
+      if (previousBounds.container.width === bounds.container.width) {
+        setIsReady(true)
+        setIsRendered(true)
+
+        // initiate re-render
+      } else {
+        setIsRendered(false)
+        setIsReady(false)
+        calculateReps()
+      }
+    }
+    // calculate initial reps
+    else if (bounds) {
       calculateReps()
     }
   }, [bounds])
@@ -49,8 +64,6 @@ const Marquee = ({ line, speed = 0.5, reverse, className }) => {
   // setup resize listener
   useEffect(() => {
     const resizeBounds = debounce(() => {
-      setIsReady(false)
-      setIsRendered(false)
       setInstanceBounds()
     }, 400)
 

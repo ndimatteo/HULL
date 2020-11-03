@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { getProduct, getErrorPage } from '../../lib/api'
-import { centsToPrice } from '../../lib/helpers'
-import ErrorPage from '../404'
+import { getProduct, getErrorPage } from '../../../lib/api'
+import { centsToPrice } from '../../../lib/helpers'
+import ErrorPage from '../../404'
 
-import Layout from '../../components/layout'
-import Marquee from '../../components/marquee'
+import Layout from '../../../components/layout'
+import Marquee from '../../../components/marquee'
 
 const Product = ({ data, error }) => {
   const router = useRouter()
@@ -17,6 +17,8 @@ const Product = ({ data, error }) => {
   }
 
   const { site, menus, product, shopify } = data
+
+  console.log(product)
 
   return (
     <Layout
@@ -31,7 +33,7 @@ const Product = ({ data, error }) => {
       }}
     >
       <section className="section">
-        <h2>{product.title}</h2>
+        <h1>{product.title}</h1>
         <p>${centsToPrice(product.price)}</p>
         {product.available ? (
           <Marquee line="For Sale /&nbsp;" />
@@ -44,7 +46,7 @@ const Product = ({ data, error }) => {
 }
 
 export async function getServerSideProps({ params }) {
-  const productData = await getProduct(params.slug.join('/'))
+  const productData = await getProduct(params.slug, params.variant)
   const errorData = await getErrorPage()
 
   return {

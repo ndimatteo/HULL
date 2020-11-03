@@ -112,6 +112,9 @@ export default async function send(req, res) {
   productVariants.forEach((variant, i) => {
     stx = stx.createIfNotExists(variant)
     stx = stx.patch(variant._id, (patch) => patch.set(productVariantFields[i]))
+    stx = stx.patch(variant._id, (patch) =>
+      patch.setIfMissing({ title: variant.title })
+    )
   })
 
   const result = await stx.commit()
