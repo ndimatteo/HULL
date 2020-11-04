@@ -14,8 +14,6 @@ const Product = ({ data, error }) => {
     return <ErrorPage data={error} statusCode={404} />
   }
 
-  console.log(data)
-
   return <ProductPage data={data} />
 }
 

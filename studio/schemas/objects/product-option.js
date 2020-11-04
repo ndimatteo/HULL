@@ -1,7 +1,10 @@
+import { FiCheckCircle } from 'react-icons/fi'
+
 export default {
   title: 'Option',
   name: 'productOption',
   type: 'object',
+  icon: FiCheckCircle,
   fields: [
     {
       title: 'Name',

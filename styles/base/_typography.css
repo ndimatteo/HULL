@@ -129,3 +129,17 @@ hr {
   background: var(--pageText);
   color: var(--pageBG);
 }
+
+/* Focus Adjust */
+a,
+button,
+input,
+textarea,
+select,
+details {
+  &:focus {
+    body:not(.is-tabbing) & {
+      outline: none;
+    }
+  }
+}

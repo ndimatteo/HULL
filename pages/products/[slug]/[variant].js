@@ -24,6 +24,8 @@ export async function getServerSideProps({ params }) {
   const productData = await getProduct(params.slug, params.variant)
   const errorData = await getErrorPage()
 
+  console.log(productData)
+
   return {
     props: {
       data: productData,

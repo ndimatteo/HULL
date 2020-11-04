@@ -57,6 +57,22 @@ const MyApp = ({ Component, pageProps, router }) => {
     })
   }, [])
 
+  const handleFirstTab = (event) => {
+    if (event.keyCode === 9) {
+      if (typeof document !== `undefined`) {
+        document.body.classList.add('is-tabbing')
+        window.removeEventListener('keydown', handleFirstTab)
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleFirstTab)
+    return () => {
+      window.removeEventListener('keydown', handleFirstTab)
+    }
+  }, [])
+
   return (
     <AnimatePresence
       exitBeforeEnter

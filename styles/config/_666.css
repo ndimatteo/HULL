@@ -117,11 +117,20 @@ body {
     display: block;
     padding: 1rem;
     width: 100%;
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      border-bottom: 1px solid;
+    }
   }
 
   &--inner {
     padding: 1rem;
-    border-top: 1px solid;
   }
 }
 
@@ -251,10 +260,29 @@ h2, h3 {
   }
 
   &--options {
+    margin: 2rem -2rem -2rem;
+  }
+}
+
+.option {
+  padding-bottom: 1rem;
+  
+  &--title {
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    font-family: 'courier';
+    font-size: .75rem;
+    font-weight: 600;
+  }
+
+  &--values {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
     row-gap: .5rem;
     column-gap: .5rem;
+    margin: 0 1rem;
 
     .is-active {
       .btn {
