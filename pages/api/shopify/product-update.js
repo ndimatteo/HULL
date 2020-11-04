@@ -87,6 +87,8 @@ export default async function send(req, res) {
     position: option.position,
   }))
 
+  console.log(productOptions)
+
   // define produt fields
   const productFields = {
     productTitle: title,
