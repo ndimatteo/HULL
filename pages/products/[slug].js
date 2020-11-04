@@ -1,36 +1,56 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-import { centsToPrice } from '../lib/helpers'
+import ErrorPage from '../404'
 
-import Layout from '../components/layout'
-import Marquee from '../components/marquee'
+import { getProduct, getErrorPage } from '../../lib/api'
+import { hasObject, centsToPrice } from '../../lib/helpers'
 
-const ProductPage = ({ data }) => {
+import Layout from '../../components/layout'
+import Marquee from '../../components/marquee'
+
+const Product = ({ data, error }) => {
+  const router = useRouter()
+
+  // ERROR: show 404 page
+  if (!router.isFallback && !data?.product.id) {
+    return <ErrorPage data={error} statusCode={404} />
+  }
+
+  // expand our page data
   const { site, menus, product } = data
 
+  // find default variant if one is set
   const defaultVariant = product.variants.find(
     (v) => v.id === product.activeVariant
   )
 
-  const [activeVariant, setActiveVariant] = useState(defaultVariant)
+  // find first variant
+  const firstVariant = product.variants.find(
+    (v) => v.id === product.firstVariantID
+  )
 
-  const toggleActive = (e, position, value) => {
-    console.log('toggle variant!!')
-    const newVariant = product.variants.find((v) => {
-      const plucked = v.options.some(
-        (opt) => opt.position === position && opt.value === value
-      )
-      return plucked
-    })
+  // set active variant as current or first
+  const [activeVariant, setActiveVariant] = useState(
+    defaultVariant ? defaultVariant : firstVariant
+  )
+
+  // handle option changes
+  const changeOption = (e, name, value) => {
+    const newOptions = activeVariant.options.map((opt) =>
+      opt.name === name ? { ...opt, value: value } : opt
+    )
+
+    const newVariant = product.variants.find((variant) =>
+      variant.options.every((opt) => hasObject(newOptions, opt))
+    )
 
     setActiveVariant(newVariant)
-    if (position === 1) {
-      history.pushState(
-        null,
-        null,
-        `/products/${product.slug}/${value.toLowerCase()}`
-      )
-    }
+    router.replace(
+      `/products/[slug]`,
+      `/products/${product.slug}?variant=${newVariant.id}`,
+      { shallow: true }
+    )
   }
 
   return (
@@ -69,8 +89,7 @@ const ProductPage = ({ data }) => {
                         <li key={key} className={isActive ? 'is-active' : null}>
                           <button
                             onClick={(e) =>
-                              !isActive &&
-                              toggleActive(e, option.position, value)
+                              !isActive && changeOption(e, option.name, value)
                             }
                             className="btn is-block"
                           >
@@ -91,4 +110,16 @@ const ProductPage = ({ data }) => {
   )
 }
 
-export default ProductPage
+export async function getServerSideProps({ query }) {
+  const productData = await getProduct(query.slug, query.variant)
+  const errorData = await getErrorPage()
+
+  return {
+    props: {
+      data: productData,
+      error: errorData,
+    },
+  }
+}
+
+export default Product

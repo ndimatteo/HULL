@@ -32,7 +32,10 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [loadingDone, isLoaderReady])
 
   useEffect(() => {
-    Router.events.on('routeChangeStart', () => {
+    Router.events.on('routeChangeStart', (url) => {
+      // bail if we're just changing a URL parameter
+      if (url.split('?')[0] === window.location.pathname) return
+
       setLoading(true)
       setTimeout(() => {
         setLoaderReady(true)
@@ -57,6 +60,7 @@ const MyApp = ({ Component, pageProps, router }) => {
     })
   }, [])
 
+  // intelligently add focus states if keyboard is used
   const handleFirstTab = (event) => {
     if (event.keyCode === 9) {
       if (typeof document !== `undefined`) {
@@ -84,7 +88,7 @@ const MyApp = ({ Component, pageProps, router }) => {
       {isLoading ? (
         <PageTransition />
       ) : (
-        <Component {...pageProps} key={router.asPath} />
+        <Component key={router.asPath.split('?')[0]} {...pageProps} />
       )}
     </AnimatePresence>
   )
