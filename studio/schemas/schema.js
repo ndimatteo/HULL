@@ -24,6 +24,8 @@ import textBlock from './modules/text'
 // Object types
 import seo from './objects/seo'
 
+import productOption from './objects/product-option'
+
 import navDropdown from './objects/nav-dropdown'
 import navPage from './objects/nav-page'
 import navLink from './objects/nav-link'
@@ -62,6 +64,8 @@ export default createSchema({
 
     // Object types
     seo,
+
+    productOption,
 
     navDropdown,
     navPage,
