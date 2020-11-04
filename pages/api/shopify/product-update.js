@@ -82,12 +82,12 @@ export default async function send(req, res) {
 
   // setup product options
   const productOptions = options.map((option) => ({
+    _key: option.id,
+    _type: 'productOption',
     name: option.name,
     values: option.values,
     position: option.position,
   }))
-
-  console.log(productOptions)
 
   // define produt fields
   const productFields = {
@@ -99,6 +99,8 @@ export default async function send(req, res) {
     wasDeleted: false,
     options: productOptions,
   }
+
+  console.log(productFields)
 
   // create product if doesn't exist
   stx = stx.createIfNotExists(product)
