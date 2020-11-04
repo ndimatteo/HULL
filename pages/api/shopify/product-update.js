@@ -100,8 +100,6 @@ export default async function send(req, res) {
     options: productOptions,
   }
 
-  console.log(productFields)
-
   // create product if doesn't exist
   stx = stx.createIfNotExists(product)
 
@@ -127,6 +125,13 @@ export default async function send(req, res) {
     price: variant.price * 100,
     sku: variant.sku,
     wasDeleted: false,
+    options: options.map((option) => ({
+      _key: option.id,
+      _type: 'productOptionValue',
+      name: option.name,
+      value: variant[`option${option.position}`],
+      position: option.position,
+    })),
   }))
 
   // create variant if doesn't exist & patch (update) variant with core shopify data

@@ -63,7 +63,7 @@ export default {
       name: 'options',
       type: 'array',
       of: [{ type: 'productOption' }],
-      // readOnly: true,
+      readOnly: true,
       fieldset: 'shopify'
     },
     {

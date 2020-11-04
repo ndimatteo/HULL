@@ -25,6 +25,7 @@ import textBlock from './modules/text'
 import seo from './objects/seo'
 
 import productOption from './objects/product-option'
+import productOptionValue from './objects/product-option-value'
 
 import navDropdown from './objects/nav-dropdown'
 import navPage from './objects/nav-page'
@@ -66,6 +67,7 @@ export default createSchema({
     seo,
 
     productOption,
+    productOptionValue,
 
     navDropdown,
     navPage,

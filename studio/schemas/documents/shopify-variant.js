@@ -62,6 +62,15 @@ export default {
       title: 'Deleted from Shopify?',
       type: 'boolean',
       readOnly: true,
+      hidden: true,
+      fieldset: 'shopify'
+    },
+    {
+      title: 'Options',
+      name: 'options',
+      type: 'array',
+      of: [{ type: 'productOptionValue' }],
+      readOnly: true,
       fieldset: 'shopify'
     },
     {

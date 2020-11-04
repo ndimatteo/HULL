@@ -34,17 +34,18 @@ const ProductPage = ({ data }) => {
             <h2>${centsToPrice(activeVariant.price)}</h2>
             <p>{activeVariant.title}</p>
 
-            <ul className="product--options">
-              {product.variants.map((variant) => (
-                <li
-                  className={
-                    variant.id === activeVariant.id ? 'is-active' : false
-                  }
-                >
-                  <button className="btn is-block">{variant.title}</button>
-                </li>
-              ))}
-            </ul>
+            {product.options.map((option, key) => (
+              <div className="product--option">
+                <h3>{option.name}</h3>
+                <ul>
+                  {option.values.map((value, key) => (
+                    <li key={key}>
+                      <button className="btn is-block">{value}</button>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
           <Marquee line="For Sale /" reverse />
         </div>
