@@ -26,12 +26,8 @@ const PageTransition = () => {
         <Icon name="666" viewBox="0 0 666 666" />
       </div>
       <div className="panel-swipe--bg">
-        <Marquee line="Loading&nbsp;" className="is-inverted is-large" />
-        <Marquee
-          reverse
-          line="Loading&nbsp;"
-          className="is-inverted is-large"
-        />
+        <Marquee line="Loading" className="is-inverted is-large" />
+        <Marquee reverse line="Loading" className="is-inverted is-large" />
       </div>
     </motion.div>
   )

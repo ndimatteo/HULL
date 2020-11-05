@@ -32,6 +32,7 @@ const Drawer = ({ title, open, toggle, children }) => {
             }}
             transition={{ duration: 0.4, ease: [0.19, 1.0, 0.22, 1.0] }}
             className="drawer--backdrop"
+            onClick={() => toggle(false)}
           />
           <motion.nav
             key="drawer"

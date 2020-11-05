@@ -39,7 +39,7 @@ export default async function send(req, res) {
 
   // extract shopify data
   const {
-    body: { id, title, handle, variants },
+    body: { status, id, title, handle, options, variants },
   } = req
 
   // bail if it's not a post request or it's missing an ID
@@ -63,15 +63,31 @@ export default async function send(req, res) {
     return res.status(200).json({ error: 'not verified from Shopify' })
   }
 
-  console.log('sync starting...')
+  console.log('[update] product sync starting...')
+
+  // grab current variants
+  const currentVariants = await sanity.fetch(
+    `*[_type == "productVariant" && productID == ${id}]{
+      _id
+    }`
+  )
 
   let stx = sanity.transaction()
 
   // setup product document
   const product = {
     _type: 'product',
-    _id: `product-${id}`,
+    _id: `${status !== 'active' ? 'drafts.' : ''}product-${id}`,
   }
+
+  // setup product options
+  const productOptions = options.map((option) => ({
+    _key: option.id,
+    _type: 'productOption',
+    name: option.name,
+    values: option.values,
+    position: option.position,
+  }))
 
   // define produt fields
   const productFields = {
@@ -80,6 +96,8 @@ export default async function send(req, res) {
     variantID: variants[0].id,
     price: variants[0].price * 100,
     sku: variants[0].sku,
+    wasDeleted: false,
+    options: productOptions,
   }
 
   // create product if doesn't exist
@@ -95,7 +113,7 @@ export default async function send(req, res) {
   // define productVariant documents
   const productVariants = variants.map((variant) => ({
     _type: 'productVariant',
-    _id: `productVariant.${variant.id}`,
+    _id: `${status !== 'active' ? 'drafts.' : ''}productVariant-${variant.id}`,
   }))
 
   // define productVariant fields
@@ -106,12 +124,31 @@ export default async function send(req, res) {
     variantID: variant.id,
     price: variant.price * 100,
     sku: variant.sku,
+    wasDeleted: false,
+    options: options.map((option) => ({
+      _key: option.id,
+      _type: 'productOptionValue',
+      name: option.name,
+      value: variant[`option${option.position}`],
+      position: option.position,
+    })),
   }))
 
   // create variant if doesn't exist & patch (update) variant with core shopify data
   productVariants.forEach((variant, i) => {
     stx = stx.createIfNotExists(variant)
     stx = stx.patch(variant._id, (patch) => patch.set(productVariantFields[i]))
+    stx = stx.patch(variant._id, (patch) =>
+      patch.setIfMissing({ title: productVariantFields[i].variantTitle })
+    )
+  })
+
+  // mark deleted variants
+  currentVariants.forEach((cv) => {
+    const active = productVariants.some((v) => v._id === cv._id)
+    if (!active) {
+      stx = stx.patch(cv._id, (patch) => patch.set({ wasDeleted: true }))
+    }
   })
 
   const result = await stx.commit()

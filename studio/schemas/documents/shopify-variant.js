@@ -58,6 +58,22 @@ export default {
       fieldset: 'shopify'
     },
     {
+      name: 'wasDeleted',
+      title: 'Deleted from Shopify?',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
+      fieldset: 'shopify'
+    },
+    {
+      title: 'Options',
+      name: 'options',
+      type: 'array',
+      of: [{ type: 'productOptionValue' }],
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
       title: 'Display Title',
       name: 'title',
       type: 'string'
@@ -70,19 +86,22 @@ export default {
   ],
   preview: {
     select: {
-      variantTitle: 'variantTitle',
+      wasDeleted: 'wasDeleted',
       title: 'title',
+      variantTitle: 'variantTitle',
       productTitle: 'productTitle',
       media: 'hero'
     },
     prepare({
-      variantTitle,
+      wasDeleted = false,
       title,
+      variantTitle,
       productTitle = '(missing product)',
       media
     }) {
       return {
-        title: title ? title : variantTitle,
+        title:
+          (title ? title : variantTitle) + (wasDeleted ? ' (removed)' : ''),
         media,
         subtitle: productTitle
       }

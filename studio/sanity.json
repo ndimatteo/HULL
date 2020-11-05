@@ -46,6 +46,10 @@
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "./branding/skin.css"
+    },
+    {
+      "implements": "part:@sanity/base/document-badges/resolver",
+      "path": "resolveDocumentBadges.js"
     }
   ]
 }

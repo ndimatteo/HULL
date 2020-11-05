@@ -1,10 +1,62 @@
 .marquee {
   position: relative;
   overflow: hidden;
+  opacity: 0;
+  transition: opacity .15s linear;
 
-  span {
-    display: block;
-    padding: .5rem 0;
+  &.is-ready {
+    opacity: 1;
+  }
+
+  * {
     white-space: nowrap;
   }
+
+  &--inner {
+    display: inline-flex;
+    flex: 1 0 auto;
+    animation-name: marqueeL;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+    will-change: transform;
+
+    .is-ready & {
+      animation-play-state: running;
+    }
+
+    .is-reversed & {
+      animation-name: marqueeR;
+    }
+  }
+
+  &--content {
+    display: inline-flex;
+    flex: 1 0 auto;
+
+    .is-reversed & {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  &--item {
+    display: flex;
+    padding: .5rem 0;
+    flex: 1 0 auto;
+
+    span {
+      display: block;
+      white-space: pre;
+    }
+  }
+}
+
+@keyframes marqueeL {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes marqueeR {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(50%, 0, 0); }
 }

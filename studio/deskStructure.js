@@ -164,10 +164,10 @@ export default () =>
               S.documentList()
                 .title('Variants')
                 .menuItems(S.documentTypeList('productVariant').getMenuItems())
-                .filter('_type == $type')
+                .filter('_type == $type && productID == $id')
                 .params({
                   type: 'productVariant',
-                  productID: Number(productID.replace('product-', ''))
+                  id: Number(productID.replace('product-', ''))
                 })
                 .child(documentId =>
                   S.document()

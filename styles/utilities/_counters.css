@@ -1,0 +1,32 @@
+.counter {
+  display: inline-grid;
+  grid-template-columns: auto auto auto;
+
+  &--down,
+  &--up {
+    @mixin flattenButton;
+    appearance: textfield;
+    -webkit-appearance: none; 
+    margin: 0;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  &--amount {
+    position: relative;
+    background: none;
+    border: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    outline: none;
+
+    padding: 0;
+    width: 2rem;
+    text-align: center;
+    color: inherit;
+  }
+}

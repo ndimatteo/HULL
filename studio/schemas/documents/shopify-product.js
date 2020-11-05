@@ -51,6 +51,22 @@ export default {
       fieldset: 'shopify'
     },
     {
+      name: 'wasDeleted',
+      title: 'Deleted from Shopify?',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
+      fieldset: 'shopify'
+    },
+    {
+      title: 'Options',
+      name: 'options',
+      type: 'array',
+      of: [{ type: 'productOption' }],
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
       title: 'Display Title',
       name: 'title',
       type: 'string'
@@ -73,15 +89,17 @@ export default {
   ],
   preview: {
     select: {
-      productTitle: 'productTitle',
+      wasDeleted: 'wasDeleted',
       title: 'title',
+      productTitle: 'productTitle',
       slug: 'slug',
       media: 'hero'
     },
-    prepare({ productTitle, title, slug = {}, media }) {
+    prepare({ wasDeleted = false, title, productTitle, slug = {}, media }) {
       const path = `/${slug.current}`
       return {
-        title: title ? title : productTitle,
+        title:
+          (title ? title : productTitle) + (wasDeleted ? ' (removed)' : ''),
         media,
         subtitle: slug.current ? path : '(missing slug)'
       }

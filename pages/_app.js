@@ -4,9 +4,8 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/app.css'
 import PageTransition from '../components/page-transition'
 
-import ShopifyProvider from '../contexts/ShopifyContext'
-import ContextProvider from '../contexts/MainContext'
-import Cart from '../components/cart'
+import { ShopifyContextProvider } from '../contexts/shopify-context'
+import Cart from '../components/cart/index'
 
 // import TagManager from 'react-gtm-module'
 
@@ -36,7 +35,10 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [loadingDone, isLoaderReady])
 
   useEffect(() => {
-    Router.events.on('routeChangeStart', () => {
+    Router.events.on('routeChangeStart', (url) => {
+      // bail if we're just changing a URL parameter
+      if (url.split('?')[0] === window.location.pathname) return
+
       setLoading(true)
       setTimeout(() => {
         setLoaderReady(true)
@@ -61,25 +63,40 @@ const MyApp = ({ Component, pageProps, router }) => {
     })
   }, [])
 
+  // intelligently add focus states if keyboard is used
+  const handleFirstTab = (event) => {
+    if (event.keyCode === 9) {
+      if (typeof document !== `undefined`) {
+        document.body.classList.add('is-tabbing')
+        window.removeEventListener('keydown', handleFirstTab)
+      }
+    }
+  }
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleFirstTab)
+    return () => {
+      window.removeEventListener('keydown', handleFirstTab)
+    }
+  }, [])
+
   return (
-    <AnimatePresence
-      exitBeforeEnter
-      onExitComplete={() => {
-        window.scrollTo(0, 0)
-        document.body.classList.remove('nav-open')
-      }}
-    >
-      <ContextProvider>
-        <ShopifyProvider>
-          <Cart />
-          {isLoading ? (
-            <PageTransition />
-          ) : (
-            <Component {...pageProps} key={router.asPath} />
-          )}
-        </ShopifyProvider>
-      </ContextProvider>
-    </AnimatePresence>
+    <ShopifyContextProvider>
+      <Cart />
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          window.scrollTo(0, 0)
+          document.body.classList.remove('nav-open')
+        }}
+      >
+        {isLoading ? (
+          <PageTransition />
+        ) : (
+          <Component key={router.asPath.split('?')[0]} {...pageProps} />
+        )}
+      </AnimatePresence>
+    </ShopifyContextProvider>
   )
 }
 
