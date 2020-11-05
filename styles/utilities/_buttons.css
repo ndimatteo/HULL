@@ -1,5 +1,10 @@
 .btn {
   @mixin flattenButton;
+  text-align: center;
+
+  &.is-small {
+    font-size: .5em;
+  }
 
   &.is-block {
     display: block;

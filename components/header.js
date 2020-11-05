@@ -5,6 +5,12 @@ import { useInView } from 'react-intersection-observer'
 import Navigation from './navigation'
 import Icon from './icon'
 
+import {
+  useStore,
+  useToggleCart,
+  useCartCount,
+} from '../contexts/shopify-context'
+
 const Header = ({ menu, transparent }) => {
   const [ref, inView, entry] = useInView()
   const [isMenuOpen, setMenuOpen] = useState(false)
@@ -15,6 +21,11 @@ const Header = ({ menu, transparent }) => {
       document.body.classList.toggle('nav-open', state)
     }
   }
+
+  // context helpers
+  const { isUpdating } = useStore()
+  const toggleCart = useToggleCart()
+  const cartCount = useCartCount()
 
   return (
     <>
@@ -42,6 +53,12 @@ const Header = ({ menu, transparent }) => {
               </button>
               {menu.items && <Navigation menu={menu} />}
             </nav>
+            <button className="btn cart-toggle" onClick={() => toggleCart()}>
+              Cart
+              <span className={cartCount > 0 ? ' is-active' : ''}>
+                {cartCount}
+              </span>
+            </button>
           </div>
         </div>
       </header>

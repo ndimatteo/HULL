@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/router'
 
 import ErrorPage from '../404'
@@ -8,6 +8,9 @@ import { hasObject, centsToPrice } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
+
+import Counter from '../../components/product/counter'
+import AddToCart from '../../components/product/add-to-cart'
 
 const Product = ({ data, error }) => {
   const router = useRouter()
@@ -53,6 +56,9 @@ const Product = ({ data, error }) => {
     )
   }
 
+  // set quantity
+  const [quantity, setQuantity] = useState(1)
+
   return (
     <Layout
       site={{
@@ -74,7 +80,7 @@ const Product = ({ data, error }) => {
             <p>{activeVariant.title}</p>
 
             <div className="product--options">
-              {product.options.map((option, key) => (
+              {product.options?.map((option, key) => (
                 <div key={key} className="option">
                   <div className="option--title">{option.name}</div>
                   <ul className="option--values">
@@ -101,6 +107,17 @@ const Product = ({ data, error }) => {
                   </ul>
                 </div>
               ))}
+            </div>
+
+            <div className="product--actions">
+              <Counter setCount={setQuantity} />
+              <AddToCart
+                productID={activeVariant.id}
+                quantity={quantity}
+                className="btn is-block"
+              >
+                Add To Cart
+              </AddToCart>
             </div>
           </div>
           <Marquee line="For Sale /" reverse />

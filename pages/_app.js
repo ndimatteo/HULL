@@ -4,6 +4,9 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/app.css'
 import PageTransition from '../components/page-transition'
 
+import { ShopifyContextProvider } from '../contexts/shopify-context'
+import Cart from '../components/cart/index'
+
 // import TagManager from 'react-gtm-module'
 
 // const tagManagerArgs = {
@@ -78,19 +81,22 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [])
 
   return (
-    <AnimatePresence
-      exitBeforeEnter
-      onExitComplete={() => {
-        window.scrollTo(0, 0)
-        document.body.classList.remove('nav-open')
-      }}
-    >
-      {isLoading ? (
-        <PageTransition />
-      ) : (
-        <Component key={router.asPath.split('?')[0]} {...pageProps} />
-      )}
-    </AnimatePresence>
+    <ShopifyContextProvider>
+      <Cart />
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          window.scrollTo(0, 0)
+          document.body.classList.remove('nav-open')
+        }}
+      >
+        {isLoading ? (
+          <PageTransition />
+        ) : (
+          <Component key={router.asPath.split('?')[0]} {...pageProps} />
+        )}
+      </AnimatePresence>
+    </ShopifyContextProvider>
   )
 }
 

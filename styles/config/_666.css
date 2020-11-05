@@ -260,7 +260,16 @@ h2, h3 {
   }
 
   &--options {
-    margin: 2rem -2rem -2rem;
+    margin: 2rem -2rem;
+    border-bottom: 1px solid;
+  }
+
+  &--actions {
+    display: flex;
+
+    .counter {
+      margin-right: 2rem;
+    }
   }
 }
 
@@ -290,5 +299,88 @@ h2, h3 {
         color: var(--pageBG);
       }
     }
+  }
+}
+
+.cart-toggle {
+  margin-top: 1rem;
+  
+  span {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(50%, -50%);
+    background: var(--pageText);
+    color: var(--pageBG);
+    width: 1.25rem;
+    height: 1.25rem;
+    font-family: 'courier';
+    font-weight: 600;
+    border-radius: 50%;
+    font-size: .75rem;
+    letter-spacing: -.125ch;
+
+    &.is-active {
+      display: flex;
+      animation: revealRight .6s cubic-bezier(0.85, 0, 0.15, 1) both;
+    }
+  }
+}
+
+.cart {
+  &--footer {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid;
+  }
+  
+  &--subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-family: 'satan';
+    text-transform: uppercase;
+  }
+}
+
+.cart-item {
+  &:not(:last-child) {
+    padding-bottom: 1rem;
+    border-bottom: 1px solid;
+  }
+  
+  &--photo {
+    .is-aspect::before {
+      background: var(--pageBG);
+    }
+  }
+
+  &--title {
+    font-size: 1rem;
+    text-transform: uppercase;
+  }
+
+  &--price {
+    font-weight: 600;
+  }
+}
+
+.counter {
+  &--up,
+  &--down {
+    border: 1px solid;
+    width: 1.5rem;
+    font-family: 'courier';
+  }
+
+  &--amount {
+    padding: .25rem;
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    font-size: .75rem;
+    font-family: 'courier';
   }
 }
