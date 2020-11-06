@@ -35,6 +35,7 @@ const fetchCheckout = (store, id) => {
   return store.shopifyClient.checkout.fetch(id)
 }
 
+// get associated variant from Sanity
 const fetchVariant = async (id) => {
   const variant = await sanity.fetch(
     `
@@ -58,6 +59,17 @@ const fetchVariant = async (id) => {
   return variant
 }
 
+// get custom Shopify domain, since they don't return that in the webhook payload
+const fetchStoreDomain = async () => {
+  const domain = await sanity.fetch(
+    `
+      *[_type == "generalSettings"][0].storeURL
+    `
+  )
+
+  return domain
+}
+
 // Save checkout to localstorage
 const setCheckoutState = async (checkout, setStore) => {
   if (typeof window !== `undefined`) {
@@ -77,6 +89,8 @@ const setCheckoutState = async (checkout, setStore) => {
     })
   )
 
+  const storeDomain = await fetchStoreDomain()
+
   // update state
   setStore((prevState) => {
     return {
@@ -86,6 +100,12 @@ const setCheckoutState = async (checkout, setStore) => {
         id: checkout.id,
         lineItems: lineItems,
         subTotal: checkout.lineItemsSubtotalPrice,
+        webUrl: storeDomain
+          ? checkout.webUrl.replace(
+              /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g,
+              storeDomain
+            )
+          : checkout.webUrl,
       },
     }
   })
@@ -302,6 +322,15 @@ function useCartTotals() {
   }
 }
 
+// build our Checkout URL
+function useCheckout() {
+  const {
+    store: { checkout },
+  } = useContext(ShopifyContext)
+
+  return checkout.webUrl
+}
+
 // Toggle cart state
 function useToggleCart() {
   const {
@@ -326,5 +355,6 @@ export {
   useAddItem,
   useRemoveItem,
   useUpdateItem,
+  useCheckout,
   useToggleCart,
 }

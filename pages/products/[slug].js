@@ -21,22 +21,15 @@ const Product = ({ data, error }) => {
   }
 
   // expand our page data
-  const { site, menus, product } = data
+  const { site, menus, product, hasVariant } = data
 
   // find default variant if one is set
   const defaultVariant = product.variants.find(
     (v) => v.id === product.activeVariant
   )
 
-  // find first variant
-  const firstVariant = product.variants.find(
-    (v) => v.id === product.firstVariantID
-  )
-
   // set active variant as current or first
-  const [activeVariant, setActiveVariant] = useState(
-    defaultVariant ? defaultVariant : firstVariant
-  )
+  const [activeVariant, setActiveVariant] = useState(defaultVariant)
 
   // handle option changes
   const changeOption = (e, name, value) => {
@@ -62,13 +55,40 @@ const Product = ({ data, error }) => {
   return (
     <Layout
       site={{
-        seo: site?.seo,
-        social: site?.social,
+        seo: site.seo,
+        social: site.social,
         menus: menus,
       }}
       page={{
-        title: product?.title,
-        seo: product?.seo,
+        title: hasVariant
+          ? `${product.title} - ${activeVariant.title}`
+          : product.title,
+        seo: hasVariant ? activeVariant.seo : product.seo,
+      }}
+      schema={{
+        '@context': 'http://schema.org',
+        '@type': 'Product',
+        name: product.title,
+        image: [
+          // buildSrc(show.photo, {
+          //   width: 800,
+          //   height: 450,
+          // }),
+        ],
+        price: centsToPrice(activeVariant.price),
+        description: activeVariant.title,
+        sku: activeVariant.sku,
+        offers: {
+          '@type': 'Offer',
+          url: `${site.rootDomain}/products/${product.slug}`,
+          availability: 'http://schema.org/InStock',
+          price: centsToPrice(activeVariant.price),
+          priceCurrency: 'USD',
+        },
+        brand: {
+          '@type': 'Brand',
+          name: site.seo.title,
+        },
       }}
     >
       <section className="section">
@@ -128,12 +148,13 @@ const Product = ({ data, error }) => {
 }
 
 export async function getServerSideProps({ query }) {
+  const hasVariant = query.variant ? true : false
   const productData = await getProduct(query.slug, query.variant)
   const errorData = await getErrorPage()
 
   return {
     props: {
-      data: productData,
+      data: { ...{ hasVariant: hasVariant }, ...productData },
       error: errorData,
     },
   }

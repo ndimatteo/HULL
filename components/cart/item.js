@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 
 import { centsToPrice, clampRange } from '../../lib/helpers'
 
-import { useUpdateItem, useRemoveItem } from '../../contexts/shopify-context'
+import {
+  useUpdateItem,
+  useRemoveItem,
+  useToggleCart,
+} from '../../contexts/shopify-context'
 
 const CartItem = ({ id, item }) => {
   const removeItem = useRemoveItem()
   const updateItem = useUpdateItem()
+  const toggleCart = useToggleCart()
 
   const [lineQuantity, setLineQuantity] = useState(item.quantity)
 
@@ -30,12 +36,14 @@ const CartItem = ({ id, item }) => {
       <div className="cart-item--details">
         <div className="cart-item--header">
           <h2 className="cart-item--title">
-            <a
+            <Link
               href={`/products/${item.product.slug}?variant=${item.id}`}
-              className="cart-item--link"
+              scroll={false}
             >
-              {item.product.title}
-            </a>
+              <a onClick={() => toggleCart(false)} className="cart-item--link">
+                {item.product.title}
+              </a>
+            </Link>
           </h2>
           <div className="cart-item--price">${centsToPrice(item.price)}</div>
         </div>

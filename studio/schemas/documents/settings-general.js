@@ -5,9 +5,21 @@ export default {
   __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
-      title: 'Marquee Text',
-      name: 'marqueeText',
-      type: 'string'
+      title: 'Live Site URL',
+      description: 'The root domain or subdomain of your website.',
+      name: 'siteURL',
+      type: 'url'
+    },
+    {
+      title: 'Shopify Checkout URL',
+      description:
+        'The custom domain or subdomain connected to your Shopify store.',
+      name: 'storeURL',
+      type: 'url',
+      validation: Rule =>
+        Rule.uri({
+          scheme: ['https']
+        })
     },
     {
       title: 'Social Links',

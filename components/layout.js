@@ -41,7 +41,7 @@ const variants = {
 
 const Layout = ({ site = {}, page = {}, schema = {}, hasHero, children }) => {
   // set <head> variables
-  const pageTitle = [page.title, site.seo?.title].filter(Boolean).join(' – ')
+  const pageTitle = [page.title, site.seo?.title].filter(Boolean).join(' 𖤐 ')
   const shareTitle = page.title || site.seo?.title
   const description = page.seo?.description || site.seo?.description
   const shareGraphic = page.seo?.share?.asset || site.seo?.share?.asset

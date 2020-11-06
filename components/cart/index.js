@@ -9,6 +9,7 @@ import {
   useStore,
   useCartTotals,
   useCartItems,
+  useCheckout,
   useToggleCart,
 } from '../../contexts/shopify-context'
 
@@ -16,7 +17,14 @@ const Cart = () => {
   const { isCartOpen, isUpdating } = useStore()
   const { subTotal } = useCartTotals()
   const lineItems = useCartItems()
+  const checkoutURL = useCheckout()
   const toggleCart = useToggleCart()
+
+  const goToCheckout = (e) => {
+    e.preventDefault()
+    toggleCart(false)
+    window.open(checkoutURL, '_self')
+  }
 
   return (
     <Drawer title="Your Cart" open={isCartOpen} toggle={toggleCart}>
@@ -28,7 +36,12 @@ const Cart = () => {
               <span>Subtotal:</span>
               <span>${centsToPrice(subTotal)}</span>
             </div>
-            <a href="#0" className="btn is-block">
+
+            <a
+              href={checkoutURL}
+              onClick={(e) => goToCheckout(e)}
+              className="btn is-block"
+            >
               {isUpdating ? 'Updating...' : 'Checkout'}
             </a>
           </div>

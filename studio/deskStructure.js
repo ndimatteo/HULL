@@ -17,7 +17,7 @@ import {
 
 import SeoPreview from './components/previews/seo/seo-preview'
 
-const remoteURL = 'https://nickdimatteo.com'
+const remoteURL = 'https://insane.codes'
 const localURL = 'http://localhost:8000'
 const previewURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL
