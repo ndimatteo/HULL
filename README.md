@@ -32,6 +32,20 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
    - ✅ Required `alt` states for all images
    - 🚫 Skip to Content link
    - 🚫 Focus Trap for modals and drawers
+- ✅ SEO features:
+   - ✅ Page-level SEO settings for meta descriptions and share graphics
+   - ✅ Fallback Global SEO settings
+   - ✅ Product Variant-specific SEO updates
+   - ✅ Automatic JSON-LD Schema markup for Products
+   
+### Headless Shopify
+- ✅ Shopify Sync
+- ✅ Automatic Variant option toggles
+- ✅ Update URL on variant changes but keep a clean history stack
+- ✅ Accessible and clamped Quantity Counters
+- ✅ Vanity Shop URL Masking
+- ✅ Global Cart with access to all variant data for line items
+- ✅ Supports Single Variant products
 
 
 ## Quick start
