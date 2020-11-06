@@ -377,10 +377,13 @@ h2, h3 {
   }
 
   &--amount {
-    padding: .25rem;
     border-top: 1px solid;
     border-bottom: 1px solid;
     font-size: .75rem;
     font-family: 'courier';
+
+    input {
+      padding: .25rem;
+    }
   }
 }

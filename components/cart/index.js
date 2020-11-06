@@ -58,7 +58,7 @@ const CartItems = ({ items }) => {
     <div className="cart--content">
       <div className="cart--items">
         {items.map((item) => {
-          return <CartItem key={item.lineID + item.quantity} item={item} />
+          return <CartItem key={item.lineID} item={item} />
         })}
       </div>
     </div>

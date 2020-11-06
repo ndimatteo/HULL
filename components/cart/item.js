@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 
-import { centsToPrice, clampRange } from '../../lib/helpers'
+import { centsToPrice } from '../../lib/helpers'
+
+import Counter from '../counter'
 
 import {
   useUpdateItem,
@@ -14,18 +16,8 @@ const CartItem = ({ id, item }) => {
   const updateItem = useUpdateItem()
   const toggleCart = useToggleCart()
 
-  const [lineQuantity, setLineQuantity] = useState(item.quantity)
-
-  const updateQuantity = (num) => {
-    const cnum = clampRange(num, [1, 10])
-
-    // Bail if no change
-    if (cnum === lineQuantity) return
-
-    if (cnum) {
-      updateItem(item.lineID, cnum)
-    }
-    setLineQuantity(cnum)
+  const changeQuantity = (quantity) => {
+    updateItem(item.lineID, quantity)
   }
 
   return (
@@ -50,30 +42,7 @@ const CartItem = ({ id, item }) => {
         <div className="cart-item--variant">{item.title}</div>
         <div className="cart-item--tools">
           <div className="cart-item--quantity">
-            <div className="counter">
-              <button
-                onClick={() => updateQuantity(lineQuantity - 1)}
-                className="counter--down"
-              >
-                -
-              </button>
-              <input
-                onChange={(e) =>
-                  updateQuantity(parseInt(e.currentTarget.value, 10))
-                }
-                className="counter--amount"
-                type="number"
-                inputMode="numeric"
-                min="1"
-                value={lineQuantity ? lineQuantity : ''}
-              />
-              <button
-                onClick={() => updateQuantity(lineQuantity + 1)}
-                className="counter--up"
-              >
-                +
-              </button>
-            </div>
+            <Counter defaultCount={item.quantity} onUpdate={changeQuantity} />
           </div>
           <div className="cart-item--remove">
             <button

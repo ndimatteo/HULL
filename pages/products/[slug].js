@@ -9,7 +9,7 @@ import { hasObject, centsToPrice } from '../../lib/helpers'
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
 
-import Counter from '../../components/product/counter'
+import Counter from '../../components/counter'
 import AddToCart from '../../components/product/add-to-cart'
 
 const Product = ({ data, error }) => {
@@ -130,7 +130,7 @@ const Product = ({ data, error }) => {
             </div>
 
             <div className="product--actions">
-              <Counter setCount={setQuantity} />
+              <Counter onUpdate={setQuantity} />
               <AddToCart
                 productID={activeVariant.id}
                 quantity={quantity}
