@@ -68,7 +68,7 @@ export default async function send(req, res) {
   // load up previous payload from the product Metafields
   const shopifyConfig = {
     'Content-Type': 'application/json',
-    'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_API_TOKEN,
+    'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
   }
 
   const shopifyProduct = await axios({
@@ -77,9 +77,17 @@ export default async function send(req, res) {
     headers: shopifyConfig,
   })
 
-  console.log('---- PRODUCT METAFIELDS ----')
-  console.log(shopifyProduct.metafields)
-  console.log('------------')
+  console.log(shopifyProduct.metafields.metafields)
+
+  const previousSync = shopifyProduct.metafields.metafields.find(
+    (mf) => mf.key === 'sanity_sync'
+  )
+
+  if (previousSync) {
+    console.log(previousSync)
+  } else {
+    console.log('needs meta field created!')
+  }
 
   console.log('[update] product sync starting...')
 
