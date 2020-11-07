@@ -68,20 +68,20 @@ export default async function send(req, res) {
 
   // load up previous payload from the product Metafields
 
-  const shopifyConfig = {
-    'Content-Type': 'application/json',
-    'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_API_TOKEN,
-  }
+  // const shopifyConfig = {
+  //   'Content-Type': 'application/json',
+  //   'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_API_TOKEN,
+  // }
 
-  const shopifyProduct = await axios({
-    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
-    method: 'GET',
-    headers: shopifyConfig,
-  })
+  // const shopifyProduct = await axios({
+  //   url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
+  //   method: 'GET',
+  //   headers: shopifyConfig,
+  // })
 
-  console.log('---- PRODUCT METAFIELDS ----')
-  console.log(shopifyProduct.metafields)
-  console.log('------------')
+  // console.log('---- PRODUCT METAFIELDS ----')
+  // console.log(shopifyProduct.metafields)
+  // console.log('------------')
 
   console.log('[update] product sync starting...')
 
