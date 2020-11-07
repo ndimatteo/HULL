@@ -78,16 +78,15 @@ export default async function send(req, res) {
   })
 
   console.log('metafields:')
-  console.log(shopifyProduct.metafields)
+  console.log(shopifyProduct)
 
-  const previousSync = shopifyProduct.metafields.find(
-    (mf) => mf.key === 'sanity_sync'
-  )
+  const previousSync = shopifyProduct.find((mf) => mf.key === 'sanity_sync')
 
   if (previousSync) {
     console.log(previousSync)
   } else {
     console.log('needs meta field created!')
+    return res.status(200).json({ error: 'temp bail' })
   }
 
   console.log('[update] product sync starting...')
