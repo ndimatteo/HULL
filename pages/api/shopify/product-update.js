@@ -1,3 +1,4 @@
+import axios from 'axios'
 import sanityClient from '@sanity/client'
 import crypto from 'crypto'
 const getRawBody = require('raw-body')
@@ -11,12 +12,14 @@ const options = {
 
 const sanity = sanityClient(options)
 
+// Turn off default NextJS bodyParser, so we can run our own middleware
 export const config = {
   api: {
     bodyParser: false,
   },
 }
 
+// Custom Middleware to parse Shopify's webhook payload
 const runMiddleware = (req, res, fn) => {
   new Promise((resolve) => {
     if (!req.body) {
@@ -62,6 +65,23 @@ export default async function send(req, res) {
     console.log('not verified from Shopify')
     return res.status(200).json({ error: 'not verified from Shopify' })
   }
+
+  // load up previous payload from the product Metafields
+
+  const shopifyConfig = {
+    'Content-Type': 'application/json',
+    'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_API_TOKEN,
+  }
+
+  const shopifyProduct = await axios({
+    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
+    method: 'GET',
+    headers: shopifyConfig,
+  })
+
+  console.log('---- PRODUCT METAFIELDS ----')
+  console.log(shopifyProduct.metafields)
+  console.log('------------')
 
   console.log('[update] product sync starting...')
 

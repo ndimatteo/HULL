@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import ErrorPage from '../404'
 
-import { getProduct, getErrorPage } from '../../lib/api'
+import { getProduct, getErrorPage, testAdmin } from '../../lib/api'
 import { hasObject, centsToPrice } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
