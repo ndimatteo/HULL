@@ -9,12 +9,14 @@ const sanity = sanityClient({
   useCdn: false,
 })
 
+// Turn off default NextJS bodyParser, so we can run our own middleware
 export const config = {
   api: {
     bodyParser: false,
   },
 }
 
+// Custom Middleware to parse Shopify's webhook payload
 const runMiddleware = (req, res, fn) => {
   new Promise((resolve) => {
     if (!req.body) {
@@ -24,7 +26,7 @@ const runMiddleware = (req, res, fn) => {
       })
 
       req.on('end', () => {
-        return resolve()
+        resolve()
         req.body = JSON.parse(Buffer.from(buffer).toString())
       })
     }
