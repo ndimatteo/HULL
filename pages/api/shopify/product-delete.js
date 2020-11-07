@@ -26,7 +26,7 @@ const runMiddleware = (req, res, fn) => {
       })
 
       req.on('end', () => {
-        resolve()
+        return resolve()
         req.body = JSON.parse(Buffer.from(buffer).toString())
       })
     }
@@ -34,13 +34,18 @@ const runMiddleware = (req, res, fn) => {
 }
 
 export default async function send(req, res) {
-  await runMiddleware(req, res)
-  const rawBody = await getRawBody(req)
+  console.log(req)
+
+  return res.status(200).json({ error: 'working at least' })
+
+  // await runMiddleware(req, res)
+
+  // const rawBody = await getRawBody(req)
 
   // extract shopify data
-  const {
-    body: { id },
-  } = req
+  // const {
+  //   body: { id },
+  // } = req
 
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !req.body) {
