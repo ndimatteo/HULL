@@ -35,18 +35,6 @@ const runMiddleware = (req, res, fn) => {
 }
 
 export default async function send(req, res) {
-  console.log(req.body)
-  const rawBody = await getRawBody(req)
-  return res.status(200).json({ error: 'testing...' })
-
-  // await runMiddleware(req, res)
-  // const rawBody = await getRawBody(req)
-
-  // extract shopify data
-  const {
-    body: { status, id, title, handle, options, variants },
-  } = req
-
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST' || !req.body) {
     console.log('must be a POST request with a product ID')
@@ -54,6 +42,10 @@ export default async function send(req, res) {
       .status(200)
       .json({ error: 'must be a POST request with a product ID' })
   }
+
+  // run our middleware to extract the "raw" body for matching the Shopify Integrity Key
+  await runMiddleware(req, res)
+  const rawBody = await getRawBody(req)
 
   // get request integrity header
   const hmac = req.headers['x-shopify-hmac-sha256']
@@ -68,8 +60,14 @@ export default async function send(req, res) {
     return res.status(200).json({ error: 'not verified from Shopify' })
   }
 
-  // load up previous payload from the product Metafields
+  // extract shopify data
+  const {
+    body: { status, id, title, handle, options, variants },
+  } = req
 
+  console.log(body)
+
+  // load up previous payload from the product Metafields
   // const shopifyConfig = {
   //   'Content-Type': 'application/json',
   //   'X-Shopify-Storefront-Access-Token': process.env.SHOPIFY_API_TOKEN,
