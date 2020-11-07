@@ -36,7 +36,7 @@ const runMiddleware = (req, res, fn) => {
 
 export default async function send(req, res) {
   // bail if it's not a post request or it's missing an ID
-  if (req.method !== 'POST' || !req.body) {
+  if (req.method !== 'POST') {
     console.log('must be a POST request with a product ID')
     return res
       .status(200)
