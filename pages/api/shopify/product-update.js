@@ -77,9 +77,10 @@ export default async function send(req, res) {
     headers: shopifyConfig,
   })
 
-  console.log(shopifyProduct.metafields.metafields)
+  console.log('metafields:')
+  console.log(shopifyProduct.metafields)
 
-  const previousSync = shopifyProduct.metafields.metafields.find(
+  const previousSync = shopifyProduct.metafields.find(
     (mf) => mf.key === 'sanity_sync'
   )
 
