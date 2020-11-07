@@ -2,6 +2,12 @@ body {
   font-family: Courier;
 }
 
+@define-mixin textured {
+  background-image: radial-gradient(var(--pageText) 9%, transparent 9%), radial-gradient(var(--pageText) 9%, transparent 9%);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+}
+
 .panel-swipe {
   &--bg {
     position: absolute;
@@ -254,21 +260,30 @@ h2, h3 {
   }
 
   &--details {
-    padding: 2rem;
     border-left: 1px solid;
     border-right: 1px solid;
   }
 
+  &--header {
+    padding: 2rem;
+  }
+
   &--options {
-    margin: 2rem -2rem;
     border-bottom: 1px solid;
   }
 
   &--actions {
     display: flex;
+    padding: 2rem;
+    @mixin textured;
 
     .counter {
       margin-right: 2rem;
+      background: var(--pageBG);
+    }
+
+    .btn {
+      background: var(--pageBG);
     }
   }
 }

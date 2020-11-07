@@ -95,9 +95,11 @@ const Product = ({ data, error }) => {
         <div className="product">
           <Marquee line="For Sale /" />
           <div className="product--details">
-            <h1 className="product--title">{product.title}</h1>
-            <h2>${centsToPrice(activeVariant.price)}</h2>
-            <p>{activeVariant.title}</p>
+            <div className="product--header">
+              <h1 className="product--title">{product.title}</h1>
+              <h2>${centsToPrice(activeVariant.price)}</h2>
+              <p>{activeVariant.title}</p>
+            </div>
 
             <div className="product--options">
               {product.options?.map((option, key) => (
