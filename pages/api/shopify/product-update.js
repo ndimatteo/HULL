@@ -37,8 +37,16 @@ const runMiddleware = (req, res, fn) => {
 }
 
 export default async function send(req, res) {
-  await runMiddleware(req, res)
+
+  console.log(req.body)
   const rawBody = await getRawBody(req)
+  return res
+      .status(200)
+      .json({ error: 'testing...' })
+  }
+  
+  // await runMiddleware(req, res)
+  // const rawBody = await getRawBody(req)
 
   // extract shopify data
   const {

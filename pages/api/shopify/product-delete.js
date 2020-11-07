@@ -34,9 +34,8 @@ const runMiddleware = (req, res, fn) => {
 }
 
 export default async function send(req, res) {
-  console.log(req)
-
-  return res.status(200).json({ error: 'working at least' })
+  console.log(req.body)
+  return res.status(200).json({ error: 'testing...' })
 
   // await runMiddleware(req, res)
 
