@@ -3,14 +3,12 @@ import sanityClient from '@sanity/client'
 import crypto from 'crypto'
 const getRawBody = require('raw-body')
 
-const options = {
+const sanity = sanityClient({
   dataset: process.env.SANITY_PROJECT_DATASET,
   projectId: process.env.SANITY_PROJECT_ID,
   token: process.env.SANITY_API_TOKEN,
   useCdn: false,
-}
-
-const sanity = sanityClient(options)
+})
 
 // Turn off default NextJS bodyParser, so we can run our own middleware
 export const config = {
@@ -37,14 +35,10 @@ const runMiddleware = (req, res, fn) => {
 }
 
 export default async function send(req, res) {
-
   console.log(req.body)
   const rawBody = await getRawBody(req)
-  return res
-      .status(200)
-      .json({ error: 'testing...' })
-  }
-  
+  return res.status(200).json({ error: 'testing...' })
+
   // await runMiddleware(req, res)
   // const rawBody = await getRawBody(req)
 

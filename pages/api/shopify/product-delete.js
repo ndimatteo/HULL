@@ -2,14 +2,12 @@ import sanityClient from '@sanity/client'
 import crypto from 'crypto'
 const getRawBody = require('raw-body')
 
-const options = {
+const sanity = sanityClient({
   dataset: process.env.SANITY_PROJECT_DATASET,
   projectId: process.env.SANITY_PROJECT_ID,
   token: process.env.SANITY_API_TOKEN,
   useCdn: false,
-}
-
-const sanity = sanityClient(options)
+})
 
 export const config = {
   api: {
