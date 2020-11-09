@@ -31,7 +31,9 @@ const Product = ({ data, error }) => {
   )
 
   // set active variant as default
-  const [activeVariant, setActiveVariant] = useState(defaultVariant)
+  const [activeVariant, setActiveVariant] = useState(
+    defaultVariant ? defaultVariant : product.variants[0]
+  )
 
   // handle option changes
   const changeOption = (e, name, value) => {
@@ -79,14 +81,18 @@ const Product = ({ data, error }) => {
           //   height: 450,
           // }),
         ],
-        price: centsToPrice(activeVariant.price),
-        description: activeVariant.title,
-        sku: activeVariant.sku,
+        price: centsToPrice(
+          activeVariant ? activeVariant.price : product.price
+        ),
+        description: activeVariant ? activeVariant.title : product.title,
+        sku: activeVariant ? activeVariant.sku : product.sku,
         offers: {
           '@type': 'Offer',
           url: `${site.rootDomain}/products/${product.slug}`,
           availability: 'http://schema.org/InStock',
-          price: centsToPrice(activeVariant.price),
+          price: centsToPrice(
+            activeVariant ? activeVariant.price : product.price
+          ),
           priceCurrency: 'USD',
         },
         brand: {
@@ -97,12 +103,17 @@ const Product = ({ data, error }) => {
     >
       <section className="section">
         <div className="product">
-          <Marquee line="For Sale /" />
+          <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
           <div className="product--details">
             <div className="product--header">
               <h1 className="product--title">{product.title}</h1>
-              <h2>${centsToPrice(activeVariant.price)}</h2>
-              <p>{activeVariant.title}</p>
+              <h2>
+                $
+                {centsToPrice(
+                  activeVariant ? activeVariant.price : product.price
+                )}
+              </h2>
+              {activeVariant && <p>{activeVariant.title}</p>}
             </div>
 
             <div className="product--options">
@@ -118,7 +129,7 @@ const Product = ({ data, error }) => {
               ))}
             </div>
 
-            {activeVariant.inStock ? (
+            {activeVariant?.inStock ? (
               <div className="product--actions">
                 {activeVariant.lowStock && (
                   <div className="product--stock-indicator">
@@ -144,7 +155,10 @@ const Product = ({ data, error }) => {
               </div>
             )}
           </div>
-          <Marquee line="For Sale /" reverse />
+          <Marquee
+            line={product.inStock ? 'For Sale /' : 'Sold Out /'}
+            reverse
+          />
         </div>
       </section>
     </Layout>

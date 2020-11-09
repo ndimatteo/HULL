@@ -51,18 +51,10 @@ export default {
       fieldset: 'shopify'
     },
     {
-      name: 'sku',
-      title: 'SKU',
-      type: 'string',
+      name: 'comparePrice',
+      title: 'Compare Price (cents)',
+      type: 'number',
       readOnly: true,
-      fieldset: 'shopify'
-    },
-    {
-      name: 'wasDeleted',
-      title: 'Deleted from Shopify?',
-      type: 'boolean',
-      readOnly: true,
-      hidden: true,
       fieldset: 'shopify'
     },
     {
@@ -80,11 +72,26 @@ export default {
       fieldset: 'shopify'
     },
     {
+      name: 'sku',
+      title: 'SKU',
+      type: 'string',
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
       title: 'Options',
       name: 'options',
       type: 'array',
       of: [{ type: 'productOptionValue' }],
       readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
+      name: 'wasDeleted',
+      title: 'Deleted from Shopify?',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
       fieldset: 'shopify'
     },
     {
