@@ -165,8 +165,9 @@ export default async function send(req, res) {
   // Metafield found
   if (previousSync) {
     console.log('previous product compare string:')
-    console.log(JSON.parse(previousSync))
-    console.log(productCompare)
+    console.log(previousSync)
+    // console.log(JSON.parse(previousSync))
+    // console.log(productCompare)
 
     // Differences found
     if (jsondiffpatch.diff(JSON.parse(previousSync), productCompare)) {
@@ -195,7 +196,6 @@ export default async function send(req, res) {
         },
       },
     })
-    console.log(newMetafield)
   }
 
   /*  ------------------------------ */
