@@ -3,12 +3,13 @@ import { useRouter } from 'next/router'
 
 import ErrorPage from '../404'
 
-import { getProduct, getErrorPage, testAdmin } from '../../lib/api'
+import { getProduct, getErrorPage } from '../../lib/api'
 import { hasObject, centsToPrice } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
 
+import ProductOption from '../../components/product/option'
 import Counter from '../../components/counter'
 import AddToCart from '../../components/product/add-to-cart'
 import ProductWaitlist from '../../components/product/waitlist'
@@ -24,12 +25,12 @@ const Product = ({ data, error }) => {
   // expand our page data
   const { site, menus, product, hasVariant } = data
 
-  // find default variant if one is set
+  // find default variant for product
   const defaultVariant = product.variants.find(
     (v) => v.id === product.activeVariant
   )
 
-  // set active variant as current or first
+  // set active variant as default
   const [activeVariant, setActiveVariant] = useState(defaultVariant)
 
   // handle option changes
@@ -73,7 +74,7 @@ const Product = ({ data, error }) => {
         '@type': 'Product',
         name: product.title,
         image: [
-          // buildSrc(show.photo, {
+          // buildSrc(product.photo, {
           //   width: 800,
           //   height: 450,
           // }),
@@ -105,90 +106,29 @@ const Product = ({ data, error }) => {
             </div>
 
             <div className="product--options">
-              {product.options?.map((option, key) => {
-                const otherOpts = [
-                  ...activeVariant.options.slice(0, key),
-                  ...activeVariant.options.slice(key + 1),
-                ]
-
-                return (
-                  <div
-                    key={key}
-                    className={`option is-${option.name
-                      .toLowerCase()
-                      .replace(' ', '-')}`}
-                  >
-                    <div className="option--title">{option.name}</div>
-                    <ul className="option--values">
-                      {option.values.map((value, key) => {
-                        const isActive = activeVariant.options.some(
-                          (opt) =>
-                            opt.position === option.position &&
-                            opt.value === value
-                        )
-
-                        const withActiveOptions = [
-                          ...[{ name: option.name, value: value }],
-                          ...otherOpts,
-                        ]
-
-                        const hasVariants = product.variants.find((variant) =>
-                          variant.options.every((opt) =>
-                            hasObject(withActiveOptions, opt)
-                          )
-                        )
-
-                        const inStock = product.variants.find(
-                          (variant) =>
-                            variant.inStock &&
-                            variant.options.every((opt) =>
-                              hasObject(withActiveOptions, opt)
-                            )
-                        )
-
-                        const valueClasses = [
-                          isActive ? 'is-active' : '',
-                          !hasVariants ? 'is-unavailable' : '',
-                          !inStock && hasVariants && !isActive
-                            ? 'is-soldout'
-                            : '',
-                        ]
-
-                        // console.log(otherOpts)
-
-                        // const isAvailable =
-                        //   !otherOpts.length ||
-                        //   relatedVariantOptions.some((vOpts) =>
-                        //     hasObject(vOpts, {
-                        //       name: option.name,
-                        //       value: value,
-                        //     })
-                        //   )
-
-                        return (
-                          <li
-                            key={key}
-                            className={valueClasses.filter(Boolean).join(' ')}
-                          >
-                            <button
-                              onClick={(e) =>
-                                !isActive && changeOption(e, option.name, value)
-                              }
-                              className="btn is-block"
-                            >
-                              {value}
-                            </button>
-                          </li>
-                        )
-                      })}
-                    </ul>
-                  </div>
-                )
-              })}
+              {product.options?.map((option, key) => (
+                <ProductOption
+                  key={key}
+                  position={key}
+                  option={option}
+                  variants={product.variants}
+                  activeVariant={activeVariant}
+                  onChange={changeOption}
+                />
+              ))}
             </div>
 
             {activeVariant.inStock ? (
               <div className="product--actions">
+                {activeVariant.lowStock && (
+                  <div className="product--stock-indicator">
+                    <span>
+                      Low
+                      <br />
+                      Stock
+                    </span>
+                  </div>
+                )}
                 <Counter onUpdate={setQuantity} />
                 <AddToCart
                   productID={activeVariant.id}
@@ -212,13 +152,13 @@ const Product = ({ data, error }) => {
 }
 
 export async function getServerSideProps({ query }) {
-  const hasVariant = query.variant ? true : false
-  const productData = await getProduct(query.slug, query.variant)
+  const hasVariant = query.variant ? true : false // check for variant param
+  const productData = await getProduct(query.slug, query.variant) // fetch our product data
   const errorData = await getErrorPage()
 
   return {
     props: {
-      data: { ...{ hasVariant: hasVariant }, ...productData },
+      data: { ...{ hasVariant: hasVariant }, ...productData }, // merge our data to help with SEO
       error: errorData,
     },
   }

@@ -81,16 +81,19 @@ export default async function send(req, res) {
     _id: `${status !== 'active' ? 'drafts.' : ''}product-${id}`,
   }
 
-  // Define product options
-  const productOptions = options
-    .sort((a, b) => (a.position > b.position ? 1 : -1))
-    .map((option) => ({
-      _key: option.id,
-      _type: 'productOption',
-      name: option.name,
-      values: option.values,
-      position: option.position,
-    }))
+  // Define product options if there are more than one variant
+  const productOptions =
+    variants.length > 1
+      ? options
+          .sort((a, b) => (a.position > b.position ? 1 : -1))
+          .map((option) => ({
+            _key: option.id,
+            _type: 'productOption',
+            name: option.name,
+            values: option.values,
+            position: option.position,
+          }))
+      : []
 
   // Define product fields
   const productFields = {
@@ -128,15 +131,18 @@ export default async function send(req, res) {
       wasDeleted: false,
       inStock: variant.inventory_quantity > 0,
       lowStock: variant.inventory_quantity <= 5,
-      options: options
-        .sort((a, b) => (a.position > b.position ? 1 : -1))
-        .map((option) => ({
-          _key: option.id,
-          _type: 'productOptionValue',
-          name: option.name,
-          value: variant[`option${option.position}`],
-          position: option.position,
-        })),
+      options:
+        variants.length > 1
+          ? options
+              .sort((a, b) => (a.position > b.position ? 1 : -1))
+              .map((option) => ({
+                _key: option.id,
+                _type: 'productOptionValue',
+                name: option.name,
+                value: variant[`option${option.position}`],
+                position: option.position,
+              }))
+          : [],
     }))
 
   // construct our comparative product object

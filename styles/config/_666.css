@@ -295,6 +295,7 @@ h2, h3 {
 
   &--actions {
     display: flex;
+    position: relative;
     padding: 2rem;
     @mixin textured;
 
@@ -305,6 +306,34 @@ h2, h3 {
 
     .btn {
       background: var(--pageBG);
+    }
+  }
+
+  &--stock-indicator {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    margin-left: -1.5rem;
+    margin-top: -1.5rem;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    z-index: 2;
+    font-size: .625rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    text-align: center;
+    background: var(--pageText);
+    color: var(--pageBG);
+    animation: spin 6s linear infinite;
+
+    span {
+      display: block;
+      margin-top: -.5em;
+      line-height: 1;
     }
   }
 
