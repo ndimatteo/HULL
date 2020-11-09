@@ -103,7 +103,7 @@ export default {
         title:
           (title ? title : variantTitle) + (wasDeleted ? ' (removed)' : ''),
         media,
-        subtitle: productTitle
+        subtitle: title ? variantTitle : productTitle
       }
     }
   }

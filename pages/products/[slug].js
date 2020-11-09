@@ -41,12 +41,14 @@ const Product = ({ data, error }) => {
       variant.options.every((opt) => hasObject(newOptions, opt))
     )
 
-    setActiveVariant(newVariant)
-    router.replace(
-      `/products/[slug]`,
-      `/products/${product.slug}?variant=${newVariant.id}`,
-      { shallow: true }
-    )
+    if (newVariant) {
+      setActiveVariant(newVariant)
+      router.replace(
+        `/products/[slug]`,
+        `/products/${product.slug}?variant=${newVariant.id}`,
+        { shallow: true }
+      )
+    }
   }
 
   // set quantity
@@ -102,33 +104,79 @@ const Product = ({ data, error }) => {
             </div>
 
             <div className="product--options">
-              {product.options?.map((option, key) => (
-                <div key={key} className="option">
-                  <div className="option--title">{option.name}</div>
-                  <ul className="option--values">
-                    {option.values.map((value, key) => {
-                      const isActive = activeVariant.options.some(
-                        (opt) =>
-                          opt.position === option.position &&
-                          opt.value === value
-                      )
+              {product.options?.map((option, key) => {
+                const otherOpts = [
+                  ...activeVariant.options.slice(0, key),
+                  ...activeVariant.options.slice(key + 1),
+                ]
 
-                      return (
-                        <li key={key} className={isActive ? 'is-active' : null}>
-                          <button
-                            onClick={(e) =>
-                              !isActive && changeOption(e, option.name, value)
-                            }
-                            className="btn is-block"
+                // const relatedVariantOptions = product.variants
+                //   .filter((variant) =>
+                //     variant.options.some((opt) => hasObject(otherOpts, opt))
+                //   )
+                //   .map((variant) => variant.options)
+
+                return (
+                  <div
+                    key={key}
+                    className={`option is-${option.name.toLowerCase()}`}
+                  >
+                    <div className="option--title">{option.name}</div>
+                    <ul className="option--values">
+                      {option.values.map((value, key) => {
+                        const isActive = activeVariant.options.some(
+                          (opt) =>
+                            opt.position === option.position &&
+                            opt.value === value
+                        )
+
+                        const withActiveOptions = [
+                          ...[{ name: option.name, value: value }],
+                          ...otherOpts,
+                        ]
+
+                        const hasVariants = product.variants.find((variant) =>
+                          variant.options.every((opt) =>
+                            hasObject(withActiveOptions, opt)
+                          )
+                        )
+
+                        const valueClasses = [
+                          isActive ? 'is-active' : '',
+                          !hasVariants ? 'is-unavailable' : '',
+                        ]
+
+                        // console.log(otherOpts)
+
+                        // const isAvailable =
+                        //   !otherOpts.length ||
+                        //   relatedVariantOptions.some((vOpts) =>
+                        //     hasObject(vOpts, {
+                        //       name: option.name,
+                        //       value: value,
+                        //     })
+                        //   )
+
+                        return (
+                          <li
+                            key={key}
+                            className={valueClasses.filter(Boolean).join(' ')}
                           >
-                            {value}
-                          </button>
-                        </li>
-                      )
-                    })}
-                  </ul>
-                </div>
-              ))}
+                            <button
+                              onClick={(e) =>
+                                !isActive && changeOption(e, option.name, value)
+                              }
+                              className="btn is-block"
+                            >
+                              {value}
+                            </button>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                )
+              })}
             </div>
 
             <div className="product--actions">

@@ -8,6 +8,11 @@ body {
   background-size: 16px 16px;
 }
 
+@define-mixin hashed {
+  background-image: repeating-linear-gradient(-45deg, var(--pageText) 0, var(--pageText) 1px, transparent 0, transparent 50%);
+  background-size: 16px 16px;
+}
+
 .panel-swipe {
   &--bg {
     position: absolute;
@@ -329,6 +334,15 @@ h2, h3 {
       .btn {
         background: var(--pageText);
         color: var(--pageBG);
+      }
+    }
+
+    .is-unavailable {
+      .btn {
+        @mixin hashed;
+        border-color: var(--pageText);
+        color: transparent;
+        cursor: default;
       }
     }
   }

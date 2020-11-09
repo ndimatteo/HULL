@@ -159,7 +159,7 @@ export default async function send(req, res) {
 
   // See if our metafield exists
   const previousSync = shopifyProduct.data?.metafields.find(
-    (mf) => mf.key === 'sanity_sync'
+    (mf) => mf.key === 'product_sync'
   )
 
   // Metafield found
@@ -182,6 +182,20 @@ export default async function send(req, res) {
     // No metafield created yet, let's do that
   } else {
     console.log('Metafield not found, create new')
+    const newMetafield = await axios({
+      url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
+      method: 'POST',
+      headers: shopifyConfig,
+      data: {
+        metafield: {
+          namespace: 'sanity',
+          key: 'product_sync',
+          value: JSON.stringify(productCompare),
+          value_type: 'string',
+        },
+      },
+    })
+    console.log(newMetafield)
   }
 
   /*  ------------------------------ */

@@ -6,6 +6,9 @@
   --pageBG: #000000;
   --pageText: #72ff27;
 
+  --black-rgb: 0,0,0;
+  --white-rgb: 255,255,255;
+
   --pageBG-rgb: 0,0,0;
   --pageText-rgb: 114,255,39;
 }
