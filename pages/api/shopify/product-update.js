@@ -87,10 +87,12 @@ export default async function send(req, res) {
   const productFields = {
     productTitle: title,
     productID: id,
-    variantID: variants[0].id,
     price: variants[0].price * 100,
     sku: variants[0].sku,
     wasDeleted: false,
+    inStock: variants.some((v) => v.inventory_quantity > 0),
+    lowStock:
+      variants.reduce((a, b) => a + (b.inventory_quantity || 0), 0) <= 10,
     options: productOptions,
   }
 
@@ -115,6 +117,8 @@ export default async function send(req, res) {
       price: variant.price * 100,
       sku: variant.sku,
       wasDeleted: false,
+      inStock: variant.inventory_quantity > 0,
+      lowStock: variant.ininventory_quantity <= 5,
       options: options
         .sort((a, b) => (a.position > b.position ? 1 : -1))
         .map((option) => ({
@@ -180,7 +184,7 @@ export default async function send(req, res) {
     // No metafield created yet, let's do that
   } else {
     console.log('Metafield not found, create new')
-    const newMetafield = await axios({
+    axios({
       url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
       method: 'POST',
       headers: shopifyConfig,

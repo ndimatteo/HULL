@@ -30,13 +30,6 @@ export default {
       fieldset: 'shopify'
     },
     {
-      name: 'variantID',
-      title: 'Variant ID',
-      type: 'number',
-      readOnly: true,
-      fieldset: 'shopify'
-    },
-    {
       name: 'price',
       title: 'Price (cents)',
       type: 'number',
@@ -56,6 +49,20 @@ export default {
       type: 'boolean',
       readOnly: true,
       hidden: true,
+      fieldset: 'shopify'
+    },
+    {
+      name: 'inStock',
+      title: 'In Stock',
+      type: 'boolean',
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
+      name: 'lowStock',
+      title: 'Stock is Low',
+      type: 'boolean',
+      readOnly: true,
       fieldset: 'shopify'
     },
     {

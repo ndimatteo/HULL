@@ -66,6 +66,20 @@ export default {
       fieldset: 'shopify'
     },
     {
+      name: 'inStock',
+      title: 'In Stock',
+      type: 'boolean',
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
+      name: 'lowStock',
+      title: 'Stock is Low',
+      type: 'boolean',
+      readOnly: true,
+      fieldset: 'shopify'
+    },
+    {
       title: 'Options',
       name: 'options',
       type: 'array',
