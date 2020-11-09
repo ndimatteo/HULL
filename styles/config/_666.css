@@ -201,6 +201,23 @@ h2, h3 {
   font-size: .666em;
   text-transform: uppercase;
   letter-spacing: .15em;
+
+  &.is-inactive {
+    pointer-events: none;
+    cursor: default;
+    
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(to top left, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px)), linear-gradient(to top right, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px));
+      mix-blend-mode: difference;
+    }
+  }
 }
 
 .is-disclaimer {
@@ -340,7 +357,7 @@ h2, h3 {
 
     &.is-active {
       display: flex;
-      animation: revealRight .6s cubic-bezier(0.85, 0, 0.15, 1) both;
+      animation: revealCenter .6s cubic-bezier(0.85, 0, 0.15, 1) both;
     }
   }
 }

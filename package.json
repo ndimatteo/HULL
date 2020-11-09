@@ -20,6 +20,7 @@
     "cross-env": "^7.0.2",
     "embla-carousel": "^4.0.6",
     "framer-motion": "^2.9.4",
+    "jsondiffpatch": "^0.4.1",
     "next": "^10.0.1",
     "raw-body": "^2.4.1",
     "react": "^17.0.1",

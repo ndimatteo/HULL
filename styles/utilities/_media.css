@@ -70,15 +70,33 @@ img.photo {
   .is-loaded & {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    animation: revealRight .6s cubic-bezier(0.85, 0, 0.15, 1) both;
+    animation: revealUp .6s cubic-bezier(0.85, 0, 0.15, 1) both;
   }
 }
 
-@keyframes revealRight {
+@keyframes revealUp {
   from {
     clip-path: inset(100% 0 0);
   }
   to {
     clip-path: inset(0% 0 0 0);
+  }
+}
+
+@keyframes revealCenter {
+  from {
+    clip-path: inset(0 50% 0 50%);
+  }
+  to {
+    clip-path: inset(0 0% 0 0%);
+  }
+}
+
+@keyframes revealCircle {
+  from {
+    clip-path: circle(0%);
+  }
+  to {
+    clip-path: circle(75%);
   }
 }

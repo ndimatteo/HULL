@@ -2,6 +2,7 @@ import axios from 'axios'
 import sanityClient from '@sanity/client'
 import crypto from 'crypto'
 const getRawBody = require('raw-body')
+const jsondiffpatch = require('jsondiffpatch')
 
 const sanity = sanityClient({
   dataset: process.env.SANITY_PROJECT_DATASET,
@@ -65,57 +66,24 @@ export default async function send(req, res) {
     body: { status, id, title, handle, options, variants },
   } = req
 
-  // load up previous payload from the product Metafields
-  const shopifyConfig = {
-    'Content-Type': 'application/json',
-    'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
-  }
-
-  const shopifyProduct = await axios({
-    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
-    method: 'GET',
-    headers: shopifyConfig,
-  })
-
-  const previousSync = shopifyProduct.data?.metafields.find(
-    (mf) => mf.key === 'sanity_sync'
-  )
-  console.log(previousSync)
-
-  if (previousSync) {
-    console.log('found the metafield')
-  } else {
-    console.log('needs metafield created!')
-    return res.status(200).json({ error: 'temp bail' })
-  }
-
-  console.log('[update] product sync starting...')
-
-  // grab current variants
-  const currentVariants = await sanity.fetch(
-    `*[_type == "productVariant" && productID == ${id}]{
-      _id
-    }`
-  )
-
-  let stx = sanity.transaction()
-
-  // setup product document
+  // Define product document
   const product = {
     _type: 'product',
     _id: `${status !== 'active' ? 'drafts.' : ''}product-${id}`,
   }
 
-  // setup product options
-  const productOptions = options.map((option) => ({
-    _key: option.id,
-    _type: 'productOption',
-    name: option.name,
-    values: option.values,
-    position: option.position,
-  }))
+  // Define product options
+  const productOptions = options
+    .sort((a, b) => (a.position > b.position ? 1 : -1))
+    .map((option) => ({
+      _key: option.id,
+      _type: 'productOption',
+      name: option.name,
+      values: option.values,
+      position: option.position,
+    }))
 
-  // define produt fields
+  // Define product fields
   const productFields = {
     productTitle: title,
     productID: id,
@@ -125,6 +93,103 @@ export default async function send(req, res) {
     wasDeleted: false,
     options: productOptions,
   }
+
+  // Define productVariant documents
+  const productVariants = variants
+    .sort((a, b) => (a.id > b.id ? 1 : -1))
+    .map((variant) => ({
+      _type: 'productVariant',
+      _id: `${status !== 'active' ? 'drafts.' : ''}productVariant-${
+        variant.id
+      }`,
+    }))
+
+  // Define productVariant fields
+  const productVariantFields = variants
+    .sort((a, b) => (a.id > b.id ? 1 : -1))
+    .map((variant) => ({
+      productTitle: title,
+      productID: id,
+      variantTitle: variant.title,
+      variantID: variant.id,
+      price: variant.price * 100,
+      sku: variant.sku,
+      wasDeleted: false,
+      options: options
+        .sort((a, b) => (a.position > b.position ? 1 : -1))
+        .map((option) => ({
+          _key: option.id,
+          _type: 'productOptionValue',
+          name: option.name,
+          value: variant[`option${option.position}`],
+          position: option.position,
+        })),
+    }))
+
+  const productCompare = {
+    ...product,
+    ...productFields,
+    ...{
+      variants: productVariants.map((variant, key) => ({
+        ...variant,
+        ...productVariantFields[key],
+      })),
+    },
+  }
+
+  console.log('new product compare string:')
+  console.log(productCompare)
+
+  /*  ------------------------------ */
+  /*  Check for previous payload
+  /*  ------------------------------ */
+
+  // Setup our Shopify connection
+  const shopifyConfig = {
+    'Content-Type': 'application/json',
+    'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
+  }
+
+  // Fetch the metafields for this product
+  const shopifyProduct = await axios({
+    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
+    method: 'GET',
+    headers: shopifyConfig,
+  })
+
+  // See if our metafield exists
+  const previousSync = shopifyProduct.data?.metafields.find(
+    (mf) => mf.key === 'sanity_sync'
+  )
+
+  // Metafield found
+  if (previousSync) {
+    console.log('previous product compare string:')
+    console.log(JSON.parse(previousSync))
+    console.log(productCompare)
+
+    // Differences found
+    if (jsondiffpatch.diff(JSON.parse(previousSync), productCompare)) {
+      console.log('discrepancy found...')
+
+      // No changes found
+    } else {
+      console.log('no difference, sync complete!')
+      return res
+        .status(200)
+        .json({ error: 'nothing to sync, product up-to-date' })
+    }
+    // No metafield created yet, let's do that
+  } else {
+    console.log('Metafield not found, create new')
+  }
+
+  /*  ------------------------------ */
+  /*  Begin Sanity Product Sync
+  /*  ------------------------------ */
+
+  console.log('[update] product sync starting...')
+  let stx = sanity.transaction()
 
   // create product if doesn't exist
   stx = stx.createIfNotExists(product)
@@ -136,30 +201,6 @@ export default async function send(req, res) {
     patch.setIfMissing({ title: title, slug: { current: handle } })
   )
 
-  // define productVariant documents
-  const productVariants = variants.map((variant) => ({
-    _type: 'productVariant',
-    _id: `${status !== 'active' ? 'drafts.' : ''}productVariant-${variant.id}`,
-  }))
-
-  // define productVariant fields
-  const productVariantFields = variants.map((variant) => ({
-    productTitle: title,
-    productID: id,
-    variantTitle: variant.title,
-    variantID: variant.id,
-    price: variant.price * 100,
-    sku: variant.sku,
-    wasDeleted: false,
-    options: options.map((option) => ({
-      _key: option.id,
-      _type: 'productOptionValue',
-      name: option.name,
-      value: variant[`option${option.position}`],
-      position: option.position,
-    })),
-  }))
-
   // create variant if doesn't exist & patch (update) variant with core shopify data
   productVariants.forEach((variant, i) => {
     stx = stx.createIfNotExists(variant)
@@ -168,6 +209,13 @@ export default async function send(req, res) {
       patch.setIfMissing({ title: productVariantFields[i].variantTitle })
     )
   })
+
+  // grab current variants
+  const currentVariants = await sanity.fetch(
+    `*[_type == "productVariant" && productID == ${id}]{
+      _id
+    }`
+  )
 
   // mark deleted variants
   currentVariants.forEach((cv) => {
