@@ -2,8 +2,8 @@
 <img src="public/HULL-Logo.svg" align="center" height="150" />
 </p>
 <p align="center">
-Website built on [Next.js](https://nextjs.org) 🤘 <br />
-Headless CMS powered by [Sanity.io](https://sanity.io)
+  <strong>Headless Shopify starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
+  <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong><br />
 </p>
 
 <p align="center">
