@@ -11,6 +11,7 @@ import Marquee from '../../components/marquee'
 
 import Counter from '../../components/counter'
 import AddToCart from '../../components/product/add-to-cart'
+import ProductWaitlist from '../../components/product/waitlist'
 
 const Product = ({ data, error }) => {
   const router = useRouter()
@@ -110,16 +111,12 @@ const Product = ({ data, error }) => {
                   ...activeVariant.options.slice(key + 1),
                 ]
 
-                // const relatedVariantOptions = product.variants
-                //   .filter((variant) =>
-                //     variant.options.some((opt) => hasObject(otherOpts, opt))
-                //   )
-                //   .map((variant) => variant.options)
-
                 return (
                   <div
                     key={key}
-                    className={`option is-${option.name.toLowerCase()}`}
+                    className={`option is-${option.name
+                      .toLowerCase()
+                      .replace(' ', '-')}`}
                   >
                     <div className="option--title">{option.name}</div>
                     <ul className="option--values">
@@ -141,9 +138,20 @@ const Product = ({ data, error }) => {
                           )
                         )
 
+                        const inStock = product.variants.find(
+                          (variant) =>
+                            variant.inStock &&
+                            variant.options.every((opt) =>
+                              hasObject(withActiveOptions, opt)
+                            )
+                        )
+
                         const valueClasses = [
                           isActive ? 'is-active' : '',
                           !hasVariants ? 'is-unavailable' : '',
+                          !inStock && hasVariants && !isActive
+                            ? 'is-soldout'
+                            : '',
                         ]
 
                         // console.log(otherOpts)
@@ -179,16 +187,22 @@ const Product = ({ data, error }) => {
               })}
             </div>
 
-            <div className="product--actions">
-              <Counter onUpdate={setQuantity} />
-              <AddToCart
-                productID={activeVariant.id}
-                quantity={quantity}
-                className="btn is-block"
-              >
-                Add To Cart
-              </AddToCart>
-            </div>
+            {activeVariant.inStock ? (
+              <div className="product--actions">
+                <Counter onUpdate={setQuantity} />
+                <AddToCart
+                  productID={activeVariant.id}
+                  quantity={quantity}
+                  className="btn is-block"
+                >
+                  Add To Cart
+                </AddToCart>
+              </div>
+            ) : (
+              <div className="product--actions">
+                <ProductWaitlist variant={activeVariant} />
+              </div>
+            )}
           </div>
           <Marquee line="For Sale /" reverse />
         </div>

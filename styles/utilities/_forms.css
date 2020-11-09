@@ -21,6 +21,21 @@
     @media (--sm) {
       grid-template-columns: repeat(2, 1fr);
     }
+
+    &.is-inline {
+      @media (--sm) {
+        display: flex;
+
+        .control {
+          flex: 1;
+          margin: 0;
+        }
+
+        .btn {
+          width: auto;
+        }
+      }
+    }
   }
 
   &--label {

@@ -42,6 +42,11 @@ export default async function send(req, res) {
       .json({ error: 'must be a POST request with a product ID' })
   }
 
+  /*  ------------------------------ */
+  /*  1. Run our middleware
+  /*  2. check webhook integrity
+  /*  ------------------------------ */
+
   // run our middleware to extract the "raw" body for matching the Shopify Integrity Key
   await runMiddleware(req, res)
   const rawBody = await getRawBody(req)
@@ -64,8 +69,11 @@ export default async function send(req, res) {
     body: { id },
   } = req
 
-  console.log('[delete] product sync starting...')
+  /*  ------------------------------ */
+  /*  Begin Sanity Product Sync
+  /*  ------------------------------ */
 
+  console.log('[delete] product sync starting...')
   let stx = sanity.transaction()
 
   // patch (update) product document with core shopify data

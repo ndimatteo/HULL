@@ -207,9 +207,8 @@ h2, h3 {
   text-transform: uppercase;
   letter-spacing: .15em;
 
-  &.is-inactive {
-    pointer-events: none;
-    cursor: default;
+  .is-soldout & {
+    border-color: transparent;
     
     &::after {
       content: '';
@@ -219,7 +218,7 @@ h2, h3 {
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(to top left, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px)), linear-gradient(to top right, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px));
+      background: linear-gradient(45deg, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px)), linear-gradient(-45deg, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px));
       mix-blend-mode: difference;
     }
   }
@@ -306,6 +305,18 @@ h2, h3 {
 
     .btn {
       background: var(--pageBG);
+    }
+  }
+
+  &--waitlist {
+    width: 100%;
+
+    .form {
+      max-width: none;
+
+      .control {
+        background: var(--pageBG);
+      }
     }
   }
 }
