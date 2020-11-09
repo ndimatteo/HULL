@@ -44,6 +44,11 @@ export default async function send(req, res) {
       .json({ error: 'must be a POST request with a product ID' })
   }
 
+  /*  ------------------------------ */
+  /*  1. Run our middleware
+  /*  2. check webhook integrity
+  /*  ------------------------------ */
+
   // run our middleware to extract the "raw" body for matching the Shopify Integrity Key
   await runMiddleware(req, res)
   const rawBody = await getRawBody(req)
@@ -65,6 +70,10 @@ export default async function send(req, res) {
   const {
     body: { status, id, title, handle, options, variants },
   } = req
+
+  /*  ------------------------------ */
+  /*  Construct our product objects
+  /*  ------------------------------ */
 
   // Define product document
   const product = {
@@ -130,6 +139,7 @@ export default async function send(req, res) {
         })),
     }))
 
+  // construct our comparative product object
   const productCompare = {
     ...product,
     ...productFields,
@@ -142,7 +152,7 @@ export default async function send(req, res) {
   }
 
   /*  ------------------------------ */
-  /*  Check for previous payload
+  /*  Check for previous sync
   /*  ------------------------------ */
 
   // Setup our Shopify connection
@@ -170,6 +180,20 @@ export default async function send(req, res) {
     // Differences found
     if (jsondiffpatch.diff(JSON.parse(previousSync.value), productCompare)) {
       console.log('discrepancy found...')
+
+      // update our shopify metafield with the new data before continuing sync with Sanity
+      axios({
+        url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields/${previousSync.id}.json`,
+        method: 'PUT',
+        headers: shopifyConfig,
+        data: {
+          metafield: {
+            id: previousSync.id,
+            value: JSON.stringify(productCompare),
+            value_type: 'string',
+          },
+        },
+      })
 
       // No changes found
     } else {
