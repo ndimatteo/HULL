@@ -111,20 +111,10 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 # 🤘 Extras/Tips
 
 #### Error: Failed to communicate with the Sanity API
-<details>
-<summary>
-Read More
-</summary>
 If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
-</details>
 
 #### Access your `product_sync` metafields in Shopify without using a plugin
-<details>
-<summary>
-Read More
-</summary>
-1. Simply navigate to: https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync
-</details>
+Simply navigate to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
 
 # License
 
