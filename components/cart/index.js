@@ -33,7 +33,7 @@ const Cart = () => {
           <CartItems items={lineItems} />
           <div className="cart--footer">
             <div className="cart--subtotal">
-              <span>Subtotal:</span>
+              <span>Subtotal</span>
               <span>${centsToPrice(subTotal)}</span>
             </div>
 

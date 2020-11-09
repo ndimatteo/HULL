@@ -118,7 +118,7 @@ export default async function send(req, res) {
       sku: variant.sku,
       wasDeleted: false,
       inStock: variant.inventory_quantity > 0,
-      lowStock: variant.ininventory_quantity <= 5,
+      lowStock: variant.inventory_quantity <= 5,
       options: options
         .sort((a, b) => (a.position > b.position ? 1 : -1))
         .map((option) => ({
@@ -140,9 +140,6 @@ export default async function send(req, res) {
       })),
     },
   }
-
-  console.log('new product compare string:')
-  console.log(productCompare)
 
   /*  ------------------------------ */
   /*  Check for previous payload
@@ -168,7 +165,7 @@ export default async function send(req, res) {
 
   // Metafield found
   if (previousSync) {
-    console.log('previous product compare string:')
+    console.log('Comparing previous sync...')
 
     // Differences found
     if (jsondiffpatch.diff(JSON.parse(previousSync.value), productCompare)) {
@@ -203,7 +200,7 @@ export default async function send(req, res) {
   /*  Begin Sanity Product Sync
   /*  ------------------------------ */
 
-  console.log('[update] product sync starting...')
+  console.log('product sync starting...')
   let stx = sanity.transaction()
 
   // create product if doesn't exist
