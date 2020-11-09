@@ -13,39 +13,48 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 - ✅ Contact Form with email notifications powered by SendGrid, validation, and success/failure states
 - ✅ Dynamic Page Routes with optional nesting (ie. /parent/child)
 - ✅ Automatic Sitemap.xml generation
-- ✅ Automatic robots.txt generation
-- ✅ 301 Redirects pulled in from Sanity
-- ✅ Dynamic Modules for building page content, including:
-   - ✅ Marquees
-   - ✅ Image Carousels
-   - ✅ Accordions
-   - ✅ Pull-out Drawers
-   - 🚫 One-off Card Grids
-   - 🚫 Relationship Card Grids
-- ✅ Styles powered by PostCSS, to mimic SASS syntax
-- ✅ Baseline styles for all components, using a BEM-like approach
-- ✅ Simple Social icon navigation lists
-- ✅ Accessibility features:
-   - ✅ ARIA Landmark Roles
-   - ✅ Focus States with accurate tab-indexes
-   - ✅ Correctly associated button states
-   - ✅ Required `alt` states for all images
-   - 🚫 Skip to Content link
-   - 🚫 Focus Trap for modals and drawers
-- ✅ SEO features:
-   - ✅ Page-level SEO settings for meta descriptions and share graphics
-   - ✅ Fallback Global SEO settings
-   - ✅ Product Variant-specific SEO updates
-   - ✅ Automatic JSON-LD Schema markup for Products
+- 🟢 Automatic robots.txt generation
+- 🟢 301 Redirects pulled in from Sanity
+- 🟢 Dynamic Modules for building page content, including:
+   - 🟢 Marquees
+   - 🟢 Image Carousels
+   - 🟢 Accordions
+   - 🟢 Pull-out Drawers
+   - ⚪ One-off Card Grids
+   - ⚪ Relationship Card Grids
+- 🟢 Styles powered by PostCSS, to mimic SASS syntax
+- 🟢 Baseline styles for all components, using a BEM-like approach
+- 🟢 Simple Social icon navigation lists
+- 🟡 Cursor Follow component
+- ⚪ Initial animations
+- ⚪ Scroll Animations
+- ⚪ Default Blog setup
+- ⚪ Instagram Module
+- 🟢 Accessibility features:
+   - 🟢 ARIA Landmark Roles
+   - 🟢 Preserve default Focus States
+   - Correctly Trap focus when Drawers (like the Shop Cart) are open (w/ [focus-trap-react](https://www.npmjs.com/package/focus-trap-react))
+   - 🟢 Correctly associated button states
+   - 🟢 Required `alt` states for all images
+   - 🟡 Skip to Content link
+- 🟢 SEO features:
+   - 🟢 Page-level SEO settings for meta descriptions and share graphics
+   - 🟢 Fallback Global SEO settings
+   - 🟢 Product Variant-specific SEO updates
+   - 🟢 Automatic JSON-LD Schema markup for Products
    
 ### Headless Shopify
-- ✅ Shopify Sync
-- ✅ Automatic Variant option toggles
-- ✅ Update URL on variant changes but keep a clean history stack
-- ✅ Accessible and clamped Quantity Counters
-- ✅ Vanity Shop URL Masking
-- ✅ Global Cart with access to all variant data for line items
-- ✅ Supports Single Variant products
+- 🟢 Shopify Sync
+- 🟢 Automatic Variant option toggles
+- 🟢 Update URL on variant changes but keep a clean history stack
+- 🟢 Accessible and clamped Quantity Counters
+- 🟢 Vanity Shop URL Masking
+- 🟢 Global Cart with access to all variant data for line items
+- 🟢 Supports Single Variant products out of the box
+- 🟡 PDP Photo Galleries with variant granularity
+- 🟡 default PLP for all products
+- 🟡 Custom PLP with easy, Sanity-managed Collections
+- ⚪ Sanity-managed conditional Cart "add-ons"
 
 
 ## Quick start
