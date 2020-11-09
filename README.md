@@ -1,8 +1,20 @@
+<p align="center">
 <img src="public/HULL-Logo.svg" align="center" height="150" />
-
+</p>
+<p align="center">
 Website built on [Next.js](https://nextjs.org) 🤘 <br />
 Headless CMS powered by [Sanity.io](https://sanity.io)
+</p>
 
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-set-up">Set Up</a> •
+  <a href="#-spin-up">Spin Up</a> •
+  <a href="#-extrastips">Extras</a> •
+  <a href="#license">License</a>
+</p>
+
+<img src="public/HULL.png" align="center" />
 
 # ✨ Features
 
@@ -113,3 +125,10 @@ Read More
 </summary>
 1. Simply navigate to: https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync
 </details>
+
+# License
+
+### MIT
+> [nickdimatteo.com](https://nickdimatteo.com) &nbsp;&middot;&nbsp;
+> GitHub [@ndimatteo](https://github.com/ndimatteo) &nbsp;&middot;&nbsp;
+> Instagram [@ndimatteo](https://instagram.com/ndimatteo)
