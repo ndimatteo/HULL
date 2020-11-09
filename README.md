@@ -17,6 +17,9 @@
 <img src="public/HULL.png" align="center" />
 
 # ✨ Features
+**🟢 = implemented // 🟡 = in progress // ⚪ = not started**
+
+---
 
 - 🟢 Page Transitions powered by Framer Motion
 - 🟢 Lazyload Images + WEBP format by default
@@ -78,7 +81,6 @@
    - Apps > Manage Private Apps > "Create private app" 
    - Use your dev email to know when there are issues
    - Allow this app to access your storefront data using the Storefront API.
-3. Copy Storefront Access Token from Admin API *(at bottom of page)*
 
 ### Shopify Webhooks
 1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
@@ -87,25 +89,52 @@
   - product deletion - `[your-domain]/api/shopify/product-delete`
   
 ### Sanity
-1. Make sure you add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
-
-# ⚡ Spin Up
-
-### Frontend
-1. Clone this repository from your GitHub account
-2. `npm install` in the project root folder on local
-3. `npm run dev` to start the frontend locally
-   - Your Frontend should be running on [http://localhost:3000](http://localhost:3000)
-   
-### Sanity
 1. `npm install && sanity init` in the `/studio` folder
 2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
 ```
 ? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
 ```
 3. When it asks you what dataset configuration to use, go with the `default`
-4. `sanity start` to start the studio locally
+4. Add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
+
+### NextJS (frontend)
+1. Clone this repository from your GitHub account with the `use template` button
+2. `npm install` in the project root folder on local
+3. Create an `.env.local` file in the project folder, and add the following variables:
+```
+SANITY_PROJECT_DATASET=production
+SANITY_PROJECT_ID=XXXXXX
+SANITY_API_TOKEN=XXXXXX
+SHOPIFY_STORE_ID=XXXXXX
+SHOPIFY_API_TOKEN=XXXXXX
+SHOPIFY_API_PASSWORD=XXXXXX
+SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
+```
+4. Update all the `XXXXXX` values, here's where to find each:
+  - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
+  - `SANITY_API_TOKEN` - Generate an API token for your Sanity project. Access your project from the Sanity Manage dashboard, and navigate to: "Settings" -> "API" -> "Add New Token" button
+  - `SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
+  - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
+  - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
+  - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
+
+
+# ⚡ Spin Up
+
+### Frontend
+`npm run dev` in the project folder to start the frontend locally
+   - Your Frontend should be running on [http://localhost:3000](http://localhost:3000)
+   
+### Sanity
+`sanity start` in the `/studio` folder to start the studio locally
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
+
+
+# Deployment
+
+### Frontend
+
+### Sanity
 
 
 # 🤘 Extras/Tips
