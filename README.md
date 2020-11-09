@@ -4,7 +4,7 @@ Website built on [Next.js](https://nextjs.org) 🤘 <br />
 Headless CMS powered by [Sanity.io](https://sanity.io)
 
 
-## Features
+# ✨ Features
 
 - 🟢 Page Transitions powered by Framer Motion
 - 🟢 Lazyload Images + WEBP format by default
@@ -56,9 +56,9 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 - 🟡 Custom PLP with easy, Sanity-managed Collections
 - ⚪ Sanity-managed conditional Cart "add-ons"
    
-# 🔌 Set Up
+# 💀 Set Up
 
-## Shopify Storefront Access
+### Shopify Storefront Access
 1. Enable Private Apps in Shopify
    - Apps > "Manage Private Apps" *(text link in page footer)*
    - Enable Private Apps
@@ -68,24 +68,24 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
    - Allow this app to access your storefront data using the Storefront API.
 3. Copy Storefront Access Token from Admin API *(at bottom of page)*
 
-## Shopify Webhooks
+### Shopify Webhooks
 1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
 2. add the following webhooks:
   - product update - `[your-domain]/api/shopify/product-update`
   - product deletion - `[your-domain]/api/shopify/product-delete`
   
-## Sanity
+### Sanity
 1. Make sure you add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
 
 # ⚡ Spin Up
 
-## Frontend
+### Frontend
 1. Clone this repository from your GitHub account
 2. `npm install` in the project root folder on local
 3. `npm run dev` to start the frontend locally
    - Your Frontend should be running on [http://localhost:3000](http://localhost:3000)
    
-## Sanity
+### Sanity
 1. `npm install && sanity init` in the `/studio` folder
 2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
 ```
@@ -98,8 +98,8 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 
 # 🤘 Extras/Tips
 
-### Error: Failed to communicate with the Sanity API
+#### Error: Failed to communicate with the Sanity API
 If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
 
-### Access your `product_sync` metafields in Shopify without using a plugin:
+#### Access your `product_sync` metafields in Shopify without using a plugin:
 1. Simply navigate to: https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync
