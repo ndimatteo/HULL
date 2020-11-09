@@ -17,7 +17,9 @@
 <img src="public/HULL.png" align="center" />
 
 # ✨ Features
-**🟢 = implemented // 🟡 = in progress // ⚪ = not started**
+> 🟢 = implemented&nbsp;&nbsp;/&nbsp;&nbsp;
+> 🟡 = in progress&nbsp;&nbsp;/&nbsp;&nbsp;
+> ⚪ = not started
 
 ---
 
