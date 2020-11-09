@@ -165,21 +165,18 @@ export default async function send(req, res) {
   // Metafield found
   if (previousSync) {
     console.log('previous product compare string:')
-    console.log(previousSync)
-    // console.log(JSON.parse(previousSync))
-    // console.log(productCompare)
 
     // Differences found
-    // if (jsondiffpatch.diff(JSON.parse(previousSync), productCompare)) {
-    //   console.log('discrepancy found...')
+    if (jsondiffpatch.diff(JSON.parse(previousSync.value), productCompare)) {
+      console.log('discrepancy found...')
 
-    //   // No changes found
-    // } else {
-    //   console.log('no difference, sync complete!')
-    //   return res
-    //     .status(200)
-    //     .json({ error: 'nothing to sync, product up-to-date' })
-    // }
+      // No changes found
+    } else {
+      console.log('no difference, sync complete!')
+      return res
+        .status(200)
+        .json({ error: 'nothing to sync, product up-to-date' })
+    }
     // No metafield created yet, let's do that
   } else {
     console.log('Metafield not found, create new')
