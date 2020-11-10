@@ -164,7 +164,7 @@ While not as easy as Netlify, what I prefer to do is:
 
 
 # Shoutouts
-Big ups to the following rad folks who helped in big and small ways, both directly with various functionality and my (in)sane questions and frustrations putting something like this together.
+Big ups to the following rad folks who helped in big and small ways, both directly with various functionality and my (in)sane questions and frustrations with putting something like this together.
 - 🔥 [@tuckercs](https://github.com/tuckercs)
 - 🍝 [@iamkevingreen](https://github.com/iamkevingreen)
 - 🧈 [@mikehwagz](https://github.com/mikehwagz)
@@ -174,5 +174,5 @@ Big ups to the following rad folks who helped in big and small ways, both direct
 
 ### MIT
 > [nickdimatteo.com](https://nickdimatteo.com) &nbsp;&middot;&nbsp;
-> GitHub [@ndimatteo](https://github.com/ndimatteo) &nbsp;&middot;&nbsp;
+> Github [@ndimatteo](https://github.com/ndimatteo) &nbsp;&middot;&nbsp;
 > Instagram [@ndimatteo](https://instagram.com/ndimatteo)
