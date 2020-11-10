@@ -73,6 +73,7 @@
 - 🟡 Custom PLP with easy, Sanity-managed Collections
 - ⚪ Sanity-managed conditional Cart "add-ons"
 - ⚪ Account Management (register/login/password/orders)
+- ⚪ Customer Reviews Integration (Yotpo? Okendo? Junip?)
    
 # 💀 Set Up
 
