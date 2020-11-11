@@ -11,6 +11,7 @@ import {
   FiAlertOctagon,
   FiMenu,
   FiRepeat,
+  FiShoppingCart,
   FiGift,
   FiCopy
 } from 'react-icons/fi'
@@ -132,58 +133,69 @@ export default () =>
         ),
       S.divider(),
       S.listItem()
-        .title('Products')
-        .icon(FiGift)
+        .title('Shop')
         .child(
-          S.documentTypeList('product')
-            .title('Products')
-            .child(documentId =>
-              S.document()
-                .documentId(documentId)
-                .schemaType('product')
-                .views([
-                  S.view.form().icon(EditIcon),
-                  S.view
-                    .component(SeoPreview)
-                    .options({ previewURL })
-                    .icon(EyeIcon)
-                    .title('SEO Preview')
-                ])
-            )
-        ),
-      S.listItem()
-        .title('Product Variants')
-        .icon(FiCopy)
-        .child(
-          S.documentTypeList('product')
-            .title('By Product')
-            .menuItems(S.documentTypeList('product').getMenuItems())
-            .filter('_type == $type')
-            .params({ type: 'product' })
-            .child(productID =>
-              S.documentList()
-                .title('Variants')
-                .menuItems(S.documentTypeList('productVariant').getMenuItems())
-                .filter('_type == $type && productID == $id')
-                .params({
-                  type: 'productVariant',
-                  id: Number(productID.replace('product-', ''))
-                })
-                .child(documentId =>
-                  S.document()
-                    .documentId(documentId)
-                    .schemaType('productVariant')
-                    .views([
-                      S.view.form().icon(EditIcon),
-                      S.view
-                        .component(SeoPreview)
-                        .options({ previewURL })
-                        .icon(EyeIcon)
-                        .title('SEO Preview')
-                    ])
+          S.list()
+            .title('Shop')
+            .items([
+              S.listItem()
+                .title('Products')
+                .icon(FiGift)
+                .child(
+                  S.documentTypeList('product')
+                    .title('Products')
+                    .child(documentId =>
+                      S.document()
+                        .documentId(documentId)
+                        .schemaType('product')
+                        .views([
+                          S.view.form().icon(EditIcon),
+                          S.view
+                            .component(SeoPreview)
+                            .options({ previewURL })
+                            .icon(EyeIcon)
+                            .title('SEO Preview')
+                        ])
+                    )
+                ),
+              S.listItem()
+                .title('Product Variants')
+                .icon(FiCopy)
+                .child(
+                  S.documentTypeList('product')
+                    .title('By Product')
+                    .menuItems(S.documentTypeList('product').getMenuItems())
+                    .filter('_type == $type')
+                    .params({ type: 'product' })
+                    .child(productID =>
+                      S.documentList()
+                        .title('Variants')
+                        .menuItems(
+                          S.documentTypeList('productVariant').getMenuItems()
+                        )
+                        .filter('_type == $type && productID == $id')
+                        .params({
+                          type: 'productVariant',
+                          id: Number(productID.replace('product-', ''))
+                        })
+                        .child(documentId =>
+                          S.document()
+                            .documentId(documentId)
+                            .schemaType('productVariant')
+                            .views([
+                              S.view.form().icon(EditIcon),
+                              S.view
+                                .component(SeoPreview)
+                                .options({ previewURL })
+                                .icon(EyeIcon)
+                                .title('SEO Preview')
+                            ])
+                        )
+                    )
                 )
-            )
-        ),
+            ])
+        )
+        .icon(FiShoppingCart),
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above
