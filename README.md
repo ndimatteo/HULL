@@ -10,6 +10,7 @@
   <a href="#-features">Features</a> •
   <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
+    <a href="#-deployment">Deployment</a> •
   <a href="#-extrastips">Extras</a> •
   <a href="#license">License</a>
 </p>
@@ -141,7 +142,7 @@ SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
 
 
-# Deployment
+# 🚀 Deployment
 
 ### Frontend
 This is setup to work seamlessly with Vercel, which I highly recommend as your hosting provider of choice. Simply follow the on-screen instructions to setup your new project, and be sure to **add the same `.env.local` variables to your Vercel Project**
