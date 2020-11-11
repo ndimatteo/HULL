@@ -105,7 +105,7 @@ export default async function send(req, res) {
     price: variants[0].price * 100,
     comparePrice: variants[0].compare_at_price
       ? variants[0].compare_at_price * 100
-      : null,
+      : '',
     sku: variants[0].sku,
     inStock: variants.some((v) => v.inventory_quantity > 0),
     lowStock:
@@ -134,7 +134,7 @@ export default async function send(req, res) {
       price: variant.price * 100,
       comparePrice: variant.compare_at_price
         ? variant.compare_at_price * 100
-        : null,
+        : '',
       sku: variant.sku,
       inStock: variant.inventory_quantity > 0,
       lowStock: variant.inventory_quantity <= 5,
