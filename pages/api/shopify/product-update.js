@@ -130,7 +130,7 @@ export default async function send(req, res) {
       variantTitle: variant.title,
       variantID: variant.id,
       price: variant.price * 100,
-      comparePrice: vvariant.compare_at_price * 100,
+      comparePrice: variant.compare_at_price * 100,
       sku: variant.sku,
       inStock: variant.inventory_quantity > 0,
       lowStock: variant.inventory_quantity <= 5,
