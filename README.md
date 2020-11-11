@@ -61,9 +61,11 @@
    - 🟢 Automatic JSON-LD Schema markup for Products
    
 ### Headless Shopify
-- 🟢 Shopify Sync
+- 🟢 Syncs Products from Shopify into Sanity
+- 🟢 Tracks product status from Shopify to help control visibility while editing
 - 🟢 Automatic Variant option toggles
-- 🟢 Update URL on variant changes but keep a clean history stack
+- 🟢 Marks deleted products and variants for easy tracking
+- 🟢 Updates the URL on variant changes while keep a clean history stack
 - 🟢 Accessible and clamped Quantity Counters
 - 🟢 Vanity Shop URL Masking
 - 🟢 Global Cart with access to all variant data for line items
