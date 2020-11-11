@@ -2,8 +2,8 @@
 <img src="public/HULL-Logo.svg" align="center" height="150" />
 </p>
 <p align="center">
-Website built on [Next.js](https://nextjs.org) 🤘 <br />
-Headless CMS powered by [Sanity.io](https://sanity.io)
+  <strong>Headless Shopify starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
+  <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong><br />
 </p>
 
 <p align="center">
@@ -17,6 +17,11 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 <img src="public/HULL.png" align="center" />
 
 # ✨ Features
+🟢 **= implemented**&nbsp;&nbsp;/&nbsp;&nbsp;
+🟡 **= in progress**&nbsp;&nbsp;/&nbsp;&nbsp;
+⚪ **= not started**
+
+---
 
 - 🟢 Page Transitions powered by Framer Motion
 - 🟢 Lazyload Images + WEBP format by default
@@ -67,6 +72,8 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 - 🟡 default PLP for all products
 - 🟡 Custom PLP with easy, Sanity-managed Collections
 - ⚪ Sanity-managed conditional Cart "add-ons"
+- ⚪ Account Management (register/login/password/orders)
+- ⚪ Customer Reviews Integration (Yotpo? Okendo? Junip?)
    
 # 💀 Set Up
 
@@ -78,7 +85,6 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
    - Apps > Manage Private Apps > "Create private app" 
    - Use your dev email to know when there are issues
    - Allow this app to access your storefront data using the Storefront API.
-3. Copy Storefront Access Token from Admin API *(at bottom of page)*
 
 ### Shopify Webhooks
 1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
@@ -86,17 +92,11 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
   - product update - `[your-domain]/api/shopify/product-update`
   - product deletion - `[your-domain]/api/shopify/product-delete`
   
-### Sanity
-1. Make sure you add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
+### Shopify Store Theme
+Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
 
-# ⚡ Spin Up
-
-### Frontend
-1. Clone this repository from your GitHub account
-2. `npm install` in the project root folder on local
-3. `npm run dev` to start the frontend locally
-   - Your Frontend should be running on [http://localhost:3000](http://localhost:3000)
-   
+This will essentially "pass-through" URLs accessed on at your Shopify Store to your true headless environment *(ie. `shop.666.com/products` -> `666.com/products`)*
+  
 ### Sanity
 1. `npm install && sanity init` in the `/studio` folder
 2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
@@ -104,31 +104,76 @@ Headless CMS powered by [Sanity.io](https://sanity.io)
 ? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
 ```
 3. When it asks you what dataset configuration to use, go with the `default`
-4. `sanity start` to start the studio locally
+4. Add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
+
+### NextJS (frontend)
+1. Clone this repository from your GitHub account with the `use template` button
+2. `npm install` in the project root folder on local
+3. Create an `.env.local` file in the project folder, and add the following variables:
+```
+SANITY_PROJECT_DATASET=production
+SANITY_PROJECT_ID=XXXXXX
+SANITY_API_TOKEN=XXXXXX
+SHOPIFY_STORE_ID=XXXXXX
+SHOPIFY_API_TOKEN=XXXXXX
+SHOPIFY_API_PASSWORD=XXXXXX
+SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
+```
+4. Update all the `XXXXXX` values, here's where to find each:
+  - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
+  - `SANITY_API_TOKEN` - Generate an API token for your Sanity project. Access your project from the Sanity Manage dashboard, and navigate to: "Settings" -> "API" -> "Add New Token" button
+  - `SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
+  - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
+  - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
+  - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
+
+
+# ⚡ Spin Up
+
+### Frontend
+`npm run dev` in the project folder to start the frontend locally
+   - Your Frontend should be running on [http://localhost:3000](http://localhost:3000)
+   
+### Sanity
+`sanity start` in the `/studio` folder to start the studio locally
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
+
+
+# Deployment
+
+### Frontend
+This is setup to work seamlessly with Vercel, which I highly recommend as your hosting provider of choice. Simply follow the on-screen instructions to setup your new project, and be sure to **add the same `.env.local` variables to your Vercel Project**
+
+### Sanity
+This is an easy one, you can simply run `sanity deploy` from the `/studio` folder in your project. Select a subdomain you want, and your Studio is now accessible from the web. This is where I'll invite the client to manage the project, so they can both add billing info and begin editing content.
 
 
 # 🤘 Extras/Tips
 
 #### Error: Failed to communicate with the Sanity API
-<details>
-<summary>
-Read More
-</summary>
 If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
-</details>
 
 #### Access your `product_sync` metafields in Shopify without using a plugin
-<details>
-<summary>
-Read More
-</summary>
-1. Simply navigate to: https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync
-</details>
+Simply navigate to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
+
+#### How do I properly hand-off a Vercel project to the client?
+While not as easy as Netlify, what I prefer to do is:
+1. have the client create their own Vercel account
+2. At the time of writing, Github connections can only be connected to one Vercel account at a time, so I have the client create a Github account if they don't already have one, and transfer the project repo to them
+3. Delete my dev project from my own Vercel account (this is so the client can utilize the project name and domain you were using during dev)
+4. You or the client can now connect their newly transferred Github repo to their own Vercel account!
+
+
+# Shoutouts
+Big ups to the following rad folks who helped in big and small ways, both directly with various functionality and my (in)sane questions and frustrations with putting something like this together.
+- 🔥 [@tuckercs](https://github.com/tuckercs)
+- 🍝 [@iamkevingreen](https://github.com/iamkevingreen)
+- 🧈 [@mikehwagz](https://github.com/mikehwagz)
+- 😎 [@dictions](https://github.com/dictions)
 
 # License
 
 ### MIT
 > [nickdimatteo.com](https://nickdimatteo.com) &nbsp;&middot;&nbsp;
-> GitHub [@ndimatteo](https://github.com/ndimatteo) &nbsp;&middot;&nbsp;
+> Github [@ndimatteo](https://github.com/ndimatteo) &nbsp;&middot;&nbsp;
 > Instagram [@ndimatteo](https://instagram.com/ndimatteo)
