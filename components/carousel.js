@@ -2,7 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useEmblaCarousel } from 'embla-carousel/react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const Carousel = ({ hasArrows, children }) => {
+import Photo from './photo'
+
+const Carousel = ({ children, thumbs, hasArrows }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ speed: 5, loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState([])
@@ -49,6 +51,30 @@ const Carousel = ({ hasArrows, children }) => {
         ))}
       </div>
 
+      {scrollSnaps && thumbs && (
+        <div className="carousel--thumbs">
+          {thumbs.map((thumb, key) => (
+            <button
+              key={key}
+              onClick={() => scrollTo(key)}
+              aria-label={`Go to slide ${key + 1}`}
+              className={`carousel--thumb${
+                selectedIndex === key ? ' is-active' : ''
+              }`}
+            >
+              <Photo
+                photo={thumb}
+                srcsetSizes={[400]}
+                sizes="(min-width: 768px) 400px, 35vw'"
+                aspect="square"
+                width="500"
+                height="500"
+              />
+            </button>
+          ))}
+        </div>
+      )}
+
       {scrollSnaps && (
         <div className="carousel--hud">
           {hasArrows && (
@@ -56,8 +82,6 @@ const Carousel = ({ hasArrows, children }) => {
               <button
                 onClick={() => emblaApi.scrollPrev()}
                 className="carousel--prev"
-                tab-index="0"
-                role="button"
                 aria-label="Previous slide"
               >
                 ←
@@ -65,8 +89,6 @@ const Carousel = ({ hasArrows, children }) => {
               <button
                 onClick={() => emblaApi.scrollNext()}
                 className="carousel--next"
-                tab-index="0"
-                role="button"
                 aria-label="Next slide"
               >
                 →

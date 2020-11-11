@@ -44,7 +44,13 @@ const SixSixSix = ({ data }) => {
         <section className="section">
           <Carousel hasArrows>
             {page.carousel.map((photo, key) => (
-              <Photo key={key} photo={photo} className="carousel--photo" />
+              <Photo
+                key={key}
+                photo={photo}
+                aspect="landscape"
+                width={1200}
+                className="carousel--photo"
+              />
             ))}
           </Carousel>
         </section>

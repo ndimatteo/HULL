@@ -9,6 +9,7 @@ import { hasObject, centsToPrice } from '../../lib/helpers'
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
 
+import ProductGallery from '../../components/product/gallery'
 import ProductDescription from '../../components/product/description'
 import ProductOption from '../../components/product/option'
 import Counter from '../../components/product/counter'
@@ -105,51 +106,64 @@ const Product = ({ data, error }) => {
       }}
     >
       <section className="section">
-        <div className="product">
-          <div className="product--content">
-            <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
+        <div
+          className={`product${
+            activeVariant.photos.gallery ? ' has-gallery' : ''
+          }`}
+        >
+          <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
 
-            <div className="product--header">
-              <h1 className="product--title">{product.title}</h1>
-              <div className="product--price">
-                $
-                {centsToPrice(
-                  activeVariant ? activeVariant.price : product.price
+          <div className="product--inner">
+            {activeVariant.photos.gallery && (
+              <ProductGallery photos={activeVariant.photos.gallery} />
+            )}
+
+            <div className="product--content">
+              <div className="product--header">
+                <h1 className="product--title">{product.title}</h1>
+                <div className="product--price">
+                  $
+                  {centsToPrice(
+                    activeVariant ? activeVariant.price : product.price
+                  )}
+                </div>
+                {activeVariant && (
+                  <p className="product--subtitle">{activeVariant.title}</p>
+                )}
+
+                {product.description && (
+                  <ProductDescription content={product.description} />
                 )}
               </div>
-              {activeVariant && (
-                <p className="product--subtitle">{activeVariant.title}</p>
-              )}
 
-              {product.description && (
-                <ProductDescription content={product.description} />
-              )}
+              <div className="product--options">
+                {product.options?.map(
+                  (option, key) =>
+                    option.values.length > 1 && (
+                      <ProductOption
+                        key={key}
+                        position={key}
+                        option={option}
+                        variants={product.variants}
+                        activeVariant={activeVariant}
+                        onChange={changeOption}
+                      />
+                    )
+                )}
+              </div>
+
+              <ProductActions
+                activeVariant={activeVariant}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
             </div>
-
-            <div className="product--options">
-              {product.options?.map((option, key) => (
-                <ProductOption
-                  key={key}
-                  position={key}
-                  option={option}
-                  variants={product.variants}
-                  activeVariant={activeVariant}
-                  onChange={changeOption}
-                />
-              ))}
-            </div>
-
-            <ProductActions
-              activeVariant={activeVariant}
-              quantity={quantity}
-              setQuantity={setQuantity}
-            />
-
-            <Marquee
-              line={product.inStock ? 'For Sale /' : 'Sold Out /'}
-              reverse
-            />
           </div>
+
+          <Marquee
+            line={product.inStock ? 'For Sale /' : 'Sold Out /'}
+            reverse
+          />
         </div>
       </section>
     </Layout>

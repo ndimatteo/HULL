@@ -1,0 +1,12 @@
+.product {
+  position: relative;
+  
+  &--inner {
+    .has-gallery & {
+      @media (--sm) {
+        display: grid;
+        grid-template-columns: 1.2fr 1.8fr;
+      }
+    }
+  }
+}

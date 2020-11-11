@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { getStaticPage } from '../lib/api'
 
 import Layout from '../components/layout'
-import Hero from '../modules/hero'
+import Photo from '../components/photo'
 
 const Home = ({ data }) => {
   const { site, menus, page } = data
@@ -28,12 +28,15 @@ const Home = ({ data }) => {
       </section>
 
       {page.hero && (
-        <Hero
-          data={{
-            photo: page.hero,
-            size: 'portrait',
-          }}
-        />
+        <div className="hero">
+          <Photo
+            photo={page.hero}
+            srcsetSize={[500, 800, 1200, 1800]}
+            sizes="100vw"
+            aspect="portrait"
+            width="1800"
+          />
+        </div>
       )}
     </Layout>
   )

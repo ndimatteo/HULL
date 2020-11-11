@@ -19,6 +19,24 @@
     width: 100%;
   }
 
+  &--thumbs {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    width: 5rem;
+    margin: .75rem;
+
+    button {
+      @mixin flattenButton;
+      margin: .25rem;
+
+      &.is-active {
+        /* active state styles */
+      }
+    }
+  }
+
   &--hud {
     display: flex;
     flex-direction: row;
@@ -38,6 +56,7 @@
       display: block;
       width: 1.5rem;
       height: 1.5rem;
+      font-size: 1.5rem;
       font-feature-settings: "tnum";
     }
   }
@@ -72,8 +91,8 @@
 
   &--progress {
     position: relative;
-    margin: 0 1.5em;
-    width: 3em;
+    margin: 0 1rem;
+    width: 3rem;
     height: 1px;
     background: rgba(var(--pageText-rgb), .25);
 

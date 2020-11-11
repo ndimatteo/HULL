@@ -42,14 +42,15 @@ const fetchVariant = async (id) => {
       *[_type == "productVariant" && variantID == ${id}][0]{
         "product": *[_type == "product" && productID == ^.productID][0]{
           title,
-          "slug": slug.current
+          "slug": slug.current,
         },
         "id": variantID,
         title,
         price,
-        "photos": {
-          "cart": cartPhoto
-        },
+        "cartPhoto": coalesce(
+          cartPhoto,
+          *[_type == "product" && productID == ^.productID][0].cartPhoto
+        ),
         options[]{
           name,
           position,

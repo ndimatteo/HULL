@@ -3,7 +3,18 @@ import LazyLoad from 'vanilla-lazyload'
 
 import { buildSrcSet, buildSrc } from '../lib/helpers'
 
-const Photo = ({ photo, aspect = 0.5625, className }) => {
+const Photo = ({
+  photo,
+  srcsetSizes = [500, 800, 1200],
+  sizes = '(min-width: 928px) 70vw, 100vw',
+  aspect = 'custom',
+  aspectCustom,
+  aspectRatio,
+  width,
+  height,
+  className,
+  style,
+}) => {
   const imageRef = useRef()
 
   let lazy
@@ -23,30 +34,30 @@ const Photo = ({ photo, aspect = 0.5625, className }) => {
   }, [imageRef])
 
   return (
-    <figure>
-      <div className="is-aspect is-aspect--landscape">
+    <figure className={className ? className : null}>
+      <div className={`is-aspect is-aspect--${aspect}`} style={aspectCustom}>
         <picture>
           <source
             data-srcset={buildSrcSet(photo, {
-              sizes: [500, 800, 1200],
-              aspect: aspect,
+              sizes: srcsetSizes,
+              aspect: aspectRatio,
               format: photo.type !== 'image/gif' ? 'webp' : null,
             })}
-            sizes="(min-width: 928px) 70vw, 100vw"
+            sizes={sizes}
             type={photo.type !== 'image/gif' ? 'image/webp' : null}
           />
 
           <img
             ref={imageRef}
             data-srcset={buildSrcSet(photo, {
-              sizes: [500, 800, 1200],
-              aspect: 0.5625,
+              sizes: srcsetSizes,
+              aspect: aspectRatio,
             })}
             data-src={buildSrc(photo, {
-              width: 800,
-              height: 450,
+              width: width,
+              height: height,
             })}
-            sizes="(min-width: 928px) 70vw, 100vw"
+            sizes={sizes}
             alt={photo.alt}
             className="photo"
           />

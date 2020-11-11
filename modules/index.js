@@ -1,13 +1,11 @@
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import BlockContent from '@sanity/block-content-to-react'
-import LazyLoad from 'vanilla-lazyload'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
 import getStaticRoute from '../lib/static-routes'
-import { buildSrcSet, buildSrc } from '../lib/helpers'
+import Photo from '../components/photo'
 
-const Hero = dynamic(() => import('./hero'))
 const Text = dynamic(() => import('./text'))
 const Events = dynamic(() => import('./events'))
 const Accordions = dynamic(() => import('./accordions'))
@@ -19,8 +17,6 @@ export const Module = ({ module }) => getModule(module)
 const getModule = (module) => {
   const type = module._type
   switch (type) {
-    case 'hero':
-      return <Hero data={module} />
     case 'textBlock':
       return <Text data={module} />
     case 'eventsList':
@@ -52,55 +48,14 @@ export const serializers = {
       return BlockContent.defaultSerializers.types.block(props)
     },
     figure: ({ node }) => {
-      const imageRef = useRef()
-
-      let lazy
-      useEffect(() => {
-        lazy = new LazyLoad(
-          {
-            threshold: 0,
-            unobserve_entered: true,
-            class_loaded: 'is-loaded',
-          },
-          [imageRef.current]
-        )
-
-        return () => {
-          lazy.destroy()
-        }
-      }, [imageRef])
-
       return (
-        <figure className="rc-image">
-          <div
-            className="is-aspect is-aspect--custom"
-            style={{ paddingTop: 100 / node.aspectRatio + '%' }}
-          >
-            <picture>
-              <source
-                data-srcset={buildSrcSet(node, {
-                  sizes: [500, 800, 1200, 1800],
-                  format: node.type !== 'image/gif' ? 'webp' : null,
-                })}
-                sizes="100vw"
-                type={node.type !== 'image/gif' ? 'image/webp' : null}
-              />
-
-              <img
-                ref={imageRef}
-                data-srcset={buildSrcSet(node, {
-                  sizes: [500, 800, 1200, 1800],
-                })}
-                data-src={buildSrc(node, {
-                  width: 1800,
-                })}
-                sizes="100vw"
-                alt={node.alt}
-                className="photo"
-              />
-            </picture>
-          </div>
-        </figure>
+        <Photo
+          photo={node}
+          srcsetSizes={[500, 800, 1200, 1800]}
+          sizes="100vw"
+          aspectCustom={{ paddingTop: 100 / node.aspectRatio + '%' }}
+          width={1800}
+        />
       )
     },
     horizontalRule: () => <hr />,

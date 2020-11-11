@@ -23,7 +23,9 @@ const Cart = () => {
   const goToCheckout = (e) => {
     e.preventDefault()
     toggleCart(false)
-    window.open(checkoutURL, '_self')
+    setTimeout(() => {
+      window.open(checkoutURL, '_self')
+    }, 200)
   }
 
   return (

@@ -1,13 +1,3 @@
 .hero {
   position: relative;
-  overflow: hidden;
-  
-  &--photo {
-    display: block;
-    position: relative;
-
-    .is-fullscreen & {
-      min-height: 100vh;
-    }
-  }
 }

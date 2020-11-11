@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Link from 'next/link'
 
 import { centsToPrice } from '../../lib/helpers'
 
+import Photo from '../photo'
 import Counter from '../product/counter'
 
 import {
@@ -22,9 +23,15 @@ const CartItem = ({ id, item }) => {
 
   return (
     <div key={id} className="cart-item">
-      <figure className="cart-item--photo">
-        <div className="is-aspect is-aspect--square"></div>
-      </figure>
+      <Photo
+        photo={item.cartPhoto}
+        srcsetSizes={[400]}
+        sizes="(min-width: 768px) 400px, 35vw'"
+        aspect="square"
+        width="500"
+        height="500"
+        className="cart-item--photo"
+      />
       <div className="cart-item--details">
         <div className="cart-item--header">
           <h2 className="cart-item--title">
