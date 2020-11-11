@@ -5,6 +5,8 @@ import { getErrorPage } from '../lib/api'
 import BlockContent from '@sanity/block-content-to-react'
 import { serializers } from '../modules'
 
+import VideoLoop from '../components/video-loop'
+
 const ErrorPage = ({ data }) => {
   const { page } = data
 
@@ -15,6 +17,8 @@ const ErrorPage = ({ data }) => {
       }}
     >
       <section className="section is-error">
+        <VideoLoop id={125635073} width={1} height={1} />
+
         <div className="section--content">
           {page.content ? (
             <BlockContent

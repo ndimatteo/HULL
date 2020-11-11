@@ -80,6 +80,14 @@ body {
 
 .section {
   text-align: center;
+
+  &.is-error {
+    overflow: hidden;
+    
+    .video-loop {
+      z-index: -1;
+    }
+  }
 }
 
 .hero {
@@ -227,10 +235,6 @@ h1 {
   font-family: 'GandurNew Light';
   font-weight: normal;
   font-size: 6rem;
-
-  .is-error & {
-    font-size: 3rem;
-  }
 }
 
 h2, h3 {
