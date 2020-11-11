@@ -116,15 +116,15 @@ export default async function send(req, res) {
     .sort((a, b) => (a.id > b.id ? 1 : -1))
     .map((variant) => ({
       _type: 'productVariant',
-      _id: `${status !== 'active' ? 'drafts.' : ''}productVariant-${
-        variant.id
-      }`,
+      _id: `productVariant-${variant.id}`,
     }))
 
   // Define productVariant fields
   const productVariantFields = variants
     .sort((a, b) => (a.id > b.id ? 1 : -1))
     .map((variant) => ({
+      isDraft: status === 'draft' ? true : false,
+      wasDeleted: false,
       productTitle: title,
       productID: id,
       variantTitle: variant.title,
@@ -132,7 +132,6 @@ export default async function send(req, res) {
       price: variant.price * 100,
       comparePrice: variant.compare_at_price * 100,
       sku: variant.sku,
-      wasDeleted: false,
       inStock: variant.inventory_quantity > 0,
       lowStock: variant.inventory_quantity <= 5,
       options:

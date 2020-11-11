@@ -86,6 +86,14 @@ export default {
       fieldset: 'shopify'
     },
     {
+      title: 'Draft Mode',
+      name: 'isDraft',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
+      fieldset: 'shopify'
+    },
+    {
       title: 'Deleted from Shopify?',
       name: 'wasDeleted',
       type: 'boolean',
@@ -165,17 +173,27 @@ export default {
   },
   preview: {
     select: {
+      isDraft: 'isDraft',
       wasDeleted: 'wasDeleted',
       title: 'title',
       productTitle: 'productTitle',
       slug: 'slug',
       media: 'hero'
     },
-    prepare({ wasDeleted = false, title, productTitle, slug = {}, media }) {
+    prepare({
+      isDraft = false,
+      wasDeleted = false,
+      title,
+      productTitle,
+      slug = {},
+      media
+    }) {
       const path = `/${slug.current}`
       return {
         title:
-          (title ? title : productTitle) + (wasDeleted ? ' (removed)' : ''),
+          (title ? title : productTitle) +
+          (wasDeleted ? ' (removed)' : '') +
+          (isDraft ? ' (draft)' : ''),
         media,
         subtitle: slug.current ? path : '(missing slug)'
       }
