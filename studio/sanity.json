@@ -49,7 +49,11 @@
     },
     {
       "implements": "part:@sanity/base/document-badges/resolver",
-      "path": "resolveDocumentBadges.js"
+      "path": "./parts/resolveDocumentBadges.js"
+    },
+    {
+      "implements": "part:@sanity/form-builder/input-resolver",
+      "path": "./parts/input-resolver.js"
     }
   ]
 }

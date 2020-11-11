@@ -9,8 +9,9 @@ import { hasObject, centsToPrice } from '../../lib/helpers'
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
 
+import ProductDescription from '../../components/product/description'
 import ProductOption from '../../components/product/option'
-import Counter from '../../components/counter'
+import Counter from '../../components/product/counter'
 import AddToCart from '../../components/product/add-to-cart'
 import ProductWaitlist from '../../components/product/waitlist'
 
@@ -58,6 +59,8 @@ const Product = ({ data, error }) => {
   // set quantity
   const [quantity, setQuantity] = useState(1)
 
+  console.log(product)
+
   return (
     <Layout
       site={{
@@ -103,17 +106,24 @@ const Product = ({ data, error }) => {
     >
       <section className="section">
         <div className="product">
-          <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
-          <div className="product--details">
+          <div className="product--content">
+            <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
+
             <div className="product--header">
               <h1 className="product--title">{product.title}</h1>
-              <h2>
+              <div className="product--price">
                 $
                 {centsToPrice(
                   activeVariant ? activeVariant.price : product.price
                 )}
-              </h2>
-              {activeVariant && <p>{activeVariant.title}</p>}
+              </div>
+              {activeVariant && (
+                <p className="product--subtitle">{activeVariant.title}</p>
+              )}
+
+              {product.description && (
+                <ProductDescription content={product.description} />
+              )}
             </div>
 
             <div className="product--options">
@@ -129,39 +139,48 @@ const Product = ({ data, error }) => {
               ))}
             </div>
 
-            {activeVariant?.inStock ? (
-              <div className="product--actions">
-                {activeVariant.lowStock && (
-                  <div className="product--stock-indicator">
-                    <span>
-                      Low
-                      <br />
-                      Stock
-                    </span>
-                  </div>
-                )}
-                <Counter onUpdate={setQuantity} />
-                <AddToCart
-                  productID={activeVariant.id}
-                  quantity={quantity}
-                  className="btn is-block"
-                >
-                  Add To Cart
-                </AddToCart>
-              </div>
-            ) : (
-              <div className="product--actions">
-                <ProductWaitlist variant={activeVariant} />
-              </div>
-            )}
+            <ProductActions
+              activeVariant={activeVariant}
+              quantity={quantity}
+              setQuantity={setQuantity}
+            />
+
+            <Marquee
+              line={product.inStock ? 'For Sale /' : 'Sold Out /'}
+              reverse
+            />
           </div>
-          <Marquee
-            line={product.inStock ? 'For Sale /' : 'Sold Out /'}
-            reverse
-          />
         </div>
       </section>
     </Layout>
+  )
+}
+
+const ProductActions = ({ activeVariant, quantity, setQuantity }) => {
+  return (
+    <>
+      {activeVariant?.inStock ? (
+        <div className="product--actions">
+          {activeVariant.lowStock && (
+            <div className="product--stock-indicator">
+              <span>Low Stock</span>
+            </div>
+          )}
+          <Counter onUpdate={setQuantity} />
+          <AddToCart
+            productID={activeVariant.id}
+            quantity={quantity}
+            className="btn is-block"
+          >
+            Add To Cart
+          </AddToCart>
+        </div>
+      ) : (
+        <div className="product--actions">
+          <ProductWaitlist variant={activeVariant} />
+        </div>
+      )}
+    </>
   )
 }
 

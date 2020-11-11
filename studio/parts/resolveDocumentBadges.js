@@ -1,5 +1,5 @@
 import defaultResolve from 'part:@sanity/base/document-badges'
-import { ShopifyBadge } from './components/shopify-badge'
+import { ShopifyBadge } from '../components/shopify-badge'
 
 export default function resolveDocumentBadges(props) {
   const badges = defaultResolve(props)

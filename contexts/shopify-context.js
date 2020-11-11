@@ -47,6 +47,9 @@ const fetchVariant = async (id) => {
         "id": variantID,
         title,
         price,
+        "photos": {
+          "cart": cartPhoto
+        },
         options[]{
           name,
           position,

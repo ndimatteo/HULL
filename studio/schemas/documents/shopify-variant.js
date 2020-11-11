@@ -11,6 +11,11 @@ export default {
       name: 'shopify',
       description: 'Synced from Shopify',
       options: { columns: 2, collapsible: true }
+    },
+    {
+      title: 'Listing Settings',
+      name: 'listing',
+      options: { columns: 2 }
     }
   ],
   icon: FiGift,
@@ -98,6 +103,32 @@ export default {
       title: 'Display Title',
       name: 'title',
       type: 'string'
+    },
+    {
+      title: 'Gallery Photo(s)',
+      name: 'photos',
+      type: 'array',
+      of: [{ type: 'figure' }],
+      options: {
+        layout: 'grid'
+      }
+    },
+    {
+      title: 'Cart Thumbnail',
+      name: 'cartPhoto',
+      type: 'figure'
+    },
+    {
+      title: 'Thumbnail',
+      name: 'listingPhoto',
+      type: 'figure',
+      fieldset: 'listing'
+    },
+    {
+      title: 'Thumbnail (hover)',
+      name: 'listingPhotoHover',
+      type: 'figure',
+      fieldset: 'listing'
     },
     {
       title: 'SEO',

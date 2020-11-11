@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
-import { clampRange } from '../lib/helpers'
+import { clampRange } from '../../lib/helpers'
 
 const flipAnim = {
   show: (custom) => ({

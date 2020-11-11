@@ -78,7 +78,7 @@ export default async function send(req, res) {
   // Define product document
   const product = {
     _type: 'product',
-    _id: `${status !== 'active' ? 'drafts.' : ''}product-${id}`,
+    _id: `product-${id}`,
   }
 
   // Define product options if there are more than one variant
@@ -97,12 +97,14 @@ export default async function send(req, res) {
 
   // Define product fields
   const productFields = {
+    wasDeleted: false,
+    isDraft: status === 'draft' ? true : false,
     productTitle: title,
     productID: id,
+    slug: { current: handle },
     price: variants[0].price * 100,
     comparePrice: variants[0].compare_at_price * 100,
     sku: variants[0].sku,
-    wasDeleted: false,
     inStock: variants.some((v) => v.inventory_quantity > 0),
     lowStock:
       variants.reduce((a, b) => a + (b.inventory_quantity || 0), 0) <= 10,
@@ -242,7 +244,7 @@ export default async function send(req, res) {
   stx = stx.patch(`product-${id}`, (patch) => patch.set(productFields))
   // patch (update) title & slug if none has been set
   stx = stx.patch(`product-${id}`, (patch) =>
-    patch.setIfMissing({ title: title, slug: { current: handle } })
+    patch.setIfMissing({ title: title })
   )
 
   // create variant if doesn't exist & patch (update) variant with core shopify data

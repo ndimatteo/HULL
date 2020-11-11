@@ -280,6 +280,22 @@ h2, h3 {
     margin: 0;
   }
 
+  &--price {
+    margin-bottom: 1rem;
+    font-family: 'satan';
+    font-size: 2rem;
+  }
+
+  &--subtitle {
+    display: inline-block;
+    padding: 0 .5em;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: .125em;
+    background: var(--pageText);
+    color: var(--pageBG);
+  }
+
   &--details {
     border-left: 1px solid;
     border-right: 1px solid;
@@ -334,6 +350,7 @@ h2, h3 {
       display: block;
       margin-top: -.5em;
       line-height: 1;
+      word-spacing: 3rem;
     }
   }
 

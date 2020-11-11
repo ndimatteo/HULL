@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 import { centsToPrice } from '../../lib/helpers'
 
-import Counter from '../counter'
+import Counter from '../product/counter'
 
 import {
   useUpdateItem,
