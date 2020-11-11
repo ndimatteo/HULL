@@ -1,5 +1,4 @@
-import DynamicSelect from '../../components/dynamic-select'
-import { FiShoppingCart } from 'react-icons/fi'
+import { FiGift } from 'react-icons/fi'
 
 export default {
   name: 'product',
@@ -19,7 +18,7 @@ export default {
       options: { columns: 2 }
     }
   ],
-  icon: FiShoppingCart,
+  icon: FiGift,
   fields: [
     {
       title: 'Product Title',

@@ -11,7 +11,7 @@ import {
   FiAlertOctagon,
   FiMenu,
   FiRepeat,
-  FiShoppingCart,
+  FiGift,
   FiCopy
 } from 'react-icons/fi'
 
@@ -133,7 +133,7 @@ export default () =>
       S.divider(),
       S.listItem()
         .title('Products')
-        .icon(FiShoppingCart)
+        .icon(FiGift)
         .child(
           S.documentTypeList('product')
             .title('Products')
