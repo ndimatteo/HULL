@@ -10,6 +10,7 @@
   <a href="#-features">Features</a> •
   <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
+    <a href="#-deployment">Deployment</a> •
   <a href="#-extrastips">Extras</a> •
   <a href="#license">License</a>
 </p>
@@ -61,9 +62,11 @@
    - 🟢 Automatic JSON-LD Schema markup for Products
    
 ### Headless Shopify
-- 🟢 Shopify Sync
+- 🟢 Syncs Products from Shopify into Sanity
+- 🟢 Tracks product status from Shopify to help control visibility while editing
 - 🟢 Automatic Variant option toggles
-- 🟢 Update URL on variant changes but keep a clean history stack
+- 🟢 Marks deleted products and variants for easy tracking
+- 🟢 Updates the URL on variant changes while keep a clean history stack
 - 🟢 Accessible and clamped Quantity Counters
 - 🟢 Vanity Shop URL Masking
 - 🟢 Global Cart with access to all variant data for line items
@@ -139,7 +142,7 @@ SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
 
 
-# Deployment
+# 🚀 Deployment
 
 ### Frontend
 This is setup to work seamlessly with Vercel, which I highly recommend as your hosting provider of choice. Simply follow the on-screen instructions to setup your new project, and be sure to **add the same `.env.local` variables to your Vercel Project**
