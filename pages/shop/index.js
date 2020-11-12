@@ -7,8 +7,6 @@ import Layout from '../../components/layout'
 const Shop = ({ data }) => {
   const { site, menus, page } = data
 
-  console.log(page)
-
   return (
     <Layout
       site={{

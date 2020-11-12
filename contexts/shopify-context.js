@@ -11,7 +11,9 @@ const SHOPIFY_VARIANT_GID = 'gid://shopify/ProductVariant/'
 // Set initial store states
 const initialStoreState = {
   shopifyClient: shopify,
-  isUpdating: true,
+  isLoading: true,
+  isAdding: false,
+  isUpdating: false,
   isCartOpen: false,
   checkout: {
     id: null,
@@ -99,6 +101,7 @@ const setCheckoutState = async (checkout, setStore) => {
   setStore((prevState) => {
     return {
       ...prevState,
+      isLoading: false,
       isUpdating: false,
       checkout: {
         id: checkout.id,
@@ -215,7 +218,7 @@ function useAddItem() {
 
     // Otherwise, start adding the product
     setStore((prevState) => {
-      return { ...prevState, isUpdating: true }
+      return { ...prevState, isAdding: true, isUpdating: true }
     })
 
     // build encoded variantID
@@ -240,6 +243,7 @@ function useAddItem() {
     setStore((prevState) => {
       return {
         ...prevState,
+        isAdding: false,
         isCartOpen: true,
       }
     })

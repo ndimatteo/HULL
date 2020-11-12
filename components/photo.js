@@ -19,49 +19,53 @@ const Photo = ({
 
   let lazy
   useEffect(() => {
-    lazy = new LazyLoad(
-      {
-        threshold: -100,
-        unobserve_entered: true,
-        class_loaded: 'is-loaded',
-      },
-      [imageRef.current]
-    )
+    if (photo) {
+      lazy = new LazyLoad(
+        {
+          threshold: -100,
+          unobserve_entered: true,
+          class_loaded: 'is-loaded',
+        },
+        [imageRef.current]
+      )
+    }
 
     return () => {
-      lazy.destroy()
+      if (photo) lazy.destroy()
     }
   }, [imageRef])
 
   return (
     <figure className={className ? className : null}>
       <div className={`is-aspect is-aspect--${aspect}`} style={aspectCustom}>
-        <picture>
-          <source
-            data-srcset={buildSrcSet(photo, {
-              sizes: srcsetSizes,
-              aspect: aspectRatio,
-              format: photo.type !== 'image/gif' ? 'webp' : null,
-            })}
-            sizes={sizes}
-            type={photo.type !== 'image/gif' ? 'image/webp' : null}
-          />
+        {photo && (
+          <picture>
+            <source
+              data-srcset={buildSrcSet(photo, {
+                sizes: srcsetSizes,
+                aspect: aspectRatio,
+                format: photo.type !== 'image/gif' ? 'webp' : null,
+              })}
+              sizes={sizes}
+              type={photo.type !== 'image/gif' ? 'image/webp' : null}
+            />
 
-          <img
-            ref={imageRef}
-            data-srcset={buildSrcSet(photo, {
-              sizes: srcsetSizes,
-              aspect: aspectRatio,
-            })}
-            data-src={buildSrc(photo, {
-              width: width,
-              height: height,
-            })}
-            sizes={sizes}
-            alt={photo.alt}
-            className="photo"
-          />
-        </picture>
+            <img
+              ref={imageRef}
+              data-srcset={buildSrcSet(photo, {
+                sizes: srcsetSizes,
+                aspect: aspectRatio,
+              })}
+              data-src={buildSrc(photo, {
+                width: width,
+                height: height,
+              })}
+              sizes={sizes}
+              alt={photo.alt}
+              className="photo"
+            />
+          </picture>
+        )}
       </div>
     </figure>
   )

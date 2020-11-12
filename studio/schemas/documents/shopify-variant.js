@@ -92,6 +92,14 @@ export default {
       fieldset: 'shopify'
     },
     {
+      title: 'Draft Mode',
+      name: 'isDraft',
+      type: 'boolean',
+      readOnly: true,
+      hidden: true,
+      fieldset: 'shopify'
+    },
+    {
       name: 'wasDeleted',
       title: 'Deleted from Shopify?',
       type: 'boolean',
@@ -103,15 +111,6 @@ export default {
       title: 'Display Title',
       name: 'title',
       type: 'string'
-    },
-    {
-      title: 'Gallery Photo(s)',
-      name: 'photos',
-      type: 'array',
-      of: [{ type: 'figure' }],
-      options: {
-        layout: 'grid'
-      }
     },
     {
       title: 'Cart Thumbnail',
@@ -138,6 +137,7 @@ export default {
   ],
   preview: {
     select: {
+      isDraft: 'isDraft',
       wasDeleted: 'wasDeleted',
       title: 'title',
       variantTitle: 'variantTitle',
@@ -145,6 +145,7 @@ export default {
       media: 'hero'
     },
     prepare({
+      isDraft = false,
       wasDeleted = false,
       title,
       variantTitle,
@@ -153,7 +154,9 @@ export default {
     }) {
       return {
         title:
-          (title ? title : variantTitle) + (wasDeleted ? ' (removed)' : ''),
+          (title ? title : variantTitle) +
+          (wasDeleted ? ' (removed)' : '') +
+          (isDraft ? ' (draft)' : ''),
         media,
         subtitle: title ? variantTitle : productTitle
       }

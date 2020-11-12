@@ -5,7 +5,7 @@ export default function resolveInput(type) {
     type.name === 'string' &&
     type.options &&
     type.options.fromField &&
-    type.options.fromFieldData
+    (type.options.fromFieldData || type.options.fromSubField)
   ) {
     return DynamicSelect
   }

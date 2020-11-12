@@ -106,15 +106,16 @@ const Product = ({ data, error }) => {
     >
       <section className="section">
         <div
-          className={`product${
-            activeVariant.photos.gallery ? ' has-gallery' : ''
-          }`}
+          className={`product${product.photos.photosets ? ' has-gallery' : ''}`}
         >
           <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
 
           <div className="product--inner">
-            {activeVariant.photos.gallery && (
-              <ProductGallery photos={activeVariant.photos.gallery} />
+            {product.photos.photosets && (
+              <ProductGallery
+                photosets={product.photos.photosets}
+                activeVariant={activeVariant}
+              />
             )}
 
             <div className="product--content">

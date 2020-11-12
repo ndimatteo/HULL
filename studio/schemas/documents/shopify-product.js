@@ -13,9 +13,14 @@ export default {
       options: { columns: 2, collapsible: true }
     },
     {
+      title: '',
+      name: '2up',
+      options: { columns: 2 }
+    },
+    {
       title: 'Listing Settings',
       name: 'listing',
-      options: { columns: 2 }
+      options: { columns: 2, collapsible: true }
     }
   ],
   icon: FiGift,
@@ -111,32 +116,34 @@ export default {
       type: 'simplePortableText'
     },
     {
-      title: 'Gallery Photo(s)',
-      name: 'photos',
+      title: 'Gallery Photosets',
+      name: 'photosets',
       type: 'array',
-      of: [{ type: 'figure' }],
-      options: {
-        layout: 'grid'
-      }
+      of: [{ type: 'productGallery' }],
+      description:
+        'Define a Gallery for your product, or for a subset of variants',
+      fieldset: '2up'
     },
     {
       title: 'Cart Thumbnail',
       name: 'cartPhoto',
       type: 'figure',
-      description: 'The default photo used in the cart for all product variants'
+      description:
+        'The default photo used in the cart for all product variants',
+      fieldset: '2up'
     },
     {
       title: 'Use Gallery Photos',
       name: 'useGallery',
       type: 'string',
-      description: 'Show gallery instead of static photo',
+      description: 'Show gallery instead of thumbnail',
       options: {
         list: [
           { title: 'Yes', value: 'true' },
           { title: 'No', value: 'false' }
         ]
       },
-      fieldset: 'listing'
+      fieldset: '2up'
     },
     {
       title: 'Quick Add Option',
@@ -144,10 +151,11 @@ export default {
       type: 'string',
       description: 'Which option to surface for quick add',
       options: {
+        list: [{ title: 'Disable Quick Add', value: '' }],
         fromField: 'options',
         fromFieldData: { title: 'name', value: 'position' }
       },
-      fieldset: 'listing'
+      fieldset: '2up'
     },
     {
       title: 'Thumbnail',

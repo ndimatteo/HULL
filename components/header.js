@@ -23,7 +23,6 @@ const Header = ({ menu, transparent }) => {
   }
 
   // context helpers
-  const { isUpdating } = useStore()
   const toggleCart = useToggleCart()
   const cartCount = useCartCount()
 
