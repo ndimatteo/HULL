@@ -241,6 +241,7 @@ h2, h3 {
   font-family: 'satan';
 }
 
+a[href="#content"].skip-link,
 .btn {
   padding: 1em 2em;
   border: 1px solid;
@@ -282,6 +283,11 @@ h2, h3 {
 
 .logo {
   margin: 2rem auto;
+
+  &--link {
+    height: 10rem;
+    padding: .5rem;
+  }
 }
 
 .social-nav {

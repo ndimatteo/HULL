@@ -28,6 +28,9 @@ const Header = ({ menu, transparent }) => {
 
   return (
     <>
+      <a href="#content" className="skip-link">
+        Skip to Content
+      </a>
       <span ref={ref} className="header--observer" />
       <header
         className={`header${inView && transparent ? ' is-transparent' : ''}`}

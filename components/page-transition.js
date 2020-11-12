@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import Marquee from './marquee'
 import Icon from './icon'
 
-const transition = { duration: 0.3, ease: [0.43, 0.13, 0.23, 0.96] }
+const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }
 
 const PageTransition = () => {
   return (

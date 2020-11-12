@@ -1,27 +1,5 @@
 .header {
-  /* position: sticky;
-  top: 0; */
-
   position: relative;
-  z-index: 9;
-
-  &::before {
-    content: '';
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--pageBG);
-    z-index: -1;
-  }
-
-  &.is-transparent {
-    &::before {
-      transform: translate3d(0,-100%,0);
-    }
-  }
   
   &--content {
     display: flex;
@@ -36,8 +14,6 @@
   &--link {
     display: block;
     margin: 0 auto;
-    height: 10em;
-    padding: .5em;
 
     svg {
       display: block;
@@ -54,9 +30,9 @@
   display: none;
   position: relative;
   margin-left: auto;
-  padding: 1em;
-  width: 3em;
-  height: 3em;
+  padding: 1rem;
+  width: 3rem;
+  height: 3rem;
 
   @media (--mdMax) {
     display: block;
@@ -83,7 +59,7 @@
       right: 0;
       height: 2px;
       margin-top: -1px;
-      background: var(--pageText);
+      background: currentColor;
     }
 
     &::after {
@@ -114,57 +90,21 @@
       a:not(.btn),
       button {
         display: block;
-        padding: .5em;
       }
     }
   }
 }
 
-/* .main-navigation {
-  display: flex;
+a[href="#content"].skip-link {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  transform: translateY(-150%);
+  transition: transform .4s ease-out;
 
-  ul {
-    @media (max-width: $md-max) {
-      display: block;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      padding: calc(5em + 1rem) 1rem 1rem;
-      background: $bg;
-      overflow-y: scroll;
-      -webkit-overflow-scrolling: touch;
-      // opacity: 0;
-      // visibility: hidden;
-      z-index: -1;
-      transform: translate3d(100%,0,0);
-      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
-      // transition: all .2s linear;
-
-      .nav-open & {
-        transform: none;
-        // opacity: 1;
-        // visibility: visible;
-        // transition: none;
-      }
-
-      > li {
-        .nav-open & {
-          @for $i from 0 through 10 {
-            &:nth-child(#{($i + 1)}) {
-              animation: .5s linear both fadeIn;
-              animation-delay: #{($i * .05) + .1}s !important;
-            }
-          }
-        }
-      }
-    }
-    
-    @media (min-width: $md-break) {
-      display: flex;
-      justify-content: flex-end;
-      width: 100%;
-    }
+  &:focus {
+    transform: none;
   }
-} */
+}
