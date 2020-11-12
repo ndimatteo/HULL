@@ -46,7 +46,11 @@ export async function getStaticProps(context) {
         price,
         comparePrice,
         "photos": {
-          "gallery": photos[],
+          "gallery": photos[]{
+            "id": asset->assetId,
+            asset,
+            alt
+          },
           "listing": {
             "default": listingPhoto,
             "hover": listingPhotoHover
@@ -67,8 +71,16 @@ export async function getStaticProps(context) {
           comparePrice,
           "photos": {
             "gallery": coalesce(
-              photos[],
-              *[_type == "product" && productID == ^.productID][0].photos[]
+              photos[]{
+                "id": asset->assetId,
+                asset,
+                alt
+              },
+              *[_type == "product" && productID == ^.productID][0].photos[]{
+                "id": asset->assetId,
+                asset,
+                alt
+              }
             ),
             "listing": {
               "default": coalesce(

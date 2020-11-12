@@ -61,8 +61,6 @@ const Product = ({ data, error }) => {
   // set quantity
   const [quantity, setQuantity] = useState(1)
 
-  console.log(product)
-
   return (
     <Layout
       site={{
