@@ -4,7 +4,9 @@ import Carousel from '../carousel'
 import Photo from '../photo'
 
 const ProductGallery = ({ photos }) => {
-  const id = photos.map((p) => p._key).join('')
+  const id = photos.map((p) => p.id).join('')
+
+  console.log(id)
 
   return (
     <div key={id} className="product--gallery">
