@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Photo from './photo'
 
 const Carousel = ({ children, thumbs, hasArrows }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ speed: 5, loop: true })
+  const [emblaRef, emblaApi] = useEmblaCarousel({ speed: 8, loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState([])
 
