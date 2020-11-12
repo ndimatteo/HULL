@@ -51,10 +51,10 @@
 - 🟢 Accessibility features:
    - 🟢 ARIA Landmark Roles
    - 🟢 Preserve default Focus States
-   - Correctly Trap focus when Drawers (like the Shop Cart) are open (w/ [focus-trap-react](https://www.npmjs.com/package/focus-trap-react))
+   - 🟢 Correctly Trap focus when Drawers (like the Shop Cart) are open (w/ [focus-trap-react](https://www.npmjs.com/package/focus-trap-react))
    - 🟢 Correctly associated button states
    - 🟢 Required `alt` states for all images
-   - 🟡 Skip to Content link
+   - 🟢 Skip to Content link
 - 🟢 SEO features:
    - 🟢 Page-level SEO settings for meta descriptions and share graphics
    - 🟢 Fallback Global SEO settings
@@ -71,10 +71,11 @@
 - 🟢 Vanity Shop URL Masking
 - 🟢 Global Cart with access to all variant data for line items
 - 🟢 Supports Single Variant products out of the box
-- 🟡 PDP Photo Galleries with variant granularity
+- 🟢 PDP Photo Galleries with variant granularity
 - 🟡 default PLP for all products
-- 🟡 Custom PLP with easy, Sanity-managed Collections
+- 🟡 Custom PLPs with easy, Sanity-managed Collections
 - ⚪ Sanity-managed conditional Cart "add-ons"
+- ⚪ Ability to apply coupons to the checkout cart
 - ⚪ Account Management (register/login/password/orders)
 - ⚪ Customer Reviews Integration (Yotpo? Okendo? Junip?)
    
