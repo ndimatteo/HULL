@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 
 import { getStaticPage } from '../lib/api'
 
@@ -42,17 +41,19 @@ const SixSixSix = ({ data }) => {
         <hr />
         <h3 className="is-mb0">The Carousel</h3>
         <section className="section">
-          <Carousel hasArrows>
-            {page.carousel.map((photo, key) => (
-              <Photo
-                key={key}
-                photo={photo}
-                aspect="landscape"
-                width={1200}
-                className="carousel--photo"
-              />
-            ))}
-          </Carousel>
+          <div style={{ maxWidth: '42rem', margin: '0 auto' }}>
+            <Carousel hasArrows>
+              {page.carousel.map((photo, key) => (
+                <Photo
+                  key={key}
+                  photo={photo}
+                  aspect="landscape"
+                  width={1200}
+                  className="carousel--photo"
+                />
+              ))}
+            </Carousel>
+          </div>
         </section>
         <hr />
         <h3 className="is-mb0">The Accordion</h3>
@@ -178,7 +179,14 @@ const SixSixSix = ({ data }) => {
 }
 
 export async function getStaticProps(context) {
-  const pageData = await getStaticPage('samplePage')
+  const pageData = await getStaticPage(`
+    *[_type == "samplePage"][0]{
+      title,
+      hero,
+      carousel,
+      seo
+    }
+  `)
 
   return {
     props: {

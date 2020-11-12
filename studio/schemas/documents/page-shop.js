@@ -1,21 +1,17 @@
-import { FiMusic } from 'react-icons/fi'
+import { FiShoppingCart } from 'react-icons/fi'
 
 export default {
-  title: 'Home',
-  name: 'samplePage',
+  title: 'Shop All Page',
+  name: 'shopPage',
   type: 'document',
   __experimental_actions: ['update', 'publish'], // disable for initial publish
-  icon: FiMusic,
+  icon: FiShoppingCart,
   fields: [
     // Place other Fields here
     {
-      title: 'Carousel Photos',
-      name: 'carousel',
-      type: 'array',
-      of: [{ type: 'figure' }],
-      options: {
-        layout: 'grid'
-      }
+      title: 'Title',
+      name: 'title',
+      type: 'string'
     },
     {
       title: 'SEO',
@@ -26,7 +22,7 @@ export default {
   preview: {
     prepare() {
       return {
-        title: 'Sample Page'
+        title: 'Shop Page'
       }
     }
   }

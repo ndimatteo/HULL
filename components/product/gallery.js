@@ -4,8 +4,10 @@ import Carousel from '../carousel'
 import Photo from '../photo'
 
 const ProductGallery = ({ photos }) => {
+  const id = photos.map((p) => p._key).join('')
+
   return (
-    <div className="product--gallery">
+    <div key={id} className="product--gallery">
       {photos && (
         <Carousel hasArrows thumbs={photos}>
           {photos.map((photo, key) => (

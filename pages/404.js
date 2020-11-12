@@ -1,10 +1,10 @@
 import React from 'react'
+import BlockContent from '@sanity/block-content-to-react'
+
+import { getErrorPage } from '../lib/api'
 
 import Layout from '../components/layout'
-import { getErrorPage } from '../lib/api'
-import BlockContent from '@sanity/block-content-to-react'
 import { serializers } from '../modules'
-
 import VideoLoop from '../components/video-loop'
 
 const ErrorPage = ({ data }) => {

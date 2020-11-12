@@ -325,54 +325,49 @@ h2, h3 {
 }
 
 .product {
-  max-width: 42rem;
+  max-width: 44rem;
   margin: 0 auto;
+
+  @media (--md) {
+    padding: 0 1rem;
+  }
 
   &.has-gallery {
     max-width: 80rem;
   }
 
   &--inner {
-    border-left: 1px solid;
-    border-right: 1px solid;
+    @media (--md) {
+      border-left: 1px solid;
+      border-right: 1px solid;
+    }
+
+    .has-gallery & {
+      @media (--md) {
+        display: grid;
+        grid-template-columns: 40% 60%;
+      }
+    }
   }
   
   &--gallery {
     position: relative;
+    padding: 1rem;
     border-bottom: 1px solid;
 
-    @media (--sm) {
+    @media (--md) {
       border-bottom: none;
       border-right: 1px solid;
     }
+  }
 
-    .carousel {
-      &--hud {
-        padding: 0 1rem 0 .5rem;  
-      }
-      
-      @media (--sm) {
-        position: absolute;
-        top: 1rem;
-        left: 1rem;
-        right: 1rem;
-        bottom: 1rem;
-        width: auto;
+  &--content {
+    display: flex;
+    flex-direction: column;
+  }
 
-        &--container,
-        &--photo,
-        .is-aspect {
-          height: 100%;
-        }
-
-        &--hud {
-          position: absolute;
-          bottom: 0;
-          width: 100%;
-          background: var(--pageBG);
-        }
-      }
-    }
+  &--header {
+    flex: 1;
   }
   
   &--title {
@@ -383,6 +378,26 @@ h2, h3 {
     margin-bottom: 1rem;
     font-family: 'satan';
     font-size: 2rem;
+
+    span.is-discounted {
+      position: relative;
+      padding: .25em 1em;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 1px solid;
+      font-family: courier;
+      
+      &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(25deg, transparent calc(50% - 1px), var(--pageText), transparent calc(50% + 1px));
+      }
+    }
   }
 
   &--subtitle {

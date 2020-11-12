@@ -6,11 +6,13 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
 import homePage from './documents/page-home'
+import shopPage from './documents/page-shop'
 import samplePage from './documents/page-sample'
 import errorPage from './documents/page-error'
 import page from './documents/page'
 import product from './documents/shopify-product'
 import productVariant from './documents/shopify-variant'
+import collection from './documents/shopify-collection'
 
 import generalSettings from './documents/settings-general'
 import seoSettings from './documents/settings-seo'
@@ -48,11 +50,13 @@ export default createSchema({
   types: schemaTypes.concat([
     // Document types
     homePage,
+    shopPage,
     samplePage,
     errorPage,
     page,
     product,
     productVariant,
+    collection,
 
     generalSettings,
     seoSettings,

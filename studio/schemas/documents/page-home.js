@@ -23,5 +23,12 @@ export default {
       name: 'seo',
       type: 'seo'
     }
-  ]
+  ],
+  preview: {
+    prepare() {
+      return {
+        title: 'Home Page'
+      }
+    }
+  }
 }

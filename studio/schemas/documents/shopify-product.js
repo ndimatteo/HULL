@@ -177,7 +177,8 @@ export default {
       title: 'title',
       productTitle: 'productTitle',
       slug: 'slug',
-      media: 'hero'
+      cartPhoto: 'cartPhoto',
+      listingPhoto: 'listingPhoto'
     },
     prepare({
       isDraft = false,
@@ -185,7 +186,8 @@ export default {
       title,
       productTitle,
       slug = {},
-      media
+      cartPhoto,
+      listingPhoto
     }) {
       const path = `/${slug.current}`
       return {
@@ -193,7 +195,7 @@ export default {
           (title ? title : productTitle) +
           (wasDeleted ? ' (removed)' : '') +
           (isDraft ? ' (draft)' : ''),
-        media,
+        media: listingPhoto || cartPhoto,
         subtitle: slug.current ? path : '(missing slug)'
       }
     }

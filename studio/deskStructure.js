@@ -13,6 +13,7 @@ import {
   FiRepeat,
   FiShoppingCart,
   FiGift,
+  FiGrid,
   FiCopy
 } from 'react-icons/fi'
 
@@ -26,11 +27,13 @@ const previewURL =
 const hiddenDocTypes = listItem =>
   ![
     'homePage',
+    'shopPage',
     'samplePage',
     'errorPage',
     'page',
     'product',
     'productVariant',
+    'collection',
 
     'generalSettings',
     'seoSettings',
@@ -192,6 +195,36 @@ export default () =>
                             ])
                         )
                     )
+                ),
+              S.listItem()
+                .title('Collections')
+                .icon(FiGrid)
+                .child(
+                  S.documentTypeList('collection')
+                    .title('Collections')
+                    .child(documentId =>
+                      S.document()
+                        .documentId(documentId)
+                        .schemaType('collection')
+                        .views([
+                          S.view.form().icon(EditIcon),
+                          S.view
+                            .component(SeoPreview)
+                            .options({ previewURL })
+                            .icon(EyeIcon)
+                            .title('SEO Preview')
+                        ])
+                    )
+                ),
+              S.listItem()
+                .title('Shop All Page')
+                .icon(FiShoppingCart)
+                .child(
+                  S.editor()
+                    .title('Shop All Page')
+                    .id('shopPage')
+                    .schemaType('shopPage')
+                    .documentId('shopPage')
                 )
             ])
         )

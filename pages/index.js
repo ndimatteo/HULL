@@ -43,7 +43,14 @@ const Home = ({ data }) => {
 }
 
 export async function getStaticProps(context) {
-  const pageData = await getStaticPage('homePage')
+  const pageData = await getStaticPage(`
+    *[_type == "homePage"][0]{
+      title,
+      hero,
+      carousel,
+      seo
+    }
+  `)
 
   return {
     props: {

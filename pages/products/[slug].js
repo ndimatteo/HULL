@@ -4,12 +4,13 @@ import { useRouter } from 'next/router'
 import ErrorPage from '../404'
 
 import { getProduct, getErrorPage } from '../../lib/api'
-import { hasObject, centsToPrice } from '../../lib/helpers'
+import { hasObject, centsToPrice, buildSrc } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'
 
 import ProductGallery from '../../components/product/gallery'
+import ProductPrice from '../../components/product/price'
 import ProductDescription from '../../components/product/description'
 import ProductOption from '../../components/product/option'
 import Counter from '../../components/product/counter'
@@ -80,10 +81,10 @@ const Product = ({ data, error }) => {
         '@type': 'Product',
         name: product.title,
         image: [
-          // buildSrc(product.photo, {
-          //   width: 800,
-          //   height: 450,
-          // }),
+          buildSrc(activeVariant.photos.cart, {
+            width: 800,
+            height: 450,
+          }),
         ],
         price: centsToPrice(
           activeVariant ? activeVariant.price : product.price
@@ -121,12 +122,15 @@ const Product = ({ data, error }) => {
             <div className="product--content">
               <div className="product--header">
                 <h1 className="product--title">{product.title}</h1>
-                <div className="product--price">
-                  $
-                  {centsToPrice(
-                    activeVariant ? activeVariant.price : product.price
-                  )}
-                </div>
+                <ProductPrice
+                  price={activeVariant ? activeVariant.price : product.price}
+                  comparePrice={
+                    activeVariant
+                      ? activeVariant.comparePrice
+                      : product.comparePrice
+                  }
+                />
+
                 {activeVariant && (
                   <p className="product--subtitle">{activeVariant.title}</p>
                 )}

@@ -1,9 +1,8 @@
-import { format } from 'date-fns'
 import { FiFile } from 'react-icons/fi'
 
 export default {
-  name: 'page',
   title: 'Page',
+  name: 'page',
   type: 'document',
   icon: FiFile,
   fields: [
@@ -62,21 +61,4 @@ export default {
       }
     }
   }
-  // preview: {
-  //   select: {
-  //     title: 'title',
-  //     publishedAt: 'publishedAt',
-  //     slug: 'slug',
-  //     media: 'mainImage'
-  //   },
-  //   prepare({ title = 'No title', publishedAt, slug = {}, media }) {
-  //     const dateSegment = format(publishedAt, 'YYYY/MM')
-  //     const path = `/${slug.current}`
-  //     return {
-  //       title,
-  //       media,
-  //       subtitle: publishedAt ? path : 'Missing publishing date'
-  //     }
-  //   }
-  // }
 }
