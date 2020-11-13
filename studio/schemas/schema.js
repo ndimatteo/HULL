@@ -26,7 +26,9 @@ import textBlock from './modules/text'
 // Object types
 import seo from './objects/seo'
 
-import productGallery from './objects/product-gallery'
+import productGalleryPhotos from './objects/product-gallery-photos'
+import productListingPhotos from './objects/product-listing-photos'
+import productCartPhotos from './objects/product-cart-photos'
 import productOption from './objects/product-option'
 import productOptionValue from './objects/product-option-value'
 
@@ -71,7 +73,9 @@ export default createSchema({
     // Object types
     seo,
 
-    productGallery,
+    productGalleryPhotos,
+    productListingPhotos,
+    productCartPhotos,
     productOption,
     productOptionValue,
 

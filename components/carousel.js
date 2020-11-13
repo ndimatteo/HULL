@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import Photo from './photo'
 
-const Carousel = ({ children, thumbs, hasArrows }) => {
+const Carousel = ({ children, thumbs, hasArrows, hasDots, hasCounter }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ speed: 8, loop: true })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState([])
@@ -95,35 +95,51 @@ const Carousel = ({ children, thumbs, hasArrows }) => {
               </button>
             </div>
           )}
-          <div className="carousel--status">
-            <div className="carousel--counter is-current">
-              <AnimatePresence>
-                <motion.span
-                  key={selectedIndex + 1}
-                  initial="hide"
-                  animate="show"
-                  exit="hide"
-                  variants={flipAnim}
-                >
-                  {selectedIndex + 1}
-                </motion.span>
-              </AnimatePresence>
-            </div>
 
-            <div className="carousel--progress">
-              <span
-                style={{
-                  transform: `scaleX(${
-                    selectedIndex / (scrollSnaps.length - 1)
-                  })`,
-                }}
-              />
+          {hasDots && (
+            <div className="carousel--dots">
+              {scrollSnaps.map((dot, key) => (
+                <button
+                  key={key}
+                  onClick={() => scrollTo(key)}
+                  aria-label={`Go to slide ${key + 1}`}
+                  className={selectedIndex === key ? 'is-active' : null}
+                />
+              ))}
             </div>
+          )}
 
-            <div className="carousel--counter is-total">
-              <span>{scrollSnaps.length}</span>
+          {hasCounter && (
+            <div className="carousel--status">
+              <div className="carousel--counter is-current">
+                <AnimatePresence>
+                  <motion.span
+                    key={selectedIndex + 1}
+                    initial="hide"
+                    animate="show"
+                    exit="hide"
+                    variants={flipAnim}
+                  >
+                    {selectedIndex + 1}
+                  </motion.span>
+                </AnimatePresence>
+              </div>
+
+              <div className="carousel--progress">
+                <span
+                  style={{
+                    transform: `scaleX(${
+                      selectedIndex / (scrollSnaps.length - 1)
+                    })`,
+                  }}
+                />
+              </div>
+
+              <div className="carousel--counter is-total">
+                <span>{scrollSnaps.length}</span>
+              </div>
             </div>
-          </div>
+          )}
         </div>
       )}
     </div>

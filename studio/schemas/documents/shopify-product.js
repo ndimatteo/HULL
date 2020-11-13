@@ -16,11 +16,6 @@ export default {
       title: '',
       name: '2up',
       options: { columns: 2 }
-    },
-    {
-      title: 'Listing Settings',
-      name: 'listing',
-      options: { columns: 2, collapsible: true }
     }
   ],
   icon: FiGift,
@@ -116,27 +111,18 @@ export default {
       type: 'simplePortableText'
     },
     {
-      title: 'Gallery Photosets',
-      name: 'photosets',
+      title: 'Gallery',
+      name: 'galleryPhotos',
       type: 'array',
-      of: [{ type: 'productGallery' }],
+      of: [{ type: 'productGalleryPhotos' }],
       description:
-        'Define a Gallery for your product, or for a subset of variants',
-      fieldset: '2up'
+        'Define a Gallery for your product, or for a subset of variants'
     },
     {
-      title: 'Cart Thumbnail',
-      name: 'cartPhoto',
-      type: 'figure',
-      description:
-        'The default photo used in the cart for all product variants',
-      fieldset: '2up'
-    },
-    {
-      title: 'Use Gallery Photos',
+      title: 'Use Galleries',
       name: 'useGallery',
       type: 'string',
-      description: 'Show gallery instead of thumbnail',
+      description: 'Use galleries over listing thumbnails on Collection pages',
       options: {
         list: [
           { title: 'Yes', value: 'true' },
@@ -146,28 +132,31 @@ export default {
       fieldset: '2up'
     },
     {
-      title: 'Quick Add Option',
-      name: 'quickOption',
+      title: 'Surface Option',
+      name: 'surfaceOption',
       type: 'string',
-      description: 'Which option to surface for quick add',
+      description:
+        'Surface one of the product options for this product on Collection pages',
       options: {
-        list: [{ title: 'Disable Quick Add', value: '' }],
+        list: [{ title: 'None', value: '' }],
         fromField: 'options',
         fromFieldData: { title: 'name', value: 'position' }
       },
       fieldset: '2up'
     },
     {
-      title: 'Thumbnail',
-      name: 'listingPhoto',
-      type: 'figure',
-      fieldset: 'listing'
+      title: 'Listing Thumbnails',
+      name: 'listingPhotos',
+      type: 'array',
+      of: [{ type: 'productListingPhotos' }],
+      fieldset: '2up'
     },
     {
-      title: 'Thumbnail (hover)',
-      name: 'listingPhotoHover',
-      type: 'figure',
-      fieldset: 'listing'
+      title: 'Cart Thumbnails',
+      name: 'cartPhotos',
+      type: 'array',
+      of: [{ type: 'productCartPhotos' }],
+      fieldset: '2up'
     },
     {
       title: 'SEO',
@@ -176,7 +165,19 @@ export default {
     }
   ],
   initialValue: {
-    useGallery: 'false'
+    useGallery: 'false',
+    galleryPhotos: {
+      _type: 'productGallery',
+      forOption: ''
+    },
+    listingPhotos: {
+      _type: 'productListingPhotos',
+      forOption: ''
+    },
+    cartPhotos: {
+      _type: 'productCartPhotos',
+      forOption: ''
+    }
   },
   preview: {
     select: {
@@ -185,7 +186,7 @@ export default {
       title: 'title',
       productTitle: 'productTitle',
       slug: 'slug',
-      cartPhoto: 'cartPhoto',
+      cartPhotos: 'cartPhotos',
       listingPhoto: 'listingPhoto'
     },
     prepare({
@@ -194,8 +195,8 @@ export default {
       title,
       productTitle,
       slug = {},
-      cartPhoto,
-      listingPhoto
+      cartPhotos,
+      listingPhotos
     }) {
       const path = `/${slug.current}`
       return {
@@ -203,7 +204,7 @@ export default {
           (title ? title : productTitle) +
           (wasDeleted ? ' (removed)' : '') +
           (isDraft ? ' (draft)' : ''),
-        media: listingPhoto || cartPhoto,
+        media: cartPhotos?.length > 0 ? cartPhotos[0].cartPhoto : null,
         subtitle: slug.current ? path : '(missing slug)'
       }
     }

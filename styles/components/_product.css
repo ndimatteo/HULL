@@ -1,14 +1,15 @@
 .product {
   position: relative;
+}
 
-  &--price {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-    span.is-discounted {
-      margin-left: .5rem;
-      font-size: .75rem;
-    }
+  &--original {
+    margin-left: .5rem;
+    font-size: .75rem;
+    line-height: 1;
   }
 }

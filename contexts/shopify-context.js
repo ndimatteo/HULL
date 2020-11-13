@@ -49,10 +49,18 @@ const fetchVariant = async (id) => {
         "id": variantID,
         title,
         price,
-        "cartPhoto": coalesce(
-          cartPhoto,
-          *[_type == "product" && productID == ^.productID][0].cartPhoto
-        ),
+        "photos": {
+          "cart": *[_type == "product" && productID == ^.productID][0].cartPhotos[]{
+            forOption,
+            "default": cartPhoto{
+              "id": asset->assetId,
+              asset,
+              crop,
+              hotspot,
+              alt
+            },
+          }
+        },
         options[]{
           name,
           position,

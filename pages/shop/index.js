@@ -3,9 +3,12 @@ import React from 'react'
 import { getStaticPage } from '../../lib/api'
 
 import Layout from '../../components/layout'
+import Collection from '../../components/shop/collection'
 
 const Shop = ({ data }) => {
   const { site, menus, page } = data
+
+  const collection = ''
 
   return (
     <Layout
@@ -20,14 +23,7 @@ const Shop = ({ data }) => {
     >
       <section className="section">
         <h1>{page.title}</h1>
-
-        {page.products.map((product) => (
-          <div className="product-item">
-            <div className="product-item--details">
-              <h2>{product.title}</h2>
-            </div>
-          </div>
-        ))}
+        <Collection collection={collection} paginationLimit={12} />
       </section>
     </Layout>
   )
@@ -37,69 +33,6 @@ export async function getStaticProps(context) {
   const shopData = await getStaticPage(`
     *[_type == "shopPage"][0]{
       title,
-      "products": *[_type == "product" && wasDeleted != true && isDraft != true]{
-        "slug": slug.current,
-        "id": productID,
-        title,
-        price,
-        comparePrice,
-        "photos": {
-          "gallery": photos[]{
-            "id": asset->assetId,
-            asset,
-            alt
-          },
-          "listing": {
-            "default": listingPhoto,
-            "hover": listingPhotoHover
-          }
-        },
-        inStock,
-        lowStock,
-        quickOption,
-        options[]{
-          name,
-          position,
-          values[]
-        },
-        "variants": *[_type == "productVariant" && productID == ^.productID && wasDeleted != true && isDraft != true]{
-          "id": variantID,
-          title,
-          price,
-          comparePrice,
-          "photos": {
-            "gallery": coalesce(
-              photos[]{
-                "id": asset->assetId,
-                asset,
-                alt
-              },
-              *[_type == "product" && productID == ^.productID][0].photos[]{
-                "id": asset->assetId,
-                asset,
-                alt
-              }
-            ),
-            "listing": {
-              "default": coalesce(
-                listingPhoto,
-                *[_type == "product" && productID == ^.productID][0].listingPhoto
-              ),
-              "hover": coalesce(
-                listingPhotoHover,
-                *[_type == "product" && productID == ^.productID][0].listingPhotoHover
-              )
-            }
-          },
-          inStock,
-          lowStock,
-          options[]{
-            name,
-            position,
-            value
-          }
-        }
-      },
       seo
     }
   `)

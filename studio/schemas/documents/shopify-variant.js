@@ -113,23 +113,6 @@ export default {
       type: 'string'
     },
     {
-      title: 'Cart Thumbnail',
-      name: 'cartPhoto',
-      type: 'figure'
-    },
-    {
-      title: 'Thumbnail',
-      name: 'listingPhoto',
-      type: 'figure',
-      fieldset: 'listing'
-    },
-    {
-      title: 'Thumbnail (hover)',
-      name: 'listingPhotoHover',
-      type: 'figure',
-      fieldset: 'listing'
-    },
-    {
       title: 'SEO',
       name: 'seo',
       type: 'seo'
@@ -141,23 +124,20 @@ export default {
       wasDeleted: 'wasDeleted',
       title: 'title',
       variantTitle: 'variantTitle',
-      productTitle: 'productTitle',
-      media: 'hero'
+      productTitle: 'productTitle'
     },
     prepare({
       isDraft = false,
       wasDeleted = false,
       title,
       variantTitle,
-      productTitle = '(missing product)',
-      media
+      productTitle = '(missing product)'
     }) {
       return {
         title:
           (title ? title : variantTitle) +
           (wasDeleted ? ' (removed)' : '') +
           (isDraft ? ' (draft)' : ''),
-        media,
         subtitle: title ? variantTitle : productTitle
       }
     }

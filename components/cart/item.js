@@ -1,7 +1,8 @@
 import React from 'react'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 
-import { centsToPrice } from '../../lib/helpers'
+import { centsToPrice, hasObject } from '../../lib/helpers'
 
 import Photo from '../photo'
 import Counter from '../product/counter'
@@ -12,7 +13,7 @@ import {
   useToggleCart,
 } from '../../contexts/shopify-context'
 
-const CartItem = ({ id, item }) => {
+function CartItem({ item }) {
   const removeItem = useRemoveItem()
   const updateItem = useUpdateItem()
   const toggleCart = useToggleCart()
@@ -21,10 +22,23 @@ const CartItem = ({ id, item }) => {
     updateItem(item.lineID, quantity)
   }
 
+  const defaultPhoto = item.photos.cart.find((set) => !set.forOption)
+  const variantPhoto = item.photos.cart.find((set) => {
+    const option = set.forOption
+      ? {
+          name: set.forOption.split(':')[0],
+          value: set.forOption.split(':')[1],
+        }
+      : {}
+    return option.value && hasObject(item.options, option)
+  })
+
+  const photos = variantPhoto ? variantPhoto : defaultPhoto
+
   return (
-    <div key={id} className="cart-item">
+    <div className="cart-item">
       <Photo
-        photo={item.cartPhoto}
+        photo={photos?.default}
         srcsetSizes={[400]}
         sizes="(min-width: 768px) 400px, 35vw'"
         aspect="square"
@@ -49,7 +63,11 @@ const CartItem = ({ id, item }) => {
         <div className="cart-item--variant">{item.title}</div>
         <div className="cart-item--tools">
           <div className="cart-item--quantity">
-            <Counter defaultCount={item.quantity} onUpdate={changeQuantity} />
+            <Counter
+              key={item.quantity}
+              defaultCount={item.quantity}
+              onUpdate={changeQuantity}
+            />
           </div>
           <div className="cart-item--remove">
             <button

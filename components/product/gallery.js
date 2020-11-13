@@ -1,5 +1,5 @@
-import { AnimatePresence, motion } from 'framer-motion'
 import React from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 
 import { hasObject } from '../../lib/helpers'
 
@@ -25,15 +25,25 @@ const galleryAnim = {
   },
 }
 
-const ProductGallery = ({ photosets, activeVariant }) => {
+const ProductGallery = ({
+  name = 'product',
+  photosets,
+  activeVariant,
+  hasArrows,
+  hasThumbs,
+  hasDots,
+  hasCounter,
+}) => {
   const { options } = activeVariant
 
   const defaultPhotoset = photosets.find((set) => !set.forOption)
   const variantPhotoset = photosets.find((set) => {
-    const option = {
-      name: set.forOption.split(':')[0],
-      value: set.forOption.split(':')[1],
-    }
+    const option = set.forOption
+      ? {
+          name: set.forOption.split(':')[0],
+          value: set.forOption.split(':')[1],
+        }
+      : {}
     return option.value && hasObject(options, option)
   })
 
@@ -44,7 +54,7 @@ const ProductGallery = ({ photosets, activeVariant }) => {
   const id = photos.map((p) => p.id).join('')
 
   return (
-    <div className="product--gallery">
+    <div className={`${name}--gallery`}>
       <AnimatePresence exitBeforeEnter>
         <motion.div
           key={id}
@@ -52,10 +62,15 @@ const ProductGallery = ({ photosets, activeVariant }) => {
           animate="show"
           exit="hide"
           variants={galleryAnim}
-          className="product--gallery-inner"
+          className={`${name}--gallery-inner`}
         >
           {photos && (
-            <Carousel hasArrows thumbs={photos}>
+            <Carousel
+              hasArrows={hasArrows}
+              hasDots={hasDots}
+              hasCounter={hasCounter}
+              thumbs={hasThumbs ? photos : false}
+            >
               {photos.map((photo, key) => (
                 <Photo
                   key={key}
@@ -64,6 +79,8 @@ const ProductGallery = ({ photosets, activeVariant }) => {
                   sizes="(min-width: 768px) 50vw, 100vw"
                   aspect="portrait"
                   width={1200}
+                  height={1680}
+                  aspectRatio={1.4}
                   className="carousel--photo"
                 />
               ))}

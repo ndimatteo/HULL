@@ -78,8 +78,9 @@ export const serializers = {
         </a>
       ) : (
         <Link
-          href={isStatic || isStatic === '' ? `/${isStatic}` : `/[...slug]`}
-          as={!isStatic && isStatic !== '' ? `/${slug?.current}` : null}
+          href={
+            isStatic || isStatic === '' ? `/${isStatic}` : `/${slug?.current}`
+          }
           scroll={false}
         >
           <a>{children}</a>
@@ -104,8 +105,9 @@ export const serializers = {
         </a>
       ) : (
         <Link
-          href={isStatic || isStatic === '' ? `/${isStatic}` : `/[...slug]`}
-          as={!isStatic && isStatic !== '' ? `/${slug?.current}` : null}
+          href={
+            isStatic || isStatic === '' ? `/${isStatic}` : `/${slug?.current}`
+          }
           scroll={false}
         >
           <a className={`btn ${color}`}>{children}</a>

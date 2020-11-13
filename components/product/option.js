@@ -6,6 +6,8 @@ const ProductOption = ({
   position,
   variants,
   activeVariant,
+  strictMatch = true,
+  hideLabels,
   onChange,
 }) => {
   const otherOpts = [
@@ -18,27 +20,36 @@ const ProductOption = ({
       key={position}
       className={`option is-${option.name.toLowerCase().replace(' ', '-')}`}
     >
-      <div className="option--title">{option.name}</div>
+      {!hideLabels && <div className="option--title">{option.name}</div>}
       <ul className="option--values">
         {option.values.map((value, key) => {
+          const currentOpt = [{ name: option.name, value: value }]
+
           const isActive = activeVariant.options.some(
             (opt) => opt.position === option.position && opt.value === value
           )
 
-          const withActiveOptions = [
-            ...[{ name: option.name, value: value }],
-            ...otherOpts,
-          ]
+          const withActiveOptions = [...currentOpt, ...otherOpts]
 
           const hasVariants = variants.find((variant) =>
             variant.options.every((opt) => hasObject(withActiveOptions, opt))
           )
 
-          const inStock = variants.find(
-            (variant) =>
-              variant.inStock &&
-              variant.options.every((opt) => hasObject(withActiveOptions, opt))
-          )
+          const inStock = variants.find((variant) => {
+            if (strictMatch) {
+              return (
+                variant.inStock &&
+                variant.options.every((opt) =>
+                  hasObject(withActiveOptions, opt)
+                )
+              )
+            } else {
+              return (
+                variant.inStock &&
+                variant.options.some((opt) => hasObject(currentOpt, opt))
+              )
+            }
+          })
 
           const valueClasses = [
             isActive ? 'is-active' : '',

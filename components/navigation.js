@@ -51,8 +51,7 @@ const Navigation = ({ menu }) => {
           return (
             <li key={key} className={isActive ? 'is-active' : null}>
               <Link
-                href={isStatic ? `/${isStatic}` : `/[...slug]`}
-                as={!isStatic ? `/${item.page.slug}` : null}
+                href={isStatic ? `/${isStatic}` : `/${item.page.slug}`}
                 scroll={false}
               >
                 <a className={item.isButton ? 'btn' : null}>{item.title}</a>

@@ -13,7 +13,7 @@ const Photo = ({
   width,
   height,
   className,
-  style,
+  isPlaceholder,
 }) => {
   const imageRef = useRef()
 
@@ -66,6 +66,8 @@ const Photo = ({
             />
           </picture>
         )}
+
+        {isPlaceholder && <div className="photo-placeholder"></div>}
       </div>
     </figure>
   )

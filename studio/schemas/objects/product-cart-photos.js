@@ -1,8 +1,8 @@
 import { FiLayers } from 'react-icons/fi'
 
 export default {
-  title: 'Gallery',
-  name: 'productGallery',
+  title: 'Cart Photos',
+  name: 'productCartPhotos',
   type: 'object',
   icon: FiLayers,
   fields: [
@@ -21,26 +21,24 @@ export default {
       }
     },
     {
-      title: 'Gallery Photo(s)',
-      name: 'photos',
-      type: 'array',
-      of: [{ type: 'figure' }],
-      options: {
-        layout: 'grid'
-      }
+      title: 'Thumbnail',
+      name: 'cartPhoto',
+      type: 'figure'
     }
   ],
   preview: {
     select: {
-      photos: 'photos',
+      cartPhoto: 'cartPhoto',
       forOption: 'forOption'
     },
-    prepare({ photos, forOption }) {
-      const option = forOption.split(':')
+    prepare({ cartPhoto, forOption }) {
+      const option = forOption ? forOption.split(':') : null
       return {
-        title: 'Gallery',
-        subtitle: option.length > 1 ? option[1] : '(default)',
-        media: photos ? photos[0] : null
+        title:
+          option && option.length > 1
+            ? `${option[0]}: ${option[1]}`
+            : 'All Variants',
+        media: cartPhoto ? cartPhoto : null
       }
     }
   }

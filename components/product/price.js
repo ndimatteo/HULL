@@ -4,10 +4,10 @@ import { centsToPrice } from '../../lib/helpers'
 
 const ProductPrice = ({ price, comparePrice }) => {
   return (
-    <div className="product--price">
-      <span className="is-regular">${centsToPrice(price)}</span>
+    <div className="price">
+      <span className="price--current">${centsToPrice(price)}</span>
       {!!comparePrice && (
-        <span className="is-discounted">${centsToPrice(comparePrice)}</span>
+        <span className="price--original">${centsToPrice(comparePrice)}</span>
       )}
     </div>
   )

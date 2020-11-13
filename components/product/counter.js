@@ -22,16 +22,16 @@ const flipAnim = {
   }),
 }
 
-function Counter({ defaultCount = 1, onUpdate }) {
+function Counter({ defaultCount = 1, onUpdate, max }) {
   const [lineQuantity, setLineQuantity] = useState(defaultCount)
   const [direction, setDirection] = useState(1)
   const [flipKey, setFlipKey] = useState(`${defaultCount}/1`)
 
   const updateQuantity = (num, direction) => {
-    const cnum = clampRange(num, [1, 10])
+    const cnum = max ? clampRange(num, [1, max]) : num
 
     // Bail if no change
-    if (cnum === lineQuantity.amount) return
+    if (cnum === lineQuantity || cnum < 1) return
 
     // update the quantity count
     setLineQuantity(cnum)

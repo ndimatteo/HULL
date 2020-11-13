@@ -78,12 +78,12 @@ const Product = ({ data, error }) => {
         '@context': 'http://schema.org',
         '@type': 'Product',
         name: product.title,
-        image: [
-          buildSrc(activeVariant.photos.cart, {
-            width: 800,
-            height: 450,
-          }),
-        ],
+        // image: [
+        //   buildSrc(activeVariant.photos.cart, {
+        //     width: 800,
+        //     height: 450,
+        //   }),
+        // ],
         price: centsToPrice(
           activeVariant ? activeVariant.price : product.price
         ),
@@ -105,16 +105,17 @@ const Product = ({ data, error }) => {
       }}
     >
       <section className="section">
-        <div
-          className={`product${product.photos.photosets ? ' has-gallery' : ''}`}
-        >
+        <div className={`product${product.photos.main ? ' has-gallery' : ''}`}>
           <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
 
           <div className="product--inner">
-            {product.photos.photosets && (
+            {product.photos.main && (
               <ProductGallery
-                photosets={product.photos.photosets}
+                photosets={product.photos.main}
                 activeVariant={activeVariant}
+                hasArrows
+                hasThumbs
+                hasCounter
               />
             )}
 
@@ -183,7 +184,7 @@ const ProductActions = ({ activeVariant, quantity, setQuantity }) => {
               <span>Low Stock</span>
             </div>
           )}
-          <Counter onUpdate={setQuantity} />
+          <Counter max={10} onUpdate={setQuantity} />
           <AddToCart
             productID={activeVariant.id}
             quantity={quantity}
