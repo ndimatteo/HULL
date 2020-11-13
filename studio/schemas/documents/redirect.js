@@ -22,6 +22,9 @@ export default {
       type: 'boolean'
     }
   ],
+  initialValue: {
+    isPermanent: true
+  },
   preview: {
     select: {
       to: 'to',
