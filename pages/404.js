@@ -13,7 +13,7 @@ const ErrorPage = ({ data }) => {
   return (
     <Layout
       page={{
-        title: page.title,
+        title: page?.title,
       }}
     >
       <section className="section is-error">

@@ -69,8 +69,6 @@ export const serializers = {
     link: ({ mark, children }) => {
       const { type, href, slug, page } = mark
 
-      console.log(mark)
-
       const isLink = !!href
       const isStatic = getStaticRoute(type ? type : '')
       const isDynamic = getDynamicRoute(page.type)
@@ -94,7 +92,7 @@ export const serializers = {
     },
 
     button: ({ mark, children }) => {
-      const { color, type, href, slug } = mark
+      const { color, type, href, slug, page } = mark
 
       const isLink = !!href
       const isStatic = getStaticRoute(type ? type : '')

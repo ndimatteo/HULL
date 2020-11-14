@@ -63,8 +63,6 @@ const ProductCard = ({ product, index }) => {
     }
   }
 
-  console.log(activeVariant)
-
   return (
     <motion.div
       initial="initial"
