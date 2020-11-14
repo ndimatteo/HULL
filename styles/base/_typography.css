@@ -20,8 +20,8 @@ p {
     margin-bottom: 1.5rem;
   }
 
-  a {
-    text-decoration: none;
+  a:not(.btn) {
+    text-decoration: underline;
     color: inherit;
   }
 }

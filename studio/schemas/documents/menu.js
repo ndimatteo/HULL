@@ -9,7 +9,7 @@ export default {
     {
       title: 'Title',
       name: 'title',
-      type: 'string',
+      type: 'string'
     },
     {
       name: 'slug',
@@ -18,14 +18,14 @@ export default {
       description: 'required',
       options: {
         source: 'title',
-        maxLength: 30,
-      },
+        maxLength: 30
+      }
     },
     {
       title: 'Nav Items',
       name: 'items',
       type: 'array',
-      of: [{ type: 'navPage' }, { type: 'navLink' }, { type: 'navDropdown' }],
-    },
-  ],
+      of: [{ type: 'navPage' }, { type: 'navLink' }, { type: 'navDropdown' }]
+    }
+  ]
 }

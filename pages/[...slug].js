@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import Error from './404'
 
 import Layout from '../components/layout'
-import { getPage, getAllPagesWithSlug } from '../lib/api'
+import { getAllDocSlugs, getPage } from '../lib/api'
 
 import { Module } from '../modules'
 
@@ -50,7 +50,7 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const allPages = await getAllPagesWithSlug()
+  const allPages = await getAllDocSlugs('page')
 
   return {
     paths:

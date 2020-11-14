@@ -63,6 +63,8 @@ const ProductCard = ({ product, index }) => {
     }
   }
 
+  console.log(activeVariant)
+
   return (
     <motion.div
       initial="initial"
@@ -111,7 +113,13 @@ const ProductCard = ({ product, index }) => {
       <div className="product-item--details">
         <div className="product-item--header">
           <h2 className="product-item--title">
-            <Link href={`/products/${product.slug}`} scroll={false}>
+            <Link
+              href={`/products/${
+                product.slug +
+                (product.surfaceOption ? `?variant=${activeVariant.id}` : '')
+              }`}
+              scroll={false}
+            >
               <a className="product-item--link">{product.title}</a>
             </Link>
           </h2>

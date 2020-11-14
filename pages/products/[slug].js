@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import ErrorPage from '../404'
 
 import { getProduct, getErrorPage } from '../../lib/api'
-import { hasObject, centsToPrice, buildSrc } from '../../lib/helpers'
+import { hasObject, centsToPrice } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
 import Marquee from '../../components/marquee'

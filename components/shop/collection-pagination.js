@@ -44,7 +44,7 @@ const CollectionPagination = ({ products, paginated }) => {
         <div className="collection--pagination">
           {hasMore && (
             <button className="btn is-accent" ref={ref} onClick={loadMore}>
-              Load More Shows
+              Load More
             </button>
           )}
         </div>

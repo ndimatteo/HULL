@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import getStaticRoute, { getActive } from '../lib/static-routes'
+import { getStaticRoute, getDynamicRoute, getActive } from '../lib/routes'
 
 const Dropdown = ({ title, items }) => {
   const router = useRouter()
@@ -77,11 +77,18 @@ const Dropdown = ({ title, items }) => {
               // Internal Page
             } else {
               const isActive = getActive(isStatic, item.page.slug, router)
+              const isDynamic = getDynamicRoute(item.page.type)
 
               return (
                 <li key={key} className={isActive ? 'is-active' : null}>
                   <Link
-                    href={isStatic ? `/${isStatic}` : `/${item.page.slug}`}
+                    href={
+                      isStatic
+                        ? `/${isStatic}`
+                        : `/${isDynamic ? `${isDynamic}/` : ''}${
+                            item.page.slug
+                          }`
+                    }
                     scroll={false}
                   >
                     <a className={item.isButton ? 'btn' : null}>{item.title}</a>

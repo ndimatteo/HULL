@@ -195,10 +195,9 @@ export default {
       title,
       productTitle,
       slug = {},
-      cartPhotos,
-      listingPhotos
+      cartPhotos
     }) {
-      const path = `/${slug.current}`
+      const path = `/products/${slug.current}`
       return {
         title:
           (title ? title : productTitle) +

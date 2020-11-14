@@ -3,7 +3,7 @@ import BlockContent from '@sanity/block-content-to-react'
 import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
-import getStaticRoute from '../lib/static-routes'
+import { getStaticRoute, getDynamicRoute } from '../lib/routes'
 import Photo from '../components/photo'
 
 const Text = dynamic(() => import('./text'))
@@ -67,10 +67,13 @@ export const serializers = {
     },
 
     link: ({ mark, children }) => {
-      const { type, href, slug } = mark
+      const { type, href, slug, page } = mark
+
+      console.log(mark)
 
       const isLink = !!href
       const isStatic = getStaticRoute(type ? type : '')
+      const isDynamic = getDynamicRoute(page.type)
 
       return isLink ? (
         <a href={href} target="_blank" rel="noopener noreferrer">
@@ -79,7 +82,9 @@ export const serializers = {
       ) : (
         <Link
           href={
-            isStatic || isStatic === '' ? `/${isStatic}` : `/${slug?.current}`
+            isStatic || isStatic === ''
+              ? `/${isStatic}`
+              : `/${isDynamic ? `${isDynamic}/` : ''}${slug?.current}`
           }
           scroll={false}
         >
@@ -93,6 +98,7 @@ export const serializers = {
 
       const isLink = !!href
       const isStatic = getStaticRoute(type ? type : '')
+      const isDynamic = getDynamicRoute(page.type)
 
       return isLink ? (
         <a
@@ -106,7 +112,9 @@ export const serializers = {
       ) : (
         <Link
           href={
-            isStatic || isStatic === '' ? `/${isStatic}` : `/${slug?.current}`
+            isStatic || isStatic === ''
+              ? `/${isStatic}`
+              : `/${isDynamic ? `${isDynamic}/` : ''}${slug?.current}`
           }
           scroll={false}
         >

@@ -44,6 +44,14 @@ const Header = ({ menu, transparent }) => {
                 </a>
               </Link>
             </div>
+
+            <button className="btn cart-toggle" onClick={() => toggleCart()}>
+              Cart
+              <span className={cartCount > 0 ? ' is-active' : ''}>
+                {cartCount}
+              </span>
+            </button>
+
             <nav className="main-navigation" role="navigation">
               <button
                 onClick={() => toggleMenu(!isMenuOpen)}
@@ -55,12 +63,6 @@ const Header = ({ menu, transparent }) => {
               </button>
               {menu.items && <Navigation menu={menu} />}
             </nav>
-            <button className="btn cart-toggle" onClick={() => toggleCart()}>
-              Cart
-              <span className={cartCount > 0 ? ' is-active' : ''}>
-                {cartCount}
-              </span>
-            </button>
           </div>
         </div>
       </header>

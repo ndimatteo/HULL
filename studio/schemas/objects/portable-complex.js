@@ -77,7 +77,14 @@ export default {
                 title: 'Page Link',
                 name: 'page',
                 type: 'reference',
-                to: [{ type: 'page' }, { type: 'homePage' }]
+                to: [
+                  { type: 'homePage' },
+                  { type: 'shopPage' },
+                  { type: 'page' },
+                  { type: 'collection' },
+                  { type: 'product' },
+                  { type: 'samplePage' }
+                ]
               },
               {
                 title: 'External URL',
@@ -99,7 +106,14 @@ export default {
                 title: 'Page Link',
                 name: 'page',
                 type: 'reference',
-                to: [{ type: 'page' }, { type: 'homePage' }]
+                to: [
+                  { type: 'homePage' },
+                  { type: 'shopPage' },
+                  { type: 'page' },
+                  { type: 'collection' },
+                  { type: 'product' },
+                  { type: 'samplePage' }
+                ]
               },
               {
                 title: 'External URL',

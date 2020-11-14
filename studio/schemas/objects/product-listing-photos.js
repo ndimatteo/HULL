@@ -37,10 +37,12 @@ export default {
       forOption: 'forOption'
     },
     prepare({ listingPhoto, forOption }) {
-      const option = forOption.split(':')
+      const option = forOption ? forOption.split(':') : null
       return {
         title:
-          option.length > 1 ? `${option[0]}: ${option[1]}` : 'All Variants',
+          option && option.length > 1
+            ? `${option[0]}: ${option[1]}`
+            : 'All Variants',
         media: listingPhoto ? listingPhoto : null
       }
     }

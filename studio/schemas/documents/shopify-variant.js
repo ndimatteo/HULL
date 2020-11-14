@@ -133,12 +133,20 @@ export default {
       variantTitle,
       productTitle = '(missing product)'
     }) {
+      const getSubtitle = () => {
+        if (title) {
+          return title === variantTitle ? null : `(${variantTitle})`
+        } else {
+          return productTitle
+        }
+      }
+
       return {
         title:
           (title ? title : variantTitle) +
           (wasDeleted ? ' (removed)' : '') +
           (isDraft ? ' (draft)' : ''),
-        subtitle: title ? variantTitle : productTitle
+        subtitle: getSubtitle()
       }
     }
   }

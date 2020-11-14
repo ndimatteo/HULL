@@ -7,18 +7,25 @@ export default {
       title: 'Title',
       name: 'title',
       type: 'string',
-      description: 'Display Text',
+      description: 'Display Text'
     },
     {
       title: 'Page',
       name: 'page',
       type: 'reference',
-      to: [{ type: 'page' }],
+      to: [
+        { type: 'homePage' },
+        { type: 'shopPage' },
+        { type: 'page' },
+        { type: 'collection' },
+        { type: 'product' },
+        { type: 'samplePage' }
+      ]
     },
     {
       title: 'Style as Button?',
       name: 'isButton',
-      type: 'boolean',
-    },
-  ],
+      type: 'boolean'
+    }
+  ]
 }

@@ -8,8 +8,6 @@ import Collection from '../../components/shop/collection'
 const Shop = ({ data }) => {
   const { site, menus, page } = data
 
-  const collection = ''
-
   return (
     <Layout
       site={{
@@ -23,7 +21,7 @@ const Shop = ({ data }) => {
     >
       <section className="section">
         <h1>{page.title}</h1>
-        <Collection collection={collection} paginationLimit={12} />
+        <Collection paginationLimit={12} />
       </section>
     </Layout>
   )
