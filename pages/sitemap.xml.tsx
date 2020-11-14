@@ -1,7 +1,7 @@
 import { GetServerSideProps } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { createGzip } from 'zlib'
-import { getAllPagesWithSlug } from '../lib/api'
+import { getAllDocSlugs } from '../lib/api'
 
 const Sitemap = () => {
   return (
@@ -16,7 +16,7 @@ export default Sitemap
 let sitemap: Buffer | null = null
 
 const addUrls = async (smStream: SitemapStream) => {
-  const allPages = await getAllPagesWithSlug()
+  const allPages = await getAllDocSlugs('page')
   allPages.map((page) => {
     smStream.write({ url: `/${page.slug}`, changefreq: 'weekly', priority: 0.7 })
   })
@@ -44,6 +44,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {
 
   try {
     smStream.write({ url: '/', changefreq: 'daily', priority: 1.0 })
+    smStream.write({ url: '/shop', changefreq: 'daily', priority: 0.9 })
     smStream.write({ url: '/666', changefreq: 'daily', priority: 0.8 })
     await addUrls(smStream)
     smStream.end()
