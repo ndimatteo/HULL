@@ -9,9 +9,6 @@ export default async function products(req, res) {
     return res.status(401).json({ error: 'Missing collection...' })
   }
 
-  console.log('collection API:')
-  console.log({ collection })
-
   const products = await getCollectionProducts(collection)
 
   res.statusCode = 200
