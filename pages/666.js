@@ -42,17 +42,21 @@ const SixSixSix = ({ data }) => {
         <h3 className="is-mb0">The Carousel</h3>
         <section className="section">
           <div style={{ maxWidth: '42rem', margin: '0 auto' }}>
-            <Carousel hasArrows hasCounter>
-              {page.carousel.map((photo, key) => (
-                <Photo
-                  key={key}
-                  photo={photo}
-                  aspect="landscape"
-                  width={1200}
-                  className="carousel--photo"
-                />
-              ))}
-            </Carousel>
+            {page.carousel && page.carousel?.length > 0 ? (
+              <Carousel hasArrows hasCounter>
+                {page.carousel.map((photo, key) => (
+                  <Photo
+                    key={key}
+                    photo={photo}
+                    aspect="landscape"
+                    width={1200}
+                    className="carousel--photo"
+                  />
+                ))}
+              </Carousel>
+            ) : (
+              <p>[add carousel photos in sanity]</p>
+            )}
           </div>
         </section>
         <hr />
