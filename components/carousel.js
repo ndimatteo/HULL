@@ -4,8 +4,19 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 import Photo from './photo'
 
-const Carousel = ({ children, thumbs, hasArrows, hasDots, hasCounter }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ speed: 8, loop: true })
+const Carousel = ({
+  children,
+  thumbs,
+  hasArrows,
+  hasDots,
+  hasCounter,
+  slideClass,
+}) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    speed: 8,
+    loop: true,
+    align: 0,
+  })
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState([])
 
@@ -45,7 +56,10 @@ const Carousel = ({ children, thumbs, hasArrows, hasDots, hasCounter }) => {
     <div ref={emblaRef} className="carousel">
       <div className="carousel--container">
         {children.map((child, index) => (
-          <div className="carousel--slide" key={index}>
+          <div
+            className={`carousel--slide${slideClass ? ` ${slideClass}` : ''}`}
+            key={index}
+          >
             {child}
           </div>
         ))}

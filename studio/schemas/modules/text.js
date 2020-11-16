@@ -1,10 +1,10 @@
-import { FiFileText } from 'react-icons/fi'
+import { FiAlignLeft } from 'react-icons/fi'
 
 export default {
   title: 'Text',
   name: 'textBlock',
   type: 'object',
-  icon: FiFileText,
+  icon: FiAlignLeft,
   fields: [
     {
       title: 'Content',
