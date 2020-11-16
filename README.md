@@ -94,6 +94,26 @@
 4. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
     - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
     - Add your Front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
+    
+### 3) Shopify Storefront Access
+1. Enable Private Apps in Shopify
+   - Apps > "Manage Private Apps" *(text link in page footer)*
+   - Enable Private Apps
+2. Create new Private App
+   - Apps > Manage Private Apps > "Create private app" 
+   - Give this a relevant name, I prefer: "Headless Storefront", so it's clear what it's being used for
+   - Use your dev email to know when there are issues
+   - Change Admin API permissions on "Products" to `Read and write`
+   - Allow this app to access your storefront data using the Storefront API, with at least the following permissions:
+      - Read inventory of products and their variants
+      - Read and modify checkouts
+
+### 4) Shopify Webhooks
+1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
+2. add the following webhooks:
+  - product update - `[your-domain]/api/shopify/product-update`
+  - product deletion - `[your-domain]/api/shopify/product-delete`
+> ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You won't know your Vercel project domain until you deploy in a later step, just enter in what you think it will be for now!
 
 ### 2) NextJS (frontend)
 2. `npm install` in the project root folder on local
@@ -114,26 +134,6 @@ SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
   - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
   - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
   - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
-
-### 3) Shopify Storefront Access
-1. Enable Private Apps in Shopify
-   - Apps > "Manage Private Apps" *(text link in page footer)*
-   - Enable Private Apps
-2. Create new Private App
-   - Apps > Manage Private Apps > "Create private app" 
-   - Give this a relevant name, I prefer: "Headless Storefront", so it's clear what it's being used for
-   - Use your dev email to know when there are issues
-   - Change Admin API permissions on "Products" to `Read and write`
-   - Allow this app to access your storefront data using the Storefront API, with at least the following permissions:
-      - Read inventory of products and their variants
-      - Read and modify checkouts
-
-### 4) Shopify Webhooks
-1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
-2. add the following webhooks:
-  - product update - `[your-domain]/api/shopify/product-update`
-  - product deletion - `[your-domain]/api/shopify/product-delete`
-> ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live.
   
 ### 5) Shopify Store Theme
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
