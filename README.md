@@ -92,8 +92,8 @@
 ```
 3. When it asks you what dataset configuration to use, go with the `default`
 4. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
-  - Add your Studio URLs **with** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
-  - Add your Front-end URLs **without** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
+    - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
+    - Add your Front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
 
 ### 2) NextJS (frontend)
 2. `npm install` in the project root folder on local
