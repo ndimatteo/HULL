@@ -45,9 +45,9 @@
 - 🟢 Simple Social icon navigation lists
 - 🟡 Cursor Follow component
 - ⚪ Initial animations
-- ⚪ Scroll Animations
+- ⚪ Scroll animations
 - ⚪ Default Blog setup
-- ⚪ Instagram Module
+- ⚪ Instagram module
 - 🟢 Accessibility features:
    - 🟢 ARIA Landmark Roles
    - 🟢 Preserve default Focus States
@@ -87,8 +87,12 @@
    - Enable Private Apps
 2. Create new Private App
    - Apps > Manage Private Apps > "Create private app" 
+   - Give this a relevant name, I prefer: "Headless Storefront", so it's clear what it's being used for
    - Use your dev email to know when there are issues
-   - Allow this app to access your storefront data using the Storefront API.
+   - Change Admin API permissions on "Products" to `Read and write`
+   - Allow this app to access your storefront data using the Storefront API, with at least the following permissions:
+      - Read inventory of products and their variants
+      - Read and modify checkouts
 
 ### Shopify Webhooks
 1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
@@ -100,15 +104,6 @@
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
 
 This will essentially "pass-through" URLs accessed on at your Shopify Store to your true headless environment *(ie. `shop.666.com/products` -> `666.com/products`)*
-  
-### Sanity
-1. `npm install && sanity init` in the `/studio` folder
-2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
-```
-? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
-```
-3. When it asks you what dataset configuration to use, go with the `default`
-4. Add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
 
 ### NextJS (frontend)
 1. Clone this repository from your GitHub account with the `use template` button
@@ -130,6 +125,15 @@ SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
   - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
   - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
   - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
+
+### Sanity (backend cms)
+1. `npm install && sanity init` in the `/studio` folder
+2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
+```
+? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
+```
+3. When it asks you what dataset configuration to use, go with the `default`
+4. Add `localhost` and your `.vercel.app` suffixed domain and any custom domains to your Sanity Project's API origins **(do not give credentials)**
 
 
 # ⚡ Spin Up
