@@ -87,6 +87,7 @@
    - Enable Private Apps
 2. Create new Private App
    - Apps > Manage Private Apps > "Create private app" 
+   - Give this a relevant name, I prefer: "Headless Storefront", so it's clear what it's being used for
    - Use your dev email to know when there are issues
    - Change Admin API permissions on "Products" to `Read and write`
    - Allow this app to access your storefront data using the Storefront API, with at least the following permissions:
