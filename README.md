@@ -43,9 +43,9 @@
 - 🟢 Styles powered by PostCSS, to mimic SASS syntax
 - 🟢 Baseline styles for all components, using a BEM-like approach
 - 🟢 Simple Social icon navigation lists
-- 🟡 Cursor Follow component
-- ⚪ Initial animations
-- ⚪ Scroll animations
+- 🟢 Cursor Follow component
+- 🟡 Initial animations
+- 🟡 Scroll animations
 - ⚪ Default Blog setup
 - ⚪ Instagram module
 - 🟢 Accessibility features:
