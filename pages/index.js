@@ -21,7 +21,7 @@ const Home = ({ data }) => {
       }}
     >
       <section className="section">
-        <h1>{page.title}</h1>
+        <h1>Light a candle for the sinners</h1>
         <Link href="/666" scroll={false}>
           <a className="btn">Set the world on fire</a>
         </Link>

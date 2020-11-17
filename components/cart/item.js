@@ -22,8 +22,8 @@ function CartItem({ item }) {
     updateItem(item.lineID, quantity)
   }
 
-  const defaultPhoto = item.photos.cart.find((set) => !set.forOption)
-  const variantPhoto = item.photos.cart.find((set) => {
+  const defaultPhoto = item.photos.cart?.find((set) => !set.forOption)
+  const variantPhoto = item.photos.cart?.find((set) => {
     const option = set.forOption
       ? {
           name: set.forOption.split(':')[0],
