@@ -15,6 +15,7 @@ const Carousel = ({
   const [emblaRef, emblaApi] = useEmblaCarousel({
     speed: 8,
     loop: true,
+    containScroll: 'keepSnaps',
     align: 0,
   })
   const [selectedIndex, setSelectedIndex] = useState(0)

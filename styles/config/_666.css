@@ -223,6 +223,16 @@ body {
   }
 }
 
+.cursor {
+  span {
+    display: block;
+    width: 10rem;
+    height: 10rem;
+    background: var(--pageBG);
+    border-radius: 50%;
+  }
+}
+
 .drawer {
   &--title {
     font-family: 'satan';

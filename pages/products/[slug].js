@@ -78,24 +78,20 @@ const Product = ({ data, error }) => {
         '@context': 'http://schema.org',
         '@type': 'Product',
         name: product.title,
-        // image: [
-        //   buildSrc(activeVariant.photos.cart, {
-        //     width: 800,
-        //     height: 450,
-        //   }),
-        // ],
-        price: centsToPrice(
-          activeVariant ? activeVariant.price : product.price
-        ),
-        description: activeVariant ? activeVariant.title : product.title,
-        sku: activeVariant ? activeVariant.sku : product.sku,
+        price: centsToPrice(hasVariant ? activeVariant.price : product.price),
+        description: product.description,
+        sku: hasVariant ? activeVariant.sku : product.sku,
         offers: {
           '@type': 'Offer',
-          url: `${site.rootDomain}/products/${product.slug}`,
-          availability: 'http://schema.org/InStock',
-          price: centsToPrice(
-            activeVariant ? activeVariant.price : product.price
-          ),
+          url: `${site.rootDomain}/products/${product.slug}${
+            hasVariant ? `?variant=${activeVariant.id}` : ''
+          }`,
+          availability: hasVariant
+            ? `http://schema.org/${
+                activeVariant.inStock ? 'InStock' : 'SoldOut'
+              }`
+            : `http://schema.org/${product.inStock ? 'InStock' : 'SoldOut'}`,
+          price: centsToPrice(hasVariant ? activeVariant.price : product.price),
           priceCurrency: 'USD',
         },
         brand: {

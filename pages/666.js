@@ -8,9 +8,12 @@ import Accordion from '../components/accordion'
 import Carousel from '../components/carousel'
 import Photo from '../components/photo'
 import Drawer from '../components/drawer'
+import CursorFollow from '../components/cursor-follow'
 
 import FormNewsletter from '../modules/form-newsletter'
 import FormContact from '../modules/form-contact'
+
+import Icon from '../components/icon'
 
 const SixSixSix = ({ data }) => {
   const [showDrawer, setShowDrawer] = useState(false)
@@ -29,6 +32,7 @@ const SixSixSix = ({ data }) => {
       }}
     >
       <div className="section">
+        <hr />
         <h3 className="is-mb0">The Marquee</h3>
         <section className="section">
           <Marquee line="The Magician / The Devil / The Emperor / The Hermit / The Fool / Justice / The High Priestess / Death / The Hierophant /" />
@@ -120,6 +124,27 @@ const SixSixSix = ({ data }) => {
               Enquirer.
             </p>
           </Drawer>
+        </section>
+        <hr />
+        <h3 className="is-mb0">The Cursor Follow</h3>
+        <section className="section">
+          <div
+            style={{ maxWidth: '32rem', margin: '0 auto', border: '1px solid' }}
+          >
+            <CursorFollow
+              cursorContent={
+                <span>
+                  <Icon name="666" viewBox="0 0 666 666" />
+                </span>
+              }
+            >
+              <Photo
+                isPlaceholder
+                aspect="square"
+                className="product-item--photo"
+              />
+            </CursorFollow>
+          </div>
         </section>
         <hr />
         <h3 className="is-mb0">The Grid</h3>

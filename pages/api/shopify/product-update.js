@@ -105,7 +105,9 @@ export default async function send(req, res) {
     price: variants[0].price * 100,
     comparePrice: variants[0].compare_at_price * 100,
     sku: variants[0].sku,
-    inStock: variants.some((v) => v.inventory_quantity > 0),
+    inStock: variants.some(
+      (v) => v.inventory_quantity > 0 || v.inventory_policy === 'continue'
+    ),
     lowStock:
       variants.reduce((a, b) => a + (b.inventory_quantity || 0), 0) <= 10,
     options: productOptions,
@@ -132,7 +134,9 @@ export default async function send(req, res) {
       price: variant.price * 100,
       comparePrice: variant.compare_at_price * 100,
       sku: variant.sku,
-      inStock: variant.inventory_quantity > 0,
+      inStock:
+        variant.inventory_quantity > 0 ||
+        variant.inventory_policy === 'continue',
       lowStock: variant.inventory_quantity <= 5,
       options:
         variants.length > 1
