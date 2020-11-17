@@ -72,9 +72,9 @@
 - 🟢 Global Cart with access to all variant data for line items
 - 🟢 Supports Single Variant products out of the box
 - 🟢 PDP Photo Galleries with variant granularity
-- 🟡 default PLP for all products
-- 🟡 Custom PLPs with easy, Sanity-managed Collections
-- ⚪ Sanity-managed conditional Cart "add-ons"
+- 🟢 default PLP for all products
+- 🟢 Custom PLPs with easy, Sanity-managed Collections
+- 🟡 Sanity-managed conditional Cart "add-ons"
 - ⚪ Ability to apply coupons to the checkout cart
 - ⚪ Account Management (register/login/password/orders)
 - ⚪ Customer Reviews Integration (Yotpo? Okendo? Junip?)
