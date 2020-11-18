@@ -184,6 +184,43 @@ body {
     }
   }
 
+  &.is-mini {
+    margin-top: 4rem;
+  }
+
+  &--slide {
+    .is-mini & {
+      padding: 0 .5rem;
+      flex: 0 0 calc(100% - 4rem);
+      width: calc(100% - 4rem);
+
+      @media (--sm) {
+        flex: 0 0 45%;
+        width: 45%;
+      }
+
+      @media (--lg) {
+        flex: 0 0 30%;
+        width: 30%;
+      }
+      
+      figure {
+        border: 1px solid;
+        padding: 2rem;
+
+        @media (--lg) {
+          padding: 3rem;
+        }
+      }
+    }
+  }
+
+  &--hud {
+    .is-mini & {
+      padding: 0 1rem;
+    }
+  }
+
   &--thumbs,
   &--dots {
     button {

@@ -62,6 +62,21 @@ const SixSixSix = ({ data }) => {
               <p>[add carousel photos in sanity]</p>
             )}
           </div>
+          <div className="test-carousel">
+            {page.carousel2 && page.carousel2?.length > 0 && (
+              <Carousel className="is-mini" hasArrows hasCounter>
+                {page.carousel2.map((photo, key) => (
+                  <Photo
+                    key={key}
+                    photo={photo}
+                    aspectCustom={{ paddingTop: '128.5%' }}
+                    width={1200}
+                    className="carousel--photo"
+                  />
+                ))}
+              </Carousel>
+            )}
+          </div>
         </section>
         <hr />
         <h3 className="is-mb0">The Accordion</h3>
@@ -213,6 +228,7 @@ export async function getStaticProps(context) {
       title,
       hero,
       carousel,
+      carousel2,
       seo
     }
   `)

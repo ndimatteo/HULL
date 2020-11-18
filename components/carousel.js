@@ -10,7 +10,7 @@ const Carousel = ({
   hasArrows,
   hasDots,
   hasCounter,
-  slideClass,
+  className,
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     speed: 8,
@@ -54,13 +54,13 @@ const Carousel = ({
   }
 
   return (
-    <div ref={emblaRef} className="carousel">
+    <div
+      ref={emblaRef}
+      className={`carousel${className ? ` ${className}` : ''}`}
+    >
       <div className="carousel--container">
         {children.map((child, index) => (
-          <div
-            className={`carousel--slide${slideClass ? ` ${slideClass}` : ''}`}
-            key={index}
-          >
+          <div className="carousel--slide" key={index}>
             {child}
           </div>
         ))}

@@ -9,8 +9,17 @@ export default {
   fields: [
     // Place other Fields here
     {
-      title: 'Carousel Photos',
+      title: 'Carousel #1 Photos',
       name: 'carousel',
+      type: 'array',
+      of: [{ type: 'figure' }],
+      options: {
+        layout: 'grid'
+      }
+    },
+    {
+      title: 'Carousel #2 Photos',
+      name: 'carousel2',
       type: 'array',
       of: [{ type: 'figure' }],
       options: {
