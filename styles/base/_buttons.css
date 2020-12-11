@@ -1,0 +1,38 @@
+.btn {
+  @mixin flattenButton;
+  text-align: center;
+
+  &.is-small {
+    font-size: .5em;
+  }
+
+  &.is-block {
+    display: block;
+    width: 100%;
+  }
+
+  &.is-loading {
+    cursor: wait !important;
+  }
+
+  &.is-disabled {
+    cursor: default;
+  }
+
+  svg {
+    width: 2em;
+    height: 2em;
+  }
+
+  &.has-icon-before {
+    svg {
+      margin: -.5em 0 -.5em -.5em;
+    }
+  }
+
+  &.has-icon-after {
+    svg {
+      margin: -.5em -.5em -.5em 0;
+    }
+  }
+}

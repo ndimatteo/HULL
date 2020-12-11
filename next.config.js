@@ -29,11 +29,18 @@ async function fetchSanityRedirects() {
 
 module.exports = withBundleAnalyzer({
   env: {
+    // Needed for Sanity powered data
     SANITY_PROJECT_DATASET: process.env.SANITY_PROJECT_DATASET,
     SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
     SANITY_API_TOKEN: process.env.SANITY_API_TOKEN,
+
+    // Needed for Shopify product syncs
     SHOPIFY_STORE_ID: process.env.SHOPIFY_STORE_ID,
     SHOPIFY_API_TOKEN: process.env.SHOPIFY_API_TOKEN,
+
+    // Needed for Mailchimp forms
+    MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
+    MAILCHIMP_SERVER: process.env.MAILCHIMP_SERVER,
   },
   async redirects() {
     const sanityRedirects = await fetchSanityRedirects()

@@ -16,8 +16,7 @@
     "@sanity/desk-tool",
     "dashboard-widget-structure-menu",
     "dashboard-widget-document-list",
-    "dashboard-widget-netlify",
-    "webhook-deploy"
+    "vercel-deploy"
   ],
   "env": {
     "development": {

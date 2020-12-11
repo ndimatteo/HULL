@@ -1,145 +1,137 @@
-body {
-  font-family: 'Helvetica Neue', Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 1;
-  font-weight: normal;
-  background: var(--pageBG);
-  color: var(--pageText);
+@layer base {
+  @font-face {
+    font-family: "GandurNew Light";
+    src: url("/fonts/GandurNew-Light.woff2") format("woff2"),
+        url("/fonts/GandurNew-Light.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
 
-  @media (--md) {
-    font-size: 16px;
+  @font-face {
+    font-family: "Satan";
+    src: url("/fonts/satan.woff2") format("woff2"),
+        url("/fonts/satan.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  html,
+  body {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-pageBG text-pageText font-mono leading-none;
+    font-size: 14px;
+
+    @media (--md) {
+      font-size: 16px;
+    }
+  }
+
+  p {
+    @apply m-0 text-base leading-normal;
+  }
+
+  ul {
+    @apply list-none m-0 p-0;
+  }
+
+  /* Headlines */
+  h1 {
+    @apply m-0 mb-2 text-5xl font-normal;
+  }
+
+  h2 {
+    @apply m-0 mb-2 text-4xl font-normal;
+  }
+
+  h3 {
+    @apply m-0 mb-2 text-3xl font-normal;
+  }
+
+  h4 {
+    @apply m-0 mb-2 text-2xl font-normal;
+  }
+
+  h5 {
+    @apply m-0 mb-2 text-xl font-normal;
+  }
+
+  h6 {
+    @apply m-0 mb-2 text-xs font-normal;
+  }
+
+  /* Links */
+  a {
+    @apply no-underline text-current;
+  }
+
+  /* Images */
+  figure {
+    @apply relative m-0;
+  }
+
+  /* Misc. */
+  hr {
+    @apply my-16 mx-0 border-0 h-px bg-pageText;
+  }
+  
+  ::-moz-selection {
+    background: var(--pageText);
+    color: var(--pageBG);
+  }
+  ::selection {
+    background: var(--pageText);
+    color: var(--pageBG);
+  }
+}
+
+/* Focus Adjust */
+body:not(.is-tabbing) {
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  details {
+    &:focus {
+      outline: none;
+    }
   }
 }
 
 p {
-  margin: 0;
-  font-size: 1rem;
-  line-height: 1.5;
-
   &:not(:last-child) {
-    margin-bottom: 1.5rem;
+    @apply mb-6;
   }
+}
 
-  a:not(.btn) {
-    text-decoration: underline;
-    color: inherit;
+hr {
+  &:last-child {
+    @apply mb-0;
   }
 }
 
 ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
   .rc & {
-    padding: 0 0 0 1rem;
-    font-size: 1rem;
-    line-height: 1.5;
+    @apply pb-4 text-base leading-normal;
 
     &:not(:last-child) {
-      margin-bottom: 1.5rem;
+      @apply mb-6;
     }
     
     li {
-      margin-bottom: .25rem;
+      @apply mb-1;
       
       &::before {
         content: "+";
-        display: inline-block;
-        position: relative;
-        top: -.125rem;
-        width: 1rem;
-        margin-left: -1rem;
+        @apply inline-block relative -ml-4 w-4;
       }
-    }
-  }
-}
-
-/* Headers */
-
-h1 {
-  margin: 0 0 .5rem;
-  font-size: 2.5rem;
-  line-height: 1.2;
-  font-weight: normal;
-}
-
-h2,
-.is-h2 {
-  margin: 0 0 .5rem;
-  font-size: 2rem;
-  line-height: 1.2;
-  font-weight: normal;
-}
-
-h3,
-.is-h3 {
-  margin: 0 0 .5rem;
-  font-size: 1.75rem;
-  line-height: 1.2;
-  font-weight: normal;
-}
-
-h4 {
-  margin: 0 0 .5rem;
-  font-size: 1.5rem;
-  line-height: 1.2;
-  font-weight: normal;
-}
-
-h5 {
-  margin: 0 0 .5rem;
-  font-size: 1.25rem;
-  line-height: 1.2;
-  font-weight: normal;
-}
-
-h6 {
-  margin: 0 0 .5rem;
-  font-size: 1rem;
-  line-height: 1.2;
-  font-weight: normal;
-}
-
-/* Links */
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Misc. */
-
-hr {
-  margin: 4rem 0;
-  border: none;
-  height: 1px;
-  background: var(--pageText);
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
-::-moz-selection {
-  background: var(--pageText);
-  color: var(--pageBG);
-}
-::selection {
-  background: var(--pageText);
-  color: var(--pageBG);
-}
-
-/* Focus Adjust */
-a,
-button,
-input,
-textarea,
-select,
-details {
-  &:focus {
-    body:not(.is-tabbing) & {
-      outline: none;
     }
   }
 }

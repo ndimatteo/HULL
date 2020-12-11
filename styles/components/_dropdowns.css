@@ -1,0 +1,58 @@
+.dropdown {
+  position: relative;
+  z-index: 1;
+
+  &:hover,
+  &.is-open {
+    @media (--sm) {
+      z-index: 3;
+
+      .dropdown--content {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+      }
+    }
+  }
+
+  &--btn {
+    @mixin flattenButton;
+
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    position: relative;
+    z-index: 2;
+
+    .is-active & {
+      /* active state styles */
+    }
+  }
+
+  &--content {
+    position: relative;
+    height: 0;
+    overflow-y: hidden;
+
+    @media (--sm) {
+      position: absolute;
+      top: 100%;
+      white-space: nowrap;
+      height: auto !important;
+      overflow-y: visible;
+
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: all .15s linear;
+    }
+  }
+
+  &--nav {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}

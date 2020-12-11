@@ -1,0 +1,26 @@
+/* Variables */
+:root {
+  --black: #000000;
+  --white: #ffffff;
+
+  --pageBG: #000000;
+  --pageText: #72ff27;
+
+  --black-rgb: 0,0,0;
+  --white-rgb: 255,255,255;
+
+  --pageBG-rgb: 0,0,0;
+  --pageText-rgb: 114,255,39;
+}
+
+@custom-media --xs (min-width: 480px);
+@custom-media --sm (min-width: 768px);
+@custom-media --md (min-width: 940px);
+@custom-media --lg (min-width: 1200px);
+@custom-media --xl (min-width: 1600px);
+
+@custom-media --xsMax (max-width: 479px);
+@custom-media --smMax (max-width: 767px);
+@custom-media --mdMax (max-width: 939px);
+@custom-media --lgMax (max-width: 1199px);
+@custom-media --xlMax (max-width: 1599px);

@@ -162,56 +162,6 @@ const SixSixSix = ({ data }) => {
           </div>
         </section>
         <hr />
-        <h3 className="is-mb0">The Grid</h3>
-        <section className="section">
-          <div className="grid has-wireframe">
-            <div className="is-col-12">
-              <span>.is-col-12</span>
-            </div>
-            <div className="is-col-6">
-              <span>.is-col-6</span>
-            </div>
-            <div className="is-col-6">
-              <span>.is-col-6</span>
-            </div>
-            <div className="is-col-4">
-              <span>.is-col-4</span>
-            </div>
-            <div className="is-col-4">
-              <span>.is-col-4</span>
-            </div>
-            <div className="is-col-4">
-              <span>.is-col-4</span>
-            </div>
-            <div className="is-col-3">
-              <span>.is-col-3</span>
-            </div>
-            <div className="is-col-3">
-              <span>.is-col-3</span>
-            </div>
-            <div className="is-col-3">
-              <span>.is-col-3</span>
-            </div>
-            <div className="is-col-3">
-              <span>.is-col-3</span>
-            </div>
-            <div className="is-col-7">
-              <span>.is-col-7</span>
-            </div>
-            <div className="is-col-5">
-              <span>.is-col-5</span>
-            </div>
-          </div>
-          <div className="grid has-wireframe">
-            <div className="is-col-12 is-col-md-6">
-              <span>.is-col-12 / .is-col-md-6</span>
-            </div>
-            <div className="is-col-12 is-col-md-6">
-              <span>.is-col-12 / .is-col-md-6</span>
-            </div>
-          </div>
-        </section>
-        <hr />
         <h3 className="is-mb0">The Newsletter</h3>
         <FormNewsletter data={{ formName: 'Test' }} />
         <hr />

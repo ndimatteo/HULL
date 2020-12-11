@@ -71,7 +71,7 @@ export const serializers = {
 
       const isLink = !!href
       const isStatic = getStaticRoute(type ? type : '')
-      const isDynamic = getDynamicRoute(page.type)
+      const isDynamic = getDynamicRoute(page?.type)
 
       return isLink ? (
         <a href={href} target="_blank" rel="noopener noreferrer">
@@ -96,7 +96,7 @@ export const serializers = {
 
       const isLink = !!href
       const isStatic = getStaticRoute(type ? type : '')
-      const isDynamic = getDynamicRoute(page.type)
+      const isDynamic = getDynamicRoute(page?.type)
 
       return isLink ? (
         <a

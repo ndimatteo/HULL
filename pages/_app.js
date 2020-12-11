@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import Router from 'next/router'
 import { AnimatePresence } from 'framer-motion'
+
+import '../styles/tailwind.css'
 import '../styles/app.css'
-import PageTransition from '../components/page-transition'
 
 import { ShopifyContextProvider } from '../contexts/shopify-context'
 import Cart from '../components/cart/index'
+
+import PageTransition from '../components/page-transition'
 
 // import TagManager from 'react-gtm-module'
 

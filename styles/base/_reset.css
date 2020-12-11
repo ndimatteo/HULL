@@ -18,11 +18,6 @@ html {
 body {
   margin: 0;
 }
- 
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
 
 main {
   display: block;
@@ -41,6 +36,7 @@ hr {
 nav ol,
 nav ul {
   list-style: none;
+  margin: 0;
   padding: 0;
 }
 
@@ -129,7 +125,7 @@ button {
 }
 
 button,
-[type="button"], /* 1 */
+[type="button"],
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;

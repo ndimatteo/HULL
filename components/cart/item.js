@@ -64,7 +64,7 @@ function CartItem({ item }) {
         <div className="cart-item--tools">
           <div className="cart-item--quantity">
             <Counter
-              key={item.quantity}
+              key={item.id}
               defaultCount={item.quantity}
               onUpdate={changeQuantity}
             />

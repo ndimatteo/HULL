@@ -22,10 +22,9 @@ const flipAnim = {
   }),
 }
 
-function Counter({ defaultCount = 1, onUpdate, max }) {
+const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
   const [lineQuantity, setLineQuantity] = useState(defaultCount)
   const [direction, setDirection] = useState(1)
-  const [flipKey, setFlipKey] = useState(`${defaultCount}/1`)
 
   const updateQuantity = (num, direction) => {
     const cnum = max ? clampRange(num, [1, max]) : num
@@ -39,7 +38,6 @@ function Counter({ defaultCount = 1, onUpdate, max }) {
     // check for a direction change
     if (direction) {
       setDirection(direction)
-      setFlipKey(`${cnum}/${direction}`)
     }
 
     // fire callback if provided
@@ -60,7 +58,7 @@ function Counter({ defaultCount = 1, onUpdate, max }) {
       <div className="counter--amount">
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
-            key={flipKey}
+            key={lineQuantity}
             animate="show"
             exit="hide"
             variants={flipAnim}
@@ -88,6 +86,6 @@ function Counter({ defaultCount = 1, onUpdate, max }) {
       </button>
     </div>
   )
-}
+})
 
 export default Counter
