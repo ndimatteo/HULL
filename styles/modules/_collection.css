@@ -1,3 +1,7 @@
+.collection {
+  @apply max-w-7xl mt-8 mx-auto px-4;
+}
+
 .product-item {
   display: flex;
   flex-direction: column;

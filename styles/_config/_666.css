@@ -56,6 +56,7 @@ body {
   button {
     font-size: .666em;
     text-transform: uppercase;
+    line-height: 1;
   }
 
   .is-active {
@@ -400,24 +401,6 @@ a[href="#content"].skip-link,
   }
 }
 
-.grid {
-  max-width: 80rem;
-  padding: 0 2rem;
-  margin: 0 auto;
-  
-  &.has-wireframe {
-    [class^="is-col"] {
-      border: 1px solid;
-      margin: -.5px;
-    }
-
-    span {
-      display: block;
-      padding: 1rem;
-    }
-  }
-}
-
 .product-item {
   margin: -.5px;
   border: 1px solid;
@@ -702,9 +685,7 @@ a[href="#content"].skip-link,
 
 .cart {
   &--footer {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid;
+    @apply border-0 border-t border-solid bg-pageText;
   }
   
   &--subtotal {

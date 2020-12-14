@@ -35,7 +35,7 @@ const CollectionPagination = ({ products, paginated }) => {
 
   return (
     <div className="collection--content">
-      <div className="grid collection--list">
+      <div className="sm:grid sm:grid-cols-2 lg:grid-cols-3 collection--list">
         {productItems.map((product, key) => (
           <ProductCard key={key} product={product} index={key} />
         ))}

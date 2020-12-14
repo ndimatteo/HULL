@@ -4,7 +4,6 @@ export default {
   title: 'Error Page',
   name: 'errorPage',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
   icon: FiAlertOctagon,
   fields: [
     // Place other Fields here

@@ -122,6 +122,7 @@ textarea {
 button {
   overflow: visible;
   text-transform: none;
+  color: inherit;
 }
 
 button,

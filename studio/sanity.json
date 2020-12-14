@@ -26,6 +26,10 @@
     }
   },
   "parts": [
+    { 
+      "implements": "part:@sanity/base/document-actions/resolver", 
+      "path": "./parts/resolve-actions.js" 
+    },
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema.js"

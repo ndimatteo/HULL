@@ -1,15 +1,10 @@
 .accordion {
-  &:not(:first-child) {
-    border-top: 1px solid;
-  }
-
   &:last-child {
-    padding-bottom: 0;
+    @apply pb-0;
   }
   
   &--toggle {
-    @mixin flattenButton;
-    text-align: left;
+    @apply text-left;
   }
 
   &--icon {
@@ -21,12 +16,10 @@
   }
 
   &--content {
-    overflow: hidden;
+    @apply overflow-hidden;
   }
 
   &--inner {
-    margin: 0 auto;
-    padding: 1rem 0 0; /* set some padding to the accordion inner */
-    max-width: 42rem; /* max width for truncating content inside accordion */
+    @apply m-0 mx-auto p-0 pt-4 max-w-2xl;
   }
 }

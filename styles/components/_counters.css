@@ -4,7 +4,6 @@
 
   &--down,
   &--up {
-    @mixin flattenButton;
     appearance: textfield;
     -webkit-appearance: none; 
     margin: 0;

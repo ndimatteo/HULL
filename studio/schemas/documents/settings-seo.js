@@ -2,7 +2,6 @@ export default {
   title: 'Global SEO',
   name: 'seoSettings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
       title: 'Site Title',

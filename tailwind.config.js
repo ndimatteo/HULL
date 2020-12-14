@@ -19,6 +19,7 @@ module.exports = {
       pageText: 'var(--pageText)',
     },
     fontFamily: {
+      inherit: 'inherit',
       serif: ['GandurNew Light', 'serif'],
       sans: ['Satan', 'sans-serif'],
       mono: ['Courier', 'monospace'],

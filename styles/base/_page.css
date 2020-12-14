@@ -1,13 +1,12 @@
 html {
   &.is-loading,
   &.is-loading * {
-    cursor: wait !important;
+    @apply cursor-wait !important;
   }
 }
 
 body {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
 }
 
 .section {

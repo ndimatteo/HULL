@@ -4,7 +4,6 @@ export default {
   title: 'Home',
   name: 'homePage',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
   icon: FiHome,
   fields: [
     // Place other Fields here

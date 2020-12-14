@@ -1,7 +1,5 @@
 .carousel {
-  position: relative;
-  width: 100%;
-  overflow: hidden;
+  @apply relative w-full overflow-hidden;
 
   &.is-draggable {
     cursor: move;
@@ -9,14 +7,12 @@
   }
 
   &--container {
-    display: flex;
+    @apply flex;
     will-change: transform;
   }
 
   &--slide {
-    position: relative;
-    flex: 0 0 100%;
-    width: 100%;
+    @apply relative flex-grow-0 flex-shrink-0 w-full;
   }
 
   &--thumbs {
@@ -28,7 +24,6 @@
     margin: .75rem;
 
     button {
-      @mixin flattenButton;
       margin: .25rem;
 
       &.is-active {
@@ -52,7 +47,6 @@
     position: relative;
 
     button {
-      @mixin flattenButton;
       display: block;
       width: 1.5rem;
       height: 1.5rem;
@@ -115,7 +109,6 @@
     margin: 1rem;
     
     button {
-      @mixin flattenButton;
       width: .75rem;
       height: .75rem;
       background: currentColor;

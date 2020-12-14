@@ -19,7 +19,7 @@ const Photo = ({
 
   let lazy
   useEffect(() => {
-    if (photo) {
+    if (photo && imageRef.current) {
       lazy = new LazyLoad(
         {
           threshold: -100,

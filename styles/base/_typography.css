@@ -71,6 +71,10 @@
     @apply no-underline text-current;
   }
 
+  button {
+    @apply clean-btn;
+  }
+
   /* Images */
   figure {
     @apply relative m-0;

@@ -3,6 +3,10 @@
     margin: 2rem 0;
     text-align: center;
   }
+
+  &--footer {
+    @apply sticky -bottom-4 z-10 mt-4 -mb-4 pt-4 pb-4;
+  }
 }
 
 .cart-item {

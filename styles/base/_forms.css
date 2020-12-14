@@ -1,4 +1,6 @@
 .form {
+  @apply relative;
+  
   &--error {
     /* Error Message styles */
   }
@@ -9,144 +11,66 @@
 }
 
 .control {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-  position: relative;
+  @apply flex flex-col relative text-left;
 
   &--group {
-    display: grid;
-    grid-template-columns: 1fr;
-
-    @media (--sm) {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    @apply grid grid-cols-1 sm:grid-cols-2;
 
     &.is-inline {
-      @media (--sm) {
-        display: flex;
+      @apply sm:flex;
 
-        .control {
-          flex: 1;
-          margin: 0;
-        }
+      .control {
+        @apply sm:flex-1 m-0;
+      }
 
-        .btn {
-          width: auto;
-        }
+      .btn {
+        @apply sm:w-auto;
       }
     }
   }
 
   &--label {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    left: 0;
-    padding: 1rem;
+    @apply absolute top-1/2 transform -translate-y-1/2 left-0 p-4;
 
     .is-filled & {
-      display: none;
+      @apply hidden;
     }
 
     &.for-textarea {
-      top: 0;
-      transform: none;
-    }
-
-    &.for-checkbox {
-      display: flex;
-      flex-direction: row;
-      position: relative;
-      top: unset;
-      left: unset;
-      transform: none;
-      cursor: pointer;
-
-      svg {
-        width: 2rem;
-        height: 2rem;
-        pointer-events: none;
-        display: block;
-        flex: none;
-        margin-right: 1rem;
-        border: 1px solid;
-        padding: .5rem;
-        transition: all .1s .1s linear;
-
-        input:checked + & {
-          background: var(--pageText);
-          border-color: var(--pageText);
-          transition-delay: 0s;
-        }
-
-        input:focus + & {
-          border-color: var(--pageText);
-        }
-
-        path {
-          stroke-dashoffset: 111.46px;
-          stroke-dasharray: 111.46px;
-          stroke: var(--pageBG);
-          transition: all 0.2s cubic-bezier(0.33, 1, 0.68, 1);
-
-          input:checked + & {
-            stroke-dashoffset: 0;
-            transition-delay: .1s;
-          }
-        }
-      }
+      @apply top-0 transform-none;
     }
   }
 
   &--error {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
+    @apply absolute top-full inset-x-0;
   }
 
   &--pot {
-    display: none;
+    @apply hidden;
   }
 
   input[type="text"],
   input[type="email"],
   input[type="number"],
   textarea {
-    position: relative;
-    background: none;
-    border: none;
-    border-radius: 0;
-    -webkit-appearance: none;
-    outline: none;
-
-    width: 100%;
-    padding: 1rem;
-    background: none;
-    border: 1px solid;
-    font-family: inherit;
-    font-size: 1rem;
-    color: var(--pageText);
-    transition: all .15s linear;
+    @apply relative appearance-none bg-transparent w-full p-4 border border-solid border-pageText font-inherit text-base text-pageText;
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
     &:-webkit-autofill:focus {
-      color: var(--pageText);
-      background: none;
+      @apply bg-transparent text-pageText;
       -webkit-text-fill-color: var(--pageText);
       -webkit-box-shadow: 0 0 0 100em var(--pageBG) inset;
     }
   }
 
   input[type="checkbox"] {
-    @mixin sr-only;
+    @apply sr-only;
   }
 
   textarea {
+    @apply max-w-full;
     min-height: 5rem;
-    max-width: 100%;
   }
 
   &.has-error {
@@ -158,14 +82,14 @@
 }
 
 ::-webkit-input-placeholder {
-  color: var(--pageText);
+  @apply text-pageText;
 }
 ::-moz-placeholder {
-  color: var(--pageText);
+  @apply text-pageText;
 }
 :-ms-input-placeholder {
-  color: var(--pageText);
+  @apply text-pageText;
 }
 :-moz-placeholder {
-  color: var(--pageText);
+  @apply text-pageText;
 }
