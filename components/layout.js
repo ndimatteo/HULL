@@ -1,5 +1,4 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import { imageBuilder } from '../lib/api'
@@ -39,14 +38,18 @@ const variants = {
   },
 }
 
-const Layout = ({ site = {}, page = {}, schema = {}, hasHero, children }) => {
+const Layout = ({ site = {}, page = {}, schema, hasHero, children }) => {
   // set <head> variables
-  const pageTitle = [page.title, site.seo?.title].filter(Boolean).join(' 𖤐 ')
-  const shareTitle = page.title || site.seo?.title
-  const description = page.seo?.description || site.seo?.description
-  const shareGraphic = page.seo?.share?.asset || site.seo?.share?.asset
-  const handle = site.seo?.handle
-  const icon = site.seo?.icon
+  const siteTitle = site.seo?.siteTitle
+  const siteIcon = site.seo?.siteIcon
+
+  const metaTitle = page.seo?.metaTitle || site.seo?.metaTitle
+  const metaDesc = page.seo?.metaDesc || site.seo?.metaDesc
+
+  const shareTitle = page.seo?.shareTitle || site.seo?.shareTitle
+  const shareDesc = page.seo?.shareDesc || site.seo?.shareDesc
+  const shareGraphic =
+    page.seo?.shareGraphic?.asset || site.seo?.shareGraphic?.asset
 
   return (
     <>
@@ -63,13 +66,17 @@ const Layout = ({ site = {}, page = {}, schema = {}, hasHero, children }) => {
           href="/favicon.svg"
           color="#000000"
         />
-        {icon && <link rel="apple-touch-icon" href={icon} />}
+        {siteIcon && (
+          <link
+            rel="apple-touch-icon"
+            href={imageBuilder.image(siteIcon).width(180).height(180).url()}
+          />
+        )}
 
-        {/* <link rel="preconnect" href="https://p.typekit.net" />
-        <link rel="preconnect" href="https://use.typekit.net" /> */}
         <link rel="preconnect" href="https://cdn.sanity.io" />
 
-        <title>{pageTitle}</title>
+        <title>{metaTitle}</title>
+        {metaDesc && <meta name="description" content={metaDesc} />}
 
         {shareTitle && (
           <>
@@ -78,11 +85,10 @@ const Layout = ({ site = {}, page = {}, schema = {}, hasHero, children }) => {
           </>
         )}
 
-        {description && (
+        {shareDesc && (
           <>
-            <meta name="description" content={description} />
-            <meta property="og:description" content={description} />
-            <meta name="twitter:description" content={description} />
+            <meta property="og:description" content={shareDesc} />
+            <meta name="twitter:description" content={shareDesc} />
           </>
         )}
 
@@ -107,10 +113,10 @@ const Layout = ({ site = {}, page = {}, schema = {}, hasHero, children }) => {
           </>
         )}
 
-        {handle && <meta name="twitter:creator" content={handle} />}
-
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
+
+        {siteTitle && <meta name="og:site_name" content={siteTitle} />}
 
         {schema && Schema(schema)}
       </Head>

@@ -1,10 +1,6 @@
 .btn {
   @apply clean-btn leading-none;
 
-  &.is-small {
-    @apply text-xs;
-  }
-
   &.is-block {
     @apply block w-full;
   }
@@ -15,22 +11,5 @@
 
   &.is-disabled {
     @apply cursor-default;
-  }
-
-  svg {
-    width: 2em;
-    height: 2em;
-  }
-
-  &.has-icon-before {
-    svg {
-      margin: -.5em 0 -.5em -.5em;
-    }
-  }
-
-  &.has-icon-after {
-    svg {
-      margin: -.5em -.5em -.5em 0;
-    }
   }
 }

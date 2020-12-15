@@ -7,7 +7,6 @@ import { getStaticRoute, getDynamicRoute } from '../lib/routes'
 import Photo from '../components/photo'
 
 const Text = dynamic(() => import('./text'))
-const Events = dynamic(() => import('./events'))
 const Accordions = dynamic(() => import('./accordions'))
 const FormContact = dynamic(() => import('./form-contact'))
 const FormNewsletter = dynamic(() => import('./form-newsletter'))
@@ -19,8 +18,6 @@ const getModule = (module) => {
   switch (type) {
     case 'textBlock':
       return <Text data={module} />
-    case 'eventsList':
-      return <Events data={module} />
     case 'accordionList':
       return <Accordions data={module} />
     case 'formContact':

@@ -1,26 +1,19 @@
 .dropdown {
-  position: relative;
-  z-index: 1;
+  @apply relative z-10;
 
   &:hover,
   &.is-open {
     @media (--sm) {
-      z-index: 3;
+      @apply z-30;
 
       .dropdown--content {
-        opacity: 1;
-        visibility: visible;
-        pointer-events: all;
+        @apply opacity-100 visible pointer-events-auto;
       }
     }
   }
 
   &--btn {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    position: relative;
-    z-index: 2;
+    @apply flex flex-row items-end relative z-20;
 
     .is-active & {
       /* active state styles */
@@ -28,29 +21,15 @@
   }
 
   &--content {
-    position: relative;
-    height: 0;
-    overflow-y: hidden;
+    @apply relative h-0 overflow-y-hidden;
 
     @media (--sm) {
-      position: absolute;
-      top: 100%;
-      white-space: nowrap;
-      height: auto !important;
-      overflow-y: visible;
-
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: all .15s linear;
+      @apply absolute top-full whitespace-nowrap overflow-y-visible opacity-0 invisible pointer-events-none transition-all;
+      height: auto !important; /* override mobile accordion styles */
     }
   }
 
   &--nav {
-    display: block;
-    position: relative;
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    @apply block relative;
   }
 }

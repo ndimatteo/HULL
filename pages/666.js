@@ -172,7 +172,7 @@ const SixSixSix = ({ data }) => {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const pageData = await getStaticPage(`
     *[_type == "samplePage"][0]{
       title,

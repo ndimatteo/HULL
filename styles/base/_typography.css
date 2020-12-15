@@ -43,27 +43,27 @@
 
   /* Headlines */
   h1 {
-    @apply m-0 mb-2 text-5xl font-normal;
+    @apply m-0 mb-2 text-5xl font-normal leading-tight;
   }
 
   h2 {
-    @apply m-0 mb-2 text-4xl font-normal;
+    @apply m-0 mb-2 text-4xl font-normal leading-tight;
   }
 
   h3 {
-    @apply m-0 mb-2 text-3xl font-normal;
+    @apply m-0 mb-2 text-3xl font-normal leading-tight;
   }
 
   h4 {
-    @apply m-0 mb-2 text-2xl font-normal;
+    @apply m-0 mb-2 text-2xl font-normal leading-tight;
   }
 
   h5 {
-    @apply m-0 mb-2 text-xl font-normal;
+    @apply m-0 mb-2 text-xl font-normal leading-tight;
   }
 
   h6 {
-    @apply m-0 mb-2 text-xs font-normal;
+    @apply m-0 mb-2 text-xs font-normal leading-tight;
   }
 
   /* Links */

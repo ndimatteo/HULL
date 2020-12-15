@@ -1,56 +1,36 @@
 .collection {
-  @apply max-w-7xl mt-8 mx-auto px-4;
+  @apply max-w-7xl mt-12 mx-auto px-4;
 }
 
 .product-item {
-  display: flex;
-  flex-direction: column;
-  position: relative;
+  @apply flex flex-col relative;
 
   &--gallery {
-    position: relative;
-    z-index: 2;
+    @apply relative z-30;
   }
   
   &--photo {
-    position: relative;
+    @apply relative;
 
     &-hover {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
-      opacity: 0;
-      visibility: hidden;
-      transition: all .2s linear;
+      @apply absolute inset-0 z-10 opacity-0 invisible transition-all;
 
       .product-item:hover & {
-        opacity: 1;
-        visibility: visible;
+        @apply opacity-100 visible;
       }
     }
   }
 
   &--link {
-    display: block;
-    text-decoration: none;
-    color: inherit;
+    @apply block no-underline text-current;
 
     &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1;
+      @apply block absolute inset-0 z-20;
+      content: "";
     }
   }
 
   &--option {
-    z-index: 2;
+    @apply z-30;
   }
 }

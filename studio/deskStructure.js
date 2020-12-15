@@ -5,7 +5,7 @@ import EditIcon from 'part:@sanity/base/edit-icon'
 
 import {
   FiHome,
-  FiMusic,
+  FiHeart,
   FiSettings,
   FiGlobe,
   FiAlertOctagon,
@@ -20,7 +20,7 @@ import {
 import SeoPreview from './components/previews/seo/seo-preview'
 
 const remoteURL = 'https://insane.codes'
-const localURL = 'http://localhost:8000'
+const localURL = 'http://localhost:3000'
 const previewURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL
 
@@ -72,7 +72,7 @@ export default () =>
                 )
                 .icon(FiAlertOctagon),
               S.listItem()
-                .title('Global SEO')
+                .title('Default SEO / Share')
                 .child(
                   S.editor()
                     .id('seoSettings')
@@ -95,24 +95,40 @@ export default () =>
       S.listItem()
         .title('Home')
         .child(
-          S.editor()
+          S.document()
             .title('Home Page')
             .id('homePage')
-            .schemaType('homePage')
             .documentId('homePage')
+            .schemaType('homePage')
+            .views([
+              S.view.form().icon(EditIcon),
+              S.view
+                .component(SeoPreview)
+                .options({ previewURL })
+                .icon(EyeIcon)
+                .title('SEO Preview')
+            ])
         )
         .icon(FiHome),
       S.divider(),
       S.listItem()
         .title('Sample Page')
         .child(
-          S.editor()
+          S.document()
             .title('Sample Page')
             .id('samplePage')
-            .schemaType('samplePage')
             .documentId('samplePage')
+            .schemaType('samplePage')
+            .views([
+              S.view.form().icon(EditIcon),
+              S.view
+                .component(SeoPreview)
+                .options({ previewURL })
+                .icon(EyeIcon)
+                .title('SEO Preview')
+            ])
         )
-        .icon(FiMusic),
+        .icon(FiHeart),
       S.divider(),
       S.listItem()
         .title('Pages')

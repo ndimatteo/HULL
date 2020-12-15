@@ -1,10 +1,9 @@
-import React, { useContext } from 'react'
-import Link from 'next/link'
-
-import { getStaticPage } from '../lib/api'
+import React from 'react'
 
 import Layout from '../components/layout'
-import Photo from '../components/photo'
+import { getStaticPage, modules } from '../lib/api'
+
+import { Module } from '../modules'
 
 const Home = ({ data }) => {
   const { site, menus, page } = data
@@ -20,34 +19,19 @@ const Home = ({ data }) => {
         seo: page.seo,
       }}
     >
-      <section className="section">
-        <h1>Light a candle for the sinners</h1>
-        <Link href="/666" scroll={false}>
-          <a className="btn">Set the world on fire</a>
-        </Link>
-      </section>
-
-      {page.hero && (
-        <div className="hero">
-          <Photo
-            photo={page.hero}
-            srcsetSize={[500, 800, 1200, 1800]}
-            sizes="100vw"
-            aspect="portrait"
-            width="1800"
-          />
-        </div>
-      )}
+      {page.content?.map((module, key) => (
+        <Module key={key} module={module} />
+      ))}
     </Layout>
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const pageData = await getStaticPage(`
     *[_type == "homePage"][0]{
-      title,
-      hero,
-      carousel,
+      content[]{
+        ${modules}
+      },
       seo
     }
   `)

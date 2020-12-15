@@ -1,7 +1,7 @@
 import React from 'react'
 import BlockContent from '@sanity/block-content-to-react'
 
-import { getErrorPage } from '../lib/api'
+import { getStaticPage, blockContent } from '../lib/api'
 
 import Layout from '../components/layout'
 import { serializers } from '../modules'
@@ -13,7 +13,7 @@ const ErrorPage = ({ data }) => {
   return (
     <Layout
       page={{
-        title: page?.title,
+        seo: page.seo,
       }}
     >
       <section className="section is-error">
@@ -39,8 +39,15 @@ const ErrorPage = ({ data }) => {
   )
 }
 
-export async function getStaticProps(context) {
-  const pageData = await getErrorPage()
+export async function getStaticProps() {
+  const pageData = await getStaticPage(`
+    *[_type == "errorPage"][0]{
+      content[]{
+        ${blockContent}
+      },
+      seo
+    }
+  `)
 
   return {
     props: {

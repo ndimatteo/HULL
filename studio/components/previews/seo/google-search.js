@@ -2,44 +2,52 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { assemblePageUrl } from './frontend-utils'
-import Truncate from './truncate'
-import styles from './google-search.css'
+import styles from './seo-preview.css'
 
 class GoogleSearchResult extends React.PureComponent {
   static propTypes = {
+    default: PropTypes.object,
     document: PropTypes.object,
-    width: PropTypes.number,
-    route: PropTypes.object
+    width: PropTypes.number
   }
 
   static defaultProps = {
+    default: null,
     document: null,
-    width: 450
+    width: 580
   }
 
   render() {
-    const { document, options, width } = this.props
-    const { title, seo, mainImage: openGraphImage } = document
+    const { default: defaultSEO, document, options, width } = this.props
+    const { seo } = document
+
     const url = assemblePageUrl({ document, options })
+    const websiteUrlWithoutProtocol = url.split('://')[1]
+
+    const metaTitle = seo?.metaTitle || defaultSEO?.metaTitle
+    const metaDesc = seo?.metaDesc || defaultSEO?.metaDesc
 
     return (
       <div className={styles.seoItem}>
-        <h3>Google search result preview</h3>
-        {title ? (
-          <div className={styles.googleWrapper} style={{ width }}>
-            <div className={styles.url}>{url}</div>
-            <Truncate maxWidth={width} className={styles.title}>
-              {title}
-            </Truncate>
-            {seo && (
-              <Truncate maxChars={300} className={styles.description}>
-                {seo.description}
-              </Truncate>
-            )}
-          </div>
-        ) : (
-          <p>Please add a title and fill out your SEO fields first.</p>
-        )}
+        <h3 className={styles.seoItemTitle}>Google search result preview</h3>
+        <div className={styles.seoItemContent}>
+          {metaTitle ? (
+            <div className={styles.seoItemCard}>
+              <div className={styles.googleWrapper} style={{ width }}>
+                <div className={styles.googleUrl}>
+                  {websiteUrlWithoutProtocol}
+                </div>
+                <div className={styles.googleTitle}>{metaTitle}</div>
+
+                {metaDesc && (
+                  <div className={styles.googleDesc}>{metaDesc}</div>
+                )}
+              </div>
+            </div>
+          ) : (
+            <p>Please add a title and fill out your SEO fields first.</p>
+          )}
+        </div>
       </div>
     )
   }

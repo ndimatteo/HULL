@@ -1,15 +1,3 @@
 .product {
-  position: relative;
-}
-
-.price {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  &--original {
-    margin-left: .5rem;
-    font-size: .75rem;
-    line-height: 1;
-  }
+  @apply relative;
 }

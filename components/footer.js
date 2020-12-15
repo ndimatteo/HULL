@@ -40,7 +40,7 @@ const Footer = ({ menu, social }) => {
           </div>
 
           <div className="footer--disclaimer">
-            <p className="is-disclaimer">
+            <p className="text-xs">
               &copy; {new Date().getFullYear()}. All Rights Reserved.
             </p>
           </div>

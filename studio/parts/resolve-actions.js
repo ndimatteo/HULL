@@ -4,7 +4,7 @@ import defaultResolve, {
   DeleteAction
 } from 'part:@sanity/base/document-actions'
 
-const singleton = [
+const singletons = [
   'homePage',
   'samplePage',
   'shopPage',
@@ -16,7 +16,7 @@ const singleton = [
 const editAndDelete = ['product', 'productVariant']
 
 export default function resolveDocumentActions(props) {
-  const isSingle = singleton.indexOf(props.type) > -1
+  const isSingle = singletons.indexOf(props.type) > -1
   const canEditDelete = editAndDelete.indexOf(props.type) > -1
 
   if (isSingle) {

@@ -33,6 +33,11 @@ export default {
         }
       ],
       validation: Rule => Rule.unique()
+    },
+    {
+      title: 'SEO / Share Settings',
+      name: 'seo',
+      type: 'seo'
     }
   ],
   preview: {

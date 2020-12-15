@@ -10,7 +10,7 @@
   }
 
   &--header {
-    @apply flex items-center relative p-4 border-0 border-b border-solid;
+    @apply flex items-center relative p-4;
   }
 
   &--close {

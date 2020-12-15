@@ -1,14 +1,5 @@
 .panel-swipe {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--pageText);
-  color: var(--pageBG);
-  z-index: 99;
-  pointer-events: none;
-  overflow: hidden;
+  @apply fixed inset-0 bg-pageText text-pageBG z-50 pointer-events-none overflow-hidden;
 
   &--content {
     /* Loader Content styles */

@@ -1,14 +1,14 @@
-import { FiMusic } from 'react-icons/fi'
+import { FiHeart } from 'react-icons/fi'
 
 export default {
-  title: 'Home',
+  title: 'Sample Page',
   name: 'samplePage',
   type: 'document',
-  icon: FiMusic,
+  icon: FiHeart,
   fields: [
     // Place other Fields here
     {
-      title: 'Carousel #1 Photos',
+      title: 'Demo Carousel #1',
       name: 'carousel',
       type: 'array',
       of: [{ type: 'figure' }],
@@ -17,7 +17,7 @@ export default {
       }
     },
     {
-      title: 'Carousel #2 Photos',
+      title: 'Demo Carousel #2',
       name: 'carousel2',
       type: 'array',
       of: [{ type: 'figure' }],
@@ -26,7 +26,7 @@ export default {
       }
     },
     {
-      title: 'SEO',
+      title: 'SEO / Share Settings',
       name: 'seo',
       type: 'seo'
     }

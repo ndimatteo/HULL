@@ -8,14 +8,14 @@ export default {
   fields: [
     // Place other Fields here
     {
-      title: 'Browser Title',
-      name: 'title',
-      type: 'string'
-    },
-    {
       title: 'Content',
       name: 'content',
       type: 'complexPortableText'
+    },
+    {
+      title: 'SEO / Share Settings',
+      name: 'seo',
+      type: 'seo'
     }
   ],
   preview: {

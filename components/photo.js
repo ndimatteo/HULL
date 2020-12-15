@@ -37,7 +37,7 @@ const Photo = ({
 
   return (
     <figure className={className ? className : null}>
-      <div className={`is-aspect is-aspect--${aspect}`} style={aspectCustom}>
+      <div className={`has-ar has-ar--${aspect}`} style={aspectCustom}>
         {photo && (
           <picture>
             <source

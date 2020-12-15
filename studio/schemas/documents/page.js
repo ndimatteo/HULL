@@ -22,26 +22,13 @@ export default {
       }
     },
     {
-      title: 'Hero Photo',
-      name: 'hero',
-      type: 'figure'
-    },
-    {
       title: 'Content',
       name: 'content',
       type: 'array',
-      of: [
-        { type: 'hero' },
-        { type: 'textBlock' }
-        // { type: 'venuesList' },
-        // { type: 'eventsList' },
-        // { type: 'formContact' },
-        // { type: 'formNewsletter' },
-        // { type: 'accordionList' },
-      ]
+      of: [{ type: 'textBlock' }, { type: 'accordionList' }]
     },
     {
-      title: 'SEO',
+      title: 'SEO / Share Settings',
       name: 'seo',
       type: 'seo'
     }
@@ -49,14 +36,12 @@ export default {
   preview: {
     select: {
       title: 'title',
-      slug: 'slug',
-      media: 'hero'
+      slug: 'slug'
     },
-    prepare({ title = 'Untitled', slug = {}, media }) {
+    prepare({ title = 'Untitled', slug = {} }) {
       const path = `/${slug.current}`
       return {
         title,
-        media,
         subtitle: slug.current ? path : '(missing slug)'
       }
     }

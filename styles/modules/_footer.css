@@ -1,21 +1,15 @@
 .footer {
-  position: relative;
-  overflow: hidden;
+  @apply relative overflow-hidden;
   
   &--content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem 0;
+    @apply flex flex-col items-center py-8;
   }
 
   .logo {
-    margin: 1rem auto;
+    @apply my-4 mx-auto;
     
     &--link {
-      margin: 0 auto;
-      height: 3em;
-      padding: .5em;
+      @apply mx-auto h-12 p-2;
     }
   }
 
@@ -25,18 +19,9 @@
 }
 
 .social-nav {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 3rem 0;
+  @apply flex flex-wrap justify-center my-12;
 
   &--link {
-    display: block;
-    margin: 0 .25rem;
-    width: 2.5rem;
-    height: 2.5rem;
-    font-size: 1rem;
-    line-height: 0;
+    @apply block mx-1 w-10 h-10 text-base leading-none;
   }
 }

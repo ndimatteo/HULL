@@ -1,81 +1,56 @@
 .header {
-  position: relative;
+  @apply relative;
   
   &--content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    @apply flex flex-col items-center;
   }
 }
 
 .logo {
-  display: flex;
+  @apply flex;
 
   &--link {
-    display: block;
-    margin: 0 auto;
+    @apply block mx-auto;
 
     svg {
-      display: block;
-      width: auto;
-      height: 100%;
-      fill: currentColor;
+      @apply block w-auto h-full fill-current;
     }
   }
 }
 
 .menu-toggle {
-  display: none;
-  position: relative;
-  margin-left: auto;
-  padding: 1rem;
-  width: 3rem;
-  height: 3rem;
-
-  @media (--mdMax) {
-    display: block;
-  }
+  @apply block relative ml-auto p-4 w-12 h-12 md:hidden;
 
   &.is-open span {
-    transform: rotate(45deg);
+    @apply transform rotate-45;
   }
 
   span {
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform .3s cubic-bezier(0.33, 1, 0.68, 1);
+    @apply block relative w-full h-full transition-transform;
 
     &::before,
     &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
+      @apply block absolute top-1/2 inset-x-0 bg-current;
+      content: "";
       height: 2px;
       margin-top: -1px;
-      background: currentColor;
     }
 
     &::after {
-      transform: rotate(90deg);
+      @apply transform rotate-90;
     }
   }
 }
 
 .main-navigation,
 .footer-navigation {
-  flex: 1;
+  @apply flex-1;
   
   > ul {
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
 
     @media (--md) {
-      flex-direction: row;
+      @apply flex-row;
     }
 
     li {
@@ -87,22 +62,17 @@
 
       a:not(.btn),
       button {
-        display: block;
+        @apply block;
       }
     }
   }
 }
 
 a[href="#content"].skip-link {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
+  @apply block fixed top-0 left-0 z-10 transition-transform;
   transform: translateY(-150%);
-  transition: transform .4s ease-out;
 
   &:focus {
-    transform: none;
+    @apply transform-none;
   }
 }

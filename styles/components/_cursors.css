@@ -1,14 +1,7 @@
 .cursor {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  z-index: 5;
-  pointer-events: none;
+  @apply fixed top-0 left-0 w-0 h-0 z-10 pointer-events-none;
 
   &--content {
-    position: absolute;
-    transform: translate3d(-50%,-50%,0);
+    @apply absolute transform-gpu -translate-x-1/2 -translate-y-1/2;
   }
 }

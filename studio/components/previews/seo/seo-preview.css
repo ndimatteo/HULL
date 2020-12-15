@@ -1,0 +1,289 @@
+@import 'part:@sanity/base/theme/variables-style';
+
+.seoItem {
+  margin: 0;
+}
+
+.seoItemTitle {
+  margin: 0;
+  padding: var(--medium-padding);
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+}
+
+.seoItemContent {
+  display: flex;
+  overflow: auto;
+  padding: var(--large-padding);
+  background-color: color(var(--white) blend(var(--gray-base) 5%));
+  border-top: 1px solid var(--hairline-color);
+  border-bottom: 1px solid var(--hairline-color);
+}
+
+.seoItemCard {
+  composes: root from 'part:@sanity/base/theme/layout/box-style';
+  margin: 0 !important;
+  min-width: 460px;
+  border-radius: var(--border-radius-large);
+}
+
+/* Image Placeholder */
+.imagePlaceholder {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 52.5%;
+  background: var(--gray-light);
+}
+
+.imagePlaceholder::after {
+  content: "no photo set!";
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  transform: translateY(-50%);
+}
+
+
+/* Google Preview */
+.googleWrapper {
+  max-width: 100%;
+  font-family: Arial, sans-serif;
+}
+
+.googleTitle {
+  display: inline-block;
+  color: #1a0dab;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.3;
+  white-space: 'nowrap';
+  overflow: 'hidden';
+  text-overflow: 'ellipsis';
+  cursor: pointer;
+}
+
+.googleTitle:hover {
+  text-decoration: underline;
+}
+
+.googleUrl {
+  color: #202124;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: 'nowrap';
+  overflow: 'hidden';
+  text-overflow: 'ellipsis';
+}
+
+.googleUrl span {
+  color: #5f6368;
+}
+
+.googleDesc {
+  font-size: 14px;
+  color: #4d5156;
+  line-height: 1.58;
+  word-wrap: break-word;
+}
+
+/* Twitter Preview */
+.tweetWrapper {
+  position: relative;
+  max-width: 100%;
+  padding: 12px 12px 8px 55px;
+  text-align: left;
+  font-size: 14px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+.tweetAuthor {
+  position: relative;
+  margin-right: 75px;
+  margin-bottom: 2px;
+}
+
+.tweetAuthorAvatar {
+  position: absolute;
+  top: 0;
+  left: -55px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+}
+
+.tweetAuthorName {
+  margin-right: 4px;
+  font-weight: 700;
+  color: #333;
+}
+
+.tweetAuthorHandle {
+  padding: 0;
+  margin-top: 2px;
+  margin-left: 2px;
+  font-size: 12px;
+  color: rgb(91, 112, 131);
+}
+
+.tweetText p {
+  margin: 0 0 10px;
+}
+
+.tweetUrlWrapper {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.tweetCardPreview {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-color: rgb(196, 207, 214);
+  border-radius: 16px;
+  border-width: 1px;
+  border-style: solid;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.tweetCardContent {
+  padding: 0.75em;
+  width: calc(100% - 8.81667em - 2px);
+  overflow: hidden;
+}
+
+.tweetCardImage {
+  display: flex;
+  border-right-width: 1px;
+  overflow: hidden;
+  width: 100%;
+  flex-shrink: 0;
+  border-right-width: 1px;
+}
+
+.tweetCardImage img {
+  width: 100%;
+  height: auto;
+  object-fit: fit;
+}
+
+.tweetCardTitle {
+  max-height: 1.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 1em;
+  font-weight: normal;
+  margin: 0 0 0.15em;
+}
+
+.tweetCardDescription {
+  max-height: 3.9em;
+  overflow: hidden;
+  color: rgb(91, 112, 131);
+}
+
+.tweetCardDescription p {
+  overflow: hidden;
+  margin-top: 0.32333em;
+}
+
+.tweetCardDestination {
+  margin-top: 0.32333em;
+  text-transform: lowercase;
+  color: rgb(91, 112, 131);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tweetCardIcon {
+  margin-right: 2px;
+  height: 1.25em;
+  font-size: 12px;
+  line-height: calc(18.375px);
+  color: rgb(91, 112, 131);
+}
+
+.tweetCardIcon svg {
+  display: inline-block;
+  vertical-align: text-bottom;
+  height: 1.25em;
+  fill: currentColor;
+}
+
+/* Facebook Share */
+.facebookWrapper {
+  max-width: 100%;
+  background-color: #f6f6f6;
+  overflow: hidden;
+}
+
+.facebookImageContainer {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+
+.facebookCardImage {
+  width: 100%;
+  object-fit: cover;
+}
+
+.facebookCardContent {
+  padding: 10px 12px;
+  background: rgb(240, 242, 245);
+  color: #606770;
+  border: 1px solid #ced0d4;
+}
+
+.facebookCardUrl {
+  flex-shrink: 0;
+  margin-bottom: 4px;
+  padding: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: rgb(101, 103, 107);
+}
+
+.facebookCardTitle {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+}
+
+.facebookCardTitle a {
+  color: #1d2129;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 20px;
+  margin: 3px 0 0;
+  padding-top: 2px;
+  text-decoration: none;
+}
+
+.facebookCardDescription {
+  color: rgb(101, 103, 107);
+  font-size: 15px;
+  line-height: 20px;
+  max-height: 80px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
+  overflow: hidden;
+}

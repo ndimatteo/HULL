@@ -8,17 +8,13 @@ export default {
   fields: [
     // Place other Fields here
     {
-      title: 'Title',
-      name: 'title',
-      type: 'string'
+      title: 'Content',
+      name: 'content',
+      type: 'array',
+      of: [{ type: 'textBlock' }, { type: 'accordionList' }]
     },
     {
-      title: 'Hero Photo',
-      name: 'hero',
-      type: 'figure'
-    },
-    {
-      title: 'SEO',
+      title: 'SEO / Share Settings',
       name: 'seo',
       type: 'seo'
     }

@@ -159,7 +159,7 @@ export default {
       fieldset: '2up'
     },
     {
-      title: 'SEO',
+      title: 'SEO / Share Settings',
       name: 'seo',
       type: 'seo'
     }

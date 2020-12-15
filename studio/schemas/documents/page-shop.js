@@ -13,7 +13,7 @@ export default {
       type: 'string'
     },
     {
-      title: 'SEO',
+      title: 'SEO / Share Settings',
       name: 'seo',
       type: 'seo'
     }

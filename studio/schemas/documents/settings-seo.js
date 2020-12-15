@@ -1,36 +1,63 @@
 export default {
-  title: 'Global SEO',
+  title: 'Default SEO / Share',
   name: 'seoSettings',
   type: 'document',
   fields: [
     {
       title: 'Site Title',
-      name: 'title',
-      type: 'string'
+      name: 'siteTitle',
+      type: 'string',
+      description: 'The name of your site, usually your company/brand name.'
     },
     {
-      title: 'Description',
-      name: 'description',
+      title: 'Default Meta Title',
+      name: 'metaTitle',
+      type: 'string',
+      description: 'Title used for search engines and browsers.',
+      validation: Rule =>
+        Rule.max(50).warning('Longer titles may be truncated by search engines')
+    },
+    {
+      title: 'Default Meta Description',
+      name: 'metaDesc',
       type: 'text',
-      description: 'Describe your site for search engines and social media.'
+      rows: 3,
+      description: 'Description for search engines.',
+      validation: Rule =>
+        Rule.max(150).warning(
+          'Longer descriptions may be truncated by search engines'
+        )
     },
     {
-      title: 'Share Graphic',
-      name: 'share',
+      title: 'Default Share Title',
+      name: 'shareTitle',
+      type: 'string',
+      description: 'TItle used for social sharing cards.',
+      validation: Rule =>
+        Rule.max(50).warning('Longer titles may be truncated by social sites')
+    },
+    {
+      title: 'Default Share Description',
+      name: 'shareDesc',
+      type: 'text',
+      rows: 3,
+      description: 'Description for social sharing cards.',
+      validation: Rule =>
+        Rule.max(150).warning(
+          'Longer descriptions may be truncated by social sites'
+        )
+    },
+    {
+      title: 'Default Share Graphic',
+      name: 'shareGraphic',
       type: 'image',
-      description:
-        'recommended size: 1200x630, used when shared on social media.'
-    },
-    {
-      title: 'Twitter Handle',
-      name: 'handle',
-      type: 'string'
+      description: 'Share graphics will be cropped to 1200x630'
     }
   ],
   preview: {
     prepare() {
       return {
-        title: 'Global SEO'
+        title: 'Default SEO / Share'
       }
     }
   }

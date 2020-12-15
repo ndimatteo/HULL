@@ -1,19 +1,16 @@
 .marquee {
-  position: relative;
-  overflow: hidden;
-  opacity: 0;
-  transition: opacity .15s linear;
+  @apply relative overflow-hidden opacity-0 transition-opacity;
 
   &.is-ready {
-    opacity: 1;
+    @apply opacity-100;
   }
 
   * {
-    white-space: nowrap;
+    @apply whitespace-nowrap;
   }
 
   &--inner {
-    display: inline-flex;
+    @apply inline-flex;
     flex: 1 0 auto;
     animation-name: marqueeL;
     animation-timing-function: linear;
@@ -31,7 +28,7 @@
   }
 
   &--content {
-    display: inline-flex;
+    @apply inline-flex;
     flex: 1 0 auto;
 
     .is-reversed & {
@@ -40,13 +37,11 @@
   }
 
   &--item {
-    display: flex;
-    padding: .5rem 0;
+    @apply flex;
     flex: 1 0 auto;
 
     span {
-      display: block;
-      white-space: pre;
+      @apply block whitespace-pre;
     }
   }
 }

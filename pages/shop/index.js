@@ -27,7 +27,7 @@ const Shop = ({ data }) => {
   )
 }
 
-export async function getStaticProps(context) {
+export async function getStaticProps() {
   const shopData = await getStaticPage(`
     *[_type == "shopPage"][0]{
       title,

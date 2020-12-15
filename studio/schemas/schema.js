@@ -20,8 +20,8 @@ import menu from './documents/menu'
 import redirect from './documents/redirect'
 
 // Module types
-import hero from './modules/hero'
 import textBlock from './modules/text'
+import accordionList from './modules/accordion-list'
 
 // Object types
 import seo from './objects/seo'
@@ -40,6 +40,7 @@ import socialLink from './objects/social-link'
 import simplePortableText from './objects/portable-simple'
 import complexPortableText from './objects/portable-complex'
 
+import accordion from './objects/accordion'
 import figure from './objects/figure'
 import button from './objects/button'
 import horizontalRule from './objects/horizontal-rule'
@@ -67,8 +68,8 @@ export default createSchema({
     redirect,
 
     // Module types
-    hero,
     textBlock,
+    accordionList,
 
     // Object types
     seo,
@@ -87,6 +88,7 @@ export default createSchema({
     simplePortableText,
     complexPortableText,
 
+    accordion,
     figure,
     button,
     horizontalRule

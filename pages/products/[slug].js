@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import ErrorPage from '../404'
 
-import { getProduct, getErrorPage } from '../../lib/api'
+import { getProduct, getStaticPage, blockContent } from '../../lib/api'
 import { hasObject, centsToPrice } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
@@ -58,7 +58,7 @@ const Product = ({ data, error }) => {
     }
   }
 
-  // set quantity
+  // set default quantity
   const [quantity, setQuantity] = useState(1)
 
   return (
@@ -72,7 +72,7 @@ const Product = ({ data, error }) => {
         title: hasVariant
           ? `${product.title} - ${activeVariant.title}`
           : product.title,
-        seo: hasVariant ? activeVariant.seo : product.seo,
+        seo: hasVariant ? activeVariant.seo || product.seo : product.seo,
       }}
       schema={{
         '@context': 'http://schema.org',
@@ -96,7 +96,7 @@ const Product = ({ data, error }) => {
         },
         brand: {
           '@type': 'Brand',
-          name: site.seo.title,
+          name: site.seo.siteTitle,
         },
       }}
     >
@@ -201,7 +201,14 @@ const ProductActions = ({ activeVariant, quantity, setQuantity }) => {
 export async function getServerSideProps({ query }) {
   const hasVariant = query.variant ? true : false // check for variant param
   const productData = await getProduct(query.slug, query.variant) // fetch our product data
-  const errorData = await getErrorPage()
+  const errorData = await getStaticPage(`
+    *[_type == "errorPage"][0]{
+      content[]{
+        ${blockContent}
+      },
+      seo
+    }
+  `)
 
   return {
     props: {
