@@ -24,7 +24,8 @@
 
 ---
 
-- 🟢 Page Transitions powered by Framer Motion
+- 🟢 utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
+- 🟢 Page Transitions powered by [Framer Motion](https://www.framer.com/motion/)
 - 🟢 Lazyload Images + WEBP format by default
 - 🟢 Built-in Global navigation with active states and options for: internal links, external links, dropdowns, buttons
 - 🟢 Mailchimp Newsletter form with opt-in feature, validation, and success/failure states
@@ -38,15 +39,14 @@
    - 🟢 Image Carousels
    - 🟢 Accordions
    - 🟢 Pull-out Drawers
-   - ⚪ One-off Card Grids
-   - ⚪ Relationship Card Grids
+   - ⚪ Product Carousels
 - 🟢 Styles powered by PostCSS, to mimic SASS syntax
 - 🟢 Baseline styles for all components, using a BEM-like approach
 - 🟢 Simple Social icon navigation lists
 - 🟢 Cursor Follow component
-- 🟡 Initial animations
-- 🟡 Scroll animations
-- ⚪ Default Blog setup
+- 🟡 Default Blog setup
+- ⚪ Initial animations
+- ⚪ Scroll animations
 - ⚪ Instagram module
 - 🟢 Accessibility features:
    - 🟢 ARIA Landmark Roles
@@ -94,8 +94,9 @@
 4. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
     - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
     - Add your Front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
+> ⚠️ **Note** <br />This Studio uses the new "actions" resolver to handle "singleton" documents. To adjust what documents should behave like singletons be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`
     
-### 3) Shopify Storefront Access
+### 2) Shopify Storefront Access
 1. Enable Private Apps in Shopify
    - Apps > "Manage Private Apps" *(text link in page footer)*
    - Enable Private Apps
@@ -108,16 +109,16 @@
       - Read inventory of products and their variants
       - Read and modify checkouts
 
-### 4) Shopify Webhooks
+### 3) Shopify Webhooks
 1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
 2. add the following webhooks:
   - product update - `[your-domain]/api/shopify/product-update`
   - product deletion - `[your-domain]/api/shopify/product-delete`
 > ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You won't know your Vercel project domain until you deploy in a later step, just enter in what you think it will be for now!
 
-### 2) NextJS (frontend)
-2. `npm install` in the project root folder on local
-3. Create an `.env.local` file in the project folder, and add the following variables:
+### 4) NextJS (frontend)
+1. `npm install` in the project root folder on local
+2. Create an `.env.local` file in the project folder, and add the following variables:
 ```
 SANITY_PROJECT_DATASET=production
 SANITY_PROJECT_ID=XXXXXX
@@ -126,14 +127,20 @@ SHOPIFY_STORE_ID=XXXXXX
 SHOPIFY_API_TOKEN=XXXXXX
 SHOPIFY_API_PASSWORD=XXXXXX
 SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
+
+// optional for Mailchimp:
+MAILCHIMP_API_KEY=XXXXXX-usX
+MAILCHIMP_SERVER=usX
 ```
-4. Update all the `XXXXXX` values, here's where to find each:
+3. Update all the `XXXXXX` values, here's where to find each:
   - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
   - `SANITY_API_TOKEN` - Generate an API token for your Sanity project. Access your project from the Sanity Manage dashboard, and navigate to: "Settings" -> "API" -> "Add New Token" button. Make sure you give `read + write` access!
   - `SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
   - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
   - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
   - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
+  - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
+  - `MAILCHIMP_SERVER` - This is the server your account is from. It's in the URL when logged in and at the end of your API Key
   
 ### 5) Shopify Store Theme
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
@@ -150,7 +157,6 @@ This will essentially "pass-through" URLs accessed on at your Shopify Store to y
 ### Sanity
 `sanity start` in the `/studio` folder to start the studio locally
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
-> ⚠️ **Note** <br />For all your singleton docs, you must comment out the `__experimental_actions` line for their corresponding schema after a fresh install in order to make changes. Once you publish the initial singleton, you should uncomment the `__experimental_actions` line to return it to a true "singleton".
 
 
 # 🚀 Deployment
@@ -160,6 +166,9 @@ This is setup to work seamlessly with Vercel, which I highly recommend as your h
 
 ### Sanity
 This is an easy one, you can simply run `sanity deploy` from the `/studio` folder in your project. Select a subdomain you want, and your Studio is now accessible from the web. This is where I'll invite the client to manage the project, so they can both add billing info and begin editing content.
+
+### Client Updates
+Once you hand off to the client, you'll want to give them the ability to generate builds when they make updates within the Sanity Studio. The easiest way to do this is through my [Vercel Deploy plugin](https://github.com/ndimatteo/sanity-plugin-vercel-deploy).
 
 
 # 🤘 Extras/Tips
