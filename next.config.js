@@ -41,6 +41,9 @@ module.exports = withBundleAnalyzer({
     // Needed for Mailchimp forms
     MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
     MAILCHIMP_SERVER: process.env.MAILCHIMP_SERVER,
+
+    // Needed for SendGrid forms
+    SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
   },
   async redirects() {
     const sanityRedirects = await fetchSanityRedirects()

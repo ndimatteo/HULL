@@ -14,7 +14,7 @@
   @apply flex flex-col relative text-left;
 
   &--group {
-    @apply grid grid-cols-1 sm:grid-cols-2;
+    @apply grid gap-y-2 grid-cols-1 sm:grid-cols-2;
 
     &.is-inline {
       @apply sm:flex;

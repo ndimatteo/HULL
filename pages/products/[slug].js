@@ -156,6 +156,7 @@ const Product = ({ data, error }) => {
                 activeVariant={activeVariant}
                 quantity={quantity}
                 setQuantity={setQuantity}
+                klaviyoID={product.klaviyoID}
               />
             </div>
           </div>
@@ -170,11 +171,16 @@ const Product = ({ data, error }) => {
   )
 }
 
-const ProductActions = ({ activeVariant, quantity, setQuantity }) => {
+const ProductActions = ({
+  activeVariant,
+  quantity,
+  setQuantity,
+  klaviyoID,
+}) => {
   return (
-    <>
+    <div className="product--actions">
       {activeVariant?.inStock ? (
-        <div className="product--actions">
+        <>
           {activeVariant.lowStock && (
             <div className="product--stock-indicator">
               <span>Low Stock</span>
@@ -188,13 +194,17 @@ const ProductActions = ({ activeVariant, quantity, setQuantity }) => {
           >
             Add To Cart
           </AddToCart>
-        </div>
+        </>
       ) : (
-        <div className="product--actions">
-          <ProductWaitlist variant={activeVariant} />
-        </div>
+        <>
+          {klaviyoID ? (
+            <ProductWaitlist variant={activeVariant.id} klaviyo={klaviyoID} />
+          ) : (
+            <div className="btn is-disabled is-block">Out of Stock</div>
+          )}
+        </>
       )}
-    </>
+    </div>
   )
 }
 

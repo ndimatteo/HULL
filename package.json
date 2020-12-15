@@ -11,6 +11,7 @@
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.25",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/client": "^2.1.0",
     "@sanity/image-url": "^0.140.19",
@@ -23,6 +24,7 @@
     "framer-motion": "^2.9.5",
     "jsondiffpatch": "^0.4.1",
     "next": "^10.0.3",
+    "qs": "^6.9.4",
     "raw-body": "^2.4.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

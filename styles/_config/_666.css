@@ -440,6 +440,20 @@ a[href="#content"].skip-link,
     .form {
       @apply max-w-none;
 
+      &--error {
+        @apply grid gap-y-2 grid-cols-1 sm:flex;
+
+        &-content {
+          @apply flex-1 flex items-center justify-center sm:mr-4 px-2 border border-current bg-pageBG;
+          padding: .375rem .5rem;
+          font-size: .875rem;
+        }
+
+        .btn {
+          @apply w-full;
+        }
+      }
+
       .control {
         @apply bg-pageBG;
       }
@@ -524,7 +538,7 @@ a[href="#content"].skip-link,
   }
   
   &--photo {
-    .is-ar::before {
+    .has-ar::before {
       @apply bg-pageBG;
     }
   }

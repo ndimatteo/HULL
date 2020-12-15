@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { motion, AnimatePresence } from 'framer-motion'
-import sscroll from 'sscroll'
 
 import BlockContent from '@sanity/block-content-to-react'
 import { serializers } from '.'
@@ -11,7 +10,6 @@ const FormContact = ({ data }) => {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
   const { handleSubmit, register, reset, errors } = useForm()
-  const formRef = useRef()
 
   const {
     formName,
@@ -29,17 +27,6 @@ const FormContact = ({ data }) => {
     setError(false)
     setSuccess(false)
     setSubmitting(false)
-  }
-
-  const scrollToForm = () => {
-    if (typeof window !== `undefined` && typeof document !== `undefined`) {
-      const offset = document.querySelector('.header').getBoundingClientRect()
-        .height
-      sscroll(formRef.current, {
-        duration: 400,
-        offset: -(offset + 20),
-      })
-    }
   }
 
   const onSubmit = (data, e) => {
@@ -71,7 +58,6 @@ const FormContact = ({ data }) => {
           setSubmitting(false)
           setSuccess(true)
         }
-        scrollToForm()
       })
       .catch((error) => {
         setSubmitting(false)
@@ -100,7 +86,7 @@ const FormContact = ({ data }) => {
   }
 
   return (
-    <section className="section" ref={formRef}>
+    <section className="section">
       <div className="section--wrapper">
         <div className="section--content">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -283,14 +269,16 @@ const FormContact = ({ data }) => {
                   variants={formAnim}
                   className="form--success"
                 >
-                  <div className="form--success-inner">
-                    {successMsg && (
+                  <div className="form--success-content">
+                    {successMsg ? (
                       <BlockContent
                         renderContainerOnSingleChild
                         className="rc"
                         blocks={successMsg}
                         serializers={serializers}
                       />
+                    ) : (
+                      <h2>Success!</h2>
                     )}
                   </div>
                 </motion.div>
@@ -305,14 +293,16 @@ const FormContact = ({ data }) => {
                   variants={formAnim}
                   className="form--error"
                 >
-                  <div className="form--error-inner">
-                    {errorMsg && (
+                  <div className="form--error-content">
+                    {errorMsg ? (
                       <BlockContent
                         renderContainerOnSingleChild
                         className="rc"
                         blocks={errorMsg}
                         serializers={serializers}
                       />
+                    ) : (
+                      <h2>Error!</h2>
                     )}
                     <p className="form--error-reset">
                       <button className="btn" onClick={(e) => resetForm(e)}>

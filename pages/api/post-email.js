@@ -8,7 +8,7 @@ export default async function send(req, res) {
   }
 
   // honeypot
-  if (req.body.show !== '') {
+  if (req.body.fullname !== '') {
     console.log('stuck in honey')
     return res.status(200).json({ status: 202 })
   }

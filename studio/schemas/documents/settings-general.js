@@ -21,6 +21,12 @@ export default {
         })
     },
     {
+      title: 'Klaviyo Site ID (Public API Key)',
+      description: 'For product waitlist and newsletter forms.',
+      name: 'klaviyoID',
+      type: 'string'
+    },
+    {
       title: 'Social Links',
       name: 'social',
       type: 'array',

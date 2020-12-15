@@ -1,8 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import astrochimp from 'astrochimp'
 import { motion, AnimatePresence } from 'framer-motion'
-import sscroll from 'sscroll'
 
 import BlockContent from '@sanity/block-content-to-react'
 import { serializers } from '.'
@@ -14,7 +12,6 @@ const FormNewsletter = ({ data }) => {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState(false)
   const { handleSubmit, register, watch, reset, errors } = useForm()
-  const formRef = useRef()
 
   const hasAgreed = watch('agreeToTerms')
 
@@ -26,17 +23,6 @@ const FormNewsletter = ({ data }) => {
     setError(false)
     setSuccess(false)
     setSubmitting(false)
-  }
-
-  const scrollToForm = () => {
-    if (typeof window !== `undefined` && typeof document !== `undefined`) {
-      const offset = document.querySelector('.header').getBoundingClientRect()
-        .height
-      sscroll(formRef.current, {
-        duration: 400,
-        offset: -(offset + 20),
-      })
-    }
   }
 
   const onSubmit = (data, e) => {
@@ -51,15 +37,7 @@ const FormNewsletter = ({ data }) => {
     setSubmitting(true)
     setError(false)
 
-    astrochimp(action, data, (err, data) => {
-      setSubmitting(false)
-      if (err) {
-        setError(true)
-      } else {
-        setSuccess(true)
-      }
-      scrollToForm()
-    })
+    // ADD KLAVIYO
   }
 
   const formAnim = {
@@ -82,7 +60,7 @@ const FormNewsletter = ({ data }) => {
   }
 
   return (
-    <section className="section" ref={formRef}>
+    <section className="section">
       <div className="section--wrapper">
         <div className="section--content">
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
@@ -98,7 +76,7 @@ const FormNewsletter = ({ data }) => {
                 >
                   <div className="control--group">
                     <div
-                      className={`control${errors.FNAME ? ' has-error' : ''}`}
+                      className={`control${errors.fname ? ' has-error' : ''}`}
                     >
                       <input
                         type="text"
@@ -106,11 +84,11 @@ const FormNewsletter = ({ data }) => {
                         className="control--pot"
                         ref={register}
                       />
-                      <label htmlFor="FNAME" className="control--label">
+                      <label htmlFor="fname" className="control--label">
                         First Name
                       </label>
                       <input
-                        name="FNAME"
+                        name="fname"
                         type="text"
                         autoComplete="given-name"
                         ref={register({
@@ -134,20 +112,20 @@ const FormNewsletter = ({ data }) => {
                           )
                         }}
                       />
-                      {errors.FNAME && (
+                      {errors.fname && (
                         <span role="alert" className="control--error">
-                          {errors.FNAME.message}
+                          {errors.fname.message}
                         </span>
                       )}
                     </div>
                     <div
-                      className={`control${errors.LNAME ? ' has-error' : ''}`}
+                      className={`control${errors.lname ? ' has-error' : ''}`}
                     >
-                      <label htmlFor="LNAME" className="control--label">
+                      <label htmlFor="lname" className="control--label">
                         Last Name
                       </label>
                       <input
-                        name="LNAME"
+                        name="lname"
                         type="text"
                         autoComplete="family-name"
                         ref={register({
@@ -171,19 +149,19 @@ const FormNewsletter = ({ data }) => {
                           )
                         }}
                       />
-                      {errors.LNAME && (
+                      {errors.lname && (
                         <span role="alert" className="control--error">
-                          {errors.LNAME.message}
+                          {errors.lname.message}
                         </span>
                       )}
                     </div>
                   </div>
-                  <div className={`control${errors.EMAIL ? ' has-error' : ''}`}>
-                    <label htmlFor="EMAIL" className="control--label">
+                  <div className={`control${errors.email ? ' has-error' : ''}`}>
+                    <label htmlFor="email" className="control--label">
                       Email Address
                     </label>
                     <input
-                      name="EMAIL"
+                      name="email"
                       type="email"
                       inputMode="email"
                       autoComplete="email"
@@ -206,9 +184,9 @@ const FormNewsletter = ({ data }) => {
                         e.target.parentNode.classList.toggle('is-filled', value)
                       }}
                     />
-                    {errors.EMAIL && (
+                    {errors.email && (
                       <span role="alert" className="control--error">
-                        {errors.EMAIL.message}
+                        {errors.email.message}
                       </span>
                     )}
                   </div>
@@ -257,7 +235,7 @@ const FormNewsletter = ({ data }) => {
                   variants={formAnim}
                   className="form--success"
                 >
-                  <div className="form--success-inner">
+                  <div className="form--success-content">
                     {successMsg ? (
                       <BlockContent
                         renderContainerOnSingleChild
@@ -281,7 +259,7 @@ const FormNewsletter = ({ data }) => {
                   variants={formAnim}
                   className="form--error"
                 >
-                  <div className="form--error-inner">
+                  <div className="form--error-content">
                     {errorMsg ? (
                       <BlockContent
                         renderContainerOnSingleChild
