@@ -182,23 +182,35 @@ Once you hand off to the client, you'll want to give them the ability to generat
 
 # 🤘 Extras/Tips
 
-#### This looks like a theme... How can I use this like a starter?
+<details>
+<summary><strong>This looks like a theme... How can I use this like a starter?</strong></summary>
+
 While this starter is relatively opinionated, the goal was to use the best tools on the market for common problems in the headless Ecommerce space to deliver a fast and more approachable starter for new and seasoned developers alike.
 
 Once you're setup, you should atleast delete the demo CSS file (`/styles/_config/_666.css`), which contains all the hyper-specific styles to the demo. From there you should have a good foundation of styles that you can build off of or pick apart!
+</details>
 
-#### Error: Failed to communicate with the Sanity API
+<details>
+<summary><strong>Error: Failed to communicate with the Sanity API</strong></summary>
+
 If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
+</details>
 
-#### Access your `product_sync` metafields in Shopify without using a plugin
+<details>
+<summary><strong>Access your "product_sync" metafields in Shopify without using a plugin</strong></summary>
+
 Simply navigate to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
+</details>
 
-#### How do I properly hand-off a Vercel project to the client?
+<details>
+<summary><strong>How do I properly hand-off a Vercel project to the client?</strong></summary>
+
 While not as easy as Netlify, what I prefer to do is:
 1. have the client create their own Vercel account
 2. At the time of writing, Github connections can only be connected to one Vercel account at a time, so I have the client create a Github account if they don't already have one, and transfer the project repo to them
 3. Delete my dev project from my own Vercel account (this is so the client can utilize the project name and domain you were using during dev)
 4. You or the client can now connect their newly transferred Github repo to their own Vercel account!
+</details>
 
 
 # Shoutouts
