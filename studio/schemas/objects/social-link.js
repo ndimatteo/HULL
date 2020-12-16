@@ -5,7 +5,8 @@ import {
   FaSoundcloud,
   FaSpotify,
   FaTwitter,
-  FaYoutube
+  FaYoutube,
+  FaGithub
 } from 'react-icons/fa'
 
 const getIcon = icon => {
@@ -24,8 +25,10 @@ const getIcon = icon => {
       return FaTwitter
     case 'YouTube':
       return FaYoutube
+    case 'Github':
+      return FaGithub
     default:
-      return
+      return false
   }
 }
 
@@ -50,7 +53,8 @@ export default {
           { title: 'Soundcloud', value: 'Soundcloud' },
           { title: 'Spotify', value: 'Spotify' },
           { title: 'Twitter', value: 'Twitter' },
-          { title: 'YouTube', value: 'YouTube' }
+          { title: 'YouTube', value: 'YouTube' },
+          { title: 'Github', value: 'Github' }
         ]
       }
     },
