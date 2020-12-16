@@ -30,9 +30,9 @@
 - 🟢 Klaviyo Waitlist form for out-of-stock Products + Variants
 - 🟢 Klaviyo Newsletter form with opt-in feature _(with validation and success/failure states)_
 - 🟢 Contact Form with email notifications powered by SendGrid _(with validation and success/failure states)_
-- 🟢 Dynamic Page Routes with optional nesting (ie. `/parent/child`)
-- 🟢 Automatic Sitemap.xml generation
-- 🟢 Automatic robots.txt generation
+- 🟢 Dynamic Page Routes with optional nesting _(ie. `/parent/child`)_
+- 🟢 Automatic `Sitemap.xml` generation
+- 🟢 Automatic `robots.txt` generation
 - 🟢 Automatic 301 Redirects from Sanity
 - 🟢 Dynamic Modules for building page content, including:
    - 🟢 Marquees
@@ -41,13 +41,13 @@
    - 🟢 Pull-out Drawers
    - 🟢 Cursor Follows
    - 🟡 Product Carousels
+   - ⚪ Instagram Feed
 - 🟢 Baseline styles for all components, simply delete the demo CSS file to start fresh
 - 🟢 Simple Social icon navigation lists
 - 🟢 Lazyload Images + WEBP format by default
 - 🟡 Default Blog setup
 - ⚪ Initial animations
 - ⚪ Scroll animations
-- ⚪ Instagram module
 - 🟢 Accessibility features:
    - 🟢 ARIA Landmark Roles
    - 🟢 Default focus states preserved for keyboard navigation
@@ -63,7 +63,7 @@
    
 ### Headless Shopify
 - 🟢 Syncs Products from Shopify into Sanity
-- 🟢 Tracks product status from Shopify to help control visibility while editing
+- 🟢 Tracks product status _(draft/published)_ from Shopify to help control visibility while editing
 - 🟢 Automatic Variant option toggles
 - 🟢 Marks deleted products and variants for easy tracking
 - 🟢 Updates the URL on variant changes while keeping a clean history stack
@@ -77,8 +77,8 @@
 - 🟢 Ability to surface a PDP option on PLP product cards
 - 🟡 Sanity-managed conditional Cart "add-ons"
 - ⚪ Ability to apply coupons to the checkout cart
-- ⚪ Account Management (register/login/password/orders)
-- ⚪ Customer Reviews Integration (Yotpo? Okendo? Junip?)
+- ⚪ Account Management _(register/login/password/orders)_
+- ⚪ Customer Reviews Integration _(Yotpo? Okendo? Junip?)_
    
 # 💀 Set Up
 
