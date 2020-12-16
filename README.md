@@ -7,6 +7,7 @@
 </p>
 
 <p align="center">
+  <a href="https://insane.codes" target="_blank">Demo</a> •
   <a href="#-features">Features</a> •
   <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
@@ -174,10 +175,10 @@ This will essentially "pass-through" URLs accessed on at your Shopify Store to y
 This is setup to work seamlessly with Vercel, which I highly recommend as your hosting provider of choice. Simply follow the on-screen instructions to setup your new project, and be sure to **add the same `.env.local` variables to your Vercel Project**
 
 ### Sanity
-This is an easy one, you can simply run `sanity deploy` from the `/studio` folder in your project. Select a subdomain you want, and your Studio is now accessible from the web. This is where I'll invite the client to manage the project, so they can both add billing info and begin editing content.
+This is an easy one, you can simply run `sanity deploy` from the `/studio` folder in your project. Select a subdomain you want; your Studio is now accessible from the web. This is where I'll invite the client to manage the project so they can both add billing info and begin editing content.
 
 ### Client Updates
-Once you hand off to the client, you'll want to give them the ability to generate builds when they make updates within the Sanity Studio. The easiest way to do this is through my [Vercel Deploy plugin](https://github.com/ndimatteo/sanity-plugin-vercel-deploy).
+Once you hand off to the client you'll want to give them the ability to generate builds when they make updates within the Sanity Studio. The easiest way to do this is through my [Vercel Deploy plugin](https://github.com/ndimatteo/sanity-plugin-vercel-deploy).
 
 
 # 🤘 Extras/Tips
@@ -187,7 +188,7 @@ Once you hand off to the client, you'll want to give them the ability to generat
 
 While this starter is relatively opinionated, the goal was to use the best tools on the market for common problems in the headless Ecommerce space to deliver a fast and more approachable starter for new and seasoned developers alike.
 
-Once you're setup, you should atleast delete the demo CSS file (`/styles/_config/_666.css`), which contains all the hyper-specific styles to the demo. From there you should have a good foundation of styles that you can build off of or pick apart!
+Once you're setup, you should atleast delete the demo CSS file (`/styles/_config/_666.css`) which contains all the hyper-specific styles to the demo. From there you should have a good foundation of styles that you can build off of, or pick apart!
 </details>
 
 <details>
@@ -206,9 +207,9 @@ Simply navigate to: `https://[store_id].myshopify.com/admin/bulk?resource_name=P
 <summary><strong>How do I properly hand-off a Vercel project to the client?</strong></summary>
 
 While not as easy as Netlify, what I prefer to do is:
-1. have the client create their own Vercel account
-2. At the time of writing, Github connections can only be connected to one Vercel account at a time, so I have the client create a Github account if they don't already have one, and transfer the project repo to them
-3. Delete my dev project from my own Vercel account (this is so the client can utilize the project name and domain you were using during dev)
+1. Have the client create their own [Vercel account](https://vercel.com/signup)
+2. At the time of writing, Github connections can only be connected to one Vercel account at a time, so have the client [create a Github account](https://github.com/join) if they don't already have one, and transfer the project repo to them
+3. Delete the dev project from your own Vercel account (this is so the client can utilize the project name and domain you were using during dev)
 4. You or the client can now connect their newly transferred Github repo to their own Vercel account!
 </details>
 
