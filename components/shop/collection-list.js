@@ -37,7 +37,7 @@ const CollectionList = ({ products, isLoading, paginated = 12 }) => {
           <CollectionPagination products={products} paginated={paginated} />
         )}
 
-        {isLoading && <p>Loading Products...</p>}
+        {isLoading && <p className="text-center">Loading Products...</p>}
       </motion.div>
     </AnimatePresence>
   )

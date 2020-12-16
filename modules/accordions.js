@@ -29,33 +29,38 @@ const Accordions = ({ data }) => {
   }
 
   return (
-    <section className="section">
-      <div className="section--content">
-        <div className="section--title has-action">
-          {title}
-          <button className="btn" onClick={() => setAllOpen(!allOpen)}>
-            {allOpen ? 'Collapse' : 'Expand'} All
-          </button>
-        </div>
-        <div className="accordions-list">
-          {items.map((accordion, key) => {
-            return (
-              <Accordion
-                key={key}
-                title={accordion.title}
-                id={accordion.id}
-                toggle={allOpen}
-                onChange={onChange}
-              >
-                <BlockContent
-                  renderContainerOnSingleChild
-                  className="rc"
-                  blocks={accordion.content}
-                  serializers={serializers}
-                />
-              </Accordion>
-            )
-          })}
+    <section className="section border-b">
+      <div className="section--wrapper">
+        <div className="section--content">
+          <h2 className="mb-8 font-serif text-7xl text-center">
+            The Accordion
+          </h2>
+          <div className="section--title has-action">
+            {title}
+            <button className="btn" onClick={() => setAllOpen(!allOpen)}>
+              {allOpen ? 'Collapse' : 'Expand'} All
+            </button>
+          </div>
+          <div className="accordions-list">
+            {items.map((accordion, key) => {
+              return (
+                <Accordion
+                  key={key}
+                  title={accordion.title}
+                  id={accordion.id}
+                  toggle={allOpen}
+                  onChange={onChange}
+                >
+                  <BlockContent
+                    renderContainerOnSingleChild
+                    className="rc"
+                    blocks={accordion.content}
+                    serializers={serializers}
+                  />
+                </Accordion>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>

@@ -85,7 +85,7 @@ const fetchStoreDomain = async () => {
 }
 
 // Save checkout to localstorage
-const setCheckoutState = async (checkout, setStore) => {
+const setCheckoutState = async (checkout, setStore, openCart) => {
   if (typeof window !== `undefined`) {
     localStorage.setItem(SHOPIFY_CHECKOUT_ID, checkout.id)
   }
@@ -109,8 +109,10 @@ const setCheckoutState = async (checkout, setStore) => {
   setStore((prevState) => {
     return {
       ...prevState,
+      isAdding: false,
       isLoading: false,
       isUpdating: false,
+      isCartOpen: openCart ? true : prevState.isCartOpen,
       checkout: {
         id: checkout.id,
         lineItems: lineItems,
@@ -247,14 +249,14 @@ function useAddItem() {
     )
 
     // Update our global store states
-    setCheckoutState(newCheckout, setStore)
-    setStore((prevState) => {
-      return {
-        ...prevState,
-        isAdding: false,
-        isCartOpen: true,
-      }
-    })
+    setCheckoutState(newCheckout, setStore, true)
+    // setStore((prevState) => {
+    //   return {
+    //     ...prevState,
+    //     isAdding: false,
+    //     isCartOpen: true,
+    //   }
+    // })
   }
   return addItem
 }

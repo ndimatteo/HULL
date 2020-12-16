@@ -15,7 +15,7 @@ const FormNewsletter = ({ data }) => {
 
   const hasAgreed = watch('agreeToTerms')
 
-  const { action, terms, submit, successMsg, errorMsg } = data
+  const { klaviyoListID, terms, submit, successMsg, errorMsg } = data
 
   const resetForm = (e) => {
     e.preventDefault()
@@ -28,16 +28,33 @@ const FormNewsletter = ({ data }) => {
   const onSubmit = (data, e) => {
     e.preventDefault()
 
-    if (!action) {
+    if (!klaviyoListID) {
       setError(true)
     }
 
-    if ((!hasAgreed && terms && !action) || !action) return
+    if ((!hasAgreed && terms && !klaviyoListID) || !klaviyoListID) return
 
     setSubmitting(true)
     setError(false)
 
-    // ADD KLAVIYO
+    fetch('/api/klaviyo/newsletter-join', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        listID: klaviyoListID,
+        ...data,
+      }),
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        setSubmitting(false)
+        setSuccess(true)
+      })
+      .catch((error) => {
+        setSubmitting(false)
+        setError(true)
+        console.log(error)
+      })
   }
 
   const formAnim = {
@@ -60,9 +77,10 @@ const FormNewsletter = ({ data }) => {
   }
 
   return (
-    <section className="section">
+    <section className="section border-b">
       <div className="section--wrapper">
-        <div className="section--content">
+        <div className="section--content text-center">
+          <h2 className="mb-8 font-serif text-7xl">The Newsletter</h2>
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <AnimatePresence exitBeforeEnter>
               {!error && !success && (
@@ -80,7 +98,8 @@ const FormNewsletter = ({ data }) => {
                     >
                       <input
                         type="text"
-                        name="show"
+                        name="fullname"
+                        autoComplete="off"
                         className="control--pot"
                         ref={register}
                       />

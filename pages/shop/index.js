@@ -20,8 +20,10 @@ const Shop = ({ data }) => {
       }}
     >
       <section className="section">
-        <h1>{page.title}</h1>
-        <Collection paginationLimit={12} />
+        <div className="section--wrapper">
+          <h1 className="text-center">{page.title}</h1>
+          <Collection paginationLimit={12} />
+        </div>
       </section>
     </Layout>
   )

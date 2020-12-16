@@ -58,9 +58,9 @@ export const serializers = {
     horizontalRule: () => <hr />,
   },
   marks: {
-    highlight: ({ mark, children }) => {
-      const { color } = mark
-      return <span className={color}>{children}</span>
+    align: ({ mark, children }) => {
+      const { alignment } = mark
+      return <span className={`block ${alignment}`}>{children}</span>
     },
 
     link: ({ mark, children }) => {

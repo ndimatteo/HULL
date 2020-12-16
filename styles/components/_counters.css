@@ -17,6 +17,15 @@
   
   &--amount {
     @apply relative overflow-hidden w-8;
+
+    &:focus-within {
+      outline: 1px dashed var(--pageText);
+      outline-offset: 2px;
+      
+      body:not(.is-tabbing) & {
+        outline: none;
+      }
+    }
   }
 
   &--input {
@@ -27,7 +36,7 @@
     }
     
     input {
-      @apply relative bg-transparent border-0 rounded-none appearance-none p-0 w-full h-full text-center text-current;
+      @apply relative bg-transparent border-0 rounded-none appearance-none p-0 w-full h-full text-center text-current outline-none;
       font-feature-settings: "tnum";
     }
   }

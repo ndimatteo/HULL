@@ -19,9 +19,11 @@ const Home = ({ data }) => {
         seo: page.seo,
       }}
     >
-      {page.content?.map((module, key) => (
-        <Module key={key} module={module} />
-      ))}
+      <div className="text-center">
+        {page.content?.map((module, key) => (
+          <Module key={key} module={module} />
+        ))}
+      </div>
     </Layout>
   )
 }

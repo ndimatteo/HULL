@@ -96,14 +96,17 @@
 }
 
 /* Focus Adjust */
-body:not(.is-tabbing) {
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  details {
-    &:focus {
+a,
+button,
+input,
+textarea,
+select,
+details {
+  &:focus {
+    outline: 1px dashed var(--pageText);
+    outline-offset: 2px;
+    
+    body:not(.is-tabbing) & {
       outline: none;
     }
   }
@@ -123,7 +126,7 @@ hr {
 
 ul {
   .rc & {
-    @apply pb-4 text-base leading-normal;
+    @apply pl-8 text-base leading-normal;
 
     &:not(:last-child) {
       @apply mb-6;

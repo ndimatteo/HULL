@@ -38,6 +38,9 @@ module.exports = withBundleAnalyzer({
     SHOPIFY_STORE_ID: process.env.SHOPIFY_STORE_ID,
     SHOPIFY_API_TOKEN: process.env.SHOPIFY_API_TOKEN,
 
+    // Needed for Klaviyo forms
+    KLAVIYO_API_KEY: process.env.KLAVIYO_API_KEY,
+
     // Needed for Mailchimp forms
     MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
     MAILCHIMP_SERVER: process.env.MAILCHIMP_SERVER,

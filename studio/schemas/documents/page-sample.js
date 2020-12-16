@@ -8,6 +8,17 @@ export default {
   fields: [
     // Place other Fields here
     {
+      title: 'Content',
+      name: 'content',
+      type: 'array',
+      of: [
+        { type: 'textBlock' },
+        { type: 'accordionList' },
+        { type: 'formNewsletter' },
+        { type: 'formContact' }
+      ]
+    },
+    {
       title: 'Demo Carousel #1',
       name: 'carousel',
       type: 'array',

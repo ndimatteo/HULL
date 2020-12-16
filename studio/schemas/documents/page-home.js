@@ -11,7 +11,12 @@ export default {
       title: 'Content',
       name: 'content',
       type: 'array',
-      of: [{ type: 'textBlock' }, { type: 'accordionList' }]
+      of: [
+        { type: 'textBlock' },
+        { type: 'accordionList' },
+        { type: 'formNewsletter' },
+        { type: 'formContact' }
+      ]
     },
     {
       title: 'SEO / Share Settings',

@@ -24,25 +24,37 @@ const flipAnim = {
 
 const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
   const [lineQuantity, setLineQuantity] = useState(defaultCount)
-  const [direction, setDirection] = useState(1)
 
-  const updateQuantity = (num, direction) => {
-    const cnum = max ? clampRange(num, [1, max]) : num
+  const [direction, setDirection] = useState(1)
+  const [motionKey, setMotionKey] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const animateQuantity = (amount, direction) => {
+    const count = max ? clampRange(amount, 1, max) : amount
 
     // Bail if no change
-    if (cnum === lineQuantity || cnum < 1) return
+    if (count === lineQuantity || count < 1) return
 
-    // update the quantity count
-    setLineQuantity(cnum)
+    setIsAnimating(true)
+    setDirection(direction)
+    setMotionKey(count + (direction > 0 ? '-up' : '-down'))
+    setLineQuantity(count)
 
-    // check for a direction change
-    if (direction) {
-      setDirection(direction)
+    if (onUpdate) {
+      onUpdate(count)
     }
+  }
 
-    // fire callback if provided
-    if (cnum && onUpdate) {
-      onUpdate(cnum)
+  const updateQuantity = (amount) => {
+    const count = max ? clampRange(amount, 1, max) : amount
+
+    if (count === lineQuantity || count < 1) return
+
+    setIsAnimating(false)
+    setLineQuantity(count)
+
+    if (onUpdate) {
+      onUpdate(count)
     }
   }
 
@@ -50,7 +62,7 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
     <div className="counter">
       <button
         aria-label="Decrease quantity by one"
-        onClick={() => updateQuantity(lineQuantity - 1, -1)}
+        onClick={() => animateQuantity(lineQuantity - 1, -1)}
         className="counter--down"
       >
         -
@@ -58,7 +70,8 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
       <div className="counter--amount">
         <AnimatePresence custom={direction} initial={false}>
           <motion.div
-            key={lineQuantity}
+            key={motionKey}
+            initial={isAnimating ? 'hide' : 'show'}
             animate="show"
             exit="hide"
             variants={flipAnim}
@@ -67,7 +80,7 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
           >
             <input
               onChange={(e) =>
-                updateQuantity(parseInt(e.currentTarget.value, 10), false)
+                updateQuantity(parseInt(e.currentTarget.value, 10))
               }
               type="number"
               inputMode="numeric"
@@ -79,7 +92,7 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
       </div>
       <button
         aria-label="Increase quantity by one"
-        onClick={() => updateQuantity(lineQuantity + 1, 1)}
+        onClick={() => animateQuantity(lineQuantity + 1, 1)}
         className="counter--up"
       >
         +

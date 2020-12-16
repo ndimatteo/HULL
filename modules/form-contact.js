@@ -43,7 +43,7 @@ const FormContact = ({ data }) => {
       templateID: templateID,
     })
 
-    fetch('/api/post-email', {
+    fetch('/api/sendgrid/send-message', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: payload,
@@ -88,7 +88,8 @@ const FormContact = ({ data }) => {
   return (
     <section className="section">
       <div className="section--wrapper">
-        <div className="section--content">
+        <div className="section--content text-center">
+          <h2 className="mb-8 font-serif text-7xl">The Contact Form</h2>
           <form className="form" onSubmit={handleSubmit(onSubmit)}>
             <AnimatePresence exitBeforeEnter>
               {!error && !success && (
@@ -106,7 +107,8 @@ const FormContact = ({ data }) => {
                     >
                       <input
                         type="text"
-                        name="show"
+                        name="fullname"
+                        autoComplete="off"
                         className="control--pot"
                         ref={register}
                       />

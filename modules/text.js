@@ -7,13 +7,15 @@ const Text = ({ data }) => {
 
   return (
     <section className="section">
-      <div className="section--content">
-        <BlockContent
-          renderContainerOnSingleChild
-          className="rc"
-          blocks={content}
-          serializers={serializers}
-        />
+      <div className="section--wrapper">
+        <div className="section--content">
+          <BlockContent
+            renderContainerOnSingleChild
+            className="rc"
+            blocks={content}
+            serializers={serializers}
+          />
+        </div>
       </div>
     </section>
   )

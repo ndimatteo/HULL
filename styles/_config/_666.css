@@ -36,6 +36,12 @@ body {
   @apply font-mono;
 }
 
+p {
+  &.is-note {
+    @apply p-4 bg-pageText text-pageBG;
+  }
+}
+
 p,
 .rc ul {
   @apply text-xs leading-normal;
@@ -50,7 +56,7 @@ p,
 }
 
 h1 {
-  @apply mt-8 mb-4 font-serif font-normal text-8xl;
+  @apply mt-8 mb-6 font-serif font-normal text-8xl;
 }
 
 h2, h3 {
@@ -58,10 +64,10 @@ h2, h3 {
 }
 
 .rc {
-  @apply mx-auto max-w-4xl;
+  @apply mx-auto;
 
   figure {
-    @apply my-16 mx-auto max-w-2xl;
+    @apply my-16 mx-auto max-w-xl;
   }
 }
 
@@ -84,6 +90,10 @@ a[href="#content"].skip-link,
       mix-blend-mode: difference;
     }
   }
+
+  &.is-disabled {
+    @mixin hashed;
+  }
 }
 
 
@@ -103,7 +113,7 @@ a[href="#content"].skip-link,
 /* ----- Forms ----- */
 
 .form {
-  @apply max-w-2xl mx-auto;
+  @apply mx-auto;
 }
 
 .control {
@@ -138,8 +148,6 @@ a[href="#content"].skip-link,
 /* ----- Page ----- */
 
 .section {
-  @apply text-center;
-
   &.is-error {
     @apply overflow-hidden;
 
@@ -151,13 +159,17 @@ a[href="#content"].skip-link,
       @apply z-0;
     }
   }
+
+  &--title {
+    @apply font-sans;
+  }
 }
 
 
 /* ----- Accordions ----- */
 
 .accordion {
-  @apply max-w-2xl mx-auto border-t border-l border-r border-current text-left;
+  @apply mx-auto border-t border-l border-r border-current text-left;
 
   &:last-child {
     @apply border-b;
@@ -270,6 +282,22 @@ a[href="#content"].skip-link,
   &--title {
     @apply font-sans uppercase;
   }
+
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  details {
+    &:focus {
+      outline: 1px dashed var(--pageBG);
+      outline-offset: 2px;
+      
+      body:not(.is-tabbing) & {
+        outline: none;
+      }
+    }
+  }
 }
 
 
@@ -329,7 +357,7 @@ a[href="#content"].skip-link,
   }
 
   &--status {
-    @apply absolute bottom-0 left-0 w-full z-10;
+    @apply absolute bottom-0 left-0 w-full z-30;
   }
 
   &--details {
@@ -341,7 +369,7 @@ a[href="#content"].skip-link,
   }
 
   &--title {
-    @apply text-xl uppercase;
+    @apply text-xl uppercase text-center;
   }
 
   &--option {
@@ -387,7 +415,7 @@ a[href="#content"].skip-link,
   }
 
   &--header {
-    @apply flex-1;
+    @apply flex-1 text-center;
   }
   
   &--title {
@@ -440,6 +468,16 @@ a[href="#content"].skip-link,
     .form {
       @apply max-w-none;
 
+      &--success {
+        @apply border bg-pageBG text-center;
+
+        &-content {
+          padding: .375rem .5rem;
+          font-size: .875rem;
+          line-height: 1.2;
+        }
+      }
+
       &--error {
         @apply grid gap-y-2 grid-cols-1 sm:flex;
 
@@ -469,7 +507,8 @@ a[href="#content"].skip-link,
   }
 
   &--original {
-    @apply relative ml-2 px-4 py-1 rounded-full overflow-hidden border border-current font-mono text-xs leading-none;
+    @apply relative ml-2 px-4 py-1 overflow-hidden border border-current font-mono text-xs leading-none;
+    border-radius: 50%;
     
     &::after {
       @apply block absolute inset-0;
@@ -483,7 +522,7 @@ a[href="#content"].skip-link,
   @apply pb-4;
   
   &--title {
-    @apply border-t border-b border-current mb-4 p-2 font-mono text-xs font-semibold;
+    @apply border-t border-b border-current mb-4 p-2 font-mono text-xs font-semibold text-center;
   }
 
   &--values {
@@ -560,6 +599,15 @@ a[href="#content"].skip-link,
 
   &--amount {
     @apply border-t border-b border-current text-xs font-mono;
+
+    &:focus-within {
+      outline: 1px dashed var(--pageBG);
+      outline-offset: 2px;
+      
+      body:not(.is-tabbing) & {
+        outline: none;
+      }
+    }
 
     input {
       @apply p-1;

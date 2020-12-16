@@ -69,7 +69,7 @@ const Waitlist = ({ variant, klaviyo }) => {
 
   return (
     <div className="product--waitlist">
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence exitBeforeEnter initial={false}>
         {!error && !success && (
           <motion.form
             key="form"
@@ -83,6 +83,7 @@ const Waitlist = ({ variant, klaviyo }) => {
             <input
               type="text"
               name="fullname"
+              autoComplete="off"
               className="control--pot"
               ref={register}
             />

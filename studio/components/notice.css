@@ -2,6 +2,7 @@
 
 .notice {
   composes: root from 'part:@sanity/base/theme/layout/box-style';
+  margin-bottom: 0 !important;
   border-radius: var(--border-radius-large);
   background-color: var(--gray-lightest) !important;
   color: var(--gray);

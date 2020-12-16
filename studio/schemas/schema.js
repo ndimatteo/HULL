@@ -22,6 +22,8 @@ import redirect from './documents/redirect'
 // Module types
 import textBlock from './modules/text'
 import accordionList from './modules/accordion-list'
+import formNewsletter from './modules/form-newsletter'
+import formContact from './modules/form-contact'
 
 // Object types
 import seo from './objects/seo'
@@ -70,6 +72,8 @@ export default createSchema({
     // Module types
     textBlock,
     accordionList,
+    formNewsletter,
+    formContact,
 
     // Object types
     seo,

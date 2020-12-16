@@ -1,16 +1,12 @@
 import React from 'react'
-import { FiMousePointer } from 'react-icons/fi'
+import { FiAlignLeft, FiMousePointer } from 'react-icons/fi'
 
 import '../../branding/skin.css?raw'
 
-const statementRender = props => (
-  <div className="is-statement">{props.children}</div>
-)
-
 const noteRender = props => <div className="is-note">{props.children}</div>
 
-const importantRender = props => (
-  <div className="is-important">{props.children}</div>
+const alignRender = props => (
+  <span className={props.alignment}>{props.children}</span>
 )
 
 const buttonRender = props => (
@@ -25,31 +21,13 @@ export default {
     {
       title: 'Block',
       type: 'block',
-      // Styles let you set what your user can mark up blocks with. These
-      // corrensponds with HTML tags, but you can set any title or value
-      // you want and decide how you want to deal with it where you want to
-      // use your content.
       styles: [
         { title: 'Normal', value: 'normal' },
-        {
-          title: 'Statement',
-          value: 'statement',
-          blockEditor: {
-            render: statementRender
-          }
-        },
         {
           title: 'Note',
           value: 'note',
           blockEditor: {
             render: noteRender
-          }
-        },
-        {
-          title: 'Important',
-          value: 'important',
-          blockEditor: {
-            render: importantRender
           }
         },
         { title: 'H1', value: 'h1' },
@@ -58,16 +36,36 @@ export default {
         { title: 'H4', value: 'h4' }
       ],
       lists: [{ title: 'Bullet', value: 'bullet' }],
-      // Marks let you mark up inline text in the block editor.
       marks: {
-        // Decorators usually describe a single property – e.g. a typographic
-        // preference or highlighting by editors.
         decorators: [
           { title: 'Strong', value: 'strong' },
           { title: 'Emphasis', value: 'em' }
         ],
-        // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
+          {
+            title: 'Text Align',
+            name: 'align',
+            type: 'object',
+            blockEditor: {
+              icon: FiAlignLeft,
+              render: alignRender
+            },
+            fields: [
+              {
+                title: 'Text Alignment',
+                name: 'alignment',
+                type: 'string',
+                options: {
+                  list: [
+                    { title: 'Left', value: 'text-left' },
+                    { title: 'Center', value: 'text-center' },
+                    { title: 'Right', value: 'text-right' }
+                  ],
+                  layout: 'radio'
+                }
+              }
+            ]
+          },
           {
             title: 'Link',
             name: 'link',
@@ -79,11 +77,11 @@ export default {
                 type: 'reference',
                 to: [
                   { type: 'homePage' },
+                  { type: 'samplePage' },
                   { type: 'shopPage' },
                   { type: 'page' },
                   { type: 'collection' },
-                  { type: 'product' },
-                  { type: 'samplePage' }
+                  { type: 'product' }
                 ]
               },
               {
@@ -108,11 +106,11 @@ export default {
                 type: 'reference',
                 to: [
                   { type: 'homePage' },
+                  { type: 'samplePage' },
                   { type: 'shopPage' },
                   { type: 'page' },
                   { type: 'collection' },
-                  { type: 'product' },
-                  { type: 'samplePage' }
+                  { type: 'product' }
                 ]
               },
               {

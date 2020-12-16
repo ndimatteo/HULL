@@ -156,7 +156,7 @@ const Product = ({ data, error }) => {
                 activeVariant={activeVariant}
                 quantity={quantity}
                 setQuantity={setQuantity}
-                klaviyoID={product.klaviyoID}
+                klaviyoAccountID={product.klaviyoAccountID}
               />
             </div>
           </div>
@@ -175,7 +175,7 @@ const ProductActions = ({
   activeVariant,
   quantity,
   setQuantity,
-  klaviyoID,
+  klaviyoAccountID,
 }) => {
   return (
     <div className="product--actions">
@@ -197,8 +197,11 @@ const ProductActions = ({
         </>
       ) : (
         <>
-          {klaviyoID ? (
-            <ProductWaitlist variant={activeVariant.id} klaviyo={klaviyoID} />
+          {klaviyoAccountID ? (
+            <ProductWaitlist
+              variant={activeVariant.id}
+              klaviyo={klaviyoAccountID}
+            />
           ) : (
             <div className="btn is-disabled is-block">Out of Stock</div>
           )}

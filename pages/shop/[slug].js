@@ -31,10 +31,12 @@ const CollectionPage = ({ data, error }) => {
       }}
     >
       <section className="section">
-        <h1>{page.title}</h1>
-        {page.collection && (
-          <Collection collection={page.collection} paginationLimit={12} />
-        )}
+        <div className="section--wrapper">
+          <h1 className="text-center">{page.title}</h1>
+          {page.collection && (
+            <Collection collection={page.collection} paginationLimit={12} />
+          )}
+        </div>
       </section>
     </Layout>
   )

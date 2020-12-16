@@ -39,6 +39,36 @@
     &.for-textarea {
       @apply top-0 transform-none;
     }
+
+    &.for-checkbox {
+      @apply transform-none flex relative top-auto left-auto p-0 cursor-pointer;
+
+      svg {
+        @apply block flex-none w-6 h-6 mr-4 p-1 pointer-events-none border border-current transition-colors;
+        transition-delay: .15s;
+
+        input:checked + & {
+          @apply bg-pageText;
+          transition-delay: 0s;
+        }
+
+        path {
+          @apply stroke-current text-pageBG transition-all;
+          stroke-dashoffset: 120px;
+          stroke-dasharray: 120px;
+          transition-delay: 0s;
+
+          input:checked + & {
+            stroke-dashoffset: 0;
+            transition-delay: .15s;
+          }
+        }
+      }
+
+      .rc {
+        @apply flex flex-col justify-center m-0 select-none;
+      }
+    }
   }
 
   &--error {
