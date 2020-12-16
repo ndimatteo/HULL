@@ -3,7 +3,7 @@
 </p>
 <p align="center">
   <strong>Headless Shopify starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
-  <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong><br />
+  <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong> ⚡<br />
 </p>
 
 <p align="center">
@@ -26,39 +26,39 @@
 
 - 🟢 utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
 - 🟢 Page Transitions powered by [Framer Motion](https://www.framer.com/motion/)
-- 🟢 Lazyload Images + WEBP format by default
-- 🟢 Built-in Global navigation with active states and options for: internal links, external links, dropdowns, buttons
-- 🟢 Mailchimp Newsletter form with opt-in feature, validation, and success/failure states
-- 🟢 Contact Form with email notifications powered by SendGrid, validation, and success/failure states
-- 🟢 Dynamic Page Routes with optional nesting (ie. /parent/child)
+- 🟢 Cart powered by [Shopify Buy SDK](https://www.npmjs.com/package/shopify-buy)
+- 🟢 Klaviyo Waitlist form for out-of-stock Products + Variants
+- 🟢 Klaviyo Newsletter form with opt-in feature _(with validation and success/failure states)_
+- 🟢 Contact Form with email notifications powered by SendGrid _(with validation and success/failure states)_
+- 🟢 Dynamic Page Routes with optional nesting (ie. `/parent/child`)
 - 🟢 Automatic Sitemap.xml generation
 - 🟢 Automatic robots.txt generation
-- 🟢 301 Redirects pulled in from Sanity
+- 🟢 Automatic 301 Redirects from Sanity
 - 🟢 Dynamic Modules for building page content, including:
    - 🟢 Marquees
-   - 🟢 Image Carousels
+   - 🟢 Image Galleries/Carousels
    - 🟢 Accordions
    - 🟢 Pull-out Drawers
-   - ⚪ Product Carousels
-- 🟢 Styles powered by PostCSS, to mimic SASS syntax
-- 🟢 Baseline styles for all components, using a BEM-like approach
+   - 🟢 Cursor Follows
+   - 🟡 Product Carousels
+- 🟢 Baseline styles for all components, simply delete the demo CSS file to start fresh
 - 🟢 Simple Social icon navigation lists
-- 🟢 Cursor Follow component
+- 🟢 Lazyload Images + WEBP format by default
 - 🟡 Default Blog setup
 - ⚪ Initial animations
 - ⚪ Scroll animations
 - ⚪ Instagram module
 - 🟢 Accessibility features:
    - 🟢 ARIA Landmark Roles
-   - 🟢 Preserve default Focus States
-   - 🟢 Correctly Trap focus when Drawers (like the Shop Cart) are open (w/ [focus-trap-react](https://www.npmjs.com/package/focus-trap-react))
+   - 🟢 Default focus states preserved for keyboard navigation
+   - 🟢 Correctly Trap focus when Drawers are open with [focus-trap-react](https://www.npmjs.com/package/focus-trap-react)
+   - 🟢 Input-based Counters
    - 🟢 Correctly associated button states
    - 🟢 Required `alt` states for all images
    - 🟢 Skip to Content link
 - 🟢 SEO features:
-   - 🟢 Page-level SEO settings for meta descriptions and share graphics
-   - 🟢 Fallback Global SEO settings
-   - 🟢 Product Variant-specific SEO updates
+   - 🟢 Page-level SEO/Share settings with previews
+   - 🟢 Fallback Global SEO/Share settings
    - 🟢 Automatic JSON-LD Schema markup for Products
    
 ### Headless Shopify
@@ -66,7 +66,7 @@
 - 🟢 Tracks product status from Shopify to help control visibility while editing
 - 🟢 Automatic Variant option toggles
 - 🟢 Marks deleted products and variants for easy tracking
-- 🟢 Updates the URL on variant changes while keep a clean history stack
+- 🟢 Updates the URL on variant changes while keeping a clean history stack
 - 🟢 Accessible and clamped Quantity Counters
 - 🟢 Vanity Shop URL Masking
 - 🟢 Global Cart with access to all variant data for line items
@@ -74,6 +74,7 @@
 - 🟢 PDP Photo Galleries with variant granularity
 - 🟢 default PLP for all products
 - 🟢 Custom PLPs with easy, Sanity-managed Collections
+- 🟢 Ability to surface a PDP option on PLP product cards
 - 🟡 Sanity-managed conditional Cart "add-ons"
 - ⚪ Ability to apply coupons to the checkout cart
 - ⚪ Account Management (register/login/password/orders)
@@ -128,9 +129,15 @@ SHOPIFY_API_TOKEN=XXXXXX
 SHOPIFY_API_PASSWORD=XXXXXX
 SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
 
-// optional for Mailchimp:
+// Needed for Klaviyo forms:
+KLAVIYO_API_KEY=XXXXXX
+
+// Needed for Mailchimp forms:
 MAILCHIMP_API_KEY=XXXXXX-usX
 MAILCHIMP_SERVER=usX
+
+// Needed for SendGrid forms:
+SENDGRID_API_KEY=XXXXXX
 ```
 3. Update all the `XXXXXX` values, here's where to find each:
   - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
@@ -139,8 +146,10 @@ MAILCHIMP_SERVER=usX
   - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
   - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
   - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
+  - `KLAVIYO_API_KEY` - This is your Public API Key / Site ID from your Klaviyo Account "Settings" -> "API Keys"
   - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
   - `MAILCHIMP_SERVER` - This is the server your account is from. It's in the URL when logged in and at the end of your API Key
+  - `SENDGRID_API_KEY` - Create an API key from "Settings" -> "API Keys" with "Restricted Access" to only "Mail Send"
   
 ### 5) Shopify Store Theme
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
@@ -172,6 +181,11 @@ Once you hand off to the client, you'll want to give them the ability to generat
 
 
 # 🤘 Extras/Tips
+
+#### This looks like a theme... How can I use this like a starter?
+While this starter is relatively opinionated, the goal was to use the best tools on the market for common problems in the headless Ecommerce space to deliver a fast and more approachable starter for new and seasoned developers alike.
+
+Once you're setup, you should atleast delete the demo CSS file (`/styles/_config/_666.css`), which contains all the hyper-specific styles to the demo. From there you should have a good foundation of styles that you can build off of or pick apart!
 
 #### Error: Failed to communicate with the Sanity API
 If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
