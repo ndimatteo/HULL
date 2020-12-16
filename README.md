@@ -3,7 +3,7 @@
 </p>
 <p align="center">
   <strong>Headless Shopify starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
-  <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong><br />
+  <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong> ⚡<br />
 </p>
 
 <p align="center">
@@ -181,6 +181,11 @@ Once you hand off to the client, you'll want to give them the ability to generat
 
 
 # 🤘 Extras/Tips
+
+#### This looks like a theme... How can I use this like a starter?
+While this starter is relatively opinionated, the goal was to use the best tools on the market for common problems in the headless Ecommerce space to deliver a fast and more approachable starter for new and seasoned developers alike.
+
+Once you're setup, you should atleast delete the demo CSS file (`/styles/_config/_666.css`), which contains all the hyper-specific styles to the demo. From there you should have a good foundation of styles that you can build off of or pick apart!
 
 #### Error: Failed to communicate with the Sanity API
 If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
