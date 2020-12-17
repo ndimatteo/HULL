@@ -7,7 +7,12 @@
 </p>
 
 <p align="center">
-  <a href="https://insane.codes" target="_blank">Demo</a> •
+  <a href="https://insane.codes">
+    <img src="https://img.shields.io/static/v1?label=&message=View%20Demo&style=for-the-badge&color=black&logo=vercel" />
+  </a>
+</p>
+
+<p align="center">
   <a href="#-features">Features</a> •
   <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
