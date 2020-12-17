@@ -14,6 +14,7 @@
 
 <p align="center">
   <a href="#-features">Features</a> •
+  <a href="#-tours">Tours</a> •
   <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
     <a href="#-deployment">Deployment</a> •
@@ -85,6 +86,22 @@
 - ⚪ Ability to apply coupons to the checkout cart
 - ⚪ Account Management _(register/login/password/orders)_
 - ⚪ Customer Reviews Integration _(Yotpo? Okendo? Junip?)_
+
+<br />
+
+# 🎧 Tours
+Still not sold? Here's some video walkthroughs for HULL:
+
+#### Famous 5 Minute Setup™ - `Coming Soon` 
+_From sync to sale, watch me spin up a fresh storefront with HULL in under 5 minutes!_
+#### Explore the file Structure - `Coming Soon`
+_In-depth look at the file structure, naming conventions, and logic under the hood_
+#### Setting up your first Product - `Coming Soon`
+_Explore the Product settings within Sanity and how to properly setup PDP pages and PLP cards_
+#### Connecting to Klaviyo and testing your Forms - `Coming Soon`
+_Learn how to quickly connect Klaviyo to utilize product waitlist and newsletter forms_
+#### Setup your first Vercel deployment - `Coming Soon`
+_Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clients to trigger deploys_
 
 <br />
 
