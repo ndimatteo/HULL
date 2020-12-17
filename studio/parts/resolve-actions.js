@@ -6,6 +6,11 @@ import defaultResolve, {
 
 import { FiEye } from 'react-icons/fi'
 
+const remoteURL = 'https://insane.codes'
+const localURL = 'http://localhost:3000'
+const previewURL =
+  window.location.hostname === 'localhost' ? localURL : remoteURL
+
 const singletons = [
   'homePage',
   'samplePage',
@@ -35,9 +40,8 @@ const PreviewAction = props => {
     icon: FiEye,
     onHandle: () => {
       window.open(
-        `http://localhost:3000/api/preview?token=666&type=${
-          props.type
-        }&slug=${slug || ''}`
+        `${previewURL}/api/preview?token=666&type=${props.type}&slug=${slug ||
+          ''}`
       )
     }
   }
