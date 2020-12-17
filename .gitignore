@@ -54,6 +54,9 @@ typings/
 # next files
 .next/
 
+# sanity dist
+studio/dist
+
 # Mac files
 .DS_Store
 
