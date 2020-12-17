@@ -40,6 +40,7 @@
 - 🟢 Automatic `Sitemap.xml` generation
 - 🟢 Automatic `robots.txt` generation
 - 🟢 Automatic 301 Redirects from Sanity
+- 🟢 Live Preview content before deploying directly from the Sanity Studio
 - 🟢 Dynamic Modules for building page content, including:
    - 🟢 Marquees
    - 🟢 Image Galleries/Carousels
