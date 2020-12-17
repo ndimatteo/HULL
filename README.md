@@ -17,8 +17,7 @@
   <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
     <a href="#-deployment">Deployment</a> •
-  <a href="#-extrastips">Extras</a> •
-  <a href="#license">License</a>
+  <a href="#-extrastips">Extras</a>
 </p>
 
 <img src="public/HULL.png" align="center" />
