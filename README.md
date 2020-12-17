@@ -46,7 +46,8 @@
 - 🟢 Baseline styles for all components, simply delete the demo CSS file to start fresh
 - 🟢 Simple Social icon navigation lists
 - 🟢 Lazyload Images + WEBP format by default
-- 🟡 Default Blog setup
+- 🟡 Promotion Banner
+- ⚪ Default Blog setup
 - ⚪ Initial animations
 - ⚪ Scroll animations
 - 🟢 Accessibility features:
@@ -80,11 +81,12 @@
 - ⚪ Ability to apply coupons to the checkout cart
 - ⚪ Account Management _(register/login/password/orders)_
 - ⚪ Customer Reviews Integration _(Yotpo? Okendo? Junip?)_
-   
+
+<br />
+
 # 💀 Set Up
 
-1. Clone this repository from your GitHub account with the `use template` button
-2. Clone your repo locally
+Clone this repository from your GitHub account with the `use template` button
 
 ### 1) Sanity
 1. `npm install && sanity init` in the `/studio` folder
@@ -157,6 +159,7 @@ Since we're serving our store through a headless environment, we don't want visi
 
 This will essentially "pass-through" URLs accessed on at your Shopify Store to your true headless environment *(ie. `shop.666.com/products` -> `666.com/products`)*
 
+<br />
 
 # ⚡ Spin Up
 
@@ -168,6 +171,7 @@ This will essentially "pass-through" URLs accessed on at your Shopify Store to y
 `sanity start` in the `/studio` folder to start the studio locally
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
 
+<br />
 
 # 🚀 Deployment
 
@@ -180,6 +184,7 @@ This is an easy one, you can simply run `sanity deploy` from the `/studio` folde
 ### Client Updates
 Once you hand off to the client you'll want to give them the ability to generate builds when they make updates within the Sanity Studio. The easiest way to do this is through my [Vercel Deploy plugin](https://github.com/ndimatteo/sanity-plugin-vercel-deploy).
 
+<br />
 
 # 🤘 Extras/Tips
 
@@ -213,6 +218,7 @@ While not as easy as Netlify, what I prefer to do is:
 4. You or the client can now connect their newly transferred Github repo to their own Vercel account!
 </details>
 
+<br />
 
 # Shoutouts
 Big ups to the following rad folks who helped in big and small ways, both directly with various functionality and my (in)sane questions and frustrations with putting something like this together.
@@ -220,6 +226,8 @@ Big ups to the following rad folks who helped in big and small ways, both direct
 - 🍝 [@iamkevingreen](https://github.com/iamkevingreen)
 - 🧈 [@mikehwagz](https://github.com/mikehwagz)
 - 😎 [@dictions](https://github.com/dictions)
+
+<br />
 
 # License
 
