@@ -39,8 +39,11 @@ const Page = ({ data }) => {
   )
 }
 
-export async function getStaticProps({ params }) {
-  const pageData = await getPage(params.slug.join('/'))
+export async function getStaticProps({ params, preview, previewData }) {
+  const pageData = await getPage(params.slug.join('/'), {
+    active: preview,
+    token: previewData?.token,
+  })
 
   return {
     props: {

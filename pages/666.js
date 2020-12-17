@@ -177,9 +177,10 @@ const SixSixSix = ({ data }) => {
   )
 }
 
-export async function getStaticProps() {
-  const pageData = await getStaticPage(`
-    *[_type == "samplePage"][0]{
+export async function getStaticProps({ preview, previewData }) {
+  const pageData = await getStaticPage(
+    `
+    *[_type == "samplePage"] | order(_updatedAt desc)[0]{
       title,
       content[]{
         ${modules}
@@ -188,7 +189,12 @@ export async function getStaticProps() {
       carousel2,
       seo
     }
-  `)
+  `,
+    {
+      active: preview,
+      token: previewData?.token,
+    }
+  )
 
   return {
     props: {

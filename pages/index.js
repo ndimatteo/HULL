@@ -28,15 +28,21 @@ const Home = ({ data }) => {
   )
 }
 
-export async function getStaticProps() {
-  const pageData = await getStaticPage(`
-    *[_type == "homePage"][0]{
+export async function getStaticProps({ preview, previewData }) {
+  const pageData = await getStaticPage(
+    `
+    *[_type == "homePage"] | order(_updatedAt desc)[0]{
       content[]{
         ${modules}
       },
       seo
     }
-  `)
+  `,
+    {
+      active: preview,
+      token: previewData?.token,
+    }
+  )
 
   return {
     props: {

@@ -2,11 +2,9 @@ export const assemblePageUrl = ({ document, options }) => {
   const { slug } = document
   const { previewURL } = options
   if (!previewURL) {
-    console.warn('Missing previewURL', { slug, previewURL })
+    console.warn('Missing preview URL', { slug, previewURL })
     return ''
   }
-
-  console.log(slug)
 
   return previewURL + (slug ? `/${slug.current}` : '')
 }

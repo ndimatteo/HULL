@@ -6,15 +6,17 @@ import { sleeper } from '../../lib/helpers'
 import CollectionList from './collection-list'
 
 // the product fetcher
-const fetchProducts = (url, collection) => {
-  return axios.get(url).then((res) => res.data)
+const fetchProducts = (url, preview) => {
+  return axios
+    .get(url, { params: { preview: preview } })
+    .then((res) => res.data)
 }
 
-const Collection = ({ collection, paginationLimit }) => {
+const Collection = ({ collection, paginationLimit, preview }) => {
   // fetch initial data
   const { data: products } = useSWR(
     [collection ? `/api/products/${collection}` : '/api/products'],
-    (url) => fetchProducts(url),
+    (url) => fetchProducts(url, preview),
     {
       revalidateOnFocus: false,
     }

@@ -211,9 +211,13 @@ const ProductActions = ({
   )
 }
 
-export async function getServerSideProps({ query }) {
+export async function getServerSideProps({ query, preview, previewData }) {
   const hasVariant = query.variant ? true : false // check for variant param
-  const productData = await getProduct(query.slug, query.variant) // fetch our product data
+  const productData = await getProduct(query.slug, query.variant, {
+    active: preview,
+    token: previewData?.token,
+  })
+
   const errorData = await getStaticPage(`
     *[_type == "errorPage"][0]{
       content[]{

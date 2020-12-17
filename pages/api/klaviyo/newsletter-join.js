@@ -10,8 +10,6 @@ export default async function send(req, res) {
     body: { listID, email, fname, lname },
   } = req
 
-  console.log(req.body)
-
   // honeypot
   if (req.body.fullname !== '') {
     console.log('stuck in honey')
