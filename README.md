@@ -92,15 +92,19 @@
 # 🎧 Tours
 Still not sold? Here's some video walkthroughs for HULL:
 
-#### Famous 5 Minute Setup™ - `Coming Soon` 
+**Famous 5 Minute Setup™ - `Coming Soon`** <br />
 _From sync to sale, watch me spin up a fresh storefront with HULL in under 5 minutes!_
-#### Explore the file Structure - `Coming Soon`
+
+**Explore the file Structure - `Coming Soon`** <br />
 _In-depth look at the file structure, naming conventions, and logic under the hood_
-#### Setting up your first Product - `Coming Soon`
+
+**Setting up your first Product - `Coming Soon`** <br />
 _Explore the Product settings within Sanity and how to properly setup PDP pages and PLP cards_
-#### Connecting to Klaviyo and testing your Forms - `Coming Soon`
+
+**Connecting to Klaviyo and testing your Forms - `Coming Soon`** <br />
 _Learn how to quickly connect Klaviyo to utilize product waitlist and newsletter forms_
-#### Setup your first Vercel deployment - `Coming Soon`
+
+**Setup your first Vercel deployment - `Coming Soon`** <br />
 _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clients to trigger deploys_
 
 <br />
@@ -241,8 +245,8 @@ While not as easy as Netlify, what I prefer to do is:
 
 <br />
 
-# Shoutouts
-Big ups to the following rad folks who helped in big and small ways, both directly with various functionality and my (in)sane questions and frustrations with putting something like this together.
+# 💯 Shoutouts
+Huge ups to the following talented and rad folks who helped in countless ways. Thank you for all the support, code contributions, and for putting up with my _insane_ questions around headless shopify woes!
 - 🔥 [@tuckercs](https://github.com/tuckercs)
 - 🍝 [@iamkevingreen](https://github.com/iamkevingreen)
 - 🧈 [@mikehwagz](https://github.com/mikehwagz)
@@ -250,7 +254,7 @@ Big ups to the following rad folks who helped in big and small ways, both direct
 
 <br />
 
-# License
+# 🤝 License
 
 ### MIT
 > [nickdimatteo.com](https://nickdimatteo.com) &nbsp;&middot;&nbsp;
