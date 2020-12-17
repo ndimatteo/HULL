@@ -298,6 +298,10 @@ a[href="#content"].skip-link,
       }
     }
   }
+
+  .marquee {
+    @apply bg-pageBG text-pageText;
+  }
 }
 
 

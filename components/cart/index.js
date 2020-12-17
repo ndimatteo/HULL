@@ -4,6 +4,7 @@ import { centsToPrice } from '../../lib/helpers'
 
 import Drawer from '../drawer'
 import CartItem from './item'
+import Marquee from '../marquee'
 
 import {
   useStore,

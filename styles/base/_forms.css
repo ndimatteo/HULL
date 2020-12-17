@@ -83,7 +83,7 @@
   input[type="email"],
   input[type="number"],
   textarea {
-    @apply relative appearance-none bg-transparent w-full p-4 border border-solid border-pageText font-inherit text-base leading-none text-pageText;
+    @apply relative appearance-none bg-transparent w-full p-4 rounded-none border border-solid border-pageText font-inherit text-base leading-none text-pageText;
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,

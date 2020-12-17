@@ -104,6 +104,20 @@ const SixSixSix = ({ data }) => {
               toggle={setShowDrawer}
               title="The Dope Show"
             >
+              <div className="mb-4">
+                <div
+                  className="has-ar has-ar--custom"
+                  style={{ paddingTop: `${(315 / 410) * 100}%` }}
+                >
+                  <iframe
+                    width="410"
+                    height="315"
+                    src="https://www.youtube.com/embed/5R682M3ZEyk?modestbranding=1&autoplay=1"
+                    frameBorder="0"
+                    allowFullScreen
+                  ></iframe>
+                </div>
+              </div>
               <p>
                 The music video, directed by Paul Hunter and co-directed by
                 Manson, was filmed during the week of August 8, 1998, and
@@ -111,14 +125,17 @@ const SixSixSix = ({ data }) => {
                 Who Fell to Earth, Manson appears — red-haired, with his entire
                 body, including prosthetic rubber breasts, covered in white
                 grease paint — as an androgynous extraterrestrial wandering
-                around the Hollywood Hills. He is captured, studied in a
-                laboratory, and eventually transported by limousine to a stage
-                where he and the other members of the band — the fictional band
-                Omēga and the Mechanical Animals — perform the song in concert
-                before hysterical fans who end up rioting and crossing the
-                security barriers. The music video also features a direct homage
-                to a sequence in the Alejandro Jodorowsky film The Holy
-                Mountain, involving the destruction of plaster casts of the main
+                around the Hollywood Hills.
+              </p>
+              <p>
+                He is captured, studied in a laboratory, and eventually
+                transported by limousine to a stage where he and the other
+                members of the band — the fictional band Omēga and the
+                Mechanical Animals — perform the song in concert before
+                hysterical fans who end up rioting and crossing the security
+                barriers. The music video also features a direct homage to a
+                sequence in the Alejandro Jodorowsky film The Holy Mountain,
+                involving the destruction of plaster casts of the main
                 character's body in a crucifixion pose. Actor Billy Zane makes a
                 cameo appearance in the limo sequence, as a recording industry
                 executive. This same sequence features parodies of SPIN magazine
