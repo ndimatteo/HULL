@@ -93,7 +93,7 @@
 Still not sold? Here's some videos to get you psyched:
 
 **Famous 5 Minute Setup™ - `Coming Soon`** <br />
-_From sync to sale, watch me spin up a fresh storefront with HULL in under 5 minutes!_
+_From sync to sale, watch me spin up a fresh storefront in under 5 minutes!_
 
 **Explore the file Structure - `Coming Soon`** <br />
 _In-depth look at the file structure, naming conventions, and logic under the hood_
