@@ -1,6 +1,6 @@
 {
   "name": "hull",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
@@ -15,7 +15,6 @@
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/client": "^2.1.0",
     "@sanity/image-url": "^0.140.19",
-    "astrochimp": "^1.0.1",
     "axios": "^0.21.0",
     "base64-string": "^1.1.2",
     "cross-env": "^7.0.3",

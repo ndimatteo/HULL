@@ -7,7 +7,7 @@ import Icon from './icon'
 
 const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }
 
-const PageTransition = () => {
+const PageTransition = React.memo(() => {
   return (
     <>
       <Head>
@@ -37,6 +37,6 @@ const PageTransition = () => {
       </motion.div>
     </>
   )
-}
+})
 
 export default PageTransition
