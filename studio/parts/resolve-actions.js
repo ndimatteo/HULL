@@ -53,7 +53,11 @@ export default function resolveDocumentActions(props) {
   const canPreview = previews.indexOf(props.type) > -1
 
   if (isSingle) {
-    return [PublishAction, DiscardChangesAction, canPreview && PreviewAction]
+    return [
+      PublishAction,
+      DiscardChangesAction,
+      ...(canPreview ? [PreviewAction] : [])
+    ]
   }
 
   if (canEditDelete) {
@@ -65,5 +69,5 @@ export default function resolveDocumentActions(props) {
     ]
   }
 
-  return [...defaultResolve(props), canPreview && PreviewAction]
+  return [...defaultResolve(props), ...(canPreview ? [PreviewAction] : [])]
 }
