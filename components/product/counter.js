@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 
 import { clampRange } from '../../lib/helpers'
@@ -29,11 +29,11 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
   const [motionKey, setMotionKey] = useState(0)
   const [isAnimating, setIsAnimating] = useState(false)
 
-  const animateQuantity = (amount, direction) => {
+  const animateQuantity = useCallback((amount, direction) => {
     const count = max ? clampRange(amount, 1, max) : amount
 
-    // Bail if no change
-    if (count === lineQuantity || count < 1) return
+    // Bail if at edges
+    if (count < 1 || count > max) return
 
     setIsAnimating(true)
     setDirection(direction)
@@ -43,12 +43,12 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
     if (onUpdate) {
       onUpdate(count)
     }
-  }
+  }, [])
 
-  const updateQuantity = (amount) => {
+  const updateQuantity = useCallback((amount) => {
     const count = max ? clampRange(amount, 1, max) : amount
 
-    if (count === lineQuantity || count < 1) return
+    if (count < 1) return
 
     setIsAnimating(false)
     setLineQuantity(count)
@@ -56,7 +56,7 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
     if (onUpdate) {
       onUpdate(count)
     }
-  }
+  }, [])
 
   return (
     <div className="counter">
@@ -68,7 +68,7 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
         -
       </button>
       <div className="counter--amount">
-        <AnimatePresence custom={direction} initial={false}>
+        <AnimatePresence custom={direction}>
           <motion.div
             key={motionKey}
             initial={isAnimating ? 'hide' : 'show'}
@@ -82,6 +82,7 @@ const Counter = React.memo(({ defaultCount = 1, onUpdate, max }) => {
               onChange={(e) =>
                 updateQuantity(parseInt(e.currentTarget.value, 10))
               }
+              onBlur={(e) => isNaN(lineQuantity) && updateQuantity(1)}
               type="number"
               inputMode="numeric"
               min="1"

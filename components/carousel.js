@@ -23,10 +23,11 @@ const Carousel = ({
 
   const scrollTo = useCallback((index) => emblaApi.scrollTo(index), [emblaApi])
 
+  const onSelect = useCallback(() => {
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
   useEffect(() => {
-    const onSelect = () => {
-      setSelectedIndex(emblaApi.selectedScrollSnap())
-    }
     if (emblaApi) {
       setScrollSnaps(emblaApi.scrollSnapList())
       emblaApi.on('select', onSelect)
@@ -127,7 +128,7 @@ const Carousel = ({
           {hasCounter && (
             <div className="carousel--status">
               <div className="carousel--counter is-current">
-                <AnimatePresence>
+                <AnimatePresence initial={false}>
                   <motion.span
                     key={selectedIndex + 1}
                     initial="hide"
