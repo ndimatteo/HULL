@@ -13,7 +13,7 @@ const Carousel = ({
   className,
 }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
-    speed: 8,
+    speed: 13,
     loop: true,
     containScroll: 'keepSnaps',
     align: 0,
@@ -44,7 +44,7 @@ const Carousel = ({
       },
     },
     hide: {
-      y: ['0%', '-100%'],
+      y: '-100%',
       transition: {
         duration: 1,
         ease: [0.16, 1, 0.3, 1],
