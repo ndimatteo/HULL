@@ -40,7 +40,7 @@
 - 🟢 Automatic `Sitemap.xml` generation
 - 🟢 Automatic `robots.txt` generation
 - 🟢 Automatic 301 Redirects from Sanity
-- 🟢 Live Preview content before deploying directly from the Sanity Studio
+- 🟢 Live Preview content directly from Sanity
 - 🟢 Dynamic Modules for building page content, including:
    - 🟢 Marquees
    - 🟢 Image Galleries/Carousels
@@ -49,7 +49,7 @@
    - 🟢 Cursor Follows
    - 🟡 Product Carousels
    - ⚪ Instagram Feed
-- 🟢 Baseline styles for all components, simply delete the demo CSS file to start fresh
+- 🟢 Baseline styles using extracted component classes for cleaner code
 - 🟢 Simple Social icon navigation lists
 - 🟢 Lazyload Images + WEBP format by default
 - 🟡 Promotion Banner
@@ -123,7 +123,7 @@ Clone this repository from your GitHub account with the `use template` button
 3. When it asks you what dataset configuration to use, go with the `default`
 4. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
     - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
-    - Add your Front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
+    - Add your front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
 > ⚠️ **Note** <br />This Studio uses the new "actions" resolver to handle "singleton" documents. To adjust what documents should behave like singletons be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`
     
 ### 2) Shopify Storefront Access
@@ -146,7 +146,7 @@ Clone this repository from your GitHub account with the `use template` button
   - product deletion - `[your-domain]/api/shopify/product-delete`
 > ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You won't know your Vercel project domain until you deploy in a later step, just enter in what you think it will be for now!
 
-### 4) NextJS (frontend)
+### 4) NextJS
 1. `npm install` in the project root folder on local
 2. Create an `.env.local` file in the project folder, and add the following variables:
 ```
@@ -189,11 +189,11 @@ This will essentially "pass-through" URLs accessed on at your Shopify Store to y
 
 # ⚡ Spin Up
 
-### Frontend
-`npm run dev` in the project folder to start the frontend locally
-   - Your Frontend should be running on [http://localhost:3000](http://localhost:3000)
+### Next (Front End)
+`npm run dev` in the project folder to start the front end locally
+   - Your front end should be running on [http://localhost:3000](http://localhost:3000)
    
-### Sanity
+### Sanity (Back End)
 `sanity start` in the `/studio` folder to start the studio locally
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
 
@@ -201,7 +201,7 @@ This will essentially "pass-through" URLs accessed on at your Shopify Store to y
 
 # 🚀 Deployment
 
-### Frontend
+### Vercel
 This is setup to work seamlessly with Vercel, which I highly recommend as your hosting provider of choice. Simply follow the on-screen instructions to setup your new project, and be sure to **add the same `.env.local` variables to your Vercel Project**
 
 ### Sanity
@@ -217,21 +217,57 @@ Once you hand off to the client you'll want to give them the ability to generate
 <details>
 <summary><strong>This looks like a theme... How can I use this like a starter?</strong></summary>
 
-While this starter is relatively opinionated, the goal was to use the best tools on the market for common problems in the headless Ecommerce space to deliver a fast and more approachable starter for new and seasoned developers alike.
+While this starter is relatively opinionated, the goal was three-fold:
+1. Use high-quality packages that don't get in the way
+2. Solve common UX problems and complex logic so you can focus on the fun stuff
+3. Create a more approachable starter for anyone looking to build production-ready headless Shopify experiences
 
-Once you're setup, you should atleast delete the demo CSS file (`/styles/_config/_666.css`) which contains all the hyper-specific styles to the demo. From there you should have a good foundation of styles that you can build off of, or pick apart!
+That being said, I understand this means a lot of what's included is **very opinionated**. However, you'll find that at it's core the structure and naming conventions lend itself to really making it your own. 
+
+By now, I'm sure you noticed the ridiculous-looking [demo site](https://insane.codes/) (I love 90's metal, can you tell?)
+
+I've purposefully extracted all the styles that pertain to the demo in a single CSS file (`/styles/_config/_666.css`). Remove it from your styles to truly strip it down to its _hull_.
+</details>
+
+<details>
+<summary><strong>What's up with the CSS? What are extracted component classes and why should I use them?</strong></summary>
+
+While utility-first CSS definitely speeds up your dev time, it can become overwhelming and untenable. This can make it difficult to understand what a component is doing when shrouded in dozens of utility classes, especially for developers getting familiar with a new codebase. Luckily, Tailwind offers the ability to [extract a component](https://tailwindcss.com/docs/extracting-components), allowing you to compose custom utility patterns.
+
+The nice thing about this is we can get all the benefits of writing in utility class shorthand, but without having to sift through all your javascript logic to adjust styles. This means writing our CSS is business as usual. You create stylesheets, but use Tailwind's `@apply` to create nice and succinct classes to push to your components.
+
+You still get all the tree-shaking benefits of Tailwind, _and_ you can still use utility classes in your components when needed; the best of both worlds!
+</details>
+
+<details>
+<summary><strong>Can I use this for non-Shopify projects?</strong></summary>
+
+Absolutely! This starter was actually born out of a non-shopify starter I had been using for my own client projects. Simply delete the shopify-specific logic and you've got yourself a fancy static starter powered by Next and Sanity!
+
+Here's a shortlist of what to remove:
+- Within the `/components` folder, remove `cart`, `product`, and `shop` folders
+- Within the `/pages/api` folder, remove `products` and `shopify` folders
+- Within the `/pages` folder, remove `products` and `shop` folders
+- Within the `_app.js` file, remove `<ShopifyContextProvider />` and `<Cart />` components
+- Within the `/studio` folder, remove all shopify-related schemas and desk structures
+- `/context` folder _(used for accessing shopify data anywhere)_
+- `/lib/shopify` folder _(shopify client setup)_
+- `SHOPIFY_*` env variables from `next.config.js`
+- `shopify-buy` dependency from `package.json`
 </details>
 
 <details>
 <summary><strong>Error: Failed to communicate with the Sanity API</strong></summary>
 
-If you get this error in your CLI, you need to logout and log back in again, unfortunately. Simply do `sanity logout` and then `sanity login` to fix.
+If you get this error in your CLI, you need to logout and log back in again. Simply do `sanity logout` and then `sanity login` to fix.
 </details>
 
 <details>
 <summary><strong>Access your "product_sync" metafields in Shopify without using a plugin</strong></summary>
 
-Simply navigate to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
+Simply navigate directly to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
+
+_(making sure to replace [store_id] with your Shopify Store ID)_
 </details>
 
 <details>
