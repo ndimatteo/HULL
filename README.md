@@ -74,6 +74,7 @@
 - 🟢 Tracks product status _(draft/published)_ from Shopify to help control visibility while editing
 - 🟢 Automatic Variant option toggles
 - 🟢 Marks deleted products and variants for easy tracking
+- 🟢 SSR (Dynamic Rendering) of PDP pages
 - 🟢 Updates the URL on variant changes while keeping a clean history stack
 - 🟢 Accessible and clamped Quantity Counters
 - 🟢 Vanity Shop URL Masking
