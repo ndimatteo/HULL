@@ -34,7 +34,7 @@ const previews = [
 const PreviewAction = props => {
   const slug = props.draft
     ? props.draft.slug?.current
-    : props.published.slug?.current
+    : props.published?.slug?.current
   return {
     label: 'Open Preview',
     icon: FiEye,

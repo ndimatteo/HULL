@@ -13,7 +13,6 @@ import {
   FiRepeat,
   FiShoppingCart,
   FiGift,
-  FiGrid,
   FiCopy
 } from 'react-icons/fi'
 
@@ -214,7 +213,7 @@ export default () =>
                 ),
               S.listItem()
                 .title('Collections')
-                .icon(FiGrid)
+                .schemaType('collection')
                 .child(
                   S.documentTypeList('collection')
                     .title('Collections')
