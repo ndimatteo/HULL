@@ -65,7 +65,7 @@ export default function resolveDocumentActions(props) {
       PublishAction,
       DiscardChangesAction,
       DeleteAction,
-      canPreview && PreviewAction
+      ...(canPreview ? [PreviewAction] : [])
     ]
   }
 
