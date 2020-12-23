@@ -1,16 +1,23 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
-
 :root {
-  --brand-darkest: #000;
-  --brand-lightest: #fff;
-  --gray-base: #323232;
-  --brand-primary--inverted: #fff;
-  --brand-secondary: #f43;
-  --brand-secondary--inverted: #fff;
-  
   --brand-primary: #000;
-  --main-navigation-color: #000;
+  --brand-primary--inverted: #fff;
+  --brand-secondary: #000;
+  --brand-secondary--inverted: #fff;
+
+  --main-navigation-color: var(--brand-secondary);
+  --main-navigation-color--inverted: var(--brand-secondary--inverted);
 }
+
+
+/* correctly style active state on dark navbars */
+
+[data-tone="navbar"][class*="selected"] > span {
+  background: var(--brand-secondary--inverted) !important;
+  color: var(--brand-secondary) !important;
+}
+
+
+/* more obvious cursors for studio elements */
 
 .item:not([disabled]),
 .title,
@@ -20,6 +27,16 @@ button:not([disabled]) {
 
 .isCollapsed .title {
   cursor: e-resize !important;
+}
+
+[class*="drag"] button {
+  cursor: grab !important;
+}
+
+li[class*="moving"],
+li[class*="moving"] * {
+  pointer-events: all !important;
+  cursor: grabbing !important;
 }
 
 

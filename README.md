@@ -184,7 +184,7 @@ SENDGRID_API_KEY=XXXXXX
 ### 5) Shopify Store Theme
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
 
-This will essentially "pass-through" URLs accessed on at your Shopify Store to your true headless environment *(ie. `shop.666.com/products` -> `666.com/products`)*
+This will essentially "pass-through" URLs accessed at your Shopify Store to your true headless storefront *(ie. `shop.666.com/products` -> `666.com/products`)*
 
 <br />
 
@@ -250,9 +250,10 @@ Here's a shortlist of what to remove:
 - Within the `/pages/api` folder, remove `products` and `shopify` folders
 - Within the `/pages` folder, remove `products` and `shop` folders
 - Within the `_app.js` file, remove `<ShopifyContextProvider />` and `<Cart />` components
-- Within the `/studio` folder, remove all shopify-related schemas and desk structures
-- `/context` folder _(used for accessing shopify data anywhere)_
-- `/lib/shopify` folder _(shopify client setup)_
+- Within the `/studio` folder, remove all shopify-related schemas, desk structures, and actions
+- Within the `/components/header.js` file, remove references to shopify `context` and `cart`
+- `/contexts` folder _(used for accessing shopify data anywhere)_
+- `/lib/shopify.js` file _(shopify client setup)_
 - `SHOPIFY_*` env variables from `next.config.js`
 - `shopify-buy` dependency from `package.json`
 </details>
