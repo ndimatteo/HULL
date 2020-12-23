@@ -16,6 +16,7 @@
     "@sanity/desk-tool",
     "dashboard-widget-structure-menu",
     "dashboard-widget-document-list",
+    "media-library",
     "vercel-deploy"
   ],
   "env": {
@@ -26,9 +27,9 @@
     }
   },
   "parts": [
-    { 
-      "implements": "part:@sanity/base/document-actions/resolver", 
-      "path": "./parts/resolve-actions.js" 
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./parts/resolve-actions.js"
     },
     {
       "name": "part:@sanity/base/schema",
