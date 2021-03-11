@@ -1,6 +1,6 @@
 import React from 'react'
 import BlockContent from '@sanity/block-content-to-react'
-import { serializers } from '../../modules'
+import { serializers } from '../../lib/serializers'
 
 const ProductDescription = ({ content }) => {
   return (
