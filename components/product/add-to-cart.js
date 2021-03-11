@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
-import { useStore, useAddItem } from '../../lib/contexts/shopify'
+import React from 'react'
+
+import { useSiteContext } from '../../lib/contexts'
+import { useAddItem } from '../../lib/contexts/shopify'
 
 const addToCart = ({ productID, quantity = 1, className, children }) => {
   const addItemToCart = useAddItem()
-  const { isLoading, isAdding } = useStore()
+  const { isLoading, isAdding } = useSiteContext()
 
   return (
     <>
