@@ -17,7 +17,7 @@ const CollectionPage = ({ data, error, preview }) => {
   }
 
   // expand our page data
-  const { site, menus, page } = data
+  const { site, page } = data
 
   return (
     <Layout site={site} page={page}>

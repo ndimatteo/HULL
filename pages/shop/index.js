@@ -1,24 +1,15 @@
 import React from 'react'
 
-import { getStaticPage } from '../../lib/api'
+import { getStaticPage, modules } from '../../lib/api'
 
 import Layout from '../../components/layout'
 import Collection from '../../components/shop/collection'
 
 const Shop = ({ data, preview }) => {
-  const { site, menus, page } = data
+  const { site, page } = data
 
   return (
-    <Layout
-      site={{
-        seo: site.seo,
-        social: site.social,
-        menus: menus,
-      }}
-      page={{
-        seo: page.seo,
-      }}
-    >
+    <Layout site={site} page={page}>
       <section className="section">
         <div className="section--wrapper">
           <h1 className="text-center">{page.title}</h1>
@@ -33,7 +24,10 @@ export async function getStaticProps({ preview, previewData }) {
   const shopData = await getStaticPage(
     `
     *[_type == "shopPage"] | order(_updatedAt desc)[0]{
-      title,
+      hasTransparentHeader,
+      modules[]{
+        ${modules}
+      },
       seo
     }
   `,

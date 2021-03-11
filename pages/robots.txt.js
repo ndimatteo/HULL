@@ -1,13 +1,21 @@
-import React, { Component } from 'react'
+const Robots = () => {
+  return (
+    <div>
+      Should not be navigated via Next Link. Use a standard {`<a>`} tag!
+    </div>
+  )
+}
 
-export default class Robots extends Component {
-  static getInitialProps({ req, res }) {
-    res.setHeader('Content-Type', 'text/plain')
-    res.write(`Sitemap: https://${req.headers.host}/sitemap.xml
+export async function getServerSideProps({ req, res }) {
+  res.setHeader('Content-Type', 'text/plain')
+  res.write(`Sitemap: https://${req.headers.host}/sitemap.xml
     
 User-agent: *
 Allow: /*
 Disallow: /api/*`)
-    res.end()
-  }
+  res.end()
+
+  return { props: {} }
 }
+
+export default Robots

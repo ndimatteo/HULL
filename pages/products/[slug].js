@@ -63,11 +63,7 @@ const Product = ({ data, error }) => {
 
   return (
     <Layout
-      site={{
-        seo: site.seo,
-        social: site.social,
-        menus: menus,
-      }}
+      site={site}
       page={{
         title: hasVariant
           ? `${product.title} - ${activeVariant.title}`

@@ -19,7 +19,7 @@ const Page = ({ data }) => {
   return (
     <>
       {!router.isFallback && (
-        <Layout site={site} page={{ seo: page.seo }}>
+        <Layout site={site} page={page}>
           {page.modules?.map((module, key) => (
             <Module key={key} module={module} />
           ))}
