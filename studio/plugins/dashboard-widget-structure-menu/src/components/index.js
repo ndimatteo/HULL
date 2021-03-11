@@ -1,1 +1,1 @@
-export {default as StructureMenuWidget} from './StructureMenuWidget'
+export { default as StructureMenuWidget } from './StructureMenuWidget'

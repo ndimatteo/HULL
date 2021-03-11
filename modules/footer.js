@@ -1,8 +1,7 @@
 import React from 'react'
-import Link from 'next/link'
 
-import Navigation from './navigation'
-import Icon from './icon'
+import Navigation from '../components/navigation'
+import Icon from '../components/icon'
 
 const Footer = ({ menu, social }) => {
   return (
@@ -10,10 +9,10 @@ const Footer = ({ menu, social }) => {
       <div className="footer--wrapper">
         <div className="footer--content">
           <nav className="footer-navigation">
-            {menu.items && <Navigation menu={menu} />}
+            {menu?.items && <Navigation menu={menu} />}
           </nav>
 
-          {social.items && (
+          {social?.items && (
             <div className="social-nav">
               {social.items.map((link, key) => {
                 return (
@@ -31,18 +30,8 @@ const Footer = ({ menu, social }) => {
             </div>
           )}
 
-          <div className="logo">
-            <Link href="/" scroll={false}>
-              <a className="logo--link" aria-label="Go Home">
-                <Icon name="Logo Mark" id="footerLogo" viewBox="0 0 666 430" />
-              </a>
-            </Link>
-          </div>
-
           <div className="footer--disclaimer">
-            <p className="text-xs">
-              &copy; {new Date().getFullYear()}. All Rights Reserved.
-            </p>
+            <p>&copy; {new Date().getFullYear()}. All Rights Reserved.</p>
           </div>
         </div>
       </div>

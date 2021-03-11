@@ -1,0 +1,11 @@
+.promo-bar {
+  @apply relative z-50 bg-pageText text-pageBG text-center;
+
+  &--content {
+    @apply p-2 text-sm font-semibold;
+  }
+
+  &--link {
+    @apply block;
+  }
+}

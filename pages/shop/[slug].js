@@ -20,16 +20,7 @@ const CollectionPage = ({ data, error, preview }) => {
   const { site, menus, page } = data
 
   return (
-    <Layout
-      site={{
-        seo: site.seo,
-        social: site.social,
-        menus: menus,
-      }}
-      page={{
-        seo: page.seo,
-      }}
-    >
+    <Layout site={site} page={page}>
       <section className="section">
         <div className="section--wrapper">
           <h1 className="text-center">{page.title}</h1>

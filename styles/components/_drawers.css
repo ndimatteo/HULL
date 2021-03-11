@@ -1,8 +1,8 @@
 .drawer {
-  @apply fixed top-0 right-0 bottom-0 w-full max-w-2xl z-50 bg-pageText text-pageBG;
+  @apply fixed top-0 right-0 bottom-0 w-full max-w-2xl z-90 bg-pageText text-pageBG;
 
   &--backdrop {
-    @apply block fixed inset-0 bg-black bg-opacity-80 z-40;
+    @apply block fixed inset-0 bg-black bg-opacity-80 z-80;
   }
 
   &--inner {

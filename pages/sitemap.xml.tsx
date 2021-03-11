@@ -45,7 +45,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res, req }) => {
   try {
     smStream.write({ url: '/', changefreq: 'daily', priority: 1.0 })
     smStream.write({ url: '/shop', changefreq: 'daily', priority: 0.9 })
-    smStream.write({ url: '/666', changefreq: 'daily', priority: 0.8 })
     await addUrls(smStream)
     smStream.end()
     

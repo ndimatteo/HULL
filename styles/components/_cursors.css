@@ -1,7 +1,41 @@
 .cursor {
-  @apply fixed top-0 left-0 w-0 h-0 z-10 pointer-events-none;
+  @apply fixed top-0 left-0 w-0 h-0 pointer-events-none;
+  z-index: 120;
 
   &--content {
     @apply absolute transform-gpu -translate-x-1/2 -translate-y-1/2;
+  }
+
+  /* Simple dot cursor */
+  span {
+    @apply block relative w-12 h-12 ;
+
+    &::before {
+      @apply absolute inset-0 border rounded-full;
+      transform: scale(0);
+      will-change: transform;
+      transition: transform .5s .1s cubic-bezier(0.22, 1, 0.36, 1);
+      content: "";
+    }
+
+    &::after {
+      @apply absolute inset-0 bg-pageText rounded-full;
+      will-change: transform;
+      transform: scale(.625);
+      transition: transform .5s .1s cubic-bezier(0.22, 1, 0.36, 1);
+      content: "";
+    }
+  }
+
+  &.is-hovering {
+    span {
+      &::before {
+        transform: scale(1);
+      }
+
+      &::after {
+        transform: scale(.125);
+      }
+    }
   }
 }

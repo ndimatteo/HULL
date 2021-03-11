@@ -1,5 +1,5 @@
 .btn {
-  @apply clean-btn leading-none;
+  @apply clean-btn;
 
   &.is-block {
     @apply block w-full;

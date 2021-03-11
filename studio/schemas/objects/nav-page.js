@@ -18,14 +18,8 @@ export default {
         { type: 'shopPage' },
         { type: 'page' },
         { type: 'collection' },
-        { type: 'product' },
-        { type: 'samplePage' }
+        { type: 'product' }
       ]
-    },
-    {
-      title: 'Style as Button?',
-      name: 'isButton',
-      type: 'boolean'
     }
   ]
 }

@@ -14,23 +14,13 @@ const Page = ({ data }) => {
     return <Error statusCode={404} />
   }
 
-  const { site, menus, page } = data
+  const { site, page } = data
 
   return (
     <>
       {!router.isFallback && (
-        <Layout
-          site={{
-            seo: site.seo,
-            social: site.social,
-            menus: menus,
-          }}
-          page={{
-            title: page.title,
-            seo: page.seo,
-          }}
-        >
-          {page.content?.map((module, key) => (
+        <Layout site={site} page={{ seo: page.seo }}>
+          {page.modules?.map((module, key) => (
             <Module key={key} module={module} />
           ))}
         </Layout>

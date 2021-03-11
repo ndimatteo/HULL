@@ -7,13 +7,13 @@ export default {
       title: 'Title',
       name: 'title',
       type: 'string',
-      description: 'Text to Display',
+      description: 'Text to Display'
     },
     {
       title: 'Dropdown Items',
-      name: 'items',
+      name: 'dropdownItems',
       type: 'array',
-      of: [{ type: 'navPage' }, { type: 'navLink' }],
-    },
-  ],
+      of: [{ type: 'navPage' }, { type: 'navLink' }]
+    }
+  ]
 }

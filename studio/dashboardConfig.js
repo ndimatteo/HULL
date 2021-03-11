@@ -1,16 +1,21 @@
 export default {
   widgets: [
-    { name: 'structure-menu' },
-    { name: 'project-users', layout: { height: 'auto' } },
+    { name: 'structure-menu', layout: { width: 'full' } },
     {
       name: 'document-list',
       options: {
         title: 'Recently edited',
         order: '_updatedAt desc',
         limit: 10,
-        types: []
+        types: ['homePage', 'page'],
       },
-      layout: { width: 'medium' }
-    }
-  ]
+      layout: { width: 'medium' },
+    },
+    {
+      name: 'project-users',
+    },
+    {
+      name: 'project-info',
+    },
+  ],
 }

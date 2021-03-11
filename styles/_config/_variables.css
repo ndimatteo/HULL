@@ -3,14 +3,14 @@
   --black: #000000;
   --white: #ffffff;
 
-  --pageBG: #000000;
-  --pageText: #72ff27;
+  --pageBG: #f4f4f0;
+  --pageText: #000000;
 
-  --black-rgb: 0,0,0;
-  --white-rgb: 255,255,255;
+  --black-hsl: 0, 0%, 0%;
+  --white-hsl: 0, 0%, 100%;
 
-  --pageBG-rgb: 0,0,0;
-  --pageText-rgb: 114,255,39;
+  --pageBG-hsl: 0, 0%, 0%;
+  --pageText-hsl: 60, 14%, 95%;
 }
 
 @custom-media --xs (min-width: 480px);

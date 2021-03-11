@@ -1,7 +1,7 @@
 {
   "root": true,
   "api": {
-    "projectId": "yco7i8la",
+    "projectId": "ieasd5lg",
     "dataset": "production"
   },
   "project": {
@@ -17,7 +17,8 @@
     "dashboard-widget-structure-menu",
     "dashboard-widget-document-list",
     "media-library",
-    "vercel-deploy"
+    "vercel-deploy",
+    "note-field"
   ],
   "env": {
     "development": {
@@ -27,10 +28,6 @@
     }
   },
   "parts": [
-    {
-      "implements": "part:@sanity/base/document-actions/resolver",
-      "path": "./parts/resolve-actions.js"
-    },
     {
       "name": "part:@sanity/base/schema",
       "path": "./schemas/schema.js"
@@ -50,6 +47,10 @@
     {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "./branding/skin.css"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "./parts/resolve-actions.js"
     },
     {
       "implements": "part:@sanity/base/document-badges/resolver",

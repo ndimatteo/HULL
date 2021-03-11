@@ -5,8 +5,8 @@ export default {
   name: 'errorPage',
   type: 'document',
   icon: FiAlertOctagon,
+  __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
-    // Place other Fields here
     {
       title: 'Content',
       name: 'content',

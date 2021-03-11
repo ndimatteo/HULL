@@ -13,23 +13,18 @@ const previewURL =
 
 const singletons = [
   'homePage',
-  'samplePage',
   'shopPage',
   'errorPage',
   'generalSettings',
+  'promoSettings',
+  'headerSettings',
+  'footerSettings',
   'seoSettings'
 ]
 
 const editAndDelete = ['product', 'productVariant']
 
-const previews = [
-  'homePage',
-  'samplePage',
-  'shopPage',
-  'page',
-  'product',
-  'collection'
-]
+const previews = ['homePage', 'shopPage', 'page', 'product', 'collection']
 
 const PreviewAction = props => {
   const slug = props.draft
@@ -40,7 +35,7 @@ const PreviewAction = props => {
     icon: FiEye,
     onHandle: () => {
       window.open(
-        `${previewURL}/api/preview?token=666&type=${props.type}&slug=${slug ||
+        `${previewURL}/api/preview?token=HULL&type=${props.type}&slug=${slug ||
           ''}`
       )
     }

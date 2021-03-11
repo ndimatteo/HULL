@@ -1,6 +1,6 @@
 {
   "name": "hull",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
@@ -12,17 +12,19 @@
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.25",
+    "@reach/rect": "^0.13.2",
     "@sanity/block-content-to-react": "^2.0.7",
     "@sanity/client": "^2.1.0",
     "@sanity/image-url": "^0.140.19",
     "axios": "^0.21.0",
     "base64-string": "^1.1.2",
+    "classnames": "^2.2.6",
     "cross-env": "^7.0.3",
     "embla-carousel": "^4.1.2",
     "focus-trap-react": "^8.3.2",
     "framer-motion": "^2.9.5",
     "jsondiffpatch": "^0.4.1",
-    "next": "^10.0.3",
+    "next": "^10.0.7",
     "qs": "^6.9.4",
     "raw-body": "^2.4.1",
     "react": "^17.0.1",

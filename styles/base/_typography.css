@@ -1,21 +1,5 @@
 @layer base {
-  @font-face {
-    font-family: "GandurNew Light";
-    src: url("/fonts/GandurNew-Light.woff2") format("woff2"),
-        url("/fonts/GandurNew-Light.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
-
-  @font-face {
-    font-family: "Satan";
-    src: url("/fonts/satan.woff2") format("woff2"),
-        url("/fonts/satan.woff") format("woff");
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-  }
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
   html,
   body {
@@ -25,7 +9,7 @@
   }
 
   body {
-    @apply bg-pageBG text-pageText font-mono leading-none;
+    @apply bg-pageBG text-pageText font-sans leading-none;
     font-size: 14px;
 
     @media (--md) {
@@ -103,7 +87,7 @@ textarea,
 select,
 details {
   &:focus {
-    outline: 1px dashed var(--pageText);
+    outline: 1px dashed currentColor;
     outline-offset: 2px;
     
     body:not(.is-tabbing) & {

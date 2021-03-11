@@ -1,1 +1,17 @@
-{}
+{
+  "theme": "light",
+  "themeChanges": {
+    "buttonPrimaryBorderColor": "black",
+    "buttonPrimaryBackgroundColor": "black",
+    "buttonPrimaryColor": "white",
+
+    "buttonSecondaryBorderColor": "black",
+    "buttonSecondaryColor": "black",
+
+    "mediaGridSelectedBorderColor": "black",
+    "mediaListSelectedBorderColor": "black",
+    
+    "draggableMediaItemAmountBackgroundColor": "black",
+    "draggableMediaItemBorderColor": "black"
+  }
+}

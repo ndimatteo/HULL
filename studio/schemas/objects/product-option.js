@@ -1,7 +1,7 @@
 import { FiCheckCircle } from 'react-icons/fi'
 
 export default {
-  title: 'Option',
+  title: 'Product Option',
   name: 'productOption',
   type: 'object',
   icon: FiCheckCircle,
@@ -12,15 +12,18 @@ export default {
       type: 'string'
     },
     {
-      title: 'Values',
-      name: 'values',
-      type: 'array',
-      of: [{ type: 'string' }]
-    },
-    {
       title: 'Position',
       name: 'position',
       type: 'number'
+    },
+    {
+      title: 'Values',
+      name: 'values',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags'
+      }
     }
   ]
 }

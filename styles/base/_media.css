@@ -1,74 +1,40 @@
-.has-ar {
+.ar {
   @apply relative overflow-hidden;
   
-  &--square {
-    @mixin aspect-ratio 1,1;
+  &.has-fill {
+    @apply absolute inset-0;
   }
 
-  &--landscape {
-    @mixin aspect-ratio 16,9;
+  img {
+    @apply block absolute top-1/2 left-1/2 z-10 opacity-0;
+    width: calc(100% + 1px); /* helps with half pixel renderings */
+    height: calc(100% + 1px); /* helps with half pixel renderings */
+    content-visibility: auto; /* layout image only when in view */
+    transform: translate3d(-50%,-50%,0);
+    transition: opacity .4s linear;
+
+    &.is-loaded {
+      @apply opacity-100;
+    }
   }
 
-  &--portrait {
-    @mixin aspect-ratio 5,7;
-  }
+  &--placeholder {
+    @apply absolute inset-0;
+    filter: grayscale(1);
+    transition: opacity 0s .4s linear;
 
-  &--custom {
-    &::before {
-      @apply block absolute top-0 left-0 w-full h-full;
+    &.is-loaded {
+      @apply opacity-0;
+    }
+
+    &::after {
+      @apply absolute inset-0 z-10;
+      backdrop-filter: blur(1rem) contrast(1.5);
       content: "";
     }
-  }
-
-  &::before {
-    @apply bg-pageText z-0;
-  }
-
-  &.has-error {
-    &::after {
-      @apply absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 text-center text-4xl;
-      content: "#$!";
-    }
-
+    
     img {
-      @apply hidden;
+      @apply opacity-100;
     }
-  }
-
-  iframe,
-  embed {
-    @apply absolute inset-0 w-full h-full;
-  }
-}
-
-img.photo {
-  @apply block absolute top-1/2 left-1/2 object-cover z-10 opacity-0;
-  width: calc(100% + 1px); /* helps with half pixel renderings */
-  height: calc(100% + 1px); /* helps with half pixel renderings */
-  transform: translate3d(-50%,-50%,0) scale(1.25);
-
-  &.is-loaded,
-  .is-loaded & {
-    @apply opacity-100;
-    transform: translate3d(-50%,-50%,0) scale(1);
-    animation: revealUp .6s cubic-bezier(0.85, 0, 0.15, 1) both;
-    transition: opacity .15s linear, transform 1s cubic-bezier(.215,.61,.355,1);
-  }
-}
-
-.video-loop {
-  @apply absolute inset-0;
-  
-  iframe {
-    @apply absolute top-1/2 left-1/2 transform-gpu -translate-x-1/2 -translate-y-1/2 w-screen min-h-screen;
-  }
-}
-
-@keyframes revealUp {
-  from {
-    clip-path: inset(100% 0 0 0);
-  }
-  to {
-    clip-path: inset(0% 0 0 0);
   }
 }

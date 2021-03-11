@@ -10,7 +10,7 @@ import {
   useUpdateItem,
   useRemoveItem,
   useToggleCart,
-} from '../../contexts/shopify-context'
+} from '../../lib/contexts/shopify'
 
 function CartItem({ item }) {
   const removeItem = useRemoveItem()

@@ -25,6 +25,10 @@
     .is-reversed & {
       animation-name: marqueeR;
     }
+
+    .has-pause:hover & {
+      animation-play-state: paused;
+    }
   }
 
   &--content {
@@ -37,12 +41,8 @@
   }
 
   &--item {
-    @apply flex;
+    @apply flex items-center;
     flex: 1 0 auto;
-
-    span {
-      @apply block whitespace-pre;
-    }
   }
 }
 
@@ -54,4 +54,8 @@
 @keyframes marqueeR {
   0% { transform: translate3d(0, 0, 0); }
   100% { transform: translate3d(50%, 0, 0); }
+}
+
+.marquee-data {
+  @apply flex items-center;
 }

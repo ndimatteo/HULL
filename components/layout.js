@@ -4,8 +4,8 @@ import { motion } from 'framer-motion'
 import { imageBuilder } from '../lib/api'
 
 import Schema from '../components/schema'
-import Header from '../components/header'
-import Footer from '../components/footer'
+import Header from '../modules/header'
+import Footer from '../modules/footer'
 
 if (typeof window !== 'undefined') {
   console.groupCollapsed(
@@ -23,14 +23,19 @@ if (typeof window !== 'undefined') {
   console.groupEnd()
 }
 
-const duration = 0.25
+const duration = 0.4
 const variants = {
   initial: {
     opacity: 0,
   },
   enter: {
     opacity: 1,
-    transition: { duration: duration, when: 'beforeChildren' },
+    transition: {
+      duration: duration,
+      delay: 0.25,
+      ease: 'linear',
+      when: 'beforeChildren',
+    },
   },
   exit: {
     opacity: 0,
@@ -38,7 +43,7 @@ const variants = {
   },
 }
 
-const Layout = ({ site = {}, page = {}, schema, hasHero, children }) => {
+const Layout = ({ site = {}, page = {}, schema, children }) => {
   // set <head> variables
   const siteTitle = site.seo?.siteTitle
   const siteIcon = site.seo?.siteIcon
@@ -122,20 +127,14 @@ const Layout = ({ site = {}, page = {}, schema, hasHero, children }) => {
       </Head>
 
       <motion.div
-        variants={variants}
         initial="initial"
         animate="enter"
         exit="exit"
+        variants={variants}
       >
-        {site.menus && (
-          <Header
-            menu={site.menus.header}
-            transparent={hasHero ? true : false}
-          />
-        )}
+        <Header data={site.header} isTransparent={page.hasTransparentHeader} />
         <main id="content">{children}</main>
-
-        {site.menus && <Footer menu={site.menus.footer} social={site.social} />}
+        <Footer data={site.footer} />
       </motion.div>
     </>
   )

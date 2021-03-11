@@ -1,53 +1,43 @@
 import React from 'react'
-import BlockContent from '@sanity/block-content-to-react'
-
-import { getStaticPage, blockContent } from '../lib/api'
 
 import Layout from '../components/layout'
-import { serializers } from '../modules'
-import VideoLoop from '../components/video-loop'
+import { getStaticPage, modules } from '../lib/api'
+
+import { Module } from '../modules'
 
 const ErrorPage = ({ data }) => {
-  const { page } = data
+  const { site, menus, page } = data
 
   return (
     <Layout
+      site={site}
+      menus={menus}
       page={{
         seo: page.seo,
       }}
     >
-      <section className="section is-error">
-        <VideoLoop id={125635073} width={1} height={1} />
-
-        <div className="section--content">
-          {page.content ? (
-            <BlockContent
-              renderContainerOnSingleChild
-              className="rc"
-              blocks={page.content}
-              serializers={serializers}
-            />
-          ) : (
-            <>
-              <h1 className="is-mb0">Fatal Error</h1>
-              <p>Page not found</p>
-            </>
-          )}
-        </div>
-      </section>
+      {page.modules?.map((module, key) => (
+        <Module key={key} module={module} />
+      ))}
     </Layout>
   )
 }
 
-export async function getStaticProps() {
-  const pageData = await getStaticPage(`
-    *[_type == "errorPage"][0]{
-      content[]{
-        ${blockContent}
+export async function getStaticProps({ preview, previewData }) {
+  const pageData = await getStaticPage(
+    `
+    *[_type == "errorPage"] | order(_updatedAt desc)[0]{
+      modules[]{
+        ${modules}
       },
       seo
     }
-  `)
+  `,
+    {
+      active: preview,
+      token: previewData?.token,
+    }
+  )
 
   return {
     props: {

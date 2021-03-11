@@ -77,7 +77,6 @@ export default {
                 type: 'reference',
                 to: [
                   { type: 'homePage' },
-                  { type: 'samplePage' },
                   { type: 'shopPage' },
                   { type: 'page' },
                   { type: 'collection' },
@@ -106,7 +105,6 @@ export default {
                 type: 'reference',
                 to: [
                   { type: 'homePage' },
-                  { type: 'samplePage' },
                   { type: 'shopPage' },
                   { type: 'page' },
                   { type: 'collection' },

@@ -6,24 +6,13 @@ import { getStaticPage, modules } from '../lib/api'
 import { Module } from '../modules'
 
 const Home = ({ data }) => {
-  const { site, menus, page } = data
+  const { site, page } = data
 
   return (
-    <Layout
-      site={{
-        seo: site.seo,
-        social: site.social,
-        menus: menus,
-      }}
-      page={{
-        seo: page.seo,
-      }}
-    >
-      <div className="text-center">
-        {page.content?.map((module, key) => (
-          <Module key={key} module={module} />
-        ))}
-      </div>
+    <Layout site={site} page={page}>
+      {page.modules?.map((module, key) => (
+        <Module key={key} module={module} />
+      ))}
     </Layout>
   )
 }
@@ -32,7 +21,8 @@ export async function getStaticProps({ preview, previewData }) {
   const pageData = await getStaticPage(
     `
     *[_type == "homePage"] | order(_updatedAt desc)[0]{
-      content[]{
+      hasTransparentHeader,
+      modules[]{
         ${modules}
       },
       seo

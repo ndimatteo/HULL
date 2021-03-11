@@ -15,9 +15,11 @@
 @import "components/_drawers";
 @import "components/_dropdowns";
 @import "components/_marquees";
+@import "components/_meganavs";
 @import "components/_page-transitions";
 
 @import "modules/_cart";
+@import "modules/_promo-banner";
 @import "modules/_header";
 @import "modules/_footer";
 
@@ -26,5 +28,4 @@
 
 @import "_shame";
 
-/* Delete the HULL demo styles! */
-@import "_config/_666";
+/* HULL demo theme styles: */

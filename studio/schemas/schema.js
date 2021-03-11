@@ -1,13 +1,9 @@
-// First, we must import the schema creator
 import createSchema from 'part:@sanity/base/schema-creator'
-
-// Then import schema types from any plugins that might expose them
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
 import homePage from './documents/page-home'
 import shopPage from './documents/page-shop'
-import samplePage from './documents/page-sample'
 import errorPage from './documents/page-error'
 import page from './documents/page'
 import product from './documents/shopify-product'
@@ -15,15 +11,22 @@ import productVariant from './documents/shopify-variant'
 import collection from './documents/shopify-collection'
 
 import generalSettings from './documents/settings-general'
+import promoSettings from './documents/settings-promo'
+import headerSettings from './documents/settings-header'
+import footerSettings from './documents/settings-footer'
 import seoSettings from './documents/settings-seo'
 import menu from './documents/menu'
 import redirect from './documents/redirect'
 
 // Module types
-import textBlock from './modules/text'
-import accordionList from './modules/accordion-list'
-import formNewsletter from './modules/form-newsletter'
-import formContact from './modules/form-contact'
+import grid from './modules/grid'
+import gridColumn from './modules/grid-column'
+import gridSize from './modules/grid-size'
+import marquee from './modules/marquee'
+
+// Block types
+import freeform from './blocks/freeform'
+import accordions from './blocks/accordions'
 
 // Object types
 import seo from './objects/seo'
@@ -47,17 +50,18 @@ import figure from './objects/figure'
 import button from './objects/button'
 import horizontalRule from './objects/horizontal-rule'
 
-// Then we give our schema to the builder and provide the result to Sanity
+/*  ------------------------------------------ */
+/*  Your Schema documents / modules / objects
+/*  ------------------------------------------ */
 export default createSchema({
-  // We name our schema
+  // The name of our schema
   name: 'content',
 
-  // schema types
   types: schemaTypes.concat([
-    // Document types
+    /* ----------------- */
+    /* 1: Document types */
     homePage,
     shopPage,
-    samplePage,
     errorPage,
     page,
     product,
@@ -65,17 +69,27 @@ export default createSchema({
     collection,
 
     generalSettings,
+    promoSettings,
+    headerSettings,
+    footerSettings,
     seoSettings,
     menu,
     redirect,
 
-    // Module types
-    textBlock,
-    accordionList,
-    formNewsletter,
-    formContact,
+    /* --------------- */
+    /* 2: Module types */
+    grid,
+    gridColumn,
+    gridSize,
+    marquee,
 
-    // Object types
+    /* -------------- */
+    /* 3: Block types */
+    freeform,
+    accordions,
+
+    /* ----------------------- */
+    /* 4: Generic Object types */
     seo,
 
     productGalleryPhotos,

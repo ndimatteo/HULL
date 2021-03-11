@@ -1,9 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
+import cx from 'classnames'
+
+import { useSiteContext } from '../lib/contexts'
 
 const CursorFollow = ({ cursorContent, children }) => {
   const [isVisible, setIsVisible] = useState(false)
   const [coords, setCoords] = useState({ x: null, y: null })
+
+  const { isHovering } = useSiteContext()
 
   const onMouseEnter = useCallback(() => setIsVisible(true), [])
   const onMouseLeave = useCallback(() => setIsVisible(false), [])
@@ -48,7 +53,7 @@ const CursorFollow = ({ cursorContent, children }) => {
                 duration: 0.3,
               },
             }}
-            className="cursor"
+            className={cx('cursor', { 'is-hovering': isHovering })}
           >
             <div className="cursor--content">{cursorContent}</div>
           </motion.div>

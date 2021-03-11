@@ -2,16 +2,10 @@ import { FiMaximize2 } from 'react-icons/fi'
 
 export default {
   title: 'Accordion List',
-  name: 'accordionList',
+  name: 'accordions',
   type: 'object',
   icon: FiMaximize2,
   fields: [
-    {
-      title: 'Section Title',
-      name: 'title',
-      type: 'string',
-      description: 'Display a section title above the content'
-    },
     {
       title: 'Accordions',
       name: 'items',
@@ -21,11 +15,12 @@ export default {
   ],
   preview: {
     select: {
-      title: 'title'
+      items: 'items'
     },
-    prepare({ title }) {
+    prepare({ items }) {
       return {
-        title: title || 'Accordion List'
+        title: 'Accordion List',
+        subtitle: `${items.length} item(s)`
       }
     }
   }

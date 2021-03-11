@@ -4,18 +4,17 @@ import { centsToPrice } from '../../lib/helpers'
 
 import Drawer from '../drawer'
 import CartItem from './item'
-import Marquee from '../marquee'
 
+import { useSiteContext } from '../../lib/contexts'
 import {
-  useStore,
   useCartTotals,
   useCartItems,
   useCheckout,
   useToggleCart,
-} from '../../contexts/shopify-context'
+} from '../../lib/contexts/shopify'
 
 const Cart = () => {
-  const { isCartOpen, isUpdating } = useStore()
+  const { isCartOpen, isUpdating } = useSiteContext()
   const { subTotal } = useCartTotals()
   const lineItems = useCartItems()
   const checkoutURL = useCheckout()
@@ -70,7 +69,7 @@ const CartItems = ({ items }) => {
 
 const EmptyCart = () => (
   <div className="cart--empty">
-    <p>Don't you need some of this?</p>
+    <p>Your cart is empty</p>
   </div>
 )
 

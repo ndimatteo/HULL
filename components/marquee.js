@@ -1,7 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'
+import cx from 'classnames'
 import { debounce, usePrevious } from '../lib/helpers'
 
-const Marquee = ({ line, speed = 0.5, reverse, className }) => {
+const Marquee = ({ children, speed = 0.5, reverse, pauseOnHover, ...rest }) => {
   const container = useRef(null)
   const inner = useRef(null)
   const content = useRef(null)
@@ -136,9 +137,13 @@ const Marquee = ({ line, speed = 0.5, reverse, className }) => {
   return (
     <div
       ref={container}
-      className={`marquee${isReady ? ' is-ready' : ''}${
-        reverse ? ' is-reversed' : ''
-      }${className ? ` ${className}` : ''}`}
+      className={cx(
+        'marquee',
+        { 'is-ready': isReady },
+        { 'is-reversed': reverse },
+        { 'has-pause': pauseOnHover }
+      )}
+      {...rest}
     >
       <div
         ref={inner}
@@ -151,7 +156,7 @@ const Marquee = ({ line, speed = 0.5, reverse, className }) => {
       >
         <div ref={content} className="marquee--content">
           <div ref={item} className="marquee--item">
-            <span>{line} </span>
+            {children}
           </div>
         </div>
       </div>

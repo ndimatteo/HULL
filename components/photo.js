@@ -1,76 +1,107 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import LazyLoad from 'vanilla-lazyload'
+import cx from 'classnames'
 
 import { buildSrcSet, buildSrc } from '../lib/helpers'
 
 const Photo = ({
   photo,
-  srcsetSizes = [500, 800, 1200],
-  sizes = '(min-width: 928px) 70vw, 100vw',
-  aspect = 'custom',
-  aspectCustom,
-  aspectRatio,
   width,
   height,
+  srcSizes = [300, 600, 1200, 1600],
+  sizes = '(min-width: 940px) 50vw, 100vw',
+  layout = 'intrinsic',
+  quality = 80,
+  hasPlaceholder = true,
+  onLoad,
   className,
-  isPlaceholder,
 }) => {
   const imageRef = useRef()
+  const [loaded, setLoaded] = useState(false)
 
-  let lazy
+  // setup lazyload
   useEffect(() => {
+    let lazy
     if (photo && imageRef.current) {
       lazy = new LazyLoad(
         {
-          threshold: -100,
+          threshold: -150,
           unobserve_entered: true,
-          class_loaded: 'is-loaded',
+          callback_loaded: () => setLoaded(true),
         },
         [imageRef.current]
       )
     }
 
     return () => {
-      if (photo) lazy.destroy()
+      lazy && lazy.destroy()
     }
-  }, [imageRef])
+  }, [photo, imageRef])
+
+  useEffect(() => {
+    if (loaded && onLoad) onLoad()
+  }, [loaded])
+
+  // define our aspect ratio if not a background fill
+  const aspect =
+    typeof width === 'number' && typeof height === 'number'
+      ? (height / width) * 100
+      : 100 / (photo.customRatio || photo.aspectRatio)
+
+  const aspectCustom =
+    layout === 'intrinsic' ? { paddingTop: `${aspect}%` } : null
 
   return (
     <figure className={className ? className : null}>
-      <div className={`has-ar has-ar--${aspect}`} style={aspectCustom}>
+      <div
+        className={cx('ar', {
+          'has-fill': layout === 'fill' || layout === 'contain',
+        })}
+        style={aspectCustom}
+      >
         {photo && (
           <picture>
-            <source
-              data-srcset={buildSrcSet(photo, {
-                sizes: srcsetSizes,
-                aspect: aspectRatio,
-                format: photo.type !== 'image/gif' ? 'webp' : null,
-              })}
-              sizes={sizes}
-              type={photo.type !== 'image/gif' ? 'image/webp' : null}
-            />
-
             <img
               ref={imageRef}
-              data-srcset={buildSrcSet(photo, {
-                sizes: srcsetSizes,
-                aspect: aspectRatio,
-              })}
+              width={width}
+              height={height}
               data-src={buildSrc(photo, {
-                width: width,
-                height: height,
+                ...{ width },
+                ...{ height },
+                ...{ quality },
+              })}
+              data-srcset={buildSrcSet(photo, {
+                ...{ srcSizes },
+                ...{ aspect },
+                ...{ quality },
               })}
               sizes={sizes}
-              alt={photo.alt}
-              className="photo"
+              decoding="async"
+              alt={photo.alt || photo.asset?.altText}
+              className={cx(getSize(layout), { 'is-loaded': loaded })}
             />
           </picture>
         )}
 
-        {isPlaceholder && <div className="photo-placeholder"></div>}
+        {photo && hasPlaceholder && (
+          <div className={cx('ar--placeholder', { 'is-loaded': loaded })}>
+            <img src={photo.lqip} alt="" role="presentation" />
+          </div>
+        )}
       </div>
     </figure>
   )
+}
+
+const getSize = (layout) => {
+  switch (layout) {
+    case 'intrinsic':
+      return 'object-cover'
+    case 'fill':
+      return 'object-cover'
+    case 'contain':
+      return 'object-contain'
+  }
 }
 
 export default Photo

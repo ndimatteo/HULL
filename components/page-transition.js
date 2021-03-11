@@ -7,7 +7,7 @@ import Icon from './icon'
 
 const transition = { duration: 0.5, ease: [0.43, 0.13, 0.23, 0.96] }
 
-const PageTransition = React.memo(() => {
+const PageTransition = React.memo(({ children }) => {
   return (
     <>
       <Head>
@@ -27,13 +27,7 @@ const PageTransition = React.memo(() => {
         }}
         transition={transition}
       >
-        <div className="panel-swipe--content">
-          <Icon name="666" viewBox="0 0 666 666" />
-        </div>
-        <div className="panel-swipe--bg">
-          <Marquee line="Loading" className="is-inverted is-large" />
-          <Marquee reverse line="Loading" className="is-inverted is-large" />
-        </div>
+        <div className="panel-swipe--content">{children}</div>
       </motion.div>
     </>
   )

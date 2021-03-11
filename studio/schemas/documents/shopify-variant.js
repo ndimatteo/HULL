@@ -64,14 +64,14 @@ export default {
     },
     {
       name: 'inStock',
-      title: 'In Stock',
+      title: 'In Stock?',
       type: 'boolean',
       readOnly: true,
       fieldset: 'shopify'
     },
     {
       name: 'lowStock',
-      title: 'Stock is Low',
+      title: 'Low Stock?',
       type: 'boolean',
       readOnly: true,
       fieldset: 'shopify'

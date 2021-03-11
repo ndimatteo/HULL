@@ -13,7 +13,8 @@
   }
 
   &--btn {
-    @apply flex flex-row items-end relative z-20;
+    @apply clean-btn relative z-20 bg-transparent p-0;
+    font: inherit;
 
     .is-active & {
       /* active state styles */

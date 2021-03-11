@@ -41,6 +41,10 @@ module.exports = withBundleAnalyzer({
     // Needed for Klaviyo forms
     KLAVIYO_API_KEY: process.env.KLAVIYO_API_KEY,
 
+    // Needed for Yotpo reviews
+    YOTPO_API_KEY: process.env.YOTPO_API_KEY,
+    YOTPO_SECRET_KEY: process.env.YOTPO_SECRET_KEY,
+
     // Needed for Mailchimp forms
     MAILCHIMP_API_KEY: process.env.MAILCHIMP_API_KEY,
     MAILCHIMP_SERVER: process.env.MAILCHIMP_SERVER,

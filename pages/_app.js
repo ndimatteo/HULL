@@ -5,30 +5,21 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
-import { ShopifyContextProvider } from '../contexts/shopify-context'
-import Cart from '../components/cart/index'
-
+import { SiteContextProvider } from '../lib/contexts'
 import PageTransition from '../components/page-transition'
-
-// import TagManager from 'react-gtm-module'
-
-// const tagManagerArgs = {
-//   gtmId: 'GTM-XXXXXXX',
-// }
+import Cart from '../components/cart/index'
 
 const MyApp = ({ Component, pageProps, router }) => {
   const [isLoading, setLoading] = useState(false)
   const [isLoaderReady, setLoaderReady] = useState(false)
   const [loadingDone, setLoadingDone] = useState(false)
 
-  // useEffect(() => {
-  //   TagManager.initialize(tagManagerArgs)
-  // }, [])
-
+  // The scroll location on the page is not restored on history changes
   useEffect(() => {
     window.history.scrollRestoration = 'manual'
   }, [router])
 
+  // Reset our page-transition states
   useEffect(() => {
     if (loadingDone && isLoaderReady) {
       setLoading(false)
@@ -37,10 +28,15 @@ const MyApp = ({ Component, pageProps, router }) => {
     }
   }, [loadingDone, isLoaderReady])
 
+  // Setup Next router events
   useEffect(() => {
     Router.events.on('routeChangeStart', (url) => {
       // bail if we're just changing a URL parameter
-      if (url.split('?')[0] === window.location.pathname) return
+      if (
+        url.indexOf('?') > -1 &&
+        url.split('?')[0] === router.asPath.split('?')[0]
+      )
+        return
 
       setLoading(true)
       setTimeout(() => {
@@ -84,13 +80,13 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [])
 
   return (
-    <ShopifyContextProvider>
+    <SiteContextProvider>
       <Cart />
       <AnimatePresence
         exitBeforeEnter
         onExitComplete={() => {
           window.scrollTo(0, 0)
-          document.body.classList.remove('nav-open')
+          document.body.classList.remove('overflow-hidden')
         }}
       >
         {isLoading ? (
@@ -99,7 +95,7 @@ const MyApp = ({ Component, pageProps, router }) => {
           <Component key={router.asPath.split('?')[0]} {...pageProps} />
         )}
       </AnimatePresence>
-    </ShopifyContextProvider>
+    </SiteContextProvider>
   )
 }
 

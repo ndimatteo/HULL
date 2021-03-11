@@ -1,78 +1,105 @@
+a[href="#content"].skip-link {
+  @apply block fixed top-0 left-0 transition-transform;
+  z-index: 99;
+  transform: translateY(-150%);
+
+  &:focus {
+    @apply transform-none;
+  }
+}
+
 .header {
-  @apply relative;
+  @apply sticky top-0 inset-x-0 z-50;
+  background: red;
+
+  &.is-overlay {
+    @apply h-0;
+  }
+  
+  &--wrapper {
+    @apply relative z-20 p-4 bg-pageBG;
+
+    .is-overlay & {
+      @apply bg-transparent transition-colors duration-300;
+    }
+
+    .has-bg & {
+      @apply bg-pageBG;
+    }
+
+    .is-white & {
+      @apply text-white delay-75;
+    }
+
+    &::after {
+      @apply absolute inset-x-0 bottom-0 border-t;
+      content: "";
+    }
+  }
   
   &--content {
-    @apply flex flex-col items-center;
+    @apply flex flex-col items-center relative z-30;
+  }
+
+  &--observer {
+    @apply absolute top-8;
   }
 }
 
 .logo {
-  @apply flex;
+  @apply flex flex-col relative z-10;
 
   &--link {
-    @apply block mx-auto;
+    @apply block p-2;
 
     svg {
-      @apply block w-auto h-full fill-current;
+      @apply block fill-current w-auto h-12;
     }
   }
 }
 
 .menu-toggle {
-  @apply block relative ml-auto p-4 w-12 h-12 md:hidden;
+  @apply hidden;
+}
 
-  &.is-open span {
-    @apply transform rotate-45;
-  }
+.cart-toggle {
+  @apply clean-btn relative bg-transparent mx-2 p-0;
+  font: inherit;
 
-  span {
-    @apply block relative w-full h-full transition-transform;
+  &--count {
+    @apply inline-block ml-1 opacity-30;
 
-    &::before,
-    &::after {
-      @apply block absolute top-1/2 inset-x-0 bg-current;
-      content: "";
-      height: 2px;
-      margin-top: -1px;
-    }
-
-    &::after {
-      @apply transform rotate-90;
+    &.is-active {
+      @apply opacity-100;
     }
   }
 }
 
-.main-navigation,
-.footer-navigation {
-  @apply flex-1;
-  
-  > ul {
-    @apply flex flex-col;
+.main-navigation {
+  &--desktop {
+    @apply flex justify-between items-center absolute inset-0;
 
-    @media (--md) {
-      @apply flex-row;
+    .menu-left,
+    .menu-right {
+      @apply flex items-center;
     }
 
-    li {
-      &.is-active {
-        a {
-          /* active state styles */
-        }
-      }
+    ul {
+      @apply flex;
 
-      a:not(.btn),
-      button {
-        @apply block;
+      li {
+        @apply mx-2;
       }
     }
-  }
-}
 
-a[href="#content"].skip-link {
-  @apply block fixed top-0 left-0 z-10 transition-transform;
-  transform: translateY(-150%);
+    button {
+      @apply clean-btn bg-transparent;
+      font: inherit;
+    }
 
-  &:focus {
-    @apply transform-none;
+    a,
+    button {
+      @apply block p-2 text-sm leading-normal font-semibold uppercase;
+    }
   }
 }

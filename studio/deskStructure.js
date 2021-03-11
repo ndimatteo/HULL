@@ -4,16 +4,18 @@ import EyeIcon from 'part:@sanity/base/eye-icon'
 import EditIcon from 'part:@sanity/base/edit-icon'
 
 import {
+  FiAnchor,
   FiHome,
-  FiHeart,
   FiSettings,
   FiGlobe,
   FiAlertOctagon,
   FiMenu,
+  FiNavigation,
   FiRepeat,
   FiShoppingCart,
   FiGift,
-  FiCopy
+  FiCopy,
+  FiTag,
 } from 'react-icons/fi'
 
 import SeoPreview from './components/previews/seo/seo-preview'
@@ -23,11 +25,10 @@ const localURL = 'http://localhost:3000'
 const previewURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL
 
-const hiddenDocTypes = listItem =>
+const hiddenDocTypes = (listItem) =>
   ![
     'homePage',
     'shopPage',
-    'samplePage',
     'errorPage',
     'page',
     'product',
@@ -35,11 +36,14 @@ const hiddenDocTypes = listItem =>
     'collection',
 
     'generalSettings',
+    'promoSettings',
+    'headerSettings',
+    'footerSettings',
     'seoSettings',
 
     'menu',
     'siteSettings',
-    'redirect'
+    'redirect',
   ].includes(listItem.getId())
 
 export default () =>
@@ -61,6 +65,33 @@ export default () =>
                     .documentId('generalSettings')
                 )
                 .icon(FiSettings),
+              S.listItem()
+                .title('Promo Bar')
+                .child(
+                  S.editor()
+                    .id('promoSettings')
+                    .schemaType('promoSettings')
+                    .documentId('promoSettings')
+                )
+                .icon(FiTag),
+              S.listItem()
+                .title('Header')
+                .child(
+                  S.editor()
+                    .id('headerSettings')
+                    .schemaType('headerSettings')
+                    .documentId('headerSettings')
+                )
+                .icon(FiNavigation),
+              S.listItem()
+                .title('Footer')
+                .child(
+                  S.editor()
+                    .id('footerSettings')
+                    .schemaType('footerSettings')
+                    .documentId('footerSettings')
+                )
+                .icon(FiAnchor),
               S.listItem()
                 .title('Error Page')
                 .child(
@@ -86,7 +117,7 @@ export default () =>
               S.listItem()
                 .title('Redirects')
                 .child(S.documentTypeList('redirect').title('Redirects'))
-                .icon(FiRepeat)
+                .icon(FiRepeat),
             ])
         )
         .icon(FiSettings),
@@ -105,29 +136,10 @@ export default () =>
                 .component(SeoPreview)
                 .options({ previewURL })
                 .icon(EyeIcon)
-                .title('SEO Preview')
+                .title('SEO Preview'),
             ])
         )
         .icon(FiHome),
-      S.divider(),
-      S.listItem()
-        .title('Sample Page')
-        .child(
-          S.document()
-            .title('Sample Page')
-            .id('samplePage')
-            .documentId('samplePage')
-            .schemaType('samplePage')
-            .views([
-              S.view.form().icon(EditIcon),
-              S.view
-                .component(SeoPreview)
-                .options({ previewURL })
-                .icon(EyeIcon)
-                .title('SEO Preview')
-            ])
-        )
-        .icon(FiHeart),
       S.divider(),
       S.listItem()
         .title('Pages')
@@ -135,7 +147,7 @@ export default () =>
         .child(
           S.documentTypeList('page')
             .title('Pages')
-            .child(documentId =>
+            .child((documentId) =>
               S.document()
                 .documentId(documentId)
                 .schemaType('page')
@@ -145,7 +157,7 @@ export default () =>
                     .component(SeoPreview)
                     .options({ previewURL })
                     .icon(EyeIcon)
-                    .title('SEO Preview')
+                    .title('SEO Preview'),
                 ])
             )
         ),
@@ -162,7 +174,7 @@ export default () =>
                 .child(
                   S.documentTypeList('product')
                     .title('Products')
-                    .child(documentId =>
+                    .child((documentId) =>
                       S.document()
                         .documentId(documentId)
                         .schemaType('product')
@@ -172,7 +184,7 @@ export default () =>
                             .component(SeoPreview)
                             .options({ previewURL })
                             .icon(EyeIcon)
-                            .title('SEO Preview')
+                            .title('SEO Preview'),
                         ])
                     )
                 ),
@@ -185,7 +197,7 @@ export default () =>
                     .menuItems(S.documentTypeList('product').getMenuItems())
                     .filter('_type == $type')
                     .params({ type: 'product' })
-                    .child(productID =>
+                    .child((productID) =>
                       S.documentList()
                         .title('Variants')
                         .menuItems(
@@ -194,9 +206,9 @@ export default () =>
                         .filter('_type == $type && productID == $id')
                         .params({
                           type: 'productVariant',
-                          id: Number(productID.replace('product-', ''))
+                          id: Number(productID.replace('product-', '')),
                         })
-                        .child(documentId =>
+                        .child((documentId) =>
                           S.document()
                             .documentId(documentId)
                             .schemaType('productVariant')
@@ -206,7 +218,7 @@ export default () =>
                                 .component(SeoPreview)
                                 .options({ previewURL })
                                 .icon(EyeIcon)
-                                .title('SEO Preview')
+                                .title('SEO Preview'),
                             ])
                         )
                     )
@@ -217,7 +229,7 @@ export default () =>
                 .child(
                   S.documentTypeList('collection')
                     .title('Collections')
-                    .child(documentId =>
+                    .child((documentId) =>
                       S.document()
                         .documentId(documentId)
                         .schemaType('collection')
@@ -227,7 +239,7 @@ export default () =>
                             .component(SeoPreview)
                             .options({ previewURL })
                             .icon(EyeIcon)
-                            .title('SEO Preview')
+                            .title('SEO Preview'),
                         ])
                     )
                 ),
@@ -240,12 +252,12 @@ export default () =>
                     .id('shopPage')
                     .schemaType('shopPage')
                     .documentId('shopPage')
-                )
+                ),
             ])
         )
         .icon(FiShoppingCart),
       // This returns an array of all the document types
       // defined in schema.js. We filter out those that we have
       // defined the structure above
-      ...S.documentTypeListItems().filter(hiddenDocTypes)
+      ...S.documentTypeListItems().filter(hiddenDocTypes),
     ])

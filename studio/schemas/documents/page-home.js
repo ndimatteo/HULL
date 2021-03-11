@@ -1,22 +1,29 @@
-import { FiHome } from 'react-icons/fi'
+import {
+  FiHome,
+  FiHelpCircle,
+  FiAlertTriangle,
+  FiActivity
+} from 'react-icons/fi'
 
 export default {
   title: 'Home',
   name: 'homePage',
   type: 'document',
   icon: FiHome,
+  __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
-    // Place other Fields here
+    {
+      title: 'Overlay header with transparency?',
+      name: 'hasTransparentHeader',
+      type: 'boolean',
+      description:
+        'When toggled on, the header will appear with a transparent background over the first content module and text/logos will be white until scrolling is engaged.'
+    },
     {
       title: 'Content',
-      name: 'content',
+      name: 'modules',
       type: 'array',
-      of: [
-        { type: 'textBlock' },
-        { type: 'accordionList' },
-        { type: 'formNewsletter' },
-        { type: 'formContact' }
-      ]
+      of: [{ type: 'grid' }, { type: 'marquee' }]
     },
     {
       title: 'SEO / Share Settings',

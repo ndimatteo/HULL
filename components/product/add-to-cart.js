@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useStore, useAddItem } from '../../contexts/shopify-context'
+import { useStore, useAddItem } from '../../lib/contexts/shopify'
 
 const addToCart = ({ productID, quantity = 1, className, children }) => {
   const addItemToCart = useAddItem()

@@ -49,14 +49,14 @@ export default {
       fieldset: 'shopify'
     },
     {
-      title: 'In Stock',
+      title: 'In Stock?',
       name: 'inStock',
       type: 'boolean',
       readOnly: true,
       fieldset: 'shopify'
     },
     {
-      title: 'Stock is Low',
+      title: 'Low Stock?',
       name: 'lowStock',
       type: 'boolean',
       readOnly: true,

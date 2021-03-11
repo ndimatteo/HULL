@@ -25,12 +25,7 @@ export default {
       title: 'Content',
       name: 'content',
       type: 'array',
-      of: [
-        { type: 'textBlock' },
-        { type: 'accordionList' },
-        { type: 'formNewsletter' },
-        { type: 'formContact' }
-      ]
+      of: [{ type: 'grid' }]
     },
     {
       title: 'SEO / Share Settings',

@@ -1,21 +1,21 @@
 .clean-btn {
-  @apply inline-block relative m-0 p-0 border-0 bg-transparent appearance-none no-underline cursor-pointer font-inherit text-center;
+  @apply appearance-none no-underline cursor-pointer font-inherit;
 }
 
 .sr-only {
-  @apply absolute m-0 p-0 border-0 w-px h-px overflow-hidden;
+  @apply absolute m-0 p-0 border-0 w-px h-px overflow-hidden whitespace-nowrap;
   clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
 }
 
-@define-mixin aspect-ratio $width: null, $height: null {
-  position: relative;
-
-  &::before {
-    content: "";
-    display: block;
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-bottom: calc(($height / $width) * 100%);
+@keyframes pulse {
+  0% {
+		box-shadow: 0 0 0 0 hsla(var(--pageBG-hsl), 0.3);
+  }
+  70% {
+		box-shadow: 0 0 0 8px hsla(var(--pageBG-hsl), 0);
+  }
+  100% {
+		box-shadow: 0 0 0 0 hsla(var(--pageBG-hsl), 0);
   }
 }
