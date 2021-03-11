@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import ErrorPage from '../404'
 
-import { getProduct, getStaticPage, blockContent } from '../../lib/api'
+import { getProduct, getStaticPage, modules } from '../../lib/api'
 import { hasObject, centsToPrice } from '../../lib/helpers'
 
 import Layout from '../../components/layout'
@@ -220,8 +220,8 @@ export async function getServerSideProps({ query, preview, previewData }) {
 
   const errorData = await getStaticPage(`
     *[_type == "errorPage"][0]{
-      content[]{
-        ${blockContent}
+      modules[]{
+        ${modules}
       },
       seo
     }
