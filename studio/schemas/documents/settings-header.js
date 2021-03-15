@@ -1,3 +1,5 @@
+import { FiAlertCircle } from 'react-icons/fi'
+
 export default {
   title: 'Header Settings',
   name: 'headerSettings',
@@ -8,33 +10,50 @@ export default {
       title: 'Desktop',
       name: 'desktop',
       description: 'Navigation settings for desktop view',
-      options: { collapsible: true }
+      options: { collapsed: false }
     },
     {
       title: 'Mobile',
       name: 'mobile',
       description: 'Navigation settings for mobile view',
-      options: { collapsible: true }
+      options: { collapsed: false }
     }
   ],
   fields: [
     {
-      title: 'Menu (Left)',
-      name: 'menuLeft',
+      name: 'navNote',
+      type: 'note',
+      options: {
+        icon: FiAlertCircle,
+        headline: 'Note',
+        message: `On desktop, dropdowns will appear as a "mega-nav". On mobile, dropdowns will appear as accordions. The "Cart" toggle will always appear to the right of the header on all screen sizes.`,
+        tone: 'caution'
+      }
+    },
+    {
+      title: 'Desktop Menu (Left)',
+      name: 'menuDesktopLeft',
       type: 'reference',
       to: [{ type: 'menu' }],
       fieldset: 'desktop'
     },
     {
-      title: 'Menu (Right)',
-      name: 'menuRight',
+      title: 'Desktop Menu (Right)',
+      name: 'menuDesktopRight',
       type: 'reference',
       to: [{ type: 'menu' }],
       fieldset: 'desktop'
     },
     {
-      title: 'Menu',
-      name: 'menuMobile',
+      title: 'Mobile Menu (Primary)',
+      name: 'menuMobilePrimary',
+      type: 'reference',
+      to: [{ type: 'menu' }],
+      fieldset: 'mobile'
+    },
+    {
+      title: 'Mobile Menu (Secondary)',
+      name: 'menuMobileSecondary',
       type: 'reference',
       to: [{ type: 'menu' }],
       fieldset: 'mobile'

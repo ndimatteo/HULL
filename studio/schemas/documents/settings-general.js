@@ -11,17 +11,6 @@ export default {
       type: 'url'
     },
     {
-      title: 'Shopify Checkout URL',
-      description:
-        'The custom domain or subdomain connected to your Shopify store.',
-      name: 'storeURL',
-      type: 'url',
-      validation: Rule =>
-        Rule.uri({
-          scheme: ['https']
-        })
-    },
-    {
       title: 'Klaviyo Site ID (Public API Key)',
       description: 'For product waitlist and newsletter forms.',
       name: 'klaviyoAccountID',

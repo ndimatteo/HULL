@@ -1,14 +1,39 @@
 import React from 'react'
 
-import MarqueeItem from '../components/marquee'
+import Marqy from '../components/marquee'
+import Photo from '../components/photo'
 
 const Marquee = ({ data = {} }) => {
-  const { text, speed, reverse, pausable } = data
+  const { items, speed, reverse, pausable } = data
+
+  if (!items) return null
 
   return (
-    <MarqueeItem speed={speed} reverse={reverse} pauseOnHover={pausable}>
-      {text}
-    </MarqueeItem>
+    <Marqy
+      speed={speed}
+      direction={reverse ? 'right' : 'left'}
+      pauseOnHover={pausable}
+      className="marquee"
+    >
+      <div className="marquee--item">
+        {items.map((item, key) => {
+          switch (item._type) {
+            case 'simple':
+              return (
+                <span key={key} className="marquee--text">
+                  {item.text}
+                </span>
+              )
+            case 'photo':
+              return (
+                <div key={key} className="marquee--photo">
+                  <Photo photo={item.photo} />
+                </div>
+              )
+          }
+        })}
+      </div>
+    </Marqy>
   )
 }
 

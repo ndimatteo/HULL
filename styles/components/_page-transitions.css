@@ -1,7 +1,0 @@
-.panel-swipe {
-  @apply fixed inset-0 bg-pageText text-pageBG z-50 pointer-events-none overflow-hidden;
-
-  &--content {
-    /* Loader Content styles */
-  }
-}

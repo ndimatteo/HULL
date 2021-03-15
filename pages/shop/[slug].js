@@ -1,38 +1,18 @@
 import React from 'react'
-import { useRouter } from 'next/router'
 
-import ErrorPage from '../404'
+import Layout from '@components/layout'
+import { getAllDocSlugs, getCollection } from '@lib/api'
 
-import { getAllDocSlugs, getCollection } from '../../lib/api'
+import { Module } from '@modules/index'
 
-import Layout from '../../components/layout'
-import Collection from '../../components/shop/collection'
-
-const CollectionPage = ({ data, error, preview }) => {
-  const router = useRouter()
-
-  // ERROR: show 404 page
-  if (!router.isFallback && !data) {
-    return <ErrorPage data={error} statusCode={404} />
-  }
-
-  // expand our page data
+const CollectionPage = ({ data }) => {
   const { site, page } = data
 
   return (
     <Layout site={site} page={page}>
-      <section className="section">
-        <div className="section--wrapper">
-          <h1 className="text-center">{page.title}</h1>
-          {page.collection && (
-            <Collection
-              collection={page.collection}
-              paginationLimit={12}
-              preview={preview}
-            />
-          )}
-        </div>
-      </section>
+      {page.modules?.map((module, key) => (
+        <Module key={key} module={module} collectionProducts={page.products} />
+      ))}
     </Layout>
   )
 }
@@ -46,10 +26,6 @@ export async function getStaticProps({ params, preview, previewData }) {
   return {
     props: {
       data: collectionData,
-      preview: {
-        active: preview ? true : false,
-        token: previewData?.token || null,
-      },
     },
   }
 }

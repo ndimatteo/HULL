@@ -8,9 +8,10 @@ export default {
   __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
-      title: 'Content',
-      name: 'content',
-      type: 'complexPortableText'
+      title: 'Page Modules',
+      name: 'modules',
+      type: 'array',
+      of: [{ type: 'grid' }, { type: 'marquee' }]
     },
     {
       title: 'SEO / Share Settings',

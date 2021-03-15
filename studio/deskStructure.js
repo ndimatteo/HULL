@@ -39,6 +39,7 @@ const hiddenDocTypes = (listItem) =>
     'promoSettings',
     'headerSettings',
     'footerSettings',
+    'cartSettings',
     'seoSettings',
 
     'menu',
@@ -92,6 +93,15 @@ export default () =>
                     .documentId('footerSettings')
                 )
                 .icon(FiAnchor),
+              S.listItem()
+                .title('Cart')
+                .child(
+                  S.editor()
+                    .id('cartSettings')
+                    .schemaType('cartSettings')
+                    .documentId('cartSettings')
+                )
+                .icon(FiShoppingCart),
               S.listItem()
                 .title('Error Page')
                 .child(

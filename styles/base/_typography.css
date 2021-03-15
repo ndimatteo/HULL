@@ -87,8 +87,12 @@ textarea,
 select,
 details {
   &:focus {
-    outline: 1px dashed currentColor;
+    outline: 1px dashed var(--pageText);
     outline-offset: 2px;
+
+    .is-inverted & {
+      outline-color: var(--pageBG);
+    }
     
     body:not(.is-tabbing) & {
       outline: none;

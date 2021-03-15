@@ -1,8 +1,9 @@
 .promo-bar {
-  @apply relative z-50 bg-pageText text-pageBG text-center;
+  @apply relative z-60 bg-pageText text-pageBG text-center whitespace-nowrap overflow-x-auto overflow-y-hidden;
+  scroll-behavior: smooth;
 
   &--content {
-    @apply p-2 text-sm font-semibold;
+    @apply inline-flex px-8 py-2 text-sm font-semibold;
   }
 
   &--link {

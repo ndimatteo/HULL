@@ -1,233 +1,170 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import axios from 'axios'
+import useSWR from 'swr'
 
-import ErrorPage from '../404'
+import Error from '@pages/404'
+import Layout from '@components/layout'
+import { getAllDocSlugs, getProduct } from '@lib/api'
+import { centsToPrice } from '@lib/helpers'
 
-import { getProduct, getStaticPage, modules } from '../../lib/api'
-import { hasObject, centsToPrice } from '../../lib/helpers'
+import { Module } from '@modules/index'
 
-import Layout from '../../components/layout'
-import Marquee from '../../components/marquee'
+const fetchInventory = (url, id) =>
+  axios
+    .get(url, {
+      params: {
+        id: id,
+      },
+    })
+    .then((res) => res.data)
 
-import ProductGallery from '../../components/product/gallery'
-import ProductPrice from '../../components/product/price'
-import ProductDescription from '../../components/product/description'
-import ProductOption from '../../components/product/option'
-import Counter from '../../components/product/counter'
-import AddToCart from '../../components/product/add-to-cart'
-import ProductWaitlist from '../../components/product/waitlist'
-
-const Product = ({ data, error }) => {
+const Product = ({ data }) => {
   const router = useRouter()
 
-  // ERROR: show 404 page
-  if (!router.isFallback && !data?.product.id) {
-    return <ErrorPage data={error} statusCode={404} />
+  if (!router.isFallback && !data) {
+    return <Error statusCode={404} />
   }
 
-  // expand our page data
-  const { site, menus, product, hasVariant } = data
+  // extract our data
+  const { site, page } = data
+  const { query } = router
 
-  // find default variant for product
-  const defaultVariant = product.variants.find(
-    (v) => v.id === product.activeVariant
-  )
+  // set our Product state
+  const [product, setProduct] = useState(page.product)
+
+  // find selected variant for product
+  const selectedVariant = product.variants.find((v) => v.id == query.variant)
 
   // set active variant as default
   const [activeVariant, setActiveVariant] = useState(
-    defaultVariant ? defaultVariant : product.variants[0]
+    selectedVariant || product.variants[0]
   )
 
-  // handle option changes
-  const changeOption = (e, name, value) => {
-    const newOptions = activeVariant.options.map((opt) =>
-      opt.name === name ? { ...opt, value: value } : opt
-    )
+  // Check our product inventory is still correct
+  const { data: productInventory } = useSWR(
+    ['/api/shopify/product-inventory', page.product.id],
+    (url, id) => fetchInventory(url, id),
+    { errorRetryCount: 2 }
+  )
 
-    const newVariant = product.variants.find((variant) =>
-      variant.options.every((opt) => hasObject(newOptions, opt))
-    )
+  // Update the active variant when an option changes
+  const changeVariant = (variant) => {
+    setActiveVariant(variant)
 
-    if (newVariant) {
-      setActiveVariant(newVariant)
-      router.replace(
-        `/products/[slug]`,
-        `/products/${product.slug}?variant=${newVariant.id}`,
-        { shallow: true }
-      )
-    }
+    router.replace(
+      `/products/[slug]`,
+      `/products/${page.product.slug}?variant=${variant.id}`,
+      { shallow: true }
+    )
   }
 
-  // set default quantity
-  const [quantity, setQuantity] = useState(1)
+  // Rehydrate our inventory from SWR
+  useEffect(() => {
+    if (productInventory) {
+      setProduct({
+        ...product,
+        inStock: productInventory.inStock,
+        lowStock: productInventory.lowStock,
+        variants: [
+          ...product.variants.map((v) => {
+            const newInventory = productInventory.variants.find(
+              (nv) => nv.id === v.id
+            )
+            return newInventory ? { ...v, ...newInventory } : v
+          }),
+        ],
+      })
+    }
+  }, [productInventory])
+
+  // Ensure the active variant matches the route query
+  useEffect(() => {
+    if (selectedVariant) {
+      setActiveVariant(selectedVariant)
+    }
+  }, [query.variant, selectedVariant])
 
   return (
-    <Layout
-      site={site}
-      page={{
-        title: hasVariant
-          ? `${product.title} - ${activeVariant.title}`
-          : product.title,
-        seo: hasVariant ? activeVariant.seo || product.seo : product.seo,
-      }}
-      schema={{
-        '@context': 'http://schema.org',
-        '@type': 'Product',
-        name: product.title,
-        price: centsToPrice(hasVariant ? activeVariant.price : product.price),
-        description: product.description,
-        sku: hasVariant ? activeVariant.sku : product.sku,
-        offers: {
-          '@type': 'Offer',
-          url: `${site.rootDomain}/products/${product.slug}${
-            hasVariant ? `?variant=${activeVariant.id}` : ''
-          }`,
-          availability: hasVariant
-            ? `http://schema.org/${
-                activeVariant.inStock ? 'InStock' : 'SoldOut'
-              }`
-            : `http://schema.org/${product.inStock ? 'InStock' : 'SoldOut'}`,
-          price: centsToPrice(hasVariant ? activeVariant.price : product.price),
-          priceCurrency: 'USD',
-        },
-        brand: {
-          '@type': 'Brand',
-          name: site.seo.siteTitle,
-        },
-      }}
-    >
-      <section className="section">
-        <div className={`product${product.photos.main ? ' has-gallery' : ''}`}>
-          <Marquee line={product.inStock ? 'For Sale /' : 'Sold Out /'} />
-
-          <div className="product--inner">
-            {product.photos.main && (
-              <ProductGallery
-                photosets={product.photos.main}
-                activeVariant={activeVariant}
-                hasArrows
-                hasThumbs
-                hasCounter
-              />
-            )}
-
-            <div className="product--content">
-              <div className="product--header">
-                <h1 className="product--title">{product.title}</h1>
-                <ProductPrice
-                  price={activeVariant ? activeVariant.price : product.price}
-                  comparePrice={
-                    activeVariant
-                      ? activeVariant.comparePrice
-                      : product.comparePrice
-                  }
-                />
-
-                {activeVariant && (
-                  <p className="product--subtitle">{activeVariant.title}</p>
-                )}
-
-                {product.description && (
-                  <ProductDescription content={product.description} />
-                )}
-              </div>
-
-              <div className="product--options">
-                {product.options?.map(
-                  (option, key) =>
-                    option.values.length > 1 && (
-                      <ProductOption
-                        key={key}
-                        position={key}
-                        option={option}
-                        variants={product.variants}
-                        activeVariant={activeVariant}
-                        onChange={changeOption}
-                      />
-                    )
-                )}
-              </div>
-
-              <ProductActions
-                activeVariant={activeVariant}
-                quantity={quantity}
-                setQuantity={setQuantity}
-                klaviyoAccountID={product.klaviyoAccountID}
-              />
-            </div>
-          </div>
-
-          <Marquee
-            line={product.inStock ? 'For Sale /' : 'Sold Out /'}
-            reverse
-          />
-        </div>
-      </section>
-    </Layout>
-  )
-}
-
-const ProductActions = ({
-  activeVariant,
-  quantity,
-  setQuantity,
-  klaviyoAccountID,
-}) => {
-  return (
-    <div className="product--actions">
-      {activeVariant?.inStock ? (
-        <>
-          {activeVariant.lowStock && (
-            <div className="product--stock-indicator">
-              <span>Low Stock</span>
-            </div>
-          )}
-          <Counter max={10} onUpdate={setQuantity} />
-          <AddToCart
-            productID={activeVariant.id}
-            quantity={quantity}
-            className="btn is-block"
-          >
-            Add To Cart
-          </AddToCart>
-        </>
-      ) : (
-        <>
-          {klaviyoAccountID ? (
-            <ProductWaitlist
-              variant={activeVariant.id}
-              klaviyo={klaviyoAccountID}
+    <>
+      {!router.isFallback && (
+        <Layout
+          site={site}
+          page={page}
+          schema={getProductSchema(product, activeVariant, site)}
+        >
+          {page.modules?.map((module, key) => (
+            <Module
+              key={key}
+              module={module}
+              product={product}
+              activeVariant={activeVariant}
+              onVariantChange={changeVariant}
             />
-          ) : (
-            <div className="btn is-disabled is-block">Out of Stock</div>
-          )}
-        </>
+          ))}
+        </Layout>
       )}
-    </div>
+    </>
   )
 }
 
-export async function getServerSideProps({ query, preview, previewData }) {
-  const hasVariant = query.variant ? true : false // check for variant param
-  const productData = await getProduct(query.slug, query.variant, {
+function getProductSchema(product, variant, site) {
+  if (!product) return null
+
+  const router = useRouter()
+  const { query } = router
+
+  return {
+    '@context': 'http://schema.org',
+    '@type': 'Product',
+    name: product.title,
+    price: centsToPrice(query.variant ? variant.price : product.price),
+    description: product.description,
+    sku: query.variant ? variant.sku : product.sku,
+    offers: {
+      '@type': 'Offer',
+      url: `${site.rootDomain}/products/${product.slug}${
+        query.variant ? `?variant=${variant.id}` : ''
+      }`,
+      availability: query.variant
+        ? `http://schema.org/${variant.inStock ? 'InStock' : 'SoldOut'}`
+        : `http://schema.org/${product.inStock ? 'InStock' : 'SoldOut'}`,
+      price: centsToPrice(query.variant ? variant.price : product.price),
+      priceCurrency: 'USD',
+    },
+    brand: {
+      '@type': 'Brand',
+      name: site.seo.siteTitle,
+    },
+  }
+}
+
+export async function getStaticProps({ params, preview, previewData }) {
+  const productData = await getProduct(params.slug, {
     active: preview,
     token: previewData?.token,
   })
 
-  const errorData = await getStaticPage(`
-    *[_type == "errorPage"][0]{
-      modules[]{
-        ${modules}
-      },
-      seo
-    }
-  `)
-
   return {
     props: {
-      data: { ...{ hasVariant: hasVariant }, ...productData }, // merge our data to help with SEO
-      error: errorData,
+      data: productData,
     },
+  }
+}
+
+export async function getStaticPaths() {
+  const allProducts = await getAllDocSlugs('product')
+
+  return {
+    paths:
+      allProducts?.map((page) => {
+        return {
+          params: {
+            slug: page.slug,
+          },
+        }
+      }) || [],
+    fallback: false,
   }
 }
 

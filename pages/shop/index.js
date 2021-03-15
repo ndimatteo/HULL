@@ -1,21 +1,18 @@
 import React from 'react'
 
-import { getStaticPage, modules } from '../../lib/api'
+import Layout from '@components/layout'
+import { getStaticPage, modules, allProducts } from '@lib/api'
 
-import Layout from '../../components/layout'
-import Collection from '../../components/shop/collection'
+import { Module } from '@modules/index'
 
-const Shop = ({ data, preview }) => {
+const Shop = ({ data }) => {
   const { site, page } = data
 
   return (
     <Layout site={site} page={page}>
-      <section className="section">
-        <div className="section--wrapper">
-          <h1 className="text-center">{page.title}</h1>
-          <Collection paginationLimit={12} preview={preview} />
-        </div>
-      </section>
+      {page.modules?.map((module, key) => (
+        <Module key={key} module={module} collectionProducts={page.products} />
+      ))}
     </Layout>
   )
 }
@@ -28,6 +25,7 @@ export async function getStaticProps({ preview, previewData }) {
       modules[]{
         ${modules}
       },
+      "products": ${allProducts(preview)},
       seo
     }
   `,
@@ -40,10 +38,6 @@ export async function getStaticProps({ preview, previewData }) {
   return {
     props: {
       data: shopData,
-      preview: {
-        active: preview ? true : false,
-        token: previewData?.token || null,
-      },
     },
   }
 }

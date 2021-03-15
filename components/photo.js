@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react'
 import LazyLoad from 'vanilla-lazyload'
 import cx from 'classnames'
 
-import { buildSrcSet, buildSrc } from '../lib/helpers'
+import { buildSrcSet, buildSrc } from '@lib/helpers'
 
 const Photo = ({
   photo,
@@ -26,7 +26,6 @@ const Photo = ({
       lazy = new LazyLoad(
         {
           threshold: -150,
-          unobserve_entered: true,
           callback_loaded: () => setLoaded(true),
         },
         [imageRef.current]

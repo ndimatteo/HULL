@@ -15,17 +15,19 @@
 @import "components/_drawers";
 @import "components/_dropdowns";
 @import "components/_marquees";
-@import "components/_meganavs";
-@import "components/_page-transitions";
 
-@import "modules/_cart";
+@import "modules/_cookie-bar";
 @import "modules/_promo-banner";
 @import "modules/_header";
+@import "modules/_mega-nav";
 @import "modules/_footer";
+@import "modules/_cart";
 
 @import "modules/_collection";
 @import "modules/_product";
+@import "modules/_theme-switch";
 
 @import "_shame";
 
 /* HULL demo theme styles: */
+@import "_hull";

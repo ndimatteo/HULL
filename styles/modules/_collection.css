@@ -1,24 +1,39 @@
 .collection {
-  @apply max-w-7xl mt-12 mx-auto px-4;
+  @apply overflow-hidden border-b;
+  
+  &--grid {
+    @apply grid grid-cols-1 md:grid-cols-3 -m-px;
+  }
 }
 
-.product-item {
-  @apply flex flex-col relative;
-
-  &--gallery {
-    @apply relative z-30;
-  }
+.product-card {
+  @apply flex flex-col relative p-4 sm:p-8 border;
+  margin: -.5px;
   
   &--photo {
-    @apply relative;
+    @apply relative overflow-hidden;
 
-    &-hover {
+    .is-hover {
       @apply absolute inset-0 z-10 opacity-0 invisible transition-all;
 
-      .product-item:hover & {
+      .product-card:hover & {
         @apply opacity-100 visible;
       }
     }
+  }
+
+  &--gallery {
+    @apply relative;
+
+    .carousel {
+      &--hud {
+        @apply z-30;
+      }
+    }
+  }
+
+  &--details {
+    @apply mt-8 text-center;
   }
 
   &--link {
@@ -30,7 +45,21 @@
     }
   }
 
+  .price {
+    &--current {
+      @apply sm:text-base sm:leading-normal font-semibold;
+    }
+  }
+
   &--option {
-    @apply z-30;
+    @apply relative z-30 mt-4;
+
+    .option {
+      @apply m-0 p-0 border-0;
+
+      &--values {
+        @apply mx-auto;
+      }
+    }
   }
 }

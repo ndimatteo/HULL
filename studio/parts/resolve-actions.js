@@ -19,6 +19,7 @@ const singletons = [
   'promoSettings',
   'headerSettings',
   'footerSettings',
+  'cartSettings',
   'seoSettings'
 ]
 

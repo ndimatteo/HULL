@@ -1,65 +1,38 @@
-import React, { useState, useEffect, useCallback } from 'react'
-import { useEmblaCarousel } from 'embla-carousel/react'
+import React, { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useKeenSlider } from 'keen-slider/react'
+import cx from 'classnames'
 
-import Photo from './photo'
+import { flipAnim } from '@lib/animate'
+import Icon from '@components/icon'
+// import Photo from '@components/photo'
 
 const Carousel = ({
-  children,
-  thumbs,
+  id,
   hasArrows,
   hasDots,
   hasCounter,
+  hasThumbs,
+  hasDrag = true,
   className,
+  children,
 }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    speed: 13,
+  const [currentSlide, setCurrentSlide] = useState(0)
+  const [sliderRef, slider] = useKeenSlider({
+    initial: 0,
+    slides: '.carousel--slide',
     loop: true,
-    containScroll: 'keepSnaps',
-    align: 0,
+    duration: 800,
+    dragSpeed: 0.8,
+    controls: hasDrag,
+    slideChanged(s) {
+      setCurrentSlide(s.details().relativeSlide)
+    },
   })
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [scrollSnaps, setScrollSnaps] = useState([])
-
-  const scrollTo = useCallback((index) => emblaApi.scrollTo(index), [emblaApi])
-
-  const onSelect = useCallback(() => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-  }, [emblaApi])
-
-  useEffect(() => {
-    if (emblaApi) {
-      setScrollSnaps(emblaApi.scrollSnapList())
-      emblaApi.on('select', onSelect)
-      onSelect()
-    }
-  }, [emblaApi])
-
-  const flipAnim = {
-    show: {
-      y: ['100%', '0%'],
-      transition: {
-        duration: 1,
-        ease: [0.16, 1, 0.3, 1],
-        when: 'beforeChildren',
-      },
-    },
-    hide: {
-      y: '-100%',
-      transition: {
-        duration: 1,
-        ease: [0.16, 1, 0.3, 1],
-        when: 'afterChildren',
-      },
-    },
-  }
 
   return (
-    <div
-      ref={emblaRef}
-      className={`carousel${className ? ` ${className}` : ''}`}
-    >
-      <div className="carousel--container">
+    <div className={cx('carousel', { 'has-drag': hasDrag }, className)}>
+      <div ref={sliderRef} className="carousel--slides">
         {children.map((child, index) => (
           <div className="carousel--slide" key={index}>
             {child}
@@ -67,7 +40,7 @@ const Carousel = ({
         ))}
       </div>
 
-      {scrollSnaps && thumbs && (
+      {/* {scrollSnaps && thumbs && (
         <div className="carousel--thumbs">
           {thumbs.map((thumb, key) => (
             <button
@@ -89,73 +62,71 @@ const Carousel = ({
             </button>
           ))}
         </div>
-      )}
+      )} */}
 
-      {scrollSnaps && (
+      {slider && (
         <div className="carousel--hud">
-          {hasArrows && (
-            <div className="carousel--nav">
+          <div className="carousel--nav">
+            {hasArrows && (
               <button
-                onClick={() => emblaApi.scrollPrev()}
+                onClick={() => slider.prev()}
                 className="carousel--prev"
                 aria-label="Previous slide"
               >
-                ←
+                <Icon name="Arrow" id={`prev-${id}`} />
               </button>
+            )}
+
+            <div className="carousel--status">
+              {hasDots && (
+                <div className="carousel--dots">
+                  {[...Array(slider.details().size).keys()].map((index) => (
+                    <button
+                      key={index}
+                      onClick={() => slider.moveToSlideRelative(index)}
+                      aria-label={`Go to slide ${index + 1}`}
+                      className={cx('carousel--dot', {
+                        'is-active': currentSlide === index,
+                      })}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {hasCounter && (
+                <div className="carousel--counter">
+                  <div className="carousel--counter-item is-current">
+                    <div className="counter-flipper">
+                      <AnimatePresence initial={false}>
+                        <motion.span
+                          key={currentSlide + 1}
+                          initial="hide"
+                          animate="show"
+                          exit="hide"
+                          variants={flipAnim}
+                        >
+                          {currentSlide + 1}
+                        </motion.span>
+                      </AnimatePresence>
+                    </div>
+                  </div>
+                  <div className="carousel--counter-item is-total">
+                    <span>{slider.details().size}</span>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {hasArrows && (
               <button
-                onClick={() => emblaApi.scrollNext()}
+                onClick={() => slider.next()}
                 className="carousel--next"
                 aria-label="Next slide"
               >
-                →
+                <Icon name="Arrow" id={`next-${id}`} />
               </button>
-            </div>
-          )}
-
-          {hasDots && (
-            <div className="carousel--dots">
-              {scrollSnaps.map((dot, key) => (
-                <button
-                  key={key}
-                  onClick={() => scrollTo(key)}
-                  aria-label={`Go to slide ${key + 1}`}
-                  className={selectedIndex === key ? 'is-active' : null}
-                />
-              ))}
-            </div>
-          )}
-
-          {hasCounter && (
-            <div className="carousel--status">
-              <div className="carousel--counter is-current">
-                <AnimatePresence initial={false}>
-                  <motion.span
-                    key={selectedIndex + 1}
-                    initial="hide"
-                    animate="show"
-                    exit="hide"
-                    variants={flipAnim}
-                  >
-                    {selectedIndex + 1}
-                  </motion.span>
-                </AnimatePresence>
-              </div>
-
-              <div className="carousel--progress">
-                <span
-                  style={{
-                    transform: `scaleX(${
-                      selectedIndex / (scrollSnaps.length - 1)
-                    })`,
-                  }}
-                />
-              </div>
-
-              <div className="carousel--counter is-total">
-                <span>{scrollSnaps.length}</span>
-              </div>
-            </div>
-          )}
+            )}
+          </div>
         </div>
       )}
     </div>

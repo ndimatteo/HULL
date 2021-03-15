@@ -20,7 +20,7 @@ export default {
         'When toggled on, the header will appear with a transparent background over the first content module and text/logos will be white until scrolling is engaged.'
     },
     {
-      title: 'Content',
+      title: 'Page Modules',
       name: 'modules',
       type: 'array',
       of: [{ type: 'grid' }, { type: 'marquee' }]

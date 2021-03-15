@@ -1,11 +1,11 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import Error from './404'
+import Error from '@pages/404'
 
 import Layout from '../components/layout'
-import { getAllDocSlugs, getPage } from '../lib/api'
+import { getAllDocSlugs, getPage } from '@lib/api'
 
-import { Module } from '../modules'
+import { Module } from '@modules/index'
 
 const Page = ({ data }) => {
   const router = useRouter()

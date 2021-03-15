@@ -1,0 +1,16 @@
+.theme-switch {
+  @apply flex my-4 border px-1 py-2 rounded-full;
+
+  &--button {
+    @apply clean-btn mx-1 p-0 bg-transparent w-5 h-5 rounded-full border;
+
+    &.is-current {
+      box-shadow: 0 0 0 8px hsla(var(--pageText-hsl), .15);
+    }
+
+    span {
+      @apply block w-full h-full rounded-full bg-current;
+      color: var(--swatch);
+    }
+  }
+}

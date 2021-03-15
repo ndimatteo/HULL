@@ -1,61 +1,83 @@
-.marquee {
-  @apply relative overflow-hidden opacity-0 transition-opacity;
-
-  &.is-ready {
-    @apply opacity-100;
-  }
+[data-marquee] {
+  @apply relative overflow-hidden;
 
   * {
     @apply whitespace-nowrap;
   }
+}
 
-  &--inner {
-    @apply inline-flex;
-    flex: 1 0 auto;
+[data-marquee-inner] {
+  @apply flex;
+
+  [data-direction='right'] & {
+    @apply justify-end;
+  }
+
+  @media (prefers-reduced-motion) {
+    @apply overflow-x-scroll;
+  }
+}
+
+[data-marquee-content] {
+  @apply flex;
+  flex: 1 0 auto;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: running;
+  will-change: transform;
+
+  [data-direction='left'] & {
     animation-name: marqueeL;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+  }
+
+  [data-direction='right'] & {
+    animation-name: marqueeR;
+  }
+
+  [data-pause-on-hover]:hover & {
     animation-play-state: paused;
-    will-change: transform;
-
-    .is-ready & {
-      animation-play-state: running;
-    }
-
-    .is-reversed & {
-      animation-name: marqueeR;
-    }
-
-    .has-pause:hover & {
-      animation-play-state: paused;
-    }
   }
 
-  &--content {
-    @apply inline-flex;
-    flex: 1 0 auto;
-
-    .is-reversed & {
-      transform: translate3d(-100%, 0, 0);
-    }
+  @media (prefers-reduced-motion) {
+    animation: none !important;
   }
+}
 
-  &--item {
-    @apply flex items-center;
-    flex: 1 0 auto;
-  }
+[data-marquee-item] {
+  flex: 1 0 auto;
 }
 
 @keyframes marqueeL {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-50%, 0, 0); }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
 }
 
 @keyframes marqueeR {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(50%, 0, 0); }
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
-.marquee-data {
-  @apply flex items-center;
+
+.marquee {
+  @apply border-b;
+  
+  &--item {
+    @apply flex items-center;
+  }
+
+  &--text {
+    @apply block p-8 text-5xl leading-none;
+  }
+
+  &--photo {
+    @apply relative w-80;
+  }
 }

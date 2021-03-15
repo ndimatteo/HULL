@@ -89,6 +89,22 @@ const getIcon = (name, color) => {
           fill={color}
         />
       )
+    case 'Arrow':
+      return (
+        <polygon
+          points="51.829 7.172 46.172 12.828 79.343 46 4 46 4 54 79.343 54 46.172 87.172 51.829 92.828 94.658 50 51.829 7.172"
+          fill={color}
+        />
+      )
+    case 'Plus':
+      return (
+        <polygon
+          points="80 46 54 46 54 20 46 20 46 46 20 46 20 54 46 54 46 80 54 80 54 54 80 54 80 46"
+          fill={color}
+        />
+      )
+    case 'Minus':
+      return <rect x="20" y="46" width="60" height="8" fill={color} />
     case 'Checkmark':
       return (
         <path

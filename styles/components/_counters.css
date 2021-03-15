@@ -4,9 +4,11 @@
 
   &--down,
   &--up {
-    @apply m-0;
-    appearance: textfield;
-    -webkit-appearance: none; 
+    @apply m-0 p-0 bg-transparent;
+
+    svg {
+      @apply block;
+    }
   }
 
   input::-webkit-outer-spin-button,
@@ -15,11 +17,15 @@
   }
   
   &--amount {
-    @apply relative overflow-hidden w-8;
+    @apply relative overflow-hidden w-12;
 
     &:focus-within {
       outline: 1px dashed var(--pageText);
       outline-offset: 2px;
+
+      .is-inverted & {
+        outline-color: var(--pageBG);
+      }
       
       body:not(.is-tabbing) & {
         outline: none;
@@ -29,13 +35,14 @@
 
   &--input {
     @apply flex relative w-full h-full;
+    will-change: transform;
 
     + .counter--input {
       @apply absolute inset-0;
     }
     
     input {
-      @apply relative bg-transparent border-0 rounded-none appearance-none p-0 w-full h-full text-center text-current outline-none;
+      @apply relative bg-transparent border-0 rounded-none appearance-none p-0 w-full h-full text-center text-current text-base outline-none;
       font-feature-settings: "tnum";
     }
   }

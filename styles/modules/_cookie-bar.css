@@ -1,0 +1,27 @@
+.cookie-bar {
+  @apply fixed bottom-0 right-0 z-90 p-4 w-full max-w-4xl;
+
+  &--content {
+    @apply grid gap-6 sm:flex items-center p-6 pb-4 sm:p-6 rounded-lg bg-pageText text-pageBG border;
+  }
+
+  &--message {
+    @apply flex-1 sm:pr-8 text-center sm:text-left;
+
+    p {
+      @apply text-sm leading-normal;
+
+      br {
+        @apply hidden sm:block;
+      }
+    }
+  }
+
+  &--actions {
+    @apply grid sm:grid-cols-2 gap-1 flex-shrink-0;
+
+    button {
+      @apply order-first sm:order-none;
+    }
+  }
+}

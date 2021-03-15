@@ -1,18 +1,23 @@
 .carousel {
-  @apply relative w-full overflow-hidden;
+  @apply relative w-full bg-black;
 
-  &.is-draggable {
-    cursor: move;
-    cursor: grab;
-  }
-
-  &--container {
-    @apply flex;
+  &--slides {
+    @apply flex relative overflow-hidden;
+    touch-action: pan-y;
     will-change: transform;
+
+    .has-drag & {
+      cursor: move;
+      cursor: grab;
+
+      &:active {
+        cursor: grabbing;
+      }
+    }
   }
 
   &--slide {
-    @apply relative flex-grow-0 flex-shrink-0 w-full;
+    @apply relative flex-grow-0 flex-shrink-0 w-full min-h-full overflow-hidden;
   }
 
   &--thumbs {
@@ -28,53 +33,97 @@
   }
 
   &--hud {
-    @apply flex flex-row items-center overflow-hidden;
+    @apply flex justify-center absolute bottom-0 inset-x-0 transform translate-y-1/2 pointer-events-none;
   }
 
   &--nav {
-    @apply flex flex-row flex-wrap justify-center relative;
+    @apply flex flex-row items-center relative rounded-full bg-pageBG border p-1 pointer-events-auto;
+  }
 
-    button {
-      @apply block w-6 h-6 text-2xl;
-      font-feature-settings: "tnum";
+  &--prev,
+  &--next {
+    @apply clean-btn w-8 h-8 p-2 rounded-full bg-transparent transition-colors duration-300;
+
+    &:hover {
+      background: hsla(var(--pageText-hsl), .2);
+    }
+
+    svg {
+      @apply block;
     }
   }
 
+  &--prev {
+    transform: scaleX(-1);
+  }
+
   &--status {
-    @apply flex-grow-0 flex-shrink flex flex-row items-center justify-center ml-auto;
+    @apply flex items-center justify-center relative h-8 mx-2;
   }
 
   &--counter {
-    @apply relative h-4 my-2 overflow-hidden;
+    @apply relative grid grid-cols-2 gap-px h-8 rounded-full bg-pageText text-pageBG;
+
+    .carousel--dots + & {
+      @apply ml-2 mr-1;
+    }
+
+    &::after {
+      @apply absolute left-1/2 transform -translate-x-1/2 inset-y-3 w-px bg-pageBG opacity-30;
+      content: "";
+    }
+  }
+
+  &--counter-item {
+    @apply relative flex flex-col overflow-hidden p-2 text-xs font-semibold;
+
+    &.is-current {
+      @apply pl-3;
+    }
+
+    &.is-total {
+      @apply pr-3;
+    }
+
+    .counter-flipper {
+      @apply relative overflow-hidden;
+      
+      span {
+        @apply block;
+        font-feature-settings: "tnum";
+        will-change: transform;
     
-    span {
-      @apply block;
-      font-feature-settings: "tnum";
-  
-      + span {
-        @apply absolute inset-x-0 top-0;
+        + span {
+          @apply absolute inset-x-0 top-0;
+        }
       }
     }
   }
 
-  &--progress {
-    @apply relative mx-4 w-12 h-px;
-    background: rgba(var(--pageText-rgb), .25);
-
-    span {
-      @apply block w-full h-full bg-pageText transform origin-left;
-      transition: all .4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-  }
-
   &--dots {
-    @apply absolute top-0 left-0 flex flex-col m-4;
+    @apply relative flex items-center h-8;
     
     button {
-      @apply w-3 h-3 bg-current mb-1;
+      @apply clean-btn p-1 bg-transparent;
+
+      &::before {
+        @apply block relative w-2 h-2 bg-pageText rounded-full opacity-30;
+        transition: opacity .1s linear, transform .4s cubic-bezier(0.22, 1, 0.36, 1);
+        content: "";
+      }
+
+      &:hover {
+        &::before {
+          @apply opacity-100;
+        }
+      }
 
       &.is-active {
         /* active state styles */
+        &::before {
+          @apply opacity-100;
+          transform: scale(1.5);
+        }
       }
     }
   }

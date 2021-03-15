@@ -14,6 +14,7 @@ import generalSettings from './documents/settings-general'
 import promoSettings from './documents/settings-promo'
 import headerSettings from './documents/settings-header'
 import footerSettings from './documents/settings-footer'
+import cartSettings from './documents/settings-cart'
 import seoSettings from './documents/settings-seo'
 import menu from './documents/menu'
 import redirect from './documents/redirect'
@@ -23,6 +24,8 @@ import grid from './modules/grid'
 import gridColumn from './modules/grid-column'
 import gridSize from './modules/grid-size'
 import marquee from './modules/marquee'
+import productHero from './modules/product-hero'
+import collectionGrid from './modules/collection-grid'
 
 // Block types
 import freeform from './blocks/freeform'
@@ -72,6 +75,7 @@ export default createSchema({
     promoSettings,
     headerSettings,
     footerSettings,
+    cartSettings,
     seoSettings,
     menu,
     redirect,
@@ -82,6 +86,8 @@ export default createSchema({
     gridColumn,
     gridSize,
     marquee,
+    productHero,
+    collectionGrid,
 
     /* -------------- */
     /* 3: Block types */

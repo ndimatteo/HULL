@@ -38,12 +38,12 @@ const Drawer = ({ title, open, toggle, children }) => {
             />
             <motion.nav
               key="drawer"
-              initial="closed"
+              initial="close"
               animate="open"
-              exit="closed"
+              exit="close"
               variants={{
                 open: { x: '0%' },
-                closed: { x: '100%' },
+                close: { x: '100%' },
               }}
               transition={{ duration: 0.5, ease: [0.19, 1.0, 0.22, 1.0] }}
               className="drawer"

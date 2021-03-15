@@ -1,13 +1,17 @@
 import React from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
-import { imageBuilder } from '../lib/api'
+import { imageBuilder } from '@lib/sanity'
 
-import Schema from '../components/schema'
-import Header from '../modules/header'
-import Footer from '../modules/footer'
+import { isBrowser } from '@lib/helpers'
 
-if (typeof window !== 'undefined') {
+import Schema from '@components/schema'
+
+import CookieBar from '@modules/shared/cookie-bar'
+import Header from '@modules/shared/header'
+import Footer from '@modules/shared/footer'
+
+if (isBrowser) {
   console.groupCollapsed(
     '%c💀 Site Credits',
     'display:block;padding:0.125em 1em;font-family:courier;font-size:14px;font-weight:bold;line-height:2;text-transform:uppercase;background:black;color:white;'
@@ -32,14 +36,14 @@ const variants = {
     opacity: 1,
     transition: {
       duration: duration,
-      delay: 0.25,
+      delay: 0.3,
       ease: 'linear',
       when: 'beforeChildren',
     },
   },
   exit: {
     opacity: 0,
-    transition: { duration: duration, when: 'afterChildren' },
+    transition: { duration: duration, ease: 'linear', when: 'beforeChildren' },
   },
 }
 
@@ -125,6 +129,8 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
         {schema && Schema(schema)}
       </Head>
+
+      <CookieBar />
 
       <motion.div
         initial="initial"

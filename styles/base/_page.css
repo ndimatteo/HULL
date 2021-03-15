@@ -10,7 +10,7 @@ body {
 }
 
 .section {
-  @apply relative;
+  @apply relative p-4 sm:p-8 border-b;
 
   &--content {
     @apply mx-auto;

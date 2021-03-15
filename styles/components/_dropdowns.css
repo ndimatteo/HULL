@@ -1,7 +1,6 @@
 .dropdown {
   @apply relative z-10;
 
-  &:hover,
   &.is-open {
     @media (--sm) {
       @apply z-30;
@@ -12,13 +11,12 @@
     }
   }
 
-  &--btn {
-    @apply clean-btn relative z-20 bg-transparent p-0;
-    font: inherit;
+  /* Customize dropdown navigation buttons: */
+  /* (you should mostly offload these to the general header links/button styles) */
+  &--toggle {
+  }
 
-    .is-active & {
-      /* active state styles */
-    }
+  &--icon {
   }
 
   &--content {
@@ -32,5 +30,9 @@
 
   &--nav {
     @apply block relative;
+
+    a {
+      color: hsla(var(--pageText-hsl), 0.3);
+    }
   }
 }

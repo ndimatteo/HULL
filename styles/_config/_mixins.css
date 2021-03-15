@@ -8,14 +8,27 @@
   clip-path: inset(50%);
 }
 
+.is-textured {
+  background-image: radial-gradient(var(--pageText) 9%, transparent 9%), radial-gradient(var(--pageText) 9%, transparent 9%);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+}
+
+.is-textured-dark {
+  background-color: var(--pageText);
+  background-image: radial-gradient(var(--pageBG) 9%, transparent 9%), radial-gradient(var(--pageBG) 9%, transparent 9%);
+  background-position: 0 0, 8px 8px;
+  background-size: 16px 16px;
+}
+
 @keyframes pulse {
   0% {
-		box-shadow: 0 0 0 0 hsla(var(--pageBG-hsl), 0.3);
+		box-shadow: 0 0 0 0 hsla(var(--pageText-hsl), 0.3);
   }
   70% {
-		box-shadow: 0 0 0 8px hsla(var(--pageBG-hsl), 0);
+		box-shadow: 0 0 0 8px hsla(var(--pageText-hsl), 0);
   }
   100% {
-		box-shadow: 0 0 0 0 hsla(var(--pageBG-hsl), 0);
+		box-shadow: 0 0 0 0 hsla(var(--pageText-hsl), 0);
   }
 }

@@ -1,167 +1,102 @@
 import React, { useRef, useState, useEffect } from 'react'
-import cx from 'classnames'
-import { debounce, usePrevious } from '../lib/helpers'
+import { useRect } from '@reach/rect'
 
-const Marquee = ({ children, speed = 0.5, reverse, pauseOnHover, ...rest }) => {
-  const container = useRef(null)
-  const inner = useRef(null)
-  const content = useRef(null)
-  const item = useRef(null)
+export default function Marqy({
+  speed = 0.5,
+  direction = 'left',
+  pauseOnHover,
+  children,
+  ...rest
+}) {
+  const [observe, setObserve] = useState({ container: true, item: true })
+  const [widths, setWidths] = useState({ container: null, item: null })
+  const previousWidths = usePrevious(widths)
+  const [reps, setReps] = useState(1)
 
-  const [bounds, setBounds] = useState(false)
-  const previousBounds = usePrevious(bounds)
+  const container = useRef()
+  const containerRect = useRect(container, { observe: observe.container })
+  const item = useRef()
+  const itemRect = useRect(item, { observe: observe.item })
 
-  const [reps, setReps] = useState(false)
-  const previousReps = usePrevious(reps)
-
-  const [isRendered, setIsRendered] = useState(false)
-  const [isReady, setIsReady] = useState(false)
-
-  // set bounds after refs exist
+  // check that we are receiving rects from our refs, then set the widths and reps state
   useEffect(() => {
-    setInstanceBounds()
-  }, [container, content, item])
-
-  // calculate reps after bounds update
-  useEffect(() => {
-    // calculate a re-render
-    if (previousBounds) {
-      // no change? Just be done then!
-      if (previousBounds.container.width === bounds.container.width) {
-        setIsReady(true)
-        setIsRendered(true)
-
-        // initiate re-render
-      } else {
-        setIsRendered(false)
-        setIsReady(false)
-        calculateReps()
-      }
-    }
-    // calculate initial reps
-    else if (bounds) {
-      calculateReps()
-    }
-  }, [bounds])
-
-  // build clones if more/less than before or it hasn't been rendered before
-  useEffect(() => {
-    if (previousReps) {
-      if (reps !== previousReps) {
-        cloneItem(reps)
-      }
-    } else if (reps && !isRendered) {
-      cloneItem(reps)
-    }
-  }, [reps])
-
-  // recalculate widths after render, but before it's "ready"
-  useEffect(() => {
-    if (isRendered && !isReady) {
-      setInstanceBounds()
-    }
-  }, [isRendered])
-
-  // setup resize listener
-  useEffect(() => {
-    const resizeBounds = debounce(() => {
-      setInstanceBounds()
-    }, 400)
-
-    window.addEventListener('resize', resizeBounds)
-
-    return () => {
-      window.removeEventListener('resize', resizeBounds)
-    }
-  }, [])
-
-  // set marquee bounds
-  const setInstanceBounds = () => {
-    if (container.current && content.current && item.current) {
-      setTimeout(() => {
-        const containerBounds = container.current.getBoundingClientRect()
-        const contentBounds = content.current.getBoundingClientRect()
-        const itemBounds = item.current.getBoundingClientRect()
-
-        setBounds({
-          container: containerBounds,
-          content: contentBounds,
-          item: itemBounds,
-        })
-      }, 100)
-    }
-  }
-
-  // determine how many items to clone
-  const calculateReps = () => {
-    const repetitions = Math.ceil(bounds.container.width / bounds.item.width)
-
-    // no change? Just be done then!
-    if (repetitions === previousReps) {
-      setIsRendered(true)
-      setIsReady(true)
-    } else {
-      setReps(repetitions)
-    }
-  }
-
-  // clone items
-  const cloneItem = (amount) => {
-    // remove previous duplicates
-    inner.current.querySelectorAll('.is-clone').forEach((el) => el.remove())
-
-    // items
-    if (amount) {
-      const clones = [...Array(amount)]
-      clones.map(() => {
-        const clone = item.current.cloneNode(true)
-        clone.setAttribute('aria-hidden', 'true')
-        clone.setAttribute('role', 'presentation')
-        clone.classList.add('is-clone')
-        content.current.appendChild(clone)
-        return clone
+    if (containerRect?.width && itemRect?.width) {
+      setWidths({
+        container: containerRect.width,
+        item: itemRect.width,
       })
-
-      // container
-      const contentClone = content.current.cloneNode(true)
-      contentClone.setAttribute('aria-hidden', 'true')
-      contentClone.setAttribute('role', 'presentation')
-      contentClone.classList.add('is-clone')
-      inner.current.appendChild(contentClone)
-
-      // done rendering clones
-      setIsRendered(true)
+      setReps(Math.ceil(containerRect.width / itemRect.width))
     }
-  }
+  }, [containerRect, itemRect])
+
+  // 1. when our widths states are updated, let's check if they are matching the previous rect state
+  // 2. if they are the same, we can stop observing our refs
+  useEffect(() => {
+    if (widths.container && widths.item) {
+      setObserve({
+        container: widths.container !== previousWidths.container,
+        item: widths.item !== previousWidths.item,
+      })
+    }
+  }, [widths])
+
+  // re-observe our refs when the container ref changes size, so we can recalculate widths and reps
+  useEffect(() => {
+    if (!container?.current) return
+    const resizeObserverInstance = new ResizeObserver(() => setObserve(true))
+    resizeObserverInstance.observe(container.current)
+    return () => {
+      if (!container?.current) return
+      resizeObserverInstance.unobserve(container.current)
+    }
+  }, [container])
 
   return (
     <div
       ref={container}
-      className={cx(
-        'marquee',
-        { 'is-ready': isReady },
-        { 'is-reversed': reverse },
-        { 'has-pause': pauseOnHover }
-      )}
+      data-marquee=""
+      data-direction={direction}
+      data-pause-on-hover={pauseOnHover ? '' : null}
       {...rest}
     >
-      <div
-        ref={inner}
-        className="marquee--inner"
-        style={{
-          animationDuration: `${
-            isReady ? Math.ceil((bounds.content.width / 24) * speed) : 0
-          }s`,
-        }}
-      >
-        <div ref={content} className="marquee--content">
-          <div ref={item} className="marquee--item">
-            {children}
-          </div>
-        </div>
+      <div data-marquee-inner="">
+        {new Array(2).fill().map((_, clone) => {
+          return (
+            <div
+              key={clone}
+              data-marquee-content=""
+              style={{
+                animationDuration: `${
+                  ((widths.item ?? 0) * reps) / (100 * speed)
+                }s`,
+              }}
+            >
+              {new Array(reps).fill().map((_, rep) => {
+                const isFirstItem = clone === 0 && rep === 0
+                return (
+                  <div
+                    key={rep}
+                    ref={isFirstItem ? item : null}
+                    aria-hidden={!isFirstItem || null}
+                    data-marquee-item=""
+                  >
+                    {children}
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })}
       </div>
     </div>
   )
 }
 
-export default Marquee
+// reference a previous state after update
+function usePrevious(value) {
+  const ref = useRef()
+  useEffect(() => {
+    ref.current = value
+  })
+  return ref.current
+}

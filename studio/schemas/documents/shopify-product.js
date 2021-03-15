@@ -13,8 +13,9 @@ export default {
       options: { columns: 2, collapsible: true }
     },
     {
-      title: '',
-      name: '2up',
+      title: 'Product Cards',
+      name: 'cards',
+      description: 'These settings are for product listings and carts',
       options: { columns: 2 }
     }
   ],
@@ -122,14 +123,15 @@ export default {
       title: 'Use Galleries',
       name: 'useGallery',
       type: 'string',
-      description: 'Use galleries over listing thumbnails on Collection pages',
+      description:
+        'Display an inline gallery, instead of a thumbnail for listings',
       options: {
         list: [
           { title: 'Yes', value: 'true' },
           { title: 'No', value: 'false' }
         ]
       },
-      fieldset: '2up'
+      fieldset: 'cards'
     },
     {
       title: 'Surface Option',
@@ -142,21 +144,44 @@ export default {
         fromField: 'options',
         fromFieldData: { title: 'name', value: 'position' }
       },
-      fieldset: '2up'
+      fieldset: 'cards'
     },
     {
       title: 'Listing Thumbnails',
       name: 'listingPhotos',
       type: 'array',
       of: [{ type: 'productListingPhotos' }],
-      fieldset: '2up'
+      fieldset: 'cards'
     },
     {
       title: 'Cart Thumbnails',
       name: 'cartPhotos',
       type: 'array',
       of: [{ type: 'productCartPhotos' }],
-      fieldset: '2up'
+      fieldset: 'cards'
+    },
+    {
+      title: 'Page Modules',
+      name: 'modules',
+      type: 'array',
+      of: [{ type: 'productHero' }, { type: 'grid' }, { type: 'marquee' }],
+      validation: Rule =>
+        Rule.custom(blocks => {
+          const productHeros = blocks.filter(
+            block => block._type === 'productHero'
+          )
+
+          const productHeroItems = productHeros.map(
+            (item, index) => [{ _key: item._key }] || [index]
+          )
+
+          return productHeros.length === 1
+            ? true
+            : {
+                message: 'You must have one "Product Hero" module on the page',
+                paths: productHeroItems
+              }
+        })
     },
     {
       title: 'SEO / Share Settings',

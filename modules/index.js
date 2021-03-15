@@ -3,8 +3,16 @@ import dynamic from 'next/dynamic'
 
 const Grid = dynamic(() => import('./grid'))
 const Marquee = dynamic(() => import('./marquee'))
+const ProductHero = dynamic(() => import('./shop/product-hero'))
+const Collection = dynamic(() => import('./shop/collection'))
 
-export const Module = ({ module }) => {
+export const Module = ({
+  module,
+  collectionProducts,
+  product,
+  activeVariant,
+  onVariantChange,
+}) => {
   const type = module._type
 
   switch (type) {
@@ -12,6 +20,16 @@ export const Module = ({ module }) => {
       return <Grid data={module} />
     case 'marquee':
       return <Marquee data={module} />
+    case 'productHero':
+      return (
+        <ProductHero
+          product={product}
+          activeVariant={activeVariant}
+          onVariantChange={onVariantChange}
+        />
+      )
+    case 'collectionGrid':
+      return <Collection products={collectionProducts} />
     default:
       return null
   }

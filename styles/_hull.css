@@ -1,0 +1,102 @@
+/* ----- Mixins ----- */
+
+.is-hashed {
+  background-image: repeating-linear-gradient(-45deg, hsla(var(--pageText-hsl), .5) 0, hsla(var(--pageText-hsl), .5) 1px, transparent 0, transparent 50%);
+  background-size: 8px 8px;
+  background-repeat: repeat;
+}
+
+/* ----- Buttons -----*/
+
+.btn {
+  @apply relative bg-transparent px-6 py-2 text-center rounded-full border font-sans font-semibold text-xs;
+
+  .is-soldout & {
+    @apply is-hashed opacity-30;
+  }
+
+  .is-active & {
+    @apply bg-pageText border-pageText text-pageBG;
+  }
+
+  &.is-primary {
+    @apply bg-pageText text-pageBG border-0; 
+
+    .is-inverted & {
+      @apply bg-pageBG text-pageText border-0;
+    }
+  }
+
+  &.is-text {
+    @apply px-0 bg-transparent border-0 transition-opacity duration-300;
+
+    &:hover {
+      @apply opacity-60;
+    }
+  }
+
+  &.is-large {
+    @apply text-2xl font-normal px-10;
+  }
+
+  &.is-disabled {
+    @apply bg-pageBG;
+  }
+}
+
+
+/* ----- Counters ----- */
+
+.counter {
+  @apply border rounded-full p-2 bg-pageBG text-pageText;
+
+  &.is-small {
+    @apply p-1;
+  }
+
+  .product--actions & {
+    @apply mr-4;
+  }
+
+  .is-inverted & {
+    @apply bg-transparent text-pageBG;
+  }
+
+  &--up,
+  &--down {
+    @apply -my-px w-8 h-8 p-2 rounded-full transition-colors duration-300;
+
+    .cart & {
+      @apply my-0;
+    }
+
+    &:hover {
+      background: hsla(var(--pageText-hsl), .2);
+
+      .is-inverted & {
+        background: hsla(var(--pageBG-hsl), .2);
+      }
+    }
+  }
+
+  &--amount {
+    @apply text-xs font-mono;
+
+    .cart & {
+      @apply w-8;
+    }
+
+    input {
+      @apply p-1;
+    }
+  }
+}
+
+
+/* ----- Products ----- */
+
+.product {
+  &--actions {
+    @apply flex sticky bottom-0;
+  }
+}

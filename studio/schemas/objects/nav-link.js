@@ -10,8 +10,8 @@ export default {
       description: 'Display Text'
     },
     {
-      title: 'Link',
-      name: 'link',
+      title: 'URL',
+      name: 'url',
       type: 'url',
       description: 'enter an external URL'
     }

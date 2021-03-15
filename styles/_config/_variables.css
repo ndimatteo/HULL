@@ -3,14 +3,30 @@
   --black: #000000;
   --white: #ffffff;
 
-  --pageBG: #f4f4f0;
-  --pageText: #000000;
-
   --black-hsl: 0, 0%, 0%;
   --white-hsl: 0, 0%, 100%;
 
+  --pageBG: #f4f4f0;
+  --pageText: #000000;
+
+  --pageBG-hsl: 60, 14%, 95%;
+  --pageText-hsl: 0, 0%, 0%;
+}
+
+[data-theme='dark'] {
+  --pageBG: #000000;
+  --pageText: #f4f4f0;
+
   --pageBG-hsl: 0, 0%, 0%;
   --pageText-hsl: 60, 14%, 95%;
+}
+
+[data-theme='metal'] {
+  --pageBG: #000000;
+  --pageText: #8fff1f;
+
+  --pageBG-hsl: 0, 0%, 0%;
+  --pageText-hsl: 90, 100%, 56%;
 }
 
 @custom-media --xs (min-width: 480px);

@@ -3,15 +3,17 @@
   
   &--error {
     /* Error Message styles */
+    @apply bg-pageBG border p-4 md:p-4 text-center;
   }
   
   &--success {
     /* Success Message styles */
+    @apply bg-pageBG border p-4 md:p-4 text-center;
   }
 }
 
 .control {
-  @apply flex flex-col relative text-left;
+  @apply flex flex-col relative text-left bg-pageBG;
 
   &--group {
     @apply grid gap-y-2 grid-cols-1 sm:grid-cols-2;
@@ -20,17 +22,17 @@
       @apply sm:flex;
 
       .control {
-        @apply sm:flex-1 m-0;
+        @apply sm:flex-1 m-0 border rounded-full bg-pageBG;
       }
 
       .btn {
-        @apply sm:w-auto;
+        @apply sm:ml-4 sm:w-auto;
       }
     }
   }
 
   &--label {
-    @apply absolute top-1/2 transform -translate-y-1/2 left-0 p-4;
+    @apply absolute top-1/2 transform -translate-y-1/2 left-0 px-4 py-2;
 
     .is-filled & {
       @apply hidden;
@@ -72,7 +74,7 @@
   }
 
   &--error {
-    @apply absolute top-full inset-x-0;
+    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1/2 px-2 rounded-full bg-pageText text-pageBG text-xs leading-normal font-semibold;
   }
 
   &--pot {
@@ -83,7 +85,11 @@
   input[type="email"],
   input[type="number"],
   textarea {
-    @apply relative appearance-none bg-transparent w-full p-4 rounded-none border border-solid border-pageText font-inherit text-base leading-none text-pageText;
+    @apply relative appearance-none w-full h-full px-4 py-2 rounded-none border font-inherit text-base leading-none bg-transparent text-pageText;
+
+    .is-inline & {
+      @apply border-0;
+    }
 
     &:-webkit-autofill,
     &:-webkit-autofill:hover,
