@@ -1,0 +1,19 @@
+.label {
+  @apply inline-flex items-center mx-2 p-2 pr-3 rounded-full border border-transparent bg-pageText text-pageBG text-xs leading-none tracking-normal normal-case;
+
+  &::before {
+    @apply inline-block mr-2 rounded-full bg-pageBG;
+    width: 10px;
+    height: 10px;
+    content: "";
+  }
+
+  &.is-secondary {
+    @apply bg-transparent border-pageText text-pageText;
+
+    &::before {
+      @apply bg-pageText;
+      animation: pulse 2s infinite;
+    }
+  }
+}

@@ -33,13 +33,11 @@ const ProductHero = ({ product, activeVariant, onVariantChange }) => {
                       {activeVariant.title}
 
                       {activeVariant.lowStock && activeVariant.inStock && (
-                        <span className="product--low-stock">Low Stock</span>
+                        <span className="label is-secondary">Low Stock</span>
                       )}
 
                       {!activeVariant.inStock && (
-                        <span className="product--out-of-stock">
-                          Out of Stock
-                        </span>
+                        <span className="label">Out of Stock</span>
                       )}
                     </div>
                   )}

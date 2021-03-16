@@ -9,7 +9,7 @@
 /* ----- Buttons -----*/
 
 .btn {
-  @apply relative bg-transparent px-6 py-2 text-center rounded-full border font-sans font-semibold text-xs;
+  @apply relative bg-transparent px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
 
   .is-soldout & {
     @apply is-hashed opacity-30;
@@ -94,9 +94,3 @@
 
 
 /* ----- Products ----- */
-
-.product {
-  &--actions {
-    @apply flex sticky bottom-0;
-  }
-}

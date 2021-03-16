@@ -4,10 +4,11 @@ import { motion } from 'framer-motion'
 import { useRect } from '@reach/rect'
 import cx from 'classnames'
 
-import { useSiteContext } from '../../lib/contexts'
-import { useToggleMegaNav } from '../../lib/contexts/site'
+import { useSiteContext } from '@lib/contexts'
+import { useToggleMegaNav } from '@lib/contexts/site'
 
 import Menu from './menu'
+import { swipeAnim } from '@lib/animate'
 
 const MegaNavigation = ({ items = [], headerHeight }) => {
   const dropdowns = items.filter((item) => {
@@ -58,36 +59,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
                       initial="hide"
                       animate={isActive ? 'show' : 'hide'}
                       onAnimationComplete={() => setHasFocus(isActive)}
-                      variants={{
-                        show: {
-                          opacity: 1,
-                          x: ['-2rem', '0rem'],
-                          transition: {
-                            x: {
-                              duration: 0.8,
-                              delay: 0.1,
-                              ease: [0.16, 1, 0.3, 1],
-                            },
-                            opacity: {
-                              duration: 0.2,
-                              delay: 0.1,
-                            },
-                          },
-                        },
-                        hide: {
-                          x: ['0rem', '2rem'],
-                          opacity: 0,
-                          transition: {
-                            x: {
-                              duration: 0.4,
-                              ease: [0.16, 1, 0.3, 1],
-                            },
-                            opacity: {
-                              duration: 0.1,
-                            },
-                          },
-                        },
-                      }}
+                      variants={swipeAnim}
                       className="mega-item--content"
                     >
                       <Menu

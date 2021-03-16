@@ -4,8 +4,9 @@
 @import "base/_reset";
 @import "base/_typography";
 @import "base/_buttons";
-@import "base/_media";
 @import "base/_forms";
+@import "base/_labels";
+@import "base/_media";
 @import "base/_page";
 
 @import "components/_accordions";

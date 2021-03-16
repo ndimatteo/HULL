@@ -2,11 +2,11 @@
   @apply border-b;
 
   &--content {
-    @apply relative grid md:grid-cols-2 md:gap-px bg-pageText;
+    @apply relative grid md:grid-cols-2 md:gap-px md:bg-pageText;
   }
 
   &--gallery {
-    @apply relative p-8 md:p-24 bg-pageBG;
+    @apply relative mb-12 md:mb-0 xs:p-8 md:p-24 bg-pageBG border-b md:border-none;
 
     .carousel {
       @apply max-w-xl mx-auto;
@@ -18,7 +18,7 @@
   }
 
   &--info {
-    @apply max-w-xl m-auto p-8;
+    @apply max-w-xl m-auto p-4 sm:p-8;
   }
 
   &--header {
@@ -34,7 +34,7 @@
   }
 
   &--title {
-    @apply pr-12;
+    @apply pr-8 sm:pr-12;
   }
 
   &--name {
@@ -42,18 +42,10 @@
   }
 
   &--variant {
-    @apply mb-1 text-sm leading-relaxed tracking-wider font-semibold uppercase;
-  }
+    @apply flex items-center mb-2 text-sm leading-relaxed tracking-wider font-semibold uppercase;
 
-  &--low-stock,
-  &--out-of-stock {
-    @apply inline-flex items-center align-text-top ml-2 px-2 rounded-full bg-pageText text-pageBG normal-case tracking-normal text-xs leading-normal;
-
-    &::before {
-      @apply inline-block mr-2 rounded-full border;
-      width: 10px;
-      height: 10px;
-      content: "";
+    .label {
+      @apply -my-1 transform scale-90;
     }
   }
 
@@ -62,7 +54,11 @@
   }
 
   &--actions {
-    @apply mt-4 p-4 md:p-8 border-t bg-pageBG is-textured;
+    @apply sm:flex sticky bottom-0 mt-4 p-4 md:p-8 border-t bg-pageBG is-textured text-center;
+
+    .counter {
+      @apply hidden sm:inline-flex;
+    }
   }
 
   &--waitlist {

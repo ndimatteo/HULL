@@ -23,7 +23,7 @@
   }
 
   &--header {
-    @apply flex items-center relative px-4 sm:px-8 py-6 text-sm leading-normal font-semibold uppercase;
+    @apply flex items-center relative px-4 py-3 sm:px-8 sm:py-6 text-sm leading-normal font-semibold uppercase;
 
     &::after {
       @apply absolute inset-x-0 bottom-0 border-t;
@@ -56,7 +56,7 @@
   }
 
   &--message {
-    @apply mt-4 text-center text-sm font-semibold;
+    @apply mt-4 text-center text-xs sm:text-sm font-semibold;
   }
 
   &--empty {

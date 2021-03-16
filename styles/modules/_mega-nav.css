@@ -3,10 +3,7 @@
 
   /* Background of opened mega nav */
   &--bg {
-    /* @apply absolute top-full inset-x-0 z-10 h-px bg-pageBG;
-    will-change: transform;
-    transform-origin: 0 0;
-    transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1); */
+    @apply hidden sm:block;
 
     &::before {
       @apply absolute top-full inset-x-0 z-10 h-px bg-pageBG;

@@ -68,7 +68,7 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [])
 
   return (
-    <ThemeProvider>
+    <ThemeProvider disableTransitionOnChange>
       <SiteContextProvider data={{ ...pageProps?.data?.site }}>
         {isLoading && (
           <Head>

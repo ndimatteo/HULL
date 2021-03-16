@@ -1,46 +1,36 @@
 import React from 'react'
 import { useTheme } from 'next-themes'
-import cx from 'classnames'
 
 import { useHasMounted } from '@lib/helpers'
+
+const themes = [
+  { title: 'Light Mode', name: 'light', swatch: '#f4f4f0' },
+  { title: 'Dark Mode', name: 'dark', swatch: '#000000' },
+  { title: 'Metal Mode', name: 'metal', swatch: '#8fff1f' },
+]
 
 const ThemeSwitch = () => {
   const hasMounted = useHasMounted()
   const { theme, setTheme } = useTheme()
 
-  if (!hasMounted) return null
+  // Client-only
+  if (!hasMounted || !theme) return null
+
+  // store our current and next theme objects
+  const currentIndex = themes.findIndex((t) => t.name === theme)
+
+  const nextTheme = themes[(currentIndex + 1) % themes.length]
+  const currentTheme = themes[currentIndex]
 
   return (
     <div className="theme-switch">
       <button
-        className={cx('theme-switch--button', {
-          'is-current': theme === 'light',
-        })}
-        onClick={() => setTheme('light')}
-        aria-label="Change theme to Light mode"
-        style={{ '--swatch': '#f4f4f0' }}
+        className="theme-switch--toggle"
+        onClick={() => setTheme(nextTheme.name)}
+        aria-label={`Change theme to ${nextTheme.title}`}
       >
-        <span></span>
-      </button>
-      <button
-        className={cx('theme-switch--button', {
-          'is-current': theme === 'dark',
-        })}
-        onClick={() => setTheme('dark')}
-        aria-label="Change theme to Dark mode"
-        style={{ '--swatch': '#000000' }}
-      >
-        <span></span>
-      </button>
-      <button
-        className={cx('theme-switch--button', {
-          'is-current': theme === 'metal',
-        })}
-        onClick={() => setTheme('metal')}
-        aria-label="Change theme to Metal mode"
-        style={{ '--swatch': '#8fff1f' }}
-      >
-        <span></span>
+        <span className="swatch" style={{ '--color': currentTheme.swatch }} />
+        <div className="theme-switch--label">{currentTheme.title}</div>
       </button>
     </div>
   )

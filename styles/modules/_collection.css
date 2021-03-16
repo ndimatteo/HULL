@@ -7,7 +7,7 @@
 }
 
 .product-card {
-  @apply flex flex-col relative p-4 sm:p-8 border;
+  @apply flex flex-col relative p-8 border;
   margin: -.5px;
   
   &--photo {

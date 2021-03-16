@@ -18,7 +18,7 @@ a[href="#content"].skip-link {
   }
   
   &--inner {
-    @apply relative z-20 p-4 bg-pageBG;
+    @apply relative z-20 p-1 sm:p-4 bg-pageBG;
 
     .is-overlay & {
       @apply bg-transparent transition-colors duration-300;
@@ -212,7 +212,7 @@ a[href="#content"].skip-link {
       }
 
       &--inner {
-        @apply flex-1 flex flex-col overflow-y-scroll px-8 pb-8;
+        @apply flex-1 flex flex-col overflow-y-scroll px-4 pb-4;
         padding-top: calc(var(--headerHeight, 10rem) + 1.5rem);
       }
 

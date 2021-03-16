@@ -6,24 +6,7 @@ import { hasObject } from '@lib/helpers'
 import Carousel from '@components/carousel'
 import Photo from '@components/photo'
 
-const galleryAnim = {
-  show: {
-    opacity: 1,
-    transition: {
-      duration: 0,
-      ease: 'linear',
-      when: 'beforeChildren',
-    },
-  },
-  hide: {
-    opacity: 0,
-    transition: {
-      duration: 0,
-      ease: 'linear',
-      when: 'beforeChildren',
-    },
-  },
-}
+import { swipeAnim } from '@lib/animate'
 
 const ProductGallery = ({
   photosets,
@@ -64,19 +47,29 @@ const ProductGallery = ({
   return (
     <>
       {photos && (
-        <Carousel
-          key={id}
-          id={id}
-          hasArrows={hasArrows}
-          hasDots={hasDots}
-          hasCounter={hasCounter}
-          thumbs={hasThumbs ? photos : false}
-          hasDrag={hasDrag}
-        >
-          {photos.map((photo, key) => (
-            <Photo key={key} photo={photo} className="carousel--photo" />
-          ))}
-        </Carousel>
+        <AnimatePresence exitBeforeEnter>
+          <motion.div
+            key={id}
+            initial="hide"
+            animate="show"
+            exit="hide"
+            variants={swipeAnim}
+            className="what"
+          >
+            <Carousel
+              id={id}
+              hasArrows={hasArrows}
+              hasDots={hasDots}
+              hasCounter={hasCounter}
+              thumbs={hasThumbs}
+              hasDrag={hasDrag}
+            >
+              {photos.map((photo, key) => (
+                <Photo key={key} photo={photo} className="carousel--photo" />
+              ))}
+            </Carousel>
+          </motion.div>
+        </AnimatePresence>
       )}
     </>
   )
