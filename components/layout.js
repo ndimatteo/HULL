@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import { imageBuilder } from '@lib/sanity'
 
-import { isBrowser } from '@lib/helpers'
+import { isBrowser, useWindowSize } from '@lib/helpers'
 
-import Schema from '@components/schema'
+import generateSchema from '@lib/schema'
 
 import CookieBar from '@modules/shared/cookie-bar'
 import Header from '@modules/shared/header'
@@ -59,6 +59,14 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
   const shareDesc = page.seo?.shareDesc || site.seo?.shareDesc
   const shareGraphic =
     page.seo?.shareGraphic?.asset || site.seo?.shareGraphic?.asset
+
+  // set window height var
+  const [height, setHeight] = useState()
+  const { height: windowHeight } = useWindowSize()
+
+  useEffect(() => {
+    setHeight(windowHeight * 0.01)
+  }, [windowHeight])
 
   return (
     <>
@@ -127,7 +135,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
         {siteTitle && <meta name="og:site_name" content={siteTitle} />}
 
-        {schema && Schema(schema)}
+        {schema && generateSchema(schema)}
       </Head>
 
       <CookieBar />
@@ -137,6 +145,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
         animate="enter"
         exit="exit"
         variants={variants}
+        style={{ '--vh': `${height}px` }}
       >
         <Header data={site.header} isTransparent={page.hasTransparentHeader} />
         <main id="content">{children}</main>

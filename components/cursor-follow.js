@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import cx from 'classnames'
 
-import { useSiteContext } from '../lib/contexts'
+import { useSiteContext } from '@lib/contexts'
 
 const CursorFollow = ({ cursorContent, children }) => {
   const [isVisible, setIsVisible] = useState(false)

@@ -1,4 +1,4 @@
-import { postEmail } from '../../../lib/api'
+import { postEmail } from '@lib/api'
 
 var apiKey = process.env.SENDGRID_API_KEY
 

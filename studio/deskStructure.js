@@ -174,6 +174,7 @@ export default () =>
       S.divider(),
       S.listItem()
         .title('Shop')
+        .id('shop')
         .child(
           S.list()
             .title('Shop')

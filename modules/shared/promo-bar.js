@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
 
-import CustomLink from '../../components/link'
+import CustomLink from '@components/link'
 
 const PromoBar = React.memo(({ data = {} }) => {
   const { text, link, display } = data

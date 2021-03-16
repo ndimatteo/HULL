@@ -1,9 +1,9 @@
 import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { hasObject } from '../../lib/helpers'
+import { hasObject } from '@lib/helpers'
 
-import Photo from '../../components/photo'
+import Photo from '@components/photo'
 
 const thumbAnim = {
   show: {

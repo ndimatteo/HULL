@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { centsToPrice } from '../../lib/helpers'
+import { centsToPrice } from '@lib/helpers'
 
 const ProductPrice = ({ price, comparePrice }) => {
   return (

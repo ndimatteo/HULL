@@ -1,7 +1,7 @@
 import React from 'react'
 
-import Marqy from '../components/marquee'
-import Photo from '../components/photo'
+import Marqy from '@components/marqy'
+import Photo from '@components/photo'
 
 const Marquee = ({ data = {} }) => {
   const { items, speed, reverse, pausable } = data

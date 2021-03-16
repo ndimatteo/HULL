@@ -2,7 +2,7 @@ import React from 'react'
 import { FiSliders, FiHelpCircle } from 'react-icons/fi'
 import { Avatar } from '@sanity/ui'
 
-// import Note from '../../components/note'
+// import Note from '@components/note'
 
 export default {
   title: 'Column Size',

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from '../components/layout'
-import { getStaticPage, modules } from '../lib/api'
+import Layout from '@components/layout'
+import { getStaticPage, modules } from '@lib/api'
 
-import { Module } from '../modules'
+import { Module } from '@modules/index'
 
 const ErrorPage = ({ data }) => {
   const { site, menus, page } = data

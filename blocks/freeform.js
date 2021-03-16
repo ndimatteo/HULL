@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 import BlockContent from '@sanity/block-content-to-react'
-import { serializers } from '../lib/serializers'
+import { serializers } from '@lib/serializers'
 
 const Freeform = ({ data }) => {
   const { maxWidth, content } = data

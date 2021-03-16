@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 
-import Freeform from '../blocks/freeform'
+import Freeform from '@blocks/freeform'
 
 const Grid = ({ data = {} }) => {
   const { size, columns } = data
