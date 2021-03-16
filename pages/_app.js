@@ -7,10 +7,10 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
-import { SiteContextProvider } from 'lib/contexts'
+import { SiteContextProvider } from '@lib/contexts'
 
-import { isBrowser } from 'lib/helpers'
-import Cart from 'modules/shared/cart'
+import { isBrowser } from '@lib/helpers'
+import Cart from '@modules/shared/cart'
 
 const MyApp = ({ Component, pageProps, router }) => {
   const [isLoading, setLoading] = useState(false)

@@ -14,20 +14,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    // "paths": {
-    //   "@/blocks/*": ["blocks/*"],
-    //   "@/components/*": ["components/*"],
-    //   "@/lib/*": ["lib/*"],
-    //   "@/modules/*": ["modules/*"],
-    //   "@/pages/*": ["pages/*"],
-    // },
+    "paths": {
+      "@blocks/*": ["blocks/*"],
+      "@components/*": ["components/*"],
+      "@lib/*": ["lib/*"],
+      "@modules/*": ["modules/*"],
+      "@pages/*": ["pages/*"],
+    },
   },
   "include": [
     "next-env.d.ts",
     "**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    // "**/*.js"
+    "**/*.js"
   ],
   "exclude": [
     "node_modules"

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { ProductCounter, ProductAdd, ProductWaitlist } from 'blocks/product'
+import { ProductCounter, ProductAdd, ProductWaitlist } from '@blocks/product'
 
 const ProductActions = ({ activeVariant, klaviyoAccountID }) => {
   // set default quantity

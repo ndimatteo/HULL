@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from 'components/layout'
-import { getStaticPage, modules, allProducts } from 'lib/api'
+import Layout from '@components/layout'
+import { getStaticPage, modules, allProducts } from '@lib/api'
 
-import { Module } from 'modules/index'
+import { Module } from '@modules/index'
 
 const Shop = ({ data }) => {
   const { site, page } = data

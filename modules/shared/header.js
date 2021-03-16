@@ -6,17 +6,17 @@ import { useRect } from '@reach/rect'
 import Link from 'next/link'
 import cx from 'classnames'
 
-import { isBrowser } from 'lib/helpers'
+import { isBrowser } from '@lib/helpers'
 
 import PromoBar from './promo-bar'
-import Menu from 'components/navigation/menu'
-import MegaNavigation from 'components/navigation/mega-nav'
-import Icon from 'components/icon'
+import Menu from '@components/navigation/menu'
+import MegaNavigation from '@components/navigation/mega-nav'
+import Icon from '@components/icon'
 
 // Context helpers
-import { useSiteContext } from 'lib/contexts'
-import { useToggleMegaNav } from 'lib/contexts/site'
-import { useToggleCart, useCartCount } from 'lib/contexts/shopify'
+import { useSiteContext } from '@lib/contexts'
+import { useToggleMegaNav } from '@lib/contexts/site'
+import { useToggleCart, useCartCount } from '@lib/contexts/shopify'
 
 const Header = ({ data = {}, isTransparent }) => {
   // expand our header data

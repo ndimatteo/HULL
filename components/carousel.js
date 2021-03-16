@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useKeenSlider } from 'keen-slider/react'
 import cx from 'classnames'
 
-import { flipAnim } from 'lib/animate'
-import Icon from 'components/icon'
+import { flipAnim } from '@lib/animate'
+import Icon from '@components/icon'
 
 const Carousel = ({
   id,

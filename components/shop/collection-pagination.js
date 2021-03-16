@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useInView } from 'react-intersection-observer'
 
-import ProductCard from 'modules/shop/product-card'
+import ProductCard from '@modules/shop/product-card'
 
 const CollectionPagination = ({ products, paginated }) => {
   const pmax = paginated

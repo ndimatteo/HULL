@@ -2,7 +2,7 @@ import React from 'react'
 import { useTheme } from 'next-themes'
 import cx from 'classnames'
 
-import { useHasMounted } from 'lib/helpers'
+import { useHasMounted } from '@lib/helpers'
 
 const ThemeSwitch = () => {
   const hasMounted = useHasMounted()

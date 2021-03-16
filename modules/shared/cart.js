@@ -3,17 +3,17 @@ import FocusTrap from 'focus-trap-react'
 import { motion } from 'framer-motion'
 import cx from 'classnames'
 
-import { centsToPrice } from 'lib/helpers'
-import CartItem from 'blocks/shared/cart-item'
+import { centsToPrice } from '@lib/helpers'
+import CartItem from '@blocks/shared/cart-item'
 
-import { useSiteContext } from 'lib/contexts'
+import { useSiteContext } from '@lib/contexts'
 import {
   useCartTotals,
   useCartCount,
   useCartItems,
   useCheckout,
   useToggleCart,
-} from 'lib/contexts/shopify'
+} from '@lib/contexts/shopify'
 
 const Cart = ({ data }) => {
   const { cart } = data
