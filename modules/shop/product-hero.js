@@ -1,13 +1,13 @@
 import React from 'react'
 import BlockContent from '@sanity/block-content-to-react'
-import { serializers } from '@lib/serializers'
+import { serializers } from 'lib/serializers'
 
 import {
   ProductGallery,
   ProductPrice,
   ProductForm,
   ProductActions,
-} from '@blocks/product'
+} from 'blocks/product'
 
 const ProductHero = ({ product, activeVariant, onVariantChange }) => {
   return (

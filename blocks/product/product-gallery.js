@@ -1,10 +1,10 @@
 import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 
-import { hasObject } from '@lib/helpers'
+import { hasObject } from 'lib/helpers'
 
-import Carousel from '@components/carousel'
-import Photo from '@components/photo'
+import Carousel from 'components/carousel'
+import Photo from 'components/photo'
 
 const galleryAnim = {
   show: {

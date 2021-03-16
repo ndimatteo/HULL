@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import Cookies from 'js-cookie'
 
-import { useHasMounted } from '@lib/helpers'
+import { useHasMounted } from 'lib/helpers'
 
 const barAnim = {
   show: {

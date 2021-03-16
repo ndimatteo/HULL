@@ -1,5 +1,5 @@
 import React from 'react'
-import { hasObject } from '@lib/helpers'
+import { hasObject } from 'lib/helpers'
 
 const ProductOption = ({
   option,

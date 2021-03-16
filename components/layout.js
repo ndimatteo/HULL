@@ -1,15 +1,15 @@
 import React from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
-import { imageBuilder } from '@lib/sanity'
+import { imageBuilder } from 'lib/sanity'
 
-import { isBrowser } from '@lib/helpers'
+import { isBrowser } from 'lib/helpers'
 
-import Schema from '@components/schema'
+import Schema from 'components/schema'
 
-import CookieBar from '@modules/shared/cookie-bar'
-import Header from '@modules/shared/header'
-import Footer from '@modules/shared/footer'
+import CookieBar from 'modules/shared/cookie-bar'
+import Header from 'modules/shared/header'
+import Footer from 'modules/shared/footer'
 
 if (isBrowser) {
   console.groupCollapsed(

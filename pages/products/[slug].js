@@ -3,12 +3,12 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import useSWR from 'swr'
 
-import Error from '@pages/404'
-import Layout from '@components/layout'
-import { getAllDocSlugs, getProduct } from '@lib/api'
-import { centsToPrice } from '@lib/helpers'
+import Error from 'pages/404'
+import Layout from 'components/layout'
+import { getAllDocSlugs, getProduct } from 'lib/api'
+import { centsToPrice } from 'lib/helpers'
 
-import { Module } from '@modules/index'
+import { Module } from 'modules/index'
 
 const fetchInventory = (url, id) =>
   axios

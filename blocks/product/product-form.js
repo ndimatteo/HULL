@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ProductOption } from '@blocks/product'
+import { ProductOption } from 'blocks/product'
 
 const ProductForm = ({ product, activeVariant, onVariantChange }) => {
   if (!product) return null

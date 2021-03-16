@@ -7,7 +7,7 @@ import {
   ProductThumbnail,
   ProductPrice,
   ProductOption,
-} from '@blocks/product'
+} from 'blocks/product'
 
 const itemAnim = {
   initial: {

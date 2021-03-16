@@ -47,7 +47,14 @@
 
   &--low-stock,
   &--out-of-stock {
-    @apply inline-block align-text-top  ml-2 px-2 rounded-full bg-pageText text-pageBG normal-case tracking-normal text-xs leading-normal;
+    @apply inline-flex items-center align-text-top ml-2 px-2 rounded-full bg-pageText text-pageBG normal-case tracking-normal text-xs leading-normal;
+
+    &::before {
+      @apply inline-block mr-2 rounded-full border;
+      width: 10px;
+      height: 10px;
+      content: "";
+    }
   }
 
   &--options {

@@ -1,16 +1,16 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { centsToPrice, hasObject } from '@lib/helpers'
+import { centsToPrice, hasObject } from 'lib/helpers'
 
-import Photo from '@components/photo'
-import { ProductCounter, ProductPrice } from '@blocks/product'
+import Photo from 'components/photo'
+import { ProductCounter, ProductPrice } from 'blocks/product'
 
 import {
   useUpdateItem,
   useRemoveItem,
   useToggleCart,
-} from '@lib/contexts/shopify'
+} from 'lib/contexts/shopify'
 
 function CartItem({ item }) {
   const removeItem = useRemoveItem()

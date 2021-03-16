@@ -2,8 +2,8 @@ import React, { useState, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import cx from 'classnames'
 
-import { clampRange } from '@lib/helpers'
-import Icon from '@components/icon'
+import { clampRange } from 'lib/helpers'
+import Icon from 'components/icon'
 
 const flipAnim = {
   show: (custom) => ({

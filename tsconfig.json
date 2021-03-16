@@ -15,11 +15,11 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@blocks/*": ["blocks/*"],
-      "@components/*": ["components/*"],
-      "@lib/*": ["lib/*"],
-      "@modules/*": ["modules/*"],
-      "@pages/*": ["pages/*"],
+      "@/blocks/*": ["blocks/*"],
+      "@/components/*": ["components/*"],
+      "@/lib/*": ["lib/*"],
+      "@/modules/*": ["modules/*"],
+      "@/pages/*": ["pages/*"],
     },
   },
   "include": [

@@ -2,8 +2,8 @@ import React from 'react'
 
 import ThemeSwitch from './theme-switch'
 
-import Menu from '@components/navigation/menu'
-import Icon from '@components/icon'
+import Menu from 'components/navigation/menu'
+import Icon from 'components/icon'
 
 const Footer = ({ menu, social }) => {
   return (
