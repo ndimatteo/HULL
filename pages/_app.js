@@ -69,7 +69,7 @@ const MyApp = ({ Component, pageProps, router }) => {
 
   return (
     <ThemeProvider>
-      <SiteContextProvider data={{ ...pageProps.data.site }}>
+      <SiteContextProvider data={{ ...pageProps?.data?.site }}>
         {isLoading && (
           <Head>
             <title>Loading...</title>
@@ -85,7 +85,7 @@ const MyApp = ({ Component, pageProps, router }) => {
           <Component key={router.asPath.split('?')[0]} {...pageProps} />
         </AnimatePresence>
 
-        <Cart data={{ ...pageProps.data.site }} />
+        <Cart data={{ ...pageProps?.data?.site }} />
       </SiteContextProvider>
     </ThemeProvider>
   )
