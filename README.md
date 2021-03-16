@@ -20,8 +20,7 @@
     <a href="#-deployment">Deployment</a> •
   <a href="#-extrastips">Extras</a>
 </p>
-
-<img src="public/HULL.png" align="center" />
+<br />
 
 # ✨ Features
 🟢 **= implemented**&nbsp;&nbsp;/&nbsp;&nbsp;
