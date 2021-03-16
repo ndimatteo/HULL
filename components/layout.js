@@ -65,7 +65,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
   useEffect(() => {
     if (isBrowser) {
-      document.body.style.setProperty('--vh', windowHeight * 0.01)
+      document.body.style.setProperty('--vh', `${windowHeight * 0.01}px`)
     }
   }, [windowHeight])
 
