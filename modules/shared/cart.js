@@ -56,8 +56,6 @@ const Cart = ({ data }) => {
     }
   }, [checkoutURL])
 
-  console.log(cart)
-
   return (
     <>
       <FocusTrap

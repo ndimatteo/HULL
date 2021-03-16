@@ -25,7 +25,7 @@
     "framer-motion": "^3.10.3",
     "jsondiffpatch": "^0.4.1",
     "keen-slider": "^5.4.0",
-    "next": "^10.0.7",
+    "next": "^10.0.9",
     "next-themes": "^0.0.12",
     "qs": "^6.9.4",
     "raw-body": "^2.4.1",
