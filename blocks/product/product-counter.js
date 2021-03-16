@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import cx from 'classnames'
 
@@ -60,6 +60,10 @@ const ProductCounter = React.memo(
         onUpdate(count)
       }
     }, [])
+
+    useEffect(() => {
+      setLineQuantity(defaultCount)
+    }, [defaultCount])
 
     return (
       <div className={cx('counter', className)}>

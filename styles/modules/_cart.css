@@ -9,6 +9,10 @@
     transition-delay: 0s;
   }
 
+  &.is-updating {
+    @apply cursor-wait !important;
+  }
+
   &--backdrop {
     @apply fixed inset-0 z-80 bg-black bg-opacity-40 pointer-events-none opacity-0;
     transition: opacity .4s linear;
@@ -69,6 +73,10 @@
 
   &:not(:last-child) {
     @apply mb-8 pb-8 border-b;
+  }
+
+  .is-updating & {
+    @apply pointer-events-none;
   }
 
   &--photo {

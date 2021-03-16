@@ -1,7 +1,7 @@
 import React from 'react'
 import Link from 'next/link'
 
-import { centsToPrice, hasObject } from '@lib/helpers'
+import { hasObject } from '@lib/helpers'
 
 import Photo from '@components/photo'
 import { ProductCounter, ProductPrice } from '@blocks/product'
@@ -33,6 +33,8 @@ function CartItem({ item }) {
   })
 
   const photos = variantPhoto ? variantPhoto : defaultPhoto
+
+  console.log(item)
 
   return (
     <div className="cart-item">
