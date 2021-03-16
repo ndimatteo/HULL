@@ -9,6 +9,7 @@
   },
   "plugins": [
     "@sanity/base",
+    "@sanity/color-input",
     "@sanity/components",
     "@sanity/default-layout",
     "@sanity/default-login",

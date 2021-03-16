@@ -8,9 +8,47 @@
   &--label {
     @apply mx-2 text-sm font-semibold;
   }
+
+  .swatch {
+    &::before {
+      @apply opacity-100;
+    }
+  }
 }
 
 .swatch {
-  @apply block w-4 h-4 rounded-full border;
-  background-color: var(--color);
+  @apply relative p-0 block rounded-full;
+  width: 20px;
+  height: 20px;
+  background-color: var(--swatchColor);
+    
+  /* ring */
+  &::before {
+    @apply absolute inset-0 rounded-full opacity-10;
+    border: 1px solid var(--swatchBorder);
+    content: "";
+  }
+
+  /* active */
+  &::after {
+    @apply absolute rounded-full border border-transparent opacity-0 transition-opacity duration-200;
+    top: -3px;
+    bottom: -3px;
+    left: -3px;
+    right: -3px;
+    content: "";
+
+    .is-active & {
+      @apply border-pageText opacity-100;
+    }
+
+    li:not(.is-soldout):not(.is-active) button:hover & {
+      @apply border-pageText opacity-50;
+    }
+
+    .is-soldout & {
+      @apply -inset-1 opacity-100 border-transparent;
+      background: linear-gradient(45deg,transparent calc(50% - 1px),var(--pageText),transparent calc(50% + 1px)), linear-gradient(-45deg,transparent calc(50% - 1px),var(--pageText),transparent calc(50% + 1px));
+    }
+  }
 }

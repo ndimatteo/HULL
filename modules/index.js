@@ -8,10 +8,11 @@ const Collection = dynamic(() => import('./shop/collection'))
 
 export const Module = ({
   module,
-  collectionProducts,
   product,
   activeVariant,
   onVariantChange,
+  collectionProducts,
+  featuredProducts,
 }) => {
   const type = module._type
 
@@ -29,7 +30,12 @@ export const Module = ({
         />
       )
     case 'collectionGrid':
-      return <Collection products={collectionProducts} />
+      return (
+        <Collection
+          products={collectionProducts}
+          featuredProducts={featuredProducts}
+        />
+      )
     default:
       return null
   }

@@ -14,6 +14,7 @@ const ProductForm = ({ product, activeVariant, onVariantChange }) => {
               key={key}
               position={key}
               option={option}
+              optionSettings={product.optionSettings}
               variants={product.variants}
               activeVariant={activeVariant}
               onChange={onVariantChange}

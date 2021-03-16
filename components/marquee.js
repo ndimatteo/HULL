@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect } from 'react'
-import { useRect } from '@reach/rect'
 
 export default function Marqy({
   speed = 0.5,
@@ -8,48 +7,19 @@ export default function Marqy({
   children,
   ...rest
 }) {
-  const [observe, setObserve] = useState({ container: true, item: true })
-  const [widths, setWidths] = useState({ container: null, item: null })
-  const previousWidths = usePrevious(widths)
   const [reps, setReps] = useState(1)
 
   const container = useRef()
-  const containerRect = useRect(container, { observe: observe.container })
+  const containerWidth = useWidth(container)
+
   const item = useRef()
-  const itemRect = useRect(item, { observe: observe.item })
+  const itemWidth = useWidth(item)
 
-  // check that we are receiving rects from our refs, then set the widths and reps state
   useEffect(() => {
-    if (containerRect?.width && itemRect?.width) {
-      setWidths({
-        container: containerRect.width,
-        item: itemRect.width,
-      })
-      setReps(Math.ceil(containerRect.width / itemRect.width))
+    if (containerWidth && itemWidth) {
+      setReps(Math.ceil(containerWidth / itemWidth))
     }
-  }, [containerRect, itemRect])
-
-  // 1. when our widths states are updated, let's check if they are matching the previous rect state
-  // 2. if they are the same, we can stop observing our refs
-  useEffect(() => {
-    if (widths.container && widths.item) {
-      setObserve({
-        container: widths.container !== previousWidths.container,
-        item: widths.item !== previousWidths.item,
-      })
-    }
-  }, [widths])
-
-  // re-observe our refs when the container ref changes size, so we can recalculate widths and reps
-  useEffect(() => {
-    if (!container?.current) return
-    const resizeObserverInstance = new ResizeObserver(() => setObserve(true))
-    resizeObserverInstance.observe(container.current)
-    return () => {
-      if (!container?.current) return
-      resizeObserverInstance.unobserve(container.current)
-    }
-  }, [container])
+  }, [containerWidth, itemWidth])
 
   return (
     <div
@@ -67,7 +37,7 @@ export default function Marqy({
               data-marquee-content=""
               style={{
                 animationDuration: `${
-                  ((widths.item ?? 0) * reps) / (100 * speed)
+                  ((itemWidth ?? 0) * reps) / (100 * speed)
                 }s`,
               }}
             >
@@ -92,11 +62,25 @@ export default function Marqy({
   )
 }
 
-// reference a previous state after update
-function usePrevious(value) {
-  const ref = useRef()
+function useWidth(ref) {
+  const [width, setWidth] = useState(null)
+
   useEffect(() => {
-    ref.current = value
-  })
-  return ref.current
+    if (!ref?.current) return
+
+    const resizeObserverInstance = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setWidth(entry.contentRect.width)
+      }
+    })
+
+    resizeObserverInstance.observe(ref.current)
+
+    return () => {
+      if (!ref?.current) return
+      resizeObserverInstance.unobserve(ref.current)
+    }
+  }, [ref])
+
+  return width
 }

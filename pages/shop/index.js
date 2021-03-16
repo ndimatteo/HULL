@@ -11,7 +11,12 @@ const Shop = ({ data }) => {
   return (
     <Layout site={site} page={page}>
       {page.modules?.map((module, key) => (
-        <Module key={key} module={module} collectionProducts={page.products} />
+        <Module
+          key={key}
+          module={module}
+          collectionProducts={page.products}
+          featuredProducts={page.featuredProducts}
+        />
       ))}
     </Layout>
   )
@@ -26,6 +31,7 @@ export async function getStaticProps({ preview, previewData }) {
         ${modules}
       },
       "products": ${allProducts(preview)},
+      "featuredProducts": featuredProducts[]->productID,
       seo
     }
   `,

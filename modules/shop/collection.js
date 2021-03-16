@@ -3,24 +3,32 @@ import { useInView } from 'react-intersection-observer'
 
 import ProductCard from './product-card'
 
-const Collection = ({ products, paginationLimit = 0 }) => {
+const Collection = ({
+  products,
+  featuredProducts = [],
+  paginationLimit = 0,
+}) => {
   if (!products || products.length === 0) return null
+
+  const orderedProducts = mapOrder(products, featuredProducts, 'id')
 
   const hasPagination = paginationLimit > 0
   const pmax = paginationLimit
   const [hasMore, setMore] = useState(products.length > pmax)
-  const [pagination, setPagination] = useState([...products.slice(0, pmax)])
+  const [pagination, setPagination] = useState([
+    ...orderedProducts.slice(0, pmax),
+  ])
 
-  const productsList = hasPagination ? pagination : products
+  const productsList = hasPagination ? pagination : orderedProducts
 
   const loadMore = () => {
     const curPage = pagination.length
-    const nextPage = products.slice(curPage, curPage + pmax)
+    const nextPage = orderedProducts.slice(curPage, curPage + pmax)
     const newPage = [...pagination, ...nextPage]
 
     if (hasMore) {
       setPagination(newPage)
-      setMore(newPage.length < products.length ? true : false)
+      setMore(newPage.length < orderedProducts.length ? true : false)
     }
   }
 
@@ -54,6 +62,16 @@ const Collection = ({ products, paginationLimit = 0 }) => {
       )}
     </section>
   )
+}
+
+function mapOrder(array, myorder, key) {
+  if (!array) return
+
+  var order = myorder.reduce((r, k, i) => ((r[k] = i + 1), r), {})
+  const theSort = array.sort(
+    (a, b) => (order[a[key]] || Infinity) - (order[b[key]] || Infinity)
+  )
+  return theSort
 }
 
 export default Collection

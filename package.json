@@ -23,6 +23,7 @@
     "axios": "^0.21.0",
     "base64-string": "^1.1.2",
     "classnames": "^2.2.6",
+    "contrast-color": "^1.0.1",
     "cross-env": "^7.0.3",
     "embla-carousel": "^4.1.2",
     "focus-trap-react": "^8.3.2",

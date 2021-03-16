@@ -39,6 +39,7 @@ import productListingPhotos from './objects/product-listing-photos'
 import productCartPhotos from './objects/product-cart-photos'
 import productOption from './objects/product-option'
 import productOptionValue from './objects/product-option-value'
+import productOptionSettings from './objects/product-option-settings'
 
 import navDropdown from './objects/nav-dropdown'
 import navPage from './objects/nav-page'
@@ -103,6 +104,7 @@ export default createSchema({
     productCartPhotos,
     productOption,
     productOptionValue,
+    productOptionSettings,
 
     navDropdown,
     navPage,

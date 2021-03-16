@@ -32,6 +32,21 @@ export default {
         })
     },
     {
+      title: 'Featured Products',
+      name: 'featuredProducts',
+      description:
+        'Show these products first, before sorting remaining products alphabetically',
+      type: 'array',
+      of: [
+        {
+          title: 'Product',
+          type: 'reference',
+          to: [{ type: 'product' }]
+        }
+      ],
+      validation: Rule => Rule.unique()
+    },
+    {
       title: 'SEO / Share Settings',
       name: 'seo',
       type: 'seo'

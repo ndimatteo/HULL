@@ -77,4 +77,8 @@
     @apply flex flex-wrap justify-end gap-2 ml-auto;
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   }
+
+  &--swatch {
+    @apply clean-btn p-0 bg-transparent;
+  }
 }

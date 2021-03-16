@@ -6,7 +6,7 @@ import { hasObject } from '@lib/helpers'
 import Carousel from '@components/carousel'
 import Photo from '@components/photo'
 
-import { swipeAnim } from '@lib/animate'
+import { fadeAnim } from '@lib/animate'
 
 const ProductGallery = ({
   photosets,
@@ -53,8 +53,7 @@ const ProductGallery = ({
             initial="hide"
             animate="show"
             exit="hide"
-            variants={swipeAnim}
-            className="what"
+            variants={fadeAnim}
           >
             <Carousel
               id={id}

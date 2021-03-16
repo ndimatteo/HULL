@@ -120,6 +120,13 @@ export default {
         'Define a Gallery for your product, or for a subset of variants'
     },
     {
+      title: 'Options Settings',
+      name: 'optionSettings',
+      type: 'array',
+      of: [{ type: 'productOptionSettings' }],
+      description: 'Define additional settings for product options'
+    },
+    {
       title: 'Use Galleries',
       name: 'useGallery',
       type: 'string',

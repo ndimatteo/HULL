@@ -110,6 +110,7 @@ const ProductCard = ({ product, index }) => {
                     key={key}
                     position={key}
                     option={option}
+                    optionSettings={product.optionSettings}
                     variants={product.variants}
                     activeVariant={activeVariant}
                     strictMatch={false}

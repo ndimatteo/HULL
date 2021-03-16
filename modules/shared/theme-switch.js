@@ -2,11 +2,12 @@ import React from 'react'
 import { useTheme } from 'next-themes'
 
 import { useHasMounted } from '@lib/helpers'
+import Swatch from '@components/swatch'
 
 const themes = [
-  { title: 'Light Mode', name: 'light', swatch: '#f4f4f0' },
-  { title: 'Dark Mode', name: 'dark', swatch: '#000000' },
-  { title: 'Metal Mode', name: 'metal', swatch: '#8fff1f' },
+  { title: 'Light Mode', name: 'light', color: { hex: '#f4f4f0' } },
+  { title: 'Dark Mode', name: 'dark', color: { hex: '#000000' } },
+  { title: 'Metal Mode', name: 'metal', color: { hex: '#8fff1f' } },
 ]
 
 const ThemeSwitch = () => {
@@ -29,7 +30,7 @@ const ThemeSwitch = () => {
         onClick={() => setTheme(nextTheme.name)}
         aria-label={`Change theme to ${nextTheme.title}`}
       >
-        <span className="swatch" style={{ '--color': currentTheme.swatch }} />
+        <Swatch color={currentTheme.color} />
         <div className="theme-switch--label">{currentTheme.title}</div>
       </button>
     </div>
