@@ -1,7 +1,6 @@
 {
   "name": "hull",
   "version": "2.0.0",
-  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
     "build": "next build",
@@ -10,6 +9,8 @@
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
   },
+  "sideEffects": false,
+  "license": "MIT",
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.25",
     "@reach/rect": "^0.13.2",
@@ -45,6 +46,8 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^10.0.3",
+    "@types/classnames": "^2.2.10",
+    "@types/node": "^14.14.16",
     "@types/react": "^17.0.0",
     "@types/shopify-buy": "^2.10.5",
     "postcss": "^8.2.1",
