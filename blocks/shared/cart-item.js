@@ -34,8 +34,6 @@ function CartItem({ item }) {
 
   const photos = variantPhoto ? variantPhoto : defaultPhoto
 
-  console.log(item)
-
   return (
     <div className="cart-item">
       {photos && (
