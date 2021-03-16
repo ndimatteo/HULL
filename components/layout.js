@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Head from 'next/head'
 import { motion } from 'framer-motion'
 import { imageBuilder } from '@lib/sanity'
@@ -61,11 +61,12 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
     page.seo?.shareGraphic?.asset || site.seo?.shareGraphic?.asset
 
   // set window height var
-  const [height, setHeight] = useState()
   const { height: windowHeight } = useWindowSize()
 
   useEffect(() => {
-    setHeight(windowHeight * 0.01)
+    if (isBrowser) {
+      document.body.style.setProperty('--vh', windowHeight * 0.01)
+    }
   }, [windowHeight])
 
   return (
@@ -145,7 +146,6 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
         animate="enter"
         exit="exit"
         variants={variants}
-        style={{ '--vh': `${height}px` }}
       >
         <Header data={site.header} isTransparent={page.hasTransparentHeader} />
         <main id="content">{children}</main>

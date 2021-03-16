@@ -10,7 +10,7 @@ import '../styles/app.css'
 import { SiteContextProvider } from '@lib/contexts'
 
 import { isBrowser } from '@lib/helpers'
-import Cart from '@modules/shared/cart'
+import Cart from '@modules/shop/cart'
 
 const MyApp = ({ Component, pageProps, router }) => {
   const [isLoading, setLoading] = useState(false)

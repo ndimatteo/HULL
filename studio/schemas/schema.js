@@ -24,6 +24,7 @@ import grid from './modules/grid'
 import gridColumn from './modules/grid-column'
 import gridSize from './modules/grid-size'
 import marquee from './modules/marquee'
+import newsletter from './modules/newsletter'
 import productHero from './modules/product-hero'
 import collectionGrid from './modules/collection-grid'
 
@@ -87,6 +88,7 @@ export default createSchema({
     gridColumn,
     gridSize,
     marquee,
+    newsletter,
     productHero,
     collectionGrid,
 

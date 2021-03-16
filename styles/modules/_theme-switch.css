@@ -1,5 +1,5 @@
 .theme-switch {
-  @apply flex my-4;
+  @apply inline-block my-4;
 
   &--toggle {
     @apply clean-btn flex items-center p-2 bg-transparent border rounded-full;

@@ -100,7 +100,6 @@
 
   a,
   button {
-    @apply block text-4xl leading-normal hover:opacity-30;
-    transition: opacity .2s linear;
+    @apply block text-4xl leading-normal hover:opacity-30 transition-opacity duration-200;
   }
 }

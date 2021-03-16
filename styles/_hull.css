@@ -25,12 +25,17 @@
     .is-inverted & {
       @apply bg-pageBG text-pageText border-0;
     }
+
+    &.is-disabled {
+      @apply opacity-20;
+    }
   }
 
   &.is-text {
     @apply px-0 bg-transparent border-0 transition-opacity duration-300;
 
-    &:hover {
+    &.is-disabled,
+    &:not(.is-disabled):hover {
       @apply opacity-60;
     }
   }
@@ -39,7 +44,7 @@
     @apply text-2xl font-normal px-10;
   }
 
-  &.is-disabled {
+  &.is-disabled:not(.is-primary) {
     @apply bg-pageBG;
   }
 }

@@ -1,27 +1,45 @@
 .footer {
   @apply relative overflow-hidden;
   
-  &--content {
-    @apply flex flex-col items-center py-8;
+  &--grid {
+    @apply grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-pageText;
   }
 
-  .logo {
-    @apply my-4 mx-auto;
-    
-    &--link {
-      @apply mx-auto h-12 p-2;
+  &--block {
+    @apply flex flex-col p-8 md:p-8 bg-pageBG text-center lg:text-left;
+  }
+
+  .form {
+    @apply mt-4;
+  }
+
+  .menu-footer {
+    @apply flex flex-col lg:mt-4 lg:mb-8;
+
+    a {
+      @apply block py-2 hover:opacity-30 transition-opacity duration-200;
     }
   }
 
-  &--disclaimer {
-    /* customize disclaimer line */
+  .menu-social {
+    @apply inline-flex flex-wrap my-4 mx-auto lg:mx-0;
+
+    a {
+      @apply block w-8 h-8 hover:opacity-30 transition-opacity duration-200;
+
+      svg {
+        @apply block w-full h-full;
+      }
+    }
   }
-}
 
-.social-nav {
-  @apply flex flex-wrap justify-center my-12;
+  &--extras {
+    @apply mt-auto;
+  }
 
-  &--link {
-    @apply block mx-1 w-10 h-10 text-base leading-none;
+  &--disclaimer {
+    p {
+      @apply text-sm;
+    }
   }
 }

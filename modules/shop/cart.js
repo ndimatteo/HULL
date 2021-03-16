@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 import cx from 'classnames'
 
 import { centsToPrice } from '@lib/helpers'
-import CartItem from '@blocks/shared/cart-item'
+import CartItem from '@blocks/shop/cart-item'
 
 import { useSiteContext } from '@lib/contexts'
 import {

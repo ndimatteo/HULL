@@ -29,6 +29,27 @@
         @apply sm:ml-4 sm:w-auto;
       }
     }
+
+    &.is-clean {
+      @apply sm:border-b mb-4;
+
+      .control {
+        @apply sm:border-0;
+        
+        &--label,
+        input {
+          @apply sm:px-0;
+        }
+
+        &--error {
+          @apply sm:left-0 sm:transform-none;
+        }
+      }
+
+      .btn {
+        @apply sm:px-0 sm:border-0 sm:bg-transparent sm:text-pageText;
+      }
+    }
   }
 
   &--label {
@@ -43,10 +64,12 @@
     }
 
     &.for-checkbox {
-      @apply transform-none flex relative top-auto left-auto p-0 cursor-pointer;
+      @apply transform-none inline-flex relative top-auto left-auto mx-auto sm:mx-0 p-0 cursor-pointer;
 
       svg {
-        @apply block flex-none w-6 h-6 mr-4 p-1 pointer-events-none border border-current transition-colors;
+        @apply block flex-none mr-4 p-1 pointer-events-none border border-current transition-colors;
+        width: 20px;
+        height: 20px;
         transition-delay: .15s;
 
         input:checked + & {
@@ -69,6 +92,14 @@
 
       .rc {
         @apply flex flex-col justify-center m-0 select-none;
+
+        p {
+          @apply text-xs;
+
+          a {
+            @apply underline;
+          }
+        }
       }
     }
   }
