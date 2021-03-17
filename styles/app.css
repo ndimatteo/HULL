@@ -24,6 +24,7 @@
 @import "modules/_footer";
 @import "modules/_cart";
 
+@import "modules/_hero";
 @import "modules/_collection";
 @import "modules/_product";
 @import "modules/_theme-switch";

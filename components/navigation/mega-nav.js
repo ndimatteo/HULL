@@ -7,8 +7,9 @@ import cx from 'classnames'
 import { useSiteContext } from '@lib/contexts'
 import { useToggleMegaNav } from '@lib/contexts/site'
 
-import Menu from './menu'
 import { swipeAnim } from '@lib/animate'
+import Menu from './menu'
+import FeaturedProducts from './featured-products'
 
 const MegaNavigation = ({ items = [], headerHeight }) => {
   const dropdowns = items.filter((item) => {
@@ -67,6 +68,18 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
                         hasFocus={hasFocus && isActive}
                         onClick={() => toggleMegaNav(false)}
                       />
+
+                      {dropdown.featured && (
+                        <div className="mega-item--featured">
+                          <div className="mega-item--featured-title">
+                            <span>Featured</span>
+                          </div>
+                          <FeaturedProducts
+                            products={dropdown.featured}
+                            onClick={() => toggleMegaNav(false)}
+                          />
+                        </div>
+                      )}
                     </motion.div>
                   </div>
                 </div>
@@ -78,9 +91,6 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
       <div
         className={cx('mega-nav--bg')}
         style={{
-          // transform: `scaleY(${
-          //   meganav.isOpen ? activeNavRect?.height + headerHeight : 0
-          // })`,
           '--h': meganav.isOpen ? activeNavRect?.height + headerHeight : 0,
           '--hpx': `${
             meganav.isOpen ? activeNavRect?.height + headerHeight : 0

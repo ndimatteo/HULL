@@ -155,21 +155,21 @@ h1,
 h2,
 .is-h2 {
   &:not(:last-child) {
-    @apply mb-2;
+    @apply mb-6;
   }
 }
 
 h3,
 .is-h3 {
   &:not(:last-child) {
-    @apply mb-1;
+    @apply mb-4;
   }
 }
 
 h4,
 .is-h4 {
   &:not(:last-child) {
-    @apply mb-1;
+    @apply mb-4;
   }
 }
 

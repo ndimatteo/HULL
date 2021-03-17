@@ -2,6 +2,7 @@ import React from 'react'
 import dynamic from 'next/dynamic'
 
 const Grid = dynamic(() => import('./grid'))
+const Hero = dynamic(() => import('./hero'))
 const Marquee = dynamic(() => import('./marquee'))
 const ProductHero = dynamic(() => import('./shop/product-hero'))
 const Collection = dynamic(() => import('./shop/collection'))
@@ -19,6 +20,8 @@ export const Module = ({
   switch (type) {
     case 'grid':
       return <Grid data={module} />
+    case 'hero':
+      return <Hero data={module} />
     case 'marquee':
       return <Marquee data={module} />
     case 'productHero':

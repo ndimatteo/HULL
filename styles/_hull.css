@@ -19,6 +19,7 @@
     @apply bg-pageText border-pageText text-pageBG;
   }
 
+  .hero &,
   &.is-primary {
     @apply bg-pageText text-pageBG border-0; 
 
@@ -42,7 +43,8 @@
 
   &.is-large,
   h1 &,
-  .is-h1 & {
+  .is-h1 &,
+  .hero & {
     @apply text-2xl font-normal px-10;
   }
 

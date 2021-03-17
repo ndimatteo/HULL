@@ -19,7 +19,7 @@ const Newsletter = ({ data = {} }) => {
   const [error, setError] = useState(false)
   const { handleSubmit, register, watch, reset, errors } = useForm()
 
-  const hasAgreed = watch(`acceptTerms-${id}`)
+  const hasAgreed = watch('acceptTerms')
 
   // Call to reset the form
   const resetForm = (e) => {
@@ -79,14 +79,16 @@ const Newsletter = ({ data = {} }) => {
               name="fullname"
               autoComplete="off"
               className="control--pot"
+              aria-hidden="true"
               ref={register}
             />
             <div className="control--group is-inline is-clean">
               <div className={`control${errors.email ? ' has-error' : ''}`}>
-                <label htmlFor="email" className="control--label">
+                <label htmlFor={`email-${id}`} className="control--label">
                   Email Address
                 </label>
                 <input
+                  id={`email-${id}`}
                   name="email"
                   type="email"
                   inputMode="email"
@@ -133,8 +135,8 @@ const Newsletter = ({ data = {} }) => {
             {terms && (
               <div className="control">
                 <input
-                  name={`acceptTerms-${id}`}
                   id={`acceptTerms-${id}`}
+                  name="acceptTerms"
                   type="checkbox"
                   ref={register}
                 />

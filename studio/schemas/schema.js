@@ -23,6 +23,7 @@ import redirect from './documents/redirect'
 import grid from './modules/grid'
 import gridColumn from './modules/grid-column'
 import gridSize from './modules/grid-size'
+import hero from './modules/hero'
 import marquee from './modules/marquee'
 import newsletter from './modules/newsletter'
 import productHero from './modules/product-hero'
@@ -52,7 +53,6 @@ import complexPortableText from './objects/portable-complex'
 
 import accordion from './objects/accordion'
 import figure from './objects/figure'
-import button from './objects/button'
 import horizontalRule from './objects/horizontal-rule'
 
 /*  ------------------------------------------ */
@@ -87,6 +87,7 @@ export default createSchema({
     grid,
     gridColumn,
     gridSize,
+    hero,
     marquee,
     newsletter,
     productHero,
@@ -118,7 +119,6 @@ export default createSchema({
 
     accordion,
     figure,
-    button,
     horizontalRule
   ])
 })

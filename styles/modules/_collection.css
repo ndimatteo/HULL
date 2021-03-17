@@ -6,7 +6,18 @@
   }
 
   &--pagination {
-    @apply p-4 sm:py-8 is-textured border-t text-center;
+    @apply relative p-4 sm:py-8 is-textured bg-pageBG border-t text-center;
+  }
+}
+
+.collection-count {
+  @apply hidden relative ml-2 leading-none;
+  vertical-align: super;
+  font-size: .5em;
+
+  /* Only show product counts for the mega-nav */
+  .mega-nav & {
+    @apply inline-block;
   }
 }
 
@@ -65,5 +76,13 @@
         @apply mx-auto;
       }
     }
+  }
+}
+
+.product-featured {
+  @apply relative;
+
+  h2 {
+    @apply mt-4 text-base font-semibold text-center;
   }
 }

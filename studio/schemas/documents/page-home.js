@@ -23,7 +23,7 @@ export default {
       title: 'Page Modules',
       name: 'modules',
       type: 'array',
-      of: [{ type: 'grid' }, { type: 'marquee' }]
+      of: [{ type: 'grid' }, { type: 'hero' }, { type: 'marquee' }]
     },
     {
       title: 'SEO / Share Settings',

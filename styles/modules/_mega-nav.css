@@ -70,37 +70,29 @@
     @apply visible pointer-events-auto;
     transition-delay: 0s;
   }
-  
-  &--outer {
-    @apply overflow-hidden;
-    will-change: transform;
-    transform: translateY(-100%);
-    transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1);
-    
-    .is-active & {
-      transform: none;
-    }
-  }
-
-  &--inner {
-    will-change: transform;
-    transform: translateY(100%);
-    transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1);
-
-    .is-active & {
-      transform: none;
-    }
-  }
 
   &--content {
-    @apply relative px-8 pt-1 pb-12;
+    @apply grid grid-cols-2 relative px-8 pt-1 pb-12;
+    will-change: transform;
   }
 
   ul {
+    a,
+    button {
+      @apply block text-4xl leading-normal hover:opacity-30 transition-opacity duration-200;
+    }
   }
 
-  a,
-  button {
-    @apply block text-4xl leading-normal hover:opacity-30 transition-opacity duration-200;
+  &--featured {
+    @apply grid grid-cols-2 gap-4 max-w-2xl relative w-full border-l pl-8;
+
+    &-title {
+      @apply block absolute top-0 right-full w-2 text-xs uppercase tracking-widest font-semibold;
+      
+      span {
+        @apply block overflow-hidden absolute top-1/2 left-0 whitespace-nowrap transform rotate-90;
+        transform-origin: 0 0;
+      }
+    }
   }
 }

@@ -121,6 +121,7 @@ const Header = ({ data = {}, isTransparent }) => {
                               />
                             )}
                           </div>
+
                           <div className="menu-mobile--secondary">
                             {menuMobileSecondary.items && (
                               <Menu

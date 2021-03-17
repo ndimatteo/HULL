@@ -1,0 +1,30 @@
+.hero {
+  @apply relative overflow-hidden max-h-screen border-b;
+  max-height: calc(var(--vh, 1vh) * 100);
+
+  @media (max-height: 500px) {
+    min-height: 500px;
+  }
+  
+  &--bg {
+    @apply relative w-full z-0 max-h-screen h-full;
+
+    &-desktop {
+      @apply hidden sm:block;
+      padding-top: calc((9 / 16) * 100%);
+    }
+
+    &-mobile {
+      @apply sm:hidden;
+      padding-top: calc((4 / 3) * 100%);
+    }
+  }
+
+  &--overlay {
+    @apply absolute inset-0 z-10 flex flex-col justify-center;
+  }
+
+  &--content {
+    @apply w-full max-w-5xl mx-auto px-4 pt-4 pb-12 text-center text-white;
+  }
+}
