@@ -13,13 +13,12 @@ const Home = ({ data }) => {
       site={{
         seo: site.seo,
         social: site.social,
-        menus: menus,
       }}
       page={{
         seo: page.seo,
       }}
     >
-      <div className="text-center">
+      <div className="flex flex-col items-center justify-center min-h-screen">
         {page.content?.map((module, key) => (
           <Module key={key} module={module} />
         ))}

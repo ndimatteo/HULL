@@ -30,20 +30,6 @@ const Footer = ({ menu, social }) => {
               })}
             </div>
           )}
-
-          <div className="logo">
-            <Link href="/" scroll={false}>
-              <a className="logo--link" aria-label="Go Home">
-                <Icon name="Logo Mark" id="footerLogo" viewBox="0 0 666 430" />
-              </a>
-            </Link>
-          </div>
-
-          <div className="footer--disclaimer">
-            <p className="text-xs">
-              &copy; {new Date().getFullYear()}. All Rights Reserved.
-            </p>
-          </div>
         </div>
       </div>
     </footer>

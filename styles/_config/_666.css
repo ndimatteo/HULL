@@ -56,7 +56,13 @@ p,
 }
 
 h1 {
-  @apply mt-8 mb-6 font-serif font-normal text-8xl;
+  @apply relative m-0 font-serif font-normal text-8xl;
+  top: -.225em;
+  font-size: clamp(
+    5rem,
+    calc(1rem + 15vw),
+    20rem
+  )
 }
 
 h2, h3 {

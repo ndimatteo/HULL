@@ -37,21 +37,6 @@ const Header = ({ menu, transparent }) => {
       >
         <div className="header--wrapper">
           <div className="header--content">
-            <div className="logo">
-              <Link href="/" scroll={false}>
-                <a className="logo--link" aria-label="Go Home">
-                  <Icon name="Logo" viewBox="0 0 666 666" />
-                </a>
-              </Link>
-            </div>
-
-            <button className="btn cart-toggle" onClick={() => toggleCart()}>
-              Cart
-              <span className={cartCount > 0 ? ' is-active' : ''}>
-                {cartCount}
-              </span>
-            </button>
-
             <nav className="main-navigation" role="navigation">
               <button
                 onClick={() => toggleMenu(!isMenuOpen)}
