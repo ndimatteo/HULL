@@ -1,5 +1,5 @@
 .cookie-bar {
-  @apply fixed bottom-0 right-0 z-90 p-4 w-full max-w-4xl;
+  @apply fixed bottom-0 right-0 z-90 p-4 w-full max-w-3xl;
 
   &--content {
     @apply grid gap-6 sm:flex items-center p-6 pb-4 sm:p-6 rounded-lg bg-pageText text-pageBG border;
