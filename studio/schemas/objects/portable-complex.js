@@ -1,17 +1,12 @@
-import React from 'react'
-import { FiAlignLeft, FiMousePointer } from 'react-icons/fi'
-
 import '../../branding/skin.css?raw'
 
-const noteRender = props => <div className="is-note">{props.children}</div>
-
-const alignRender = props => (
-  <span className={props.alignment}>{props.children}</span>
-)
-
-const buttonRender = props => (
-  <span className={`btn ${props.color}`}>{props.children}</span>
-)
+import {
+  Header1,
+  Header2,
+  Header3,
+  Header4,
+  Button
+} from '../../components/block-renders'
 
 export default {
   title: 'Rich Text',
@@ -22,18 +17,63 @@ export default {
       title: 'Block',
       type: 'block',
       styles: [
-        { title: 'Normal', value: 'normal' },
+        { title: 'Paragraph', value: 'normal' },
         {
-          title: 'Note',
-          value: 'note',
+          title: 'H1 (use once)',
+          value: 'h1',
           blockEditor: {
-            render: noteRender
+            render: Header1
           }
         },
-        { title: 'H1', value: 'h1' },
-        { title: 'H2', value: 'h2' },
-        { title: 'H3', value: 'h3' },
-        { title: 'H4', value: 'h4' }
+        {
+          title: 'H1 (mimic)',
+          value: 'h1mock',
+          blockEditor: {
+            render: Header1
+          }
+        },
+        {
+          title: 'H2',
+          value: 'h2',
+          blockEditor: {
+            render: Header2
+          }
+        },
+        {
+          title: 'H2 (mimic)',
+          value: 'h2mock',
+          blockEditor: {
+            render: Header2
+          }
+        },
+        {
+          title: 'H3',
+          value: 'h3',
+          blockEditor: {
+            render: Header3
+          }
+        },
+        {
+          title: 'H3 (mimic)',
+          value: 'h3mock',
+          blockEditor: {
+            render: Header3
+          }
+        },
+        {
+          title: 'H4',
+          value: 'h4',
+          blockEditor: {
+            render: Header4
+          }
+        },
+        {
+          title: 'H4 (mimic)',
+          value: 'h4mock',
+          blockEditor: {
+            render: Header4
+          }
+        }
       ],
       lists: [{ title: 'Bullet', value: 'bullet' }],
       marks: {
@@ -43,64 +83,15 @@ export default {
         ],
         annotations: [
           {
-            title: 'Text Align',
-            name: 'align',
-            type: 'object',
-            blockEditor: {
-              icon: FiAlignLeft,
-              render: alignRender
-            },
-            fields: [
-              {
-                title: 'Text Alignment',
-                name: 'alignment',
-                type: 'string',
-                options: {
-                  list: [
-                    { title: 'Left', value: 'text-left' },
-                    { title: 'Center', value: 'text-center' },
-                    { title: 'Right', value: 'text-right' }
-                  ],
-                  layout: 'radio'
-                }
-              }
-            ]
-          },
-          {
             title: 'Link',
             name: 'link',
             type: 'object',
-            fields: [
-              {
-                title: 'Page Link',
-                name: 'page',
-                type: 'reference',
-                to: [
-                  { type: 'homePage' },
-                  { type: 'shopPage' },
-                  { type: 'page' },
-                  { type: 'collection' },
-                  { type: 'product' }
-                ]
-              },
-              {
-                title: 'External URL',
-                name: 'href',
-                type: 'url'
-              }
-            ]
-          },
-          {
-            title: 'Button',
-            name: 'button',
-            type: 'object',
             blockEditor: {
-              icon: FiMousePointer,
-              render: buttonRender
+              render: Button
             },
             fields: [
               {
-                title: 'Page Link',
+                title: '(A) Internal Page',
                 name: 'page',
                 type: 'reference',
                 to: [
@@ -112,21 +103,14 @@ export default {
                 ]
               },
               {
-                title: 'External URL',
-                name: 'href',
+                title: '(B) External URL',
+                name: 'url',
                 type: 'url'
               },
               {
-                title: 'Button Color',
-                name: 'color',
-                type: 'string',
-                options: {
-                  list: [
-                    { title: 'Default', value: 'is-default' },
-                    { title: 'Accented', value: 'is-accent' }
-                  ],
-                  layout: 'radio'
-                }
+                title: 'Style as Button?',
+                name: 'isButton',
+                type: 'boolean'
               }
             ]
           }

@@ -1,4 +1,3 @@
-import qs from 'qs'
 import axios from 'axios'
 
 export default async function send(req, res) {

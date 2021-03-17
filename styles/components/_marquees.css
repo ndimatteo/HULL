@@ -64,20 +64,3 @@
     transform: translate3d(100%, 0, 0);
   }
 }
-
-
-.marquee {
-  @apply border-b;
-  
-  &--item {
-    @apply flex items-center;
-  }
-
-  &--text {
-    @apply block p-8 text-5xl leading-none;
-  }
-
-  &--photo {
-    @apply relative w-80;
-  }
-}

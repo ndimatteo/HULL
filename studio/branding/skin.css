@@ -47,6 +47,7 @@ li[class*="moving"] * {
   padding: .5em 1em;
   background: #000 !important;
   color: #fff !important;
+  border-radius: 9999px;
 }
 
 .is-statement {

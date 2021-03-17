@@ -74,6 +74,13 @@ const Newsletter = ({ data = {} }) => {
             variants={fadeAnim}
             className="form--fields"
           >
+            <input
+              type="text"
+              name="fullname"
+              autoComplete="off"
+              className="control--pot"
+              ref={register}
+            />
             <div className="control--group is-inline is-clean">
               <div className={`control${errors.email ? ' has-error' : ''}`}>
                 <label htmlFor="email" className="control--label">
@@ -147,6 +154,59 @@ const Newsletter = ({ data = {} }) => {
                 </label>
               </div>
             )}
+          </motion.div>
+        )}
+
+        {success && (
+          <motion.div
+            key="success"
+            initial="hide"
+            animate="show"
+            exit="hide"
+            variants={fadeAnim}
+            className="form--success"
+          >
+            <div className="form--success-content">
+              {successMsg ? (
+                <BlockContent
+                  renderContainerOnSingleChild
+                  className="rc"
+                  blocks={successMsg}
+                  serializers={serializers}
+                />
+              ) : (
+                <h2>Success!</h2>
+              )}
+            </div>
+          </motion.div>
+        )}
+
+        {error && (
+          <motion.div
+            key="error"
+            initial="hide"
+            animate="show"
+            exit="hide"
+            variants={fadeAnim}
+            className="form--error"
+          >
+            <div className="form--error-content">
+              {errorMsg ? (
+                <BlockContent
+                  renderContainerOnSingleChild
+                  className="rc"
+                  blocks={errorMsg}
+                  serializers={serializers}
+                />
+              ) : (
+                <h2>Error!</h2>
+              )}
+              <p className="form--error-reset">
+                <button className="btn" onClick={(e) => resetForm(e)}>
+                  try again
+                </button>
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

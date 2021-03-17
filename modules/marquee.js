@@ -27,7 +27,7 @@ const Marquee = ({ data = {} }) => {
             case 'photo':
               return (
                 <div key={key} className="marquee--photo">
-                  <Photo photo={item.photo} />
+                  <Photo photo={item.photo} hasPlaceholder={false} />
                 </div>
               )
           }

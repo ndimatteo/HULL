@@ -4,6 +4,10 @@
   &--error {
     /* Error Message styles */
     @apply bg-pageBG border p-4 md:p-4 text-center;
+
+    &-reset {
+      @apply mt-2;
+    }
   }
   
   &--success {
@@ -95,10 +99,6 @@
 
         p {
           @apply text-xs;
-
-          a {
-            @apply underline;
-          }
         }
       }
     }

@@ -7,10 +7,6 @@ const getBlockNames = types => {
         return 'Freeform'
       case 'accordions':
         return 'Accordions'
-      case 'team':
-        return 'Team Grid'
-      case 'card':
-        return 'Card'
       default:
         return null
     }

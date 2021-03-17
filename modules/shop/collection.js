@@ -6,7 +6,7 @@ import ProductCard from './product-card'
 const Collection = ({
   products,
   featuredProducts = [],
-  paginationLimit = 0,
+  paginationLimit = 1,
 }) => {
   if (!products || products.length === 0) return null
 
@@ -51,10 +51,10 @@ const Collection = ({
         ))}
       </div>
 
-      {hasPagination && (
+      {hasPagination && hasMore && (
         <div className="collection--pagination">
           {hasMore && (
-            <button className="btn is-accent" onClick={loadMore}>
+            <button className="btn is-large" onClick={loadMore}>
               Load More
             </button>
           )}

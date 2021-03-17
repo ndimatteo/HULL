@@ -4,6 +4,10 @@
   &--grid {
     @apply grid grid-cols-1 md:grid-cols-3 -m-px;
   }
+
+  &--pagination {
+    @apply p-4 sm:py-8 is-textured border-t text-center;
+  }
 }
 
 .product-card {

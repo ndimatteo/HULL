@@ -9,7 +9,7 @@
 /* ----- Buttons -----*/
 
 .btn {
-  @apply relative bg-transparent px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
+  @apply relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
 
   .is-soldout & {
     @apply is-hashed opacity-30;
@@ -40,7 +40,9 @@
     }
   }
 
-  &.is-large {
+  &.is-large,
+  h1 &,
+  .is-h1 & {
     @apply text-2xl font-normal px-10;
   }
 
@@ -98,4 +100,30 @@
 }
 
 
-/* ----- Products ----- */
+/* ----- Marquees ----- */
+
+.marquee {
+  @apply border-b;
+  
+  &--item {
+    @apply flex items-center;
+  }
+
+  &--text {
+    @apply block p-8 text-5xl leading-none;
+  }
+
+  &--photo {
+    @apply relative w-40 sm:w-80 py-8;
+
+    [data-theme='metal'] & {
+      filter: invert(94%) sepia(59%) saturate(2450%) hue-rotate(35deg) brightness(122%) contrast(111%);
+    }
+
+    img {
+      html:not([data-theme='dark']) & {
+        filter: invert(1);
+      }
+    }
+  }
+}

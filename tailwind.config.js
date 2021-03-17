@@ -33,6 +33,10 @@ module.exports = {
         /^xl:col-start-/,
 
         /^max-w-/,
+        /^text-/,
+        'mr-auto',
+        'mx-auto',
+        'ml-auto',
       ],
     },
   },
