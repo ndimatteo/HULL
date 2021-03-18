@@ -116,13 +116,14 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 Clone this repository from your GitHub account with the `use template` button
 
 ### 1) Sanity
-1. `npm install && sanity init` in the `/studio` folder
-2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
+1. `npm install -g @sanity/cli` to install Sanity globally
+2. `npm install && sanity init` in the `/studio` folder
+3. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
 ```
 ? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
 ```
-3. When it asks you what dataset configuration to use, go with the `default`
-4. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
+4. When it asks you what dataset configuration to use, go with the `default`
+5. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
     - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
     - Add your front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
 > ⚠️ **Note** <br />This Studio uses the new "actions" resolver to handle "singleton" documents. To adjust what documents should behave like singletons be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`
