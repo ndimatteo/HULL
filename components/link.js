@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import { getStaticRoute, getDynamicRoute } from '@lib/routes'
 
-import { useProductCount } from '@lib/contexts/shopify'
+import { useProductCount } from '@lib/context'
 
 const Link = ({ link, children, ...rest }) => {
   const isLink = !!link.url

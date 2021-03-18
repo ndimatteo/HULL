@@ -15,35 +15,37 @@ const Marquee = ({ data = {} }) => {
   })
 
   return (
-    <Marqy
-      speed={speed}
-      direction={reverse ? 'right' : 'left'}
-      pauseOnHover={pausable}
-      className="marquee"
-    >
-      <div ref={marqueeRef} className="marquee--item">
-        {items.map((item, key) => {
-          switch (item._type) {
-            case 'simple':
-              return (
-                <span key={key} className="marquee--text">
-                  {item.text}
-                </span>
-              )
-            case 'photo':
-              return (
-                <div key={key} className="marquee--photo">
-                  <Photo
-                    photo={item.photo}
-                    hasPlaceholder={false}
-                    forceLoad={isIntersecting}
-                  />
-                </div>
-              )
-          }
-        })}
-      </div>
-    </Marqy>
+    <div ref={marqueeRef} className="marquee-section">
+      <Marqy
+        speed={speed}
+        direction={reverse ? 'right' : 'left'}
+        pauseOnHover={pausable}
+        className="marquee"
+      >
+        <div className="marquee--item">
+          {items.map((item, key) => {
+            switch (item._type) {
+              case 'simple':
+                return (
+                  <span key={key} className="marquee--text">
+                    {item.text}
+                  </span>
+                )
+              case 'photo':
+                return (
+                  <div key={key} className="marquee--photo">
+                    <Photo
+                      photo={item.photo}
+                      hasPlaceholder={false}
+                      forceLoad={isIntersecting}
+                    />
+                  </div>
+                )
+            }
+          })}
+        </div>
+      </Marqy>
+    </div>
   )
 }
 

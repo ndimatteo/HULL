@@ -10,7 +10,7 @@
 
 .btn {
   /* default style button */
-  @apply relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
+  @apply inline-block relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
 
   /* default: hover */
   &:not(.is-primary):not(.is-white):not(.is-disabled):not(.is-soldout) {

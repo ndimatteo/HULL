@@ -6,14 +6,14 @@ import cx from 'classnames'
 import { centsToPrice } from '@lib/helpers'
 import CartItem from '@blocks/shop/cart-item'
 
-import { useSiteContext } from '@lib/contexts'
 import {
+  useSiteContext,
   useCartTotals,
   useCartCount,
   useCartItems,
   useCheckout,
   useToggleCart,
-} from '@lib/contexts/shopify'
+} from '@lib/context'
 
 const Cart = ({ data }) => {
   const { cart } = data

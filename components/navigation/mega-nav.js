@@ -4,11 +4,10 @@ import { motion } from 'framer-motion'
 import { useRect } from '@reach/rect'
 import cx from 'classnames'
 
-import { useSiteContext } from '@lib/contexts'
-import { useToggleMegaNav } from '@lib/contexts/site'
+import { useSiteContext, useToggleMegaNav } from '@lib/context'
 import { isBrowser } from '@lib/helpers'
-
 import { swipeAnim } from '@lib/animate'
+
 import Menu from './menu'
 import FeaturedProducts from './featured-products'
 

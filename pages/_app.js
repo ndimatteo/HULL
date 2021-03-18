@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
-import { SiteContextProvider } from '@lib/contexts'
+import { SiteContextProvider } from '@lib/context'
 
 import { isBrowser } from '@lib/helpers'
 import Cart from '@modules/shop/cart'

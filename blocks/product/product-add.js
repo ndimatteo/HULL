@@ -1,8 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 
-import { useSiteContext } from '@lib/contexts'
-import { useAddItem } from '@lib/contexts/shopify'
+import { useSiteContext, useAddItem } from '@lib/context'
 
 const ProductAdd = ({ productID, quantity = 1, className, children }) => {
   const addItemToCart = useAddItem()
