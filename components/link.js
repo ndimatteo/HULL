@@ -1,5 +1,6 @@
 import React from 'react'
 import NextLink from 'next/link'
+import cx from 'classnames'
 
 import { getStaticRoute, getDynamicRoute } from '@lib/routes'
 
@@ -23,7 +24,14 @@ const Link = ({ link, children, ...rest }) => {
         href={link.url}
         target={!link.url.match('^mailto:') ? '_blank' : null}
         rel="noopener noreferrer"
-        className={link.isButton ? 'btn' : null}
+        className={
+          link.isButton
+            ? cx('btn', link.styles?.style, {
+                'is-large': link.styles?.isLarge,
+                'is-block': link.styles?.isBlock,
+              })
+            : null
+        }
         {...rest}
       >
         {link.title || children}
@@ -42,7 +50,17 @@ const Link = ({ link, children, ...rest }) => {
         }
         scroll={false}
       >
-        <a className={link.isButton ? 'btn' : null} {...rest}>
+        <a
+          className={
+            link.isButton
+              ? cx('btn', link.styles?.style, {
+                  'is-large': link.styles?.isLarge,
+                  'is-block': link.styles?.isBlock,
+                })
+              : null
+          }
+          {...rest}
+        >
           {link.title || children}
 
           {isCollection && (

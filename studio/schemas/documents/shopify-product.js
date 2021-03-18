@@ -171,7 +171,12 @@ export default {
       title: 'Page Modules',
       name: 'modules',
       type: 'array',
-      of: [{ type: 'productHero' }, { type: 'grid' }, { type: 'marquee' }],
+      of: [
+        { type: 'productHero' },
+        { type: 'grid' },
+        { type: 'hero' },
+        { type: 'marquee' }
+      ],
       validation: Rule =>
         Rule.custom(blocks => {
           const productHeros = blocks.filter(

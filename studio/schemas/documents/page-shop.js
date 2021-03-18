@@ -18,7 +18,12 @@ export default {
       title: 'Page Modules',
       name: 'modules',
       type: 'array',
-      of: [{ type: 'collectionGrid' }, { type: 'grid' }, { type: 'marquee' }],
+      of: [
+        { type: 'collectionGrid' },
+        { type: 'grid' },
+        { type: 'hero' },
+        { type: 'marquee' }
+      ],
       validation: Rule =>
         Rule.custom(blocks => {
           const collectionGrids = blocks.filter(

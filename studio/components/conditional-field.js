@@ -82,7 +82,7 @@ class ConditionalFields extends React.PureComponent {
   }
 
   handleFieldChange = (field, fieldPatchEvent) => {
-    // Whenever the field input emits a patch event, we need to make sure to each of the included patches
+    // Whenever the field input emits a patch event, we need to make sure each of the included patches
     // are prefixed with its field name, e.g. going from:
     // {path: [], set: <nextvalue>} to {path: [<fieldName>], set: <nextValue>}
     // and ensure this input's value exists
@@ -103,6 +103,7 @@ class ConditionalFields extends React.PureComponent {
         return true
       }
     const showFields = !!condition(document, this.getContext.bind(this))
+
     if (!showFields) return <></>
 
     return (
@@ -110,7 +111,7 @@ class ConditionalFields extends React.PureComponent {
         {type.fields.map((field, i) => (
           // Delegate to the generic FormBuilderInput. It will resolve and insert the actual input component
           // for the given field type
-          <div className={fieldStyle.root} key={i}>
+          <div className={fieldStyle.root} key={i} style={{ marginBottom: -1 }}>
             <FormBuilderInput
               level={level + 1}
               ref={i === 0 ? this.firstFieldInput : null}

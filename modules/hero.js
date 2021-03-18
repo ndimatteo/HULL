@@ -3,9 +3,10 @@ import BlockContent from '@sanity/block-content-to-react'
 import { serializers } from '@lib/serializers'
 
 import VideoLoop from '@components/video-loop'
+import Photo from '@components/photo'
 
 const Hero = ({ data = {} }) => {
-  const { content, bgType, photo, video } = data
+  const { content, bgType, photos, video } = data
 
   return (
     <section className="hero">
@@ -33,24 +34,28 @@ const Hero = ({ data = {} }) => {
         </>
       )}
 
-      {bgType === 'image' && (
+      {bgType === 'photo' && (
         <>
-          <Photo
-            photo={photo.photo}
-            width={1920}
-            height={1080}
-            sizes="100vw"
-            layout="fill"
-            className="hero--bg-desktop"
-          />
-          <Photo
-            photo={photo.photo}
-            width={800}
-            height={1200}
-            sizes="100vw"
-            layout="fill"
-            className="hero--bg-mobile"
-          />
+          {photos?.desktopPhoto && (
+            <Photo
+              photo={photos.desktopPhoto}
+              width={1920}
+              // height={1080}
+              sizes="100vw"
+              layout="fill"
+              className="hero--bg-desktop"
+            />
+          )}
+          {photos?.mobilePhoto && (
+            <Photo
+              photo={photos.mobilePhoto}
+              width={800}
+              // height={1200}
+              sizes="100vw"
+              layout="fill"
+              className="hero--bg-mobile"
+            />
+          )}
         </>
       )}
     </section>

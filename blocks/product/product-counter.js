@@ -6,18 +6,26 @@ import { clampRange } from '@lib/helpers'
 import Icon from '@components/icon'
 
 const flipAnim = {
-  show: (custom) => ({
-    y: [`${100 * custom}%`, '0%'],
+  show: {
+    y: '0%',
     transition: {
-      duration: 1,
+      duration: 0.5,
       ease: [0.16, 1, 0.3, 1],
       when: 'beforeChildren',
     },
-  }),
+  },
   hide: (custom) => ({
-    y: ['0%', `${-100 * custom}%`],
+    y: `${-100 * custom}%`,
     transition: {
-      duration: 1,
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1],
+      when: 'afterChildren',
+    },
+  }),
+  hideR: (custom) => ({
+    y: `${100 * custom}%`,
+    transition: {
+      duration: 0.5,
       ease: [0.16, 1, 0.3, 1],
       when: 'afterChildren',
     },
@@ -78,7 +86,7 @@ const ProductCounter = React.memo(
           <AnimatePresence custom={direction}>
             <motion.div
               key={motionKey}
-              initial={isAnimating ? 'hide' : 'show'}
+              initial={isAnimating ? 'hideR' : 'show'}
               animate="show"
               exit="hide"
               variants={flipAnim}

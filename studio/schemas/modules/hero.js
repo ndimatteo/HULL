@@ -26,13 +26,18 @@ export default {
       validation: Rule => Rule.required()
     },
     {
-      name: 'photo',
+      name: 'photos',
       type: 'object',
       inputComponent: ConditionalFields,
       fields: [
         {
-          title: 'Background Photo',
-          name: 'photo',
+          title: 'Background Photo (mobile)',
+          name: 'mobilePhoto',
+          type: 'figure'
+        },
+        {
+          title: 'Background Photo (desktop)',
+          name: 'desktopPhoto',
           type: 'figure'
         }
       ],

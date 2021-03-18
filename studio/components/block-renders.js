@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames'
 
 export const Header1 = props => (
   <h1 style={{ margin: '0', fontSize: '2rem', lineHeight: '1.5' }}>
@@ -24,10 +25,19 @@ export const Header4 = props => (
   </h4>
 )
 
-export const Button = ({ isButton, children }) => {
+export const Button = ({ isButton, styles, children }) => {
   if (!isButton) return children
 
-  return <span className="btn">{children}</span>
+  return (
+    <span
+      className={cx('btn', styles?.style, {
+        'is-large': styles?.isLarge,
+        'is-block': styles?.isBlock
+      })}
+    >
+      {children}
+    </span>
+  )
 }
 
 export const TextAlign = props => (

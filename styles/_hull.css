@@ -19,7 +19,6 @@
     @apply bg-pageText border-pageText text-pageBG;
   }
 
-  .hero &,
   &.is-primary {
     @apply bg-pageText text-pageBG border-0; 
 
@@ -32,6 +31,10 @@
     }
   }
 
+  &.is-white {
+    @apply bg-white border-white text-black;
+  }
+
   &.is-text {
     @apply px-0 bg-transparent border-0 transition-opacity duration-300;
 
@@ -41,11 +44,8 @@
     }
   }
 
-  &.is-large,
-  h1 &,
-  .is-h1 &,
-  .hero & {
-    @apply text-2xl font-normal px-10;
+  &.is-large {
+    @apply text-2xl font-normal px-7;
   }
 
   &.is-disabled:not(.is-primary) {

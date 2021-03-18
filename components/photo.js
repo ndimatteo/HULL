@@ -8,7 +8,7 @@ const Photo = ({
   photo,
   width,
   height,
-  srcSizes = [300, 600, 1200, 1600],
+  srcSizes = [300, 600, 1200],
   sizes = '(min-width: 940px) 50vw, 100vw',
   layout = 'intrinsic',
   quality = 80,
