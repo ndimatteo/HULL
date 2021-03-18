@@ -33,6 +33,13 @@
         "projectId": ["NEXT_PUBLIC_SANITY_PROJECT_ID"],
         "dataset": ["NEXT_PUBLIC_SANITY_DATASET"]
       },
+      "tokens": [
+          {
+              "label": "livePreview",
+              "role": "write",
+              "envVar": "SANITY_API_TOKEN"
+          }
+      ],
       "corsOrigins": [
         {
           "origin": "http://localhost:3000",
