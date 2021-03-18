@@ -16,7 +16,7 @@ const Footer = ({ data }) => {
       <div className="footer--grid">
         {blocks.map((block, key) => (
           <div key={key} className="footer--block">
-            {block.title && <h3>{block.title}</h3>}
+            {block.title && <p className="is-h3">{block.title}</p>}
 
             {block.menu?.items && (
               <Menu items={block.menu.items} className="menu-footer" />
