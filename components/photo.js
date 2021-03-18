@@ -14,6 +14,7 @@ const Photo = ({
   layout = 'intrinsic',
   quality = 80,
   hasPlaceholder = true,
+  forceLoad,
   onLoad,
   className,
 }) => {
@@ -24,6 +25,7 @@ const Photo = ({
   const [imageRef, isIntersecting] = useInView({
     triggerOnce: true,
     threshold: 0.1,
+    skip: forceLoad,
   })
 
   // define our aspect ratio if not a background fill
@@ -73,8 +75,8 @@ const Photo = ({
             ref={imageRef}
             width={width}
             height={height}
-            src={isIntersecting ? src : null}
-            srcSet={isIntersecting ? srcset : null}
+            src={forceLoad || isIntersecting ? src : null}
+            srcSet={forceLoad || isIntersecting ? srcset : null}
             sizes={sizes}
             decoding="async"
             onLoad={handleLoad}

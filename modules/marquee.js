@@ -1,4 +1,5 @@
 import React from 'react'
+import { useInView } from 'react-intersection-observer'
 
 import Marqy from '@components/marqy'
 import Photo from '@components/photo'
@@ -8,6 +9,11 @@ const Marquee = ({ data = {} }) => {
 
   if (!items) return null
 
+  const [marqueeRef, isIntersecting] = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+
   return (
     <Marqy
       speed={speed}
@@ -15,7 +21,7 @@ const Marquee = ({ data = {} }) => {
       pauseOnHover={pausable}
       className="marquee"
     >
-      <div className="marquee--item">
+      <div ref={marqueeRef} className="marquee--item">
         {items.map((item, key) => {
           switch (item._type) {
             case 'simple':
@@ -27,7 +33,11 @@ const Marquee = ({ data = {} }) => {
             case 'photo':
               return (
                 <div key={key} className="marquee--photo">
-                  <Photo photo={item.photo} hasPlaceholder={false} />
+                  <Photo
+                    photo={item.photo}
+                    hasPlaceholder={false}
+                    forceLoad={isIntersecting}
+                  />
                 </div>
               )
           }
