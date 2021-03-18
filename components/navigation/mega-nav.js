@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import FocusTrap from 'focus-trap-react'
 import { motion } from 'framer-motion'
 import { useRect } from '@reach/rect'
@@ -6,6 +6,7 @@ import cx from 'classnames'
 
 import { useSiteContext } from '@lib/contexts'
 import { useToggleMegaNav } from '@lib/contexts/site'
+import { isBrowser } from '@lib/helpers'
 
 import { swipeAnim } from '@lib/animate'
 import Menu from './menu'
@@ -29,6 +30,12 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
       toggleMegaNav(false)
     }
   }
+
+  useEffect(() => {
+    if (isBrowser) {
+      document.body.classList.toggle('overflow-hidden', meganav.isOpen)
+    }
+  }, [meganav.isOpen])
 
   return (
     <>

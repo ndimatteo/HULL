@@ -6,8 +6,11 @@ const ProductPrice = ({ price, comparePrice }) => {
   return (
     <div className="price">
       <span className="price--current">${centsToPrice(price)}</span>
+
       {!!comparePrice && (
-        <span className="price--original">${centsToPrice(comparePrice)}</span>
+        <span className="price--discount">
+          {Math.ceil(((comparePrice - price) / comparePrice) * 100)}% off
+        </span>
       )}
     </div>
   )

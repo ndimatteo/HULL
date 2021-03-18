@@ -63,6 +63,9 @@ module.exports = {
       xl: '1600px',
     },
     extend: {
+      fontSize: {
+        xxs: '.625rem',
+      },
       zIndex: {
         '-1': '-10',
         50: 50,

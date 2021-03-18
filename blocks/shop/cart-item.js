@@ -70,7 +70,7 @@ function CartItem({ item }) {
               key={item.id}
               defaultCount={item.quantity}
               onUpdate={changeQuantity}
-              className="is-small"
+              className="is-small is-inverted"
             />
           </div>
           <button

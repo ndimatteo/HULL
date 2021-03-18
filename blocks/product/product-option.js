@@ -61,15 +61,15 @@ const ProductOption = ({
             }
           })
 
+          const optionClassStates = (base) =>
+            cx(base, {
+              'is-active': isActive,
+              'is-unavailable': !hasVariants,
+              'is-soldout': !inStock && hasVariants && !isActive,
+            })
+
           return (
-            <li
-              key={key}
-              className={cx({
-                'is-active': isActive,
-                'is-unavailable': !hasVariants,
-                'is-soldout': !inStock && hasVariants && !isActive,
-              })}
-            >
+            <li key={key}>
               {optSettings?.color ? (
                 <button
                   onClick={() =>
@@ -82,7 +82,7 @@ const ProductOption = ({
                       onChange
                     )
                   }
-                  className="option--swatch"
+                  className={optionClassStates('option--swatch')}
                 >
                   <Swatch
                     label={`Select "${value}" ${option.name} option`}
@@ -101,7 +101,7 @@ const ProductOption = ({
                       onChange
                     )
                   }
-                  className="btn is-block"
+                  className={optionClassStates('btn is-block')}
                 >
                   {value}
                 </button>
