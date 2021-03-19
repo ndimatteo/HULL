@@ -51,6 +51,10 @@
     @apply mt-8 text-center;
   }
 
+  &--title {
+    @apply mb-2 !important;
+  }
+
   &--link {
     @apply block no-underline text-current;
 
@@ -61,8 +65,14 @@
   }
 
   .price {
+    @apply flex items-center justify-center ;
+
     &--current {
       @apply sm:text-base sm:leading-normal font-semibold;
+    }
+
+    &--discount {
+      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
     }
   }
 

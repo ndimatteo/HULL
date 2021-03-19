@@ -9,34 +9,56 @@
 /* ----- Buttons -----*/
 
 .btn {
-  @apply relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
+  /* default style button */
+  @apply inline-block relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
 
-  .is-soldout & {
-    @apply is-hashed opacity-30;
+  /* default: hover */
+  &:not(.is-primary):not(.is-white):not(.is-disabled):not(.is-soldout) {
+    &.is-active,
+    &:hover {
+      @apply bg-pageText border-pageText text-pageBG;
+    }
   }
 
-  .is-active & {
-    @apply bg-pageText border-pageText text-pageBG;
+  /* default: inverted */
+  &.is-inverted {
+    @apply bg-pageText border-pageBG text-pageBG;
+
+    &:not(.is-primary):not(.is-white):not(.is-disabled):not(.is-soldout) {
+      &.is-active,
+      &:hover {
+        @apply bg-pageBG border-pageBG text-pageText;
+      }
+    }
   }
 
+  /* default: disabled */
+  &.is-disabled:not(.is-primary),
+  &.is-soldout {
+    @apply bg-pageBG opacity-20;
+  }
+
+
+  /* primary style button */
   &.is-primary {
-    @apply bg-pageText text-pageBG border-0; 
+    @apply bg-pageText border-pageText text-pageBG;
 
-    .is-inverted & {
-      @apply bg-pageBG text-pageText border-0;
-    }
-
-    &.is-disabled {
-      @apply opacity-20;
+    /* primary: inverted */
+    &.is-inverted {
+      @apply bg-pageBG border-pageBG text-pageText;
     }
   }
 
+
+  /* white style button */
   &.is-white {
     @apply bg-white border-white text-black;
   }
 
+
+  /* text-based button */
   &.is-text {
-    @apply px-0 bg-transparent border-0 transition-opacity duration-300;
+    @apply px-0 bg-transparent border-transparent;
 
     &.is-disabled,
     &:not(.is-disabled):hover {
@@ -44,12 +66,10 @@
     }
   }
 
+
+  /* large sized button */
   &.is-large {
     @apply text-2xl font-normal px-7;
-  }
-
-  &.is-disabled:not(.is-primary) {
-    @apply bg-pageBG;
   }
 }
 
@@ -63,12 +83,12 @@
     @apply p-1;
   }
 
-  .product--actions & {
-    @apply mr-4;
+  &.is-inverted {
+    @apply bg-transparent text-pageBG;
   }
 
-  .is-inverted & {
-    @apply bg-transparent text-pageBG;
+  .product--actions & {
+    @apply mr-4;
   }
 
   &--up,

@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
-import LazyLoad from 'vanilla-lazyload'
+import React, { useState, useEffect, useRef } from 'react'
+import { useIntersection } from 'use-intersection'
 import cx from 'classnames'
 
 import { buildSrcSet, buildSrc } from '@lib/helpers'
@@ -13,33 +13,18 @@ const Photo = ({
   layout = 'intrinsic',
   quality = 80,
   hasPlaceholder = true,
+  forceLoad,
   onLoad,
   className,
 }) => {
+  if (!photo) return null
+
   const imageRef = useRef()
-  const [loaded, setLoaded] = useState(false)
-
-  // setup lazyload
-  useEffect(() => {
-    let lazy
-    if (photo && imageRef.current) {
-      lazy = new LazyLoad(
-        {
-          threshold: -150,
-          callback_loaded: () => setLoaded(true),
-        },
-        [imageRef.current]
-      )
-    }
-
-    return () => {
-      lazy && lazy.destroy()
-    }
-  }, [photo, imageRef])
-
-  useEffect(() => {
-    if (loaded && onLoad) onLoad()
-  }, [loaded])
+  const [isLoaded, setIsLoaded] = useState(false)
+  const isIntersecting = useIntersection(imageRef, {
+    once: true,
+    threshold: 0.1,
+  })
 
   // define our aspect ratio if not a background fill
   const aspect =
@@ -50,6 +35,31 @@ const Photo = ({
   const aspectCustom =
     layout === 'intrinsic' ? { paddingTop: `${aspect}%` } : null
 
+  // define our src and srcset
+  const src = buildSrc(photo, {
+    ...{ width },
+    ...{ height },
+    ...{ quality },
+  })
+
+  const srcset = buildSrcSet(photo, {
+    ...{ srcSizes },
+    ...{ aspect },
+    ...{ quality },
+  })
+
+  // handle our image onLoad
+  function handleLoad() {
+    requestAnimationFrame(() => {
+      setIsLoaded(true)
+    })
+  }
+
+  // trigger any onLoad callbacks
+  useEffect(() => {
+    if (isLoaded && onLoad) onLoad()
+  }, [isLoaded])
+
   return (
     <figure className={className ? className : null}>
       <div
@@ -58,32 +68,23 @@ const Photo = ({
         })}
         style={aspectCustom}
       >
-        {photo && (
-          <picture>
-            <img
-              ref={imageRef}
-              width={width}
-              height={height}
-              data-src={buildSrc(photo, {
-                ...{ width },
-                ...{ height },
-                ...{ quality },
-              })}
-              data-srcset={buildSrcSet(photo, {
-                ...{ srcSizes },
-                ...{ aspect },
-                ...{ quality },
-              })}
-              sizes={sizes}
-              decoding="async"
-              alt={photo.alt || photo.asset?.altText}
-              className={cx(getSize(layout), { 'is-loaded': loaded })}
-            />
-          </picture>
-        )}
+        <picture>
+          <img
+            ref={imageRef}
+            width={width}
+            height={height}
+            src={forceLoad || isIntersecting ? src : null}
+            srcSet={forceLoad || isIntersecting ? srcset : null}
+            sizes={sizes}
+            decoding="async"
+            onLoad={handleLoad}
+            alt={photo.alt || photo.asset?.altText}
+            className={cx(getSize(layout), { 'is-loaded': isLoaded })}
+          />
+        </picture>
 
-        {photo && hasPlaceholder && (
-          <div className={cx('ar--placeholder', { 'is-loaded': loaded })}>
+        {hasPlaceholder && (
+          <div className={cx('ar--placeholder', { 'is-loaded': isLoaded })}>
             <img src={photo.lqip} alt="" role="presentation" />
           </div>
         )}

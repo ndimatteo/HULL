@@ -6,11 +6,7 @@ import { hasObject } from '@lib/helpers'
 import Photo from '@components/photo'
 import { ProductCounter, ProductPrice } from '@blocks/product'
 
-import {
-  useUpdateItem,
-  useRemoveItem,
-  useToggleCart,
-} from '@lib/contexts/shopify'
+import { useUpdateItem, useRemoveItem, useToggleCart } from '@lib/context'
 
 function CartItem({ item }) {
   const removeItem = useRemoveItem()
@@ -70,7 +66,7 @@ function CartItem({ item }) {
               key={item.id}
               defaultCount={item.quantity}
               onUpdate={changeQuantity}
-              className="is-small"
+              className="is-small is-inverted"
             />
           </div>
           <button

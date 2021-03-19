@@ -25,10 +25,14 @@
     @apply flex mb-8 pb-2 border-b;
 
     .price {
-      @apply mt-auto ml-auto;
+      @apply flex flex-col items-end mt-auto ml-auto;
 
       &--current {
         @apply text-xl leading-normal font-semibold;
+      }
+
+      &--discount {
+        @apply mb-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
       }
     }
   }

@@ -6,14 +6,14 @@ import cx from 'classnames'
 import { centsToPrice } from '@lib/helpers'
 import CartItem from '@blocks/shop/cart-item'
 
-import { useSiteContext } from '@lib/contexts'
 import {
+  useSiteContext,
   useCartTotals,
   useCartCount,
   useCartItems,
   useCheckout,
   useToggleCart,
-} from '@lib/contexts/shopify'
+} from '@lib/context'
 
 const Cart = ({ data }) => {
   const { cart } = data
@@ -76,7 +76,7 @@ const Cart = ({ data }) => {
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           onKeyUp={(e) => handleKeyup(e)}
           onAnimationComplete={() => setHasFocus(isCartOpen)}
-          className={cx('cart is-inverted', {
+          className={cx('cart', {
             'is-active': isCartOpen,
             'is-updating': isUpdating,
           })}
@@ -109,7 +109,7 @@ const Cart = ({ data }) => {
                 <a
                   href={checkoutLink}
                   onClick={(e) => goToCheckout(e)}
-                  className="btn is-primary is-large is-block"
+                  className="btn is-primary is-inverted is-large is-block"
                 >
                   {isUpdating ? 'Updating...' : 'Checkout'}
                 </a>

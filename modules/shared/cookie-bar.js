@@ -37,7 +37,7 @@ const CookieBar = () => {
           variants={barAnim}
           role="dialog"
           aria-live="polite"
-          className="cookie-bar is-inverted"
+          className="cookie-bar"
         >
           <div className="cookie-bar--content">
             <div className="cookie-bar--message">
@@ -54,7 +54,7 @@ const CookieBar = () => {
               </a>
               <button
                 onClick={() => onAcceptCookies()}
-                className="btn is-primary"
+                className="btn is-primary is-inverted"
               >
                 Accept
               </button>

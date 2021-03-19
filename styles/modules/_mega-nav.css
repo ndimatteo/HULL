@@ -79,7 +79,7 @@
   ul {
     a,
     button {
-      @apply block text-4xl leading-normal hover:opacity-30 transition-opacity duration-200;
+      @apply inline-block text-4xl leading-normal hover:opacity-30 transition-opacity duration-200;
     }
   }
 

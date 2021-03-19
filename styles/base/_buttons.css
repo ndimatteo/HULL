@@ -10,6 +10,6 @@
   }
 
   &.is-disabled {
-    @apply cursor-default;
+    @apply cursor-default pointer-events-none;
   }
 }

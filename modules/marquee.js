@@ -1,6 +1,7 @@
-import React from 'react'
-
+import React, { useRef } from 'react'
+import { useIntersection } from 'use-intersection'
 import Marqy from '@components/marqy'
+
 import Photo from '@components/photo'
 
 const Marquee = ({ data = {} }) => {
@@ -8,32 +9,44 @@ const Marquee = ({ data = {} }) => {
 
   if (!items) return null
 
+  const marqueeRef = useRef()
+  const isIntersecting = useIntersection(marqueeRef, {
+    triggerOnce: true,
+    threshold: 0.1,
+  })
+
   return (
-    <Marqy
-      speed={speed}
-      direction={reverse ? 'right' : 'left'}
-      pauseOnHover={pausable}
-      className="marquee"
-    >
-      <div className="marquee--item">
-        {items.map((item, key) => {
-          switch (item._type) {
-            case 'simple':
-              return (
-                <span key={key} className="marquee--text">
-                  {item.text}
-                </span>
-              )
-            case 'photo':
-              return (
-                <div key={key} className="marquee--photo">
-                  <Photo photo={item.photo} hasPlaceholder={false} />
-                </div>
-              )
-          }
-        })}
-      </div>
-    </Marqy>
+    <div ref={marqueeRef} className="marquee-section">
+      <Marqy
+        speed={speed}
+        direction={reverse ? 'right' : 'left'}
+        pauseOnHover={pausable}
+        className="marquee"
+      >
+        <div className="marquee--item">
+          {items.map((item, key) => {
+            switch (item._type) {
+              case 'simple':
+                return (
+                  <span key={key} className="marquee--text">
+                    {item.text}
+                  </span>
+                )
+              case 'photo':
+                return (
+                  <div key={key} className="marquee--photo">
+                    <Photo
+                      photo={item.photo}
+                      hasPlaceholder={false}
+                      forceLoad={isIntersecting}
+                    />
+                  </div>
+                )
+            }
+          })}
+        </div>
+      </Marqy>
+    </div>
   )
 }
 

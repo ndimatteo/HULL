@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
-import { SiteContextProvider } from '@lib/contexts'
+import { SiteContextProvider } from '@lib/context'
 
 import { isBrowser } from '@lib/helpers'
 import Cart from '@modules/shop/cart'
@@ -70,6 +70,7 @@ const MyApp = ({ Component, pageProps, router }) => {
   return (
     <ThemeProvider disableTransitionOnChange>
       <SiteContextProvider data={{ ...pageProps?.data?.site }}>
+        {/* <LazyMotion features={domAnimation}> */}
         {isLoading && (
           <Head>
             <title>Loading...</title>
@@ -86,6 +87,7 @@ const MyApp = ({ Component, pageProps, router }) => {
         </AnimatePresence>
 
         <Cart data={{ ...pageProps?.data?.site }} />
+        {/* </LazyMotion> */}
       </SiteContextProvider>
     </ThemeProvider>
   )

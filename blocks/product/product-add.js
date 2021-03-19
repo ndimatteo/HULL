@@ -1,7 +1,7 @@
 import React from 'react'
+import cx from 'classnames'
 
-import { useSiteContext } from '@lib/contexts'
-import { useAddItem } from '@lib/contexts/shopify'
+import { useSiteContext, useAddItem } from '@lib/context'
 
 const ProductAdd = ({ productID, quantity = 1, className, children }) => {
   const addItemToCart = useAddItem()
@@ -10,12 +10,12 @@ const ProductAdd = ({ productID, quantity = 1, className, children }) => {
   return (
     <>
       {isLoading ? (
-        <button className="btn is-disabled is-block" disabled>
+        <button className={cx('is-disabled', className)} disabled>
           Loading...
         </button>
       ) : (
         <button
-          className={className ? className : null}
+          className={cx(className, { 'is-disabled': isAdding })}
           onClick={() => addItemToCart(productID, quantity)}
         >
           {isAdding ? 'Adding...' : <>{children ? children : 'Add to Cart'}</>}

@@ -1,8 +1,12 @@
 .cart {
-  @apply fixed top-0 right-0 w-full h-screen max-w-3xl z-90 border-l bg-pageText text-pageBG invisible pointer-events-none;
+  @apply fixed top-0 right-0 w-full h-screen max-w-3xl z-90 bg-pageText text-pageBG invisible pointer-events-none;
   height: calc(var(--vh, 1vh) * 100);
   will-change: transform;
   transition: visibility .2s .8s;
+
+  @media (min-width: 769px) {
+    @apply border-l;
+  }
 
   &.is-active {
     @apply visible pointer-events-auto;
