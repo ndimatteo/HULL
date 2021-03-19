@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
+import React, { useState } from 'react'
+// import { useIntersection } from 'use-intersection'
 
 import ProductCard from './product-card'
 
 const Collection = ({
   products,
   featuredProducts = [],
-  paginationLimit = 1,
+  paginationLimit = 3,
 }) => {
   if (!products || products.length === 0) return null
 
@@ -33,15 +33,13 @@ const Collection = ({
   }
 
   // uncomment below and assign the ref for auto-loading on scroll
-  // const [ref, inView] = useInView({
-  //   rootMargin: '-100px 0px',
-  // })
+  // const loadMore = useIntersection(loadMoreRef)
 
   // useEffect(() => {
-  //   if (inView) {
+  //   if (loadMore) {
   //     loadMore()
   //   }
-  // }, [inView])
+  // }, [loadMore])
 
   return (
     <section className="collection">

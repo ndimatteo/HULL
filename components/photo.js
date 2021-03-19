@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react'
-import { useInView } from 'react-intersection-observer'
-// import { useIntersection } from 'use-intersection'
+import React, { useState, useEffect, useRef } from 'react'
+import { useIntersection } from 'use-intersection'
 import cx from 'classnames'
 
 import { buildSrcSet, buildSrc } from '@lib/helpers'
@@ -20,12 +19,11 @@ const Photo = ({
 }) => {
   if (!photo) return null
 
-  // const imageRef = useRef()
+  const imageRef = useRef()
   const [isLoaded, setIsLoaded] = useState(false)
-  const [imageRef, isIntersecting] = useInView({
-    triggerOnce: true,
+  const isIntersecting = useIntersection(imageRef, {
+    once: true,
     threshold: 0.1,
-    skip: forceLoad,
   })
 
   // define our aspect ratio if not a background fill

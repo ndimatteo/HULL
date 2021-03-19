@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
-import { useInView } from 'react-intersection-observer'
+import { useIntersection } from 'use-intersection'
 import { useRect } from '@reach/rect'
 import Link from 'next/link'
 import cx from 'classnames'
@@ -33,7 +33,8 @@ const Header = ({ data = {}, isTransparent }) => {
 
   // setup states
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
-  const [observerRef, observerIsVisible] = useInView()
+  const observerRef = useRef()
+  const observerIsVisible = useIntersection(observerRef)
   const headerRef = useRef()
   const headerRect = useRect(headerRef)
 

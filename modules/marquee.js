@@ -1,7 +1,7 @@
-import React from 'react'
-import { useInView } from 'react-intersection-observer'
+import React, { useRef } from 'react'
+import { useIntersection } from 'use-intersection'
+import { Marqy } from 'marqy'
 
-import Marqy from '@components/marqy'
 import Photo from '@components/photo'
 
 const Marquee = ({ data = {} }) => {
@@ -9,7 +9,8 @@ const Marquee = ({ data = {} }) => {
 
   if (!items) return null
 
-  const [marqueeRef, isIntersecting] = useInView({
+  const marqueeRef = useRef()
+  const isIntersecting = useIntersection(marqueeRef, {
     triggerOnce: true,
     threshold: 0.1,
   })

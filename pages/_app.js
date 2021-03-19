@@ -70,7 +70,7 @@ const MyApp = ({ Component, pageProps, router }) => {
   return (
     <ThemeProvider disableTransitionOnChange>
       <SiteContextProvider data={{ ...pageProps?.data?.site }}>
-        {/* <LazyMotion features={domAnimations}> */}
+        {/* <LazyMotion features={domAnimation}> */}
         {isLoading && (
           <Head>
             <title>Loading...</title>
