@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FocusTrap from 'focus-trap-react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import cx from 'classnames'
 
 import { centsToPrice } from '@lib/helpers'
@@ -62,7 +62,7 @@ const Cart = ({ data }) => {
         active={isCartOpen && hasFocus}
         focusTrapOptions={{ allowOutsideClick: true }}
       >
-        <motion.div
+        <m.div
           initial="hide"
           animate={isCartOpen ? 'show' : 'hide'}
           variants={{
@@ -120,7 +120,7 @@ const Cart = ({ data }) => {
               </div>
             )}
           </div>
-        </motion.div>
+        </m.div>
       </FocusTrap>
 
       <div

@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import cx from 'classnames'
 
 import { useSiteContext } from '@lib/context'
@@ -23,7 +23,7 @@ const CursorFollow = ({ cursorContent, children }) => {
   }, [isVisible])
 
   return (
-    <motion.div
+    <m.div
       onHoverStart={onMouseEnter}
       onHoverEnd={onMouseLeave}
       onMouseMove={onMouseMove}
@@ -31,7 +31,7 @@ const CursorFollow = ({ cursorContent, children }) => {
       {children}
       <AnimatePresence exitBeforeEnter>
         {isVisible && coords.x !== null && (
-          <motion.div
+          <m.div
             initial={{ x: coords.x, y: coords.y, opacity: 0, scale: 0.6 }}
             animate={{
               x: coords.x,
@@ -56,10 +56,10 @@ const CursorFollow = ({ cursorContent, children }) => {
             className={cx('cursor', { 'is-hovering': isHovering })}
           >
             <div className="cursor--content">{cursorContent}</div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
-    </motion.div>
+    </m.div>
   )
 }
 

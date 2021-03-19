@@ -1,5 +1,5 @@
 import React from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 
 import { hasObject } from '@lib/helpers'
 
@@ -48,7 +48,7 @@ const ProductGallery = ({
     <>
       {photos && (
         <AnimatePresence exitBeforeEnter>
-          <motion.div
+          <m.div
             key={id}
             initial="hide"
             animate="show"
@@ -67,7 +67,7 @@ const ProductGallery = ({
                 <Photo key={key} photo={photo} className="carousel--photo" />
               ))}
             </Carousel>
-          </motion.div>
+          </m.div>
         </AnimatePresence>
       )}
     </>

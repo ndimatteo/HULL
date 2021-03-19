@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
 
 const Drawer = ({ title, open, toggle, children }) => {
@@ -23,7 +23,7 @@ const Drawer = ({ title, open, toggle, children }) => {
       {open && (
         <FocusTrap>
           <div className="drawer--wrapper">
-            <motion.div
+            <m.div
               key="drawerBG"
               initial="hidden"
               animate="visible"
@@ -36,7 +36,7 @@ const Drawer = ({ title, open, toggle, children }) => {
               className="drawer--backdrop"
               onClick={() => toggle(false)}
             />
-            <motion.nav
+            <m.nav
               key="drawer"
               initial="close"
               animate="open"
@@ -60,7 +60,7 @@ const Drawer = ({ title, open, toggle, children }) => {
                 </div>
                 <div className="drawer--content">{children}</div>
               </div>
-            </motion.nav>
+            </m.nav>
           </div>
         </FocusTrap>
       )}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import Link from 'next/link'
 
 import {
@@ -45,7 +45,7 @@ const ProductCard = ({ product, index }) => {
   )
 
   return (
-    <motion.div
+    <m.div
       initial="initial"
       animate="show"
       exit="hide"
@@ -122,7 +122,7 @@ const ProductCard = ({ product, index }) => {
           </div>
         )}
       </div>
-    </motion.div>
+    </m.div>
   )
 }
 

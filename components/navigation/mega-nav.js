@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import FocusTrap from 'focus-trap-react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useRect } from '@reach/rect'
 import cx from 'classnames'
 
@@ -21,7 +21,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
   const toggleMegaNav = useToggleMegaNav()
   const { meganav } = useSiteContext()
   const activeNav = useRef()
-  const activeNavRect = useRect(activeNav)
+  const activeNavRect = useRect(activeNav, { observe: true })
   const [hasFocus, setHasFocus] = useState(false)
 
   const handleKeyup = (e) => {
@@ -54,7 +54,8 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
             return (
               <div
                 key={key}
-                ref={isActive ? activeNav : null}
+                // ref={isActive ? activeNav : null}
+                ref={isActive ? (ref) => (activeNav.current = ref) : null}
                 id={`meganav-${dropdown._key}`}
                 className={cx('mega-item', {
                   'is-active': isActive,
@@ -62,7 +63,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
               >
                 <div className="mega-item--outer">
                   <div className="mega-item--inner">
-                    <motion.div
+                    <m.div
                       initial="hide"
                       animate={isActive ? 'show' : 'hide'}
                       onAnimationComplete={() => setHasFocus(isActive)}
@@ -86,7 +87,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
                           />
                         </div>
                       )}
-                    </motion.div>
+                    </m.div>
                   </div>
                 </div>
               </div>

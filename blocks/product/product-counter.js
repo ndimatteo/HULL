@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import cx from 'classnames'
 
 import { clampRange } from '@lib/helpers'
@@ -84,7 +84,7 @@ const ProductCounter = React.memo(
         </button>
         <div className="counter--amount">
           <AnimatePresence custom={direction}>
-            <motion.div
+            <m.div
               key={motionKey}
               initial={isAnimating ? 'hideR' : 'show'}
               animate="show"
@@ -103,7 +103,7 @@ const ProductCounter = React.memo(
                 min="1"
                 value={lineQuantity ? lineQuantity : ''}
               />
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
         <button

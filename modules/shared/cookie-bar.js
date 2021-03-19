@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 import Cookies from 'js-cookie'
 
 import { useHasMounted } from '@lib/helpers'
@@ -30,7 +30,7 @@ const CookieBar = () => {
   return (
     <AnimatePresence>
       {!acceptedCookies && (
-        <motion.div
+        <m.div
           initial="hide"
           animate="show"
           exit="hide"
@@ -60,7 +60,7 @@ const CookieBar = () => {
               </button>
             </div>
           </div>
-        </motion.div>
+        </m.div>
       )}
     </AnimatePresence>
   )

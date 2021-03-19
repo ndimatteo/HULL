@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import React, { useState } from 'react'
+import { m, AnimatePresence } from 'framer-motion'
 import { useKeenSlider } from 'keen-slider/react'
 import cx from 'classnames'
 
@@ -97,7 +97,7 @@ const Carousel = ({
                   <div className="carousel--counter-item is-current">
                     <div className="counter-flipper">
                       <AnimatePresence initial={false}>
-                        <motion.span
+                        <m.span
                           key={currentSlide + 1}
                           initial="hide"
                           animate="show"
@@ -105,7 +105,7 @@ const Carousel = ({
                           variants={flipAnim}
                         >
                           {currentSlide + 1}
-                        </motion.span>
+                        </m.span>
                       </AnimatePresence>
                     </div>
                   </div>

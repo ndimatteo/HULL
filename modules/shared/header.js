@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
 import { useIntersection } from 'use-intersection'
 import { useRect } from '@reach/rect'
@@ -95,7 +95,7 @@ const Header = ({ data = {}, isTransparent }) => {
                           <span className="hamburger--icon"></span>
                         </span>
                       </button>
-                      <motion.div
+                      <m.div
                         initial="hide"
                         animate={isMobileNavOpen ? 'show' : 'hide'}
                         variants={{
@@ -135,7 +135,7 @@ const Header = ({ data = {}, isTransparent }) => {
                             )}
                           </div>
                         </div>
-                      </motion.div>
+                      </m.div>
 
                       <div
                         className={cx('menu-mobile--backdrop', {

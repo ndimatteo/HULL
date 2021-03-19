@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const Waitlist = ({ variant, klaviyo }) => {
   const [submitting, setSubmitting] = useState(false)
@@ -71,7 +71,7 @@ const Waitlist = ({ variant, klaviyo }) => {
     <div className="product--waitlist">
       <AnimatePresence exitBeforeEnter initial={false}>
         {!error && !success && (
-          <motion.form
+          <m.form
             key="form"
             initial="hide"
             animate="show"
@@ -132,11 +132,11 @@ const Waitlist = ({ variant, klaviyo }) => {
                 {submitting ? 'Wait...' : 'Notify Me'}
               </button>
             </div>
-          </motion.form>
+          </m.form>
         )}
 
         {success && (
-          <motion.div
+          <m.div
             key="success"
             initial="hide"
             animate="show"
@@ -147,11 +147,11 @@ const Waitlist = ({ variant, klaviyo }) => {
             <div className="form--success-content">
               Thanks! We'll be in touch.
             </div>
-          </motion.div>
+          </m.div>
         )}
 
         {error && (
-          <motion.div
+          <m.div
             key="error"
             initial="hide"
             animate="show"
@@ -165,7 +165,7 @@ const Waitlist = ({ variant, klaviyo }) => {
                 Try Again
               </button>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </div>

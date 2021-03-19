@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
-import { AnimatePresence } from 'framer-motion'
+import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion'
 
 import '../styles/tailwind.css'
 import '../styles/app.css'
@@ -70,24 +70,24 @@ const MyApp = ({ Component, pageProps, router }) => {
   return (
     <ThemeProvider disableTransitionOnChange>
       <SiteContextProvider data={{ ...pageProps?.data?.site }}>
-        {/* <LazyMotion features={domAnimation}> */}
-        {isLoading && (
-          <Head>
-            <title>Loading...</title>
-          </Head>
-        )}
-        <AnimatePresence
-          exitBeforeEnter
-          onExitComplete={() => {
-            window.scrollTo(0, 0)
-            document.body.classList.remove('overflow-hidden')
-          }}
-        >
-          <Component key={router.asPath.split('?')[0]} {...pageProps} />
-        </AnimatePresence>
+        <LazyMotion features={domAnimation}>
+          {isLoading && (
+            <Head>
+              <title>Loading...</title>
+            </Head>
+          )}
+          <AnimatePresence
+            exitBeforeEnter
+            onExitComplete={() => {
+              window.scrollTo(0, 0)
+              document.body.classList.remove('overflow-hidden')
+            }}
+          >
+            <Component key={router.asPath.split('?')[0]} {...pageProps} />
+          </AnimatePresence>
 
-        <Cart data={{ ...pageProps?.data?.site }} />
-        {/* </LazyMotion> */}
+          <Cart data={{ ...pageProps?.data?.site }} />
+        </LazyMotion>
       </SiteContextProvider>
     </ThemeProvider>
   )

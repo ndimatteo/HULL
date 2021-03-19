@@ -1,11 +1,9 @@
 import React from 'react'
-import cx from 'classnames'
 
 import ThemeSwitch from './theme-switch'
 
 import Menu from '@components/navigation/menu'
 import Newsletter from '@modules/newsletter'
-
 import Icon from '@components/icon'
 
 const Footer = ({ data }) => {

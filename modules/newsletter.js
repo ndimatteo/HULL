@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 import cx from 'classnames'
 
 import BlockContent from '@sanity/block-content-to-react'
@@ -67,7 +67,7 @@ const Newsletter = ({ data = {} }) => {
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
       <AnimatePresence exitBeforeEnter>
         {!error && !success && (
-          <motion.div
+          <m.div
             initial="hide"
             animate="show"
             exit="hide"
@@ -156,11 +156,11 @@ const Newsletter = ({ data = {} }) => {
                 </label>
               </div>
             )}
-          </motion.div>
+          </m.div>
         )}
 
         {success && (
-          <motion.div
+          <m.div
             key="success"
             initial="hide"
             animate="show"
@@ -180,11 +180,11 @@ const Newsletter = ({ data = {} }) => {
                 <h2>Success!</h2>
               )}
             </div>
-          </motion.div>
+          </m.div>
         )}
 
         {error && (
-          <motion.div
+          <m.div
             key="error"
             initial="hide"
             animate="show"
@@ -209,7 +209,7 @@ const Newsletter = ({ data = {} }) => {
                 </button>
               </p>
             </div>
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </form>

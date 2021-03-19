@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import Head from 'next/head'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { imageBuilder } from '@lib/sanity'
 
 import { isBrowser, useWindowSize } from '@lib/helpers'
@@ -141,16 +141,11 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
       <CookieBar />
 
-      <motion.div
-        initial="initial"
-        animate="enter"
-        exit="exit"
-        variants={variants}
-      >
+      <m.div initial="initial" animate="enter" exit="exit" variants={variants}>
         <Header data={site.header} isTransparent={page.hasTransparentHeader} />
         <main id="content">{children}</main>
         <Footer data={site.footer} />
-      </motion.div>
+      </m.div>
     </>
   )
 }

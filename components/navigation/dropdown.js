@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import { useRouter } from 'next/router'
 
 import { getStaticRoute, getActive } from '@lib/routes'
@@ -31,7 +31,7 @@ const Dropdown = ({ id, title, items, onClick }) => {
         <span className="dropdown--icon" />
         {title}
       </button>
-      <motion.div
+      <m.div
         id={`dropdown-${id}`}
         className="dropdown--content"
         initial={isOpen ? 'open' : 'closed'}
@@ -55,7 +55,7 @@ const Dropdown = ({ id, title, items, onClick }) => {
             )
           })}
         </ul>
-      </motion.div>
+      </m.div>
     </div>
   )
 }

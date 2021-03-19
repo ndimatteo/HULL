@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { m, AnimatePresence } from 'framer-motion'
 
 const Accordion = ({ toggle, onChange, id, title, children }) => {
   const [open, setOpen] = useState(toggle)
@@ -26,7 +26,7 @@ const Accordion = ({ toggle, onChange, id, title, children }) => {
       </button>
       <AnimatePresence initial={false}>
         {open && (
-          <motion.section
+          <m.section
             key="content"
             initial="collapsed"
             animate="open"
@@ -39,7 +39,7 @@ const Accordion = ({ toggle, onChange, id, title, children }) => {
             className="accordion--content"
           >
             <div className="accordion--inner">{children}</div>
-          </motion.section>
+          </m.section>
         )}
       </AnimatePresence>
     </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
 
 import { hasObject } from '@lib/helpers'
 
@@ -44,7 +44,7 @@ const ProductThumbnail = ({ thumbnails = [], activeVariant }) => {
 
   return (
     <AnimatePresence exitBeforeEnter>
-      <motion.div
+      <m.div
         key={id}
         initial="hide"
         animate="show"
@@ -69,7 +69,7 @@ const ProductThumbnail = ({ thumbnails = [], activeVariant }) => {
             className="is-hover"
           />
         )}
-      </motion.div>
+      </m.div>
     </AnimatePresence>
   )
 }
