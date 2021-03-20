@@ -91,7 +91,12 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
           />
         )}
 
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        {/* <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> */}
+        <link
+          rel="preconnect"
+          href="https://hull-satan.myshopify.com"
+          crossorigin
+        />
         <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
 
         <title>{metaTitle}</title>

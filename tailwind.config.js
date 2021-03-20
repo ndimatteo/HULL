@@ -50,11 +50,6 @@ module.exports = {
       pageBG: 'var(--pageBG)',
       pageText: 'var(--pageText)',
     },
-    fontFamily: {
-      inherit: 'inherit',
-      sans: ['Inter', 'Helvetica Neue', 'sans-serif'],
-      mono: ['Courier', 'monospace'],
-    },
     screens: {
       xs: '480px',
       sm: '768px',
@@ -63,6 +58,9 @@ module.exports = {
       xl: '1600px',
     },
     extend: {
+      fontFamily: {
+        inherit: 'inherit',
+      },
       fontSize: {
         xxs: '.625rem',
       },

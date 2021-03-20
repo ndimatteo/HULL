@@ -99,7 +99,7 @@ const Cart = ({ data }) => {
               )}
             </div>
 
-            {lineItems?.length && (
+            {lineItems?.length > 0 && (
               <div className="cart--footer">
                 <div className="cart--subtotal">
                   <span>Subtotal</span>
