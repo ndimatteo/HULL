@@ -3,7 +3,7 @@ import React from 'react'
 import { ProductOption } from '@blocks/product'
 
 const ProductForm = ({ product, activeVariant, onVariantChange }) => {
-  if (!product) return null
+  if (!product?.options?.length) return null
 
   return (
     <div className="product--options">
