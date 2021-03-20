@@ -91,7 +91,13 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
           />
         )}
 
-        <link rel="preconnect" href="https://cdn.sanity.io" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+
+        <link
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap"
+          rel="stylesheet"
+        ></link>
 
         <title>{metaTitle}</title>
         {metaDesc && <meta name="description" content={metaDesc} />}
