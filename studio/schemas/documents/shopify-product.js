@@ -240,7 +240,7 @@ export default {
           (title ? title : productTitle) +
           (wasDeleted ? ' (removed)' : '') +
           (isDraft ? ' (draft)' : ''),
-        media: cartPhotos?.length > 0 ? cartPhotos[0].cartPhoto : null,
+        media: cartPhotos?.length ? cartPhotos[0].cartPhoto : null,
         subtitle: slug.current ? path : '(missing slug)'
       }
     }

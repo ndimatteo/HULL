@@ -30,7 +30,7 @@ const FeaturedProductCard = ({ product, onClick }) => {
 
   return (
     <div className="product-featured">
-      {product.photos.listing?.length > 0 && (
+      {product.photos.listing?.length && (
         <div className="product-card--thumb">
           <ProductThumbnail
             thumbnails={product.photos.listing}

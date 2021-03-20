@@ -92,14 +92,14 @@ const Cart = ({ data }) => {
             </div>
 
             <div className="cart--content">
-              {lineItems.length > 0 ? (
+              {lineItems?.length ? (
                 <CartItems items={lineItems} />
               ) : (
                 <EmptyCart />
               )}
             </div>
 
-            {lineItems.length > 0 && (
+            {lineItems?.length && (
               <div className="cart--footer">
                 <div className="cart--subtotal">
                   <span>Subtotal</span>
