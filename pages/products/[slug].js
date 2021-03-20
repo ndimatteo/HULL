@@ -48,7 +48,7 @@ const Product = ({ data }) => {
 
   // set active variant as default
   const [activeVariant, setActiveVariant] = useState(
-    selectedVariant || defaultVariant
+    selectedVariant || defaultVariant || product.variants[0]
   )
 
   // Check our product inventory is still correct

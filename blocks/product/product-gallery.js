@@ -17,7 +17,7 @@ const ProductGallery = ({
   hasDrag,
   hasCounter,
 }) => {
-  if (!photosets) return null
+  if (!photosets || !activeVariant) return null
 
   // 1. extract the active variant's options
   const { options } = activeVariant
