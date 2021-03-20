@@ -15,12 +15,6 @@ export default {
       description: 'For product waitlist and newsletter forms.',
       name: 'klaviyoAccountID',
       type: 'string'
-    },
-    {
-      title: 'Social Links',
-      name: 'social',
-      type: 'array',
-      of: [{ type: 'socialLink' }]
     }
   ],
   preview: {

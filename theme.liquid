@@ -18,19 +18,11 @@
     {%- endif -%}
 
      <script>
-      var l = window.location
-      /**
-       * allow app urls to pass through
-       */
-      if (/^\/a\//.test(l.pathname)) {
-        // do nothing
-      } else {    
-        var href = '[your_frontsite_domain]'
-        if (l.pathname) href += '/' + l.pathname
-        if (l.hash) href += l.hash
-        if (l.search) href += l.search
-        href = href.replace('//', '/')
-        window.top.location.href = 'https://' + href
+      var loc = window.location
+      var isAccount = loc.pathname.indexOf('account') > -1 || loc.pathname.indexOf('challenge') > -1 || loc.pathname.indexOf('customers') > -1
+      
+      if (!isAccount) {
+      	loc.host = 'YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL';
       }
     </script>
     

@@ -14,10 +14,10 @@ const ThemeSwitch = () => {
   const hasMounted = useHasMounted()
   const { theme, setTheme } = useTheme()
 
-  // Client-only
+  // Make sure it's client-only
   if (!hasMounted || !theme) return null
 
-  // store our current and next theme objects
+  // store our current and next theme objects (will be first theme, if undefined)
   const currentIndex = Math.max(
     0,
     themes.findIndex((t) => t.name === theme)
