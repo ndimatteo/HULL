@@ -176,7 +176,15 @@ h4,
 a {
   .rc & {
     &:not(.btn) {
-      @apply underline opacity-60 hover:opacity-100 transition-opacity duration-200;
+      background-image: linear-gradient(var(--pageText), var(--pageText));
+      background-position: 0% 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 1px;
+
+      &:hover {
+        background-size: 100% 100%;
+        color: var(--pageBG);
+      }
     }
   }
 }
