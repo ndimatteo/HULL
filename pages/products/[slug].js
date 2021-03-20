@@ -6,7 +6,7 @@ import useSWR from 'swr'
 import Error from '@pages/404'
 import Layout from '@components/layout'
 import { getAllDocSlugs, getProduct } from '@lib/api'
-import { centsToPrice } from '@lib/helpers'
+import { centsToPrice, hasObject } from '@lib/helpers'
 
 import { Module } from '@modules/index'
 
@@ -33,12 +33,22 @@ const Product = ({ data }) => {
   // set our Product state
   const [product, setProduct] = useState(page.product)
 
+  // find default variant for product
+  const defaultVariant = product.variants?.find((v) => {
+    const option = {
+      name: product.options[0]?.name,
+      value: product.options[0]?.values[0],
+      position: product.options[0]?.position,
+    }
+    return hasObject(v.options, option)
+  })
+
   // find selected variant for product
   const selectedVariant = product.variants.find((v) => v.id == query.variant)
 
   // set active variant as default
   const [activeVariant, setActiveVariant] = useState(
-    selectedVariant || product.variants[0]
+    selectedVariant || defaultVariant
   )
 
   // Check our product inventory is still correct

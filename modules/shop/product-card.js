@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { m } from 'framer-motion'
 import Link from 'next/link'
 
+import { hasObject } from '@lib/helpers'
+
 import {
   ProductGallery,
   ProductThumbnail,
@@ -16,16 +18,16 @@ const itemAnim = {
   show: (i) => ({
     opacity: 1,
     transition: {
-      delay: i * 0.1 + 0.5,
-      duration: 0.4,
+      delay: i * 0.05 + 0.4,
+      duration: 0.3,
       ease: 'linear',
     },
   }),
   hide: (i) => ({
     opacity: 0,
     transition: {
-      delay: i * 0.1,
-      duration: 0.4,
+      delay: i * 0.05,
+      duration: 0.3,
       ease: 'linear',
     },
   }),
@@ -35,9 +37,14 @@ const ProductCard = ({ product, index }) => {
   if (!product) return null
 
   // find default variant for product
-  const defaultVariant = product.variants?.find(
-    (v) => v.id === product.activeVariant
-  )
+  const defaultVariant = product.variants?.find((v) => {
+    const option = {
+      name: product.options[0]?.name,
+      value: product.options[0]?.values[0],
+      position: product.options[0]?.position,
+    }
+    return hasObject(v.options, option)
+  })
 
   // set active variant as default
   const [activeVariant, setActiveVariant] = useState(

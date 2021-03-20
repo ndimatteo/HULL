@@ -40,7 +40,7 @@ const ProductThumbnail = ({ thumbnails = [], activeVariant }) => {
 
   const photos = variantThumbnails ? variantThumbnails : defaultThumbnails
 
-  const id = photos.default.id + photos.hover?.id
+  const id = photos?.default?.id + photos?.hover?.id
 
   return (
     <AnimatePresence exitBeforeEnter>
