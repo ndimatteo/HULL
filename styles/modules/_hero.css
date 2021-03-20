@@ -9,12 +9,12 @@
   &--bg {
     @apply relative w-full z-0 max-h-screen h-full;
 
-    &-desktop {
+    &.is-desktop {
       @apply hidden sm:block;
       padding-top: calc((9 / 16) * 100%);
     }
 
-    &-mobile {
+    &.is-mobile {
       @apply sm:hidden;
       padding-top: calc((4 / 3) * 100%);
     }

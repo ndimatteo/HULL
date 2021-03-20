@@ -32,7 +32,7 @@ const Carousel = ({
   return (
     <div className={cx('carousel', { 'has-drag': hasDrag }, className)}>
       <div ref={sliderRef} className="carousel--slides">
-        {children.map((child, index) => (
+        {React.Children.map(children, (child, index) => (
           <div className="carousel--slide" key={index}>
             {child}
           </div>

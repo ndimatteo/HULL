@@ -2,6 +2,9 @@ import React from 'react'
 import cx from 'classnames'
 
 import { hasObject } from '@lib/helpers'
+import RadioGroup from '@components/radio-group'
+import RadioItem from '@components/radio-item'
+
 import Swatch from '@components/swatch'
 
 const ProductOption = ({
@@ -25,7 +28,16 @@ const ProductOption = ({
       className={`option is-${option.name.toLowerCase().replace(' ', '-')}`}
     >
       {!hideLabels && <div className="option--title">{option.name}</div>}
-      <ul className="option--values">
+
+      <RadioGroup
+        value={
+          activeVariant.options.find((opt) => opt.name === option.name).value
+        }
+        onChange={(value) =>
+          changeOption(option.name, value, variants, activeVariant, onChange)
+        }
+        className="option--values"
+      >
         {option.values.map((value, key) => {
           const currentOpt = [{ name: option.name, value: value }]
 
@@ -61,55 +73,77 @@ const ProductOption = ({
             }
           })
 
-          const optionClassStates = (base) =>
-            cx(base, {
-              'is-active': isActive,
-              'is-unavailable': !hasVariants,
-              'is-soldout': !inStock && hasVariants && !isActive,
-            })
-
           return (
-            <li key={key}>
+            <RadioItem
+              key={key}
+              value={value}
+              className={cx({
+                btn: !optSettings?.color,
+                'option--swatch': optSettings?.color,
+                'is-active': isActive,
+                'is-unavailable': !hasVariants,
+                'is-soldout': !inStock && hasVariants && !isActive,
+              })}
+            >
               {optSettings?.color ? (
-                <button
-                  onClick={() =>
-                    !isActive &&
-                    changeOption(
-                      option.name,
-                      value,
-                      variants,
-                      activeVariant,
-                      onChange
-                    )
-                  }
-                  className={optionClassStates('option--swatch')}
-                >
-                  <Swatch
-                    label={`Select "${value}" ${option.name} option`}
-                    color={optSettings?.color}
-                  />
-                </button>
+                <Swatch
+                  label={`Select "${value}" ${option.name} option`}
+                  color={optSettings?.color}
+                />
               ) : (
-                <button
-                  onClick={() =>
-                    !isActive &&
-                    changeOption(
-                      option.name,
-                      value,
-                      variants,
-                      activeVariant,
-                      onChange
-                    )
-                  }
-                  className={optionClassStates('btn is-block')}
-                >
-                  {value}
-                </button>
+                <>{value}</>
               )}
-            </li>
+            </RadioItem>
           )
+
+          // return (
+          //   <li key={key}>
+          //     {optSettings?.color ? (
+          //       <button
+          //         role="radio"
+          //         tabIndex={isActive ? 0 : -1}
+          //         aria-checked={isActive}
+          //         onClick={() =>
+          //           !isActive &&
+          //           changeOption(
+          //             option.name,
+          //             value,
+          //             variants,
+          //             activeVariant,
+          //             onChange
+          //           )
+          //         }
+          //         className={optionClassStates('option--swatch')}
+          //       >
+          //         <Swatch
+          //           label={`Select "${value}" ${option.name} option`}
+          //           color={optSettings?.color}
+          //         />
+          //       </button>
+          //     ) : (
+          //       <button
+          //         role="radio"
+          //         tabIndex={isActive ? 0 : -1}
+          //         aria-checked={isActive}
+          //         onClick={() =>
+          //           !isActive &&
+          //           changeOption(
+          //             option.name,
+          //             value,
+          //             variants,
+          //             activeVariant,
+          //             onChange
+          //           )
+          //         }
+          //         className={optionClassStates('btn is-block')}
+          //       >
+          //         {value}
+          //       </button>
+          //     )}
+          //   </li>
+          // )
         })}
-      </ul>
+      </RadioGroup>
     </div>
   )
 }

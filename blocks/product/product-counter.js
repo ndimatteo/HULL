@@ -33,7 +33,7 @@ const flipAnim = {
 }
 
 const ProductCounter = React.memo(
-  ({ defaultCount = 1, onUpdate, max, className }) => {
+  ({ id, defaultCount = 1, onUpdate, max, className }) => {
     const [lineQuantity, setLineQuantity] = useState(defaultCount)
 
     const [direction, setDirection] = useState(1)
@@ -80,7 +80,7 @@ const ProductCounter = React.memo(
           onClick={() => animateQuantity(lineQuantity - 1, -1)}
           className="counter--down"
         >
-          <Icon name="Minus" />
+          <Icon name="Minus" id={id} />
         </button>
         <div className="counter--amount">
           <AnimatePresence custom={direction}>
@@ -94,6 +94,7 @@ const ProductCounter = React.memo(
               className="counter--input"
             >
               <input
+                aria-label="Manually enter quantity"
                 onChange={(e) =>
                   updateQuantity(parseInt(e.currentTarget.value, 10))
                 }
@@ -111,7 +112,7 @@ const ProductCounter = React.memo(
           onClick={() => animateQuantity(lineQuantity + 1, 1)}
           className="counter--up"
         >
-          <Icon name="Plus" />
+          <Icon name="Plus" id={id} />
         </button>
       </div>
     )

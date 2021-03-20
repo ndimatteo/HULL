@@ -54,7 +54,6 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
             return (
               <div
                 key={key}
-                // ref={isActive ? activeNav : null}
                 ref={isActive ? (ref) => (activeNav.current = ref) : null}
                 id={`meganav-${dropdown._key}`}
                 className={cx('mega-item', {

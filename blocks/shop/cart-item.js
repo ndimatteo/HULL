@@ -64,6 +64,7 @@ function CartItem({ item }) {
           <div className="cart-item--quantity">
             <ProductCounter
               key={item.id}
+              id={item.id}
               defaultCount={item.quantity}
               onUpdate={changeQuantity}
               className="is-small is-inverted"

@@ -25,10 +25,10 @@ const Hero = ({ data = {} }) => {
 
       {bgType === 'video' && (
         <>
-          <div className="hero--bg-desktop">
+          <div className="hero--bg is-desktop">
             <VideoLoop title={video.title} id={video.id} />
           </div>
-          <div className="hero--bg-mobile">
+          <div className="hero--bg is-mobile">
             <VideoLoop title={video.title} id={video.id} />
           </div>
         </>
@@ -39,21 +39,19 @@ const Hero = ({ data = {} }) => {
           {photos?.desktopPhoto && (
             <Photo
               photo={photos.desktopPhoto}
-              width={1920}
-              // height={1080}
+              width={1600}
               sizes="100vw"
               layout="fill"
-              className="hero--bg-desktop"
+              className="hero--bg is-desktop"
             />
           )}
           {photos?.mobilePhoto && (
             <Photo
               photo={photos.mobilePhoto}
               width={800}
-              // height={1200}
               sizes="100vw"
               layout="fill"
-              className="hero--bg-mobile"
+              className="hero--bg is-mobile"
             />
           )}
         </>

@@ -10,7 +10,11 @@ const ProductActions = ({ activeVariant, klaviyoAccountID }) => {
     <div className="product--actions">
       {activeVariant?.inStock ? (
         <>
-          <ProductCounter max={10} onUpdate={setQuantity} />
+          <ProductCounter
+            id={activeVariant.id}
+            max={10}
+            onUpdate={setQuantity}
+          />
           <ProductAdd
             productID={activeVariant.id}
             quantity={quantity}

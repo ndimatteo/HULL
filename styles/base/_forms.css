@@ -133,6 +133,21 @@
 
   input[type="checkbox"] {
     @apply sr-only;
+
+    &:focus {
+      + label {
+        outline: 1px dashed var(--pageText);
+        outline-offset: 2px;
+
+        .is-inverted & {
+          outline-color: var(--pageBG);
+        }
+        
+        body:not(.is-tabbing) & {
+          outline: none;
+        }
+      }
+    }
   }
 
   textarea {

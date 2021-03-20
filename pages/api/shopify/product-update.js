@@ -84,15 +84,13 @@ export default async function send(req, res) {
   // Define product options if there are more than one variant
   const productOptions =
     variants.length > 1
-      ? options
-          .sort((a, b) => (a.position > b.position ? 1 : -1))
-          .map((option) => ({
-            _key: option.id,
-            _type: 'productOption',
-            name: option.name,
-            values: option.values,
-            position: option.position,
-          }))
+      ? options.map((option) => ({
+          _key: option.id,
+          _type: 'productOption',
+          name: option.name,
+          values: option.values,
+          position: option.position,
+        }))
       : []
 
   // Define product fields
@@ -104,7 +102,7 @@ export default async function send(req, res) {
     slug: { current: handle },
     price: variants[0].price * 100,
     comparePrice: variants[0].compare_at_price * 100,
-    sku: variants[0].sku,
+    sku: variants[0].sku || '',
     inStock: variants.some(
       (v) => v.inventory_quantity > 0 || v.inventory_policy === 'continue'
     ),
@@ -133,22 +131,20 @@ export default async function send(req, res) {
       variantID: variant.id,
       price: variant.price * 100,
       comparePrice: variant.compare_at_price * 100,
-      sku: variant.sku,
+      sku: variant.sku || '',
       inStock:
         variant.inventory_quantity > 0 ||
         variant.inventory_policy === 'continue',
       lowStock: variant.inventory_quantity <= 5,
       options:
         variants.length > 1
-          ? options
-              .sort((a, b) => (a.position > b.position ? 1 : -1))
-              .map((option) => ({
-                _key: option.id,
-                _type: 'productOptionValue',
-                name: option.name,
-                value: variant[`option${option.position}`],
-                position: option.position,
-              }))
+          ? options.map((option) => ({
+              _key: option.id,
+              _type: 'productOptionValue',
+              name: option.name,
+              value: variant[`option${option.position}`],
+              position: option.position,
+            }))
           : [],
     }))
 

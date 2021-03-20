@@ -1,6 +1,7 @@
 import React, { useRef } from 'react'
 import { useIntersection } from 'use-intersection'
-import Marqy from '@components/marqy'
+// import Marqy from '@components/marqy'
+import { Marqy } from 'marqy'
 
 import Photo from '@components/photo'
 

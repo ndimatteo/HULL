@@ -20,6 +20,7 @@
   &--placeholder {
     @apply absolute inset-0;
     filter: grayscale(1);
+    transform: scale(1.15);
     transition: opacity 0s .4s linear;
 
     &.is-loaded {
