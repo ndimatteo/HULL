@@ -18,7 +18,7 @@ const ThemeSwitch = () => {
   if (!hasMounted || !theme) return null
 
   // store our current and next theme objects
-  const currentIndex = themes.findIndex((t) => t.name === theme)
+  const currentIndex = themes.findIndex((t) => t.name === theme) || 0
 
   const nextTheme = themes[(currentIndex + 1) % themes.length]
   const currentTheme = themes[currentIndex]

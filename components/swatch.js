@@ -2,6 +2,8 @@ import React from 'react'
 import { contrastColor } from 'contrast-color'
 
 const Swatch = ({ label, color }) => {
+  if (!color) return null
+
   return (
     <div
       className="swatch"
