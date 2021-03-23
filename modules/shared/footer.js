@@ -2,11 +2,11 @@ import React from 'react'
 
 import ThemeSwitch from './theme-switch'
 
-import Menu from '@components/navigation/menu'
+import Menu from '@blocks/navigation/menu'
 import Newsletter from '@modules/newsletter'
 import Icon from '@components/icon'
 
-const Footer = ({ data }) => {
+const Footer = ({ data = {} }) => {
   const { blocks } = data
 
   return (

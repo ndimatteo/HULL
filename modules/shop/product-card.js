@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { m } from 'framer-motion'
 import Link from 'next/link'
+import cx from 'classnames'
 
 import { hasObject } from '@lib/helpers'
 
@@ -33,7 +34,17 @@ const itemAnim = {
   }),
 }
 
-const ProductCard = ({ product, index }) => {
+const ProductCard = ({
+  product,
+  index,
+  hasVisuals,
+  showGallery,
+  showThumbs,
+  showPrice,
+  showOption,
+  className,
+  onClick,
+}) => {
   if (!product) return null
 
   // find default variant for product
@@ -58,32 +69,34 @@ const ProductCard = ({ product, index }) => {
       exit="hide"
       custom={index}
       variants={itemAnim}
-      className="product-card"
+      className={cx('product-card', className)}
     >
-      <div className="product-card--visuals">
-        {/* Show Gallery */}
-        {product.photos.main && product.useGallery === 'true' && (
-          <div className="product-card--gallery">
-            <ProductGallery
-              photosets={product.photos.main}
-              activeVariant={activeVariant}
-              hasArrows
-              hasDots
-              hasDrag={false}
-            />
-          </div>
-        )}
+      {hasVisuals && (
+        <div className="product-card--visuals">
+          {/* Show Gallery */}
+          {showGallery && (
+            <div className="product-card--gallery">
+              <ProductGallery
+                photosets={product.photos.main}
+                activeVariant={activeVariant}
+                hasArrows
+                hasDots
+                hasDrag={false}
+              />
+            </div>
+          )}
 
-        {/* Show Thumbnail */}
-        {product.photos.listing && product.useGallery === 'false' && (
-          <div className="product-card--thumb">
-            <ProductThumbnail
-              thumbnails={product.photos.listing}
-              activeVariant={activeVariant}
-            />
-          </div>
-        )}
-      </div>
+          {/* Show Thumbnail */}
+          {showThumbs && (
+            <div className="product-card--thumb">
+              <ProductThumbnail
+                thumbnails={product.photos.listing}
+                activeVariant={activeVariant}
+              />
+            </div>
+          )}
+        </div>
+      )}
 
       <div className="product-card--details">
         <div className="product-card--header">
@@ -95,19 +108,25 @@ const ProductCard = ({ product, index }) => {
               }`}
               scroll={false}
             >
-              <a className="product-card--link">{product.title}</a>
+              <a className="product-card--link" onClick={onClick}>
+                {product.title}
+              </a>
             </Link>
           </h2>
 
-          <ProductPrice
-            price={activeVariant ? activeVariant.price : product.price}
-            comparePrice={
-              activeVariant ? activeVariant.comparePrice : product.comparePrice
-            }
-          />
+          {showPrice && (
+            <ProductPrice
+              price={activeVariant ? activeVariant.price : product.price}
+              comparePrice={
+                activeVariant
+                  ? activeVariant.comparePrice
+                  : product.comparePrice
+              }
+            />
+          )}
         </div>
 
-        {product.surfaceOption && (
+        {showOption && (
           <div className="product-card--option">
             {product.options?.map(
               (option, key) =>

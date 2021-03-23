@@ -45,7 +45,18 @@ const Collection = ({
     <section className="collection">
       <div className="collection--grid">
         {productsList.map((product, key) => (
-          <ProductCard key={key} index={key} product={product} />
+          <ProductCard
+            key={key}
+            index={key}
+            product={product}
+            hasVisuals={product.photos.main || product.photos.listing}
+            showGallery={product.photos.main && product.useGallery === 'true'}
+            showThumbs={
+              product.photos.listing && product.useGallery === 'false'
+            }
+            showOption={product.surfaceOption}
+            showPrice
+          />
         ))}
       </div>
 

@@ -23,34 +23,35 @@ const ProductHero = ({ product, activeVariant, onVariantChange }) => {
           />
         </div>
 
-        {product.description && (
-          <div className="product--details">
-            <div className="product--info">
-              <div className="product--header">
-                <div className="product--title">
-                  {activeVariant && (
-                    <div className="product--variant">
-                      {activeVariant.title}
+        <div className="product--details">
+          <div className="product--info">
+            <div className="product--header">
+              <div className="product--title">
+                {activeVariant && (
+                  <div className="product--variant">
+                    {activeVariant.title}
 
-                      {activeVariant.lowStock && activeVariant.inStock && (
-                        <span className="label is-secondary">Low Stock</span>
-                      )}
+                    {activeVariant.lowStock && activeVariant.inStock && (
+                      <span className="label is-secondary">Low Stock</span>
+                    )}
 
-                      {!activeVariant.inStock && (
-                        <span className="label">Out of Stock</span>
-                      )}
-                    </div>
-                  )}
-                  <h1 className="product--name">{product.title}</h1>
-                </div>
-
-                <ProductPrice
-                  price={activeVariant?.price || product.price}
-                  comparePrice={
-                    activeVariant?.comparePrice || product.comparePrice
-                  }
-                />
+                    {!activeVariant.inStock && (
+                      <span className="label">Out of Stock</span>
+                    )}
+                  </div>
+                )}
+                <h1 className="product--name">{product.title}</h1>
               </div>
+
+              <ProductPrice
+                price={activeVariant?.price || product.price}
+                comparePrice={
+                  activeVariant?.comparePrice || product.comparePrice
+                }
+              />
+            </div>
+
+            {product.description && (
               <div className="product--desc">
                 <BlockContent
                   renderContainerOnSingleChild
@@ -59,21 +60,21 @@ const ProductHero = ({ product, activeVariant, onVariantChange }) => {
                   serializers={serializers}
                 />
               </div>
+            )}
 
-              <ProductForm
-                product={product}
-                activeVariant={activeVariant}
-                onVariantChange={onVariantChange}
-                className="product--form"
-              />
-            </div>
-
-            <ProductActions
+            <ProductForm
+              product={product}
               activeVariant={activeVariant}
-              klaviyoAccountID={product.klaviyoAccountID}
+              onVariantChange={onVariantChange}
+              className="product--form"
             />
           </div>
-        )}
+
+          <ProductActions
+            activeVariant={activeVariant}
+            klaviyoAccountID={product.klaviyoAccountID}
+          />
+        </div>
       </div>
     </section>
   )

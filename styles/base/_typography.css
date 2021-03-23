@@ -21,6 +21,10 @@
     @apply m-0 text-base leading-normal;
   }
 
+  strong {
+    @apply font-semibold;
+  }
+
   ul {
     @apply list-none m-0 p-0;
   }
@@ -43,7 +47,7 @@
 
   h4,
   .is-h4 {
-    @apply m-0 text-2xl font-normal leading-tight;
+    @apply m-0 text-2xl font-normal leading-snug;
   }
 
   h5 {
@@ -155,7 +159,7 @@ h1,
 h2,
 .is-h2 {
   &:not(:last-child) {
-    @apply mb-6;
+    @apply mb-4;
   }
 }
 
@@ -169,7 +173,7 @@ h3,
 h4,
 .is-h4 {
   &:not(:last-child) {
-    @apply mb-4;
+    @apply mb-6;
   }
 }
 

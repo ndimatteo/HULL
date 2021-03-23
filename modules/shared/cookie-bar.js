@@ -3,6 +3,7 @@ import { AnimatePresence, m } from 'framer-motion'
 import Cookies from 'js-cookie'
 
 import { useHasMounted } from '@lib/helpers'
+import CustomLink from '@components/link'
 
 const barAnim = {
   show: {
@@ -21,11 +22,13 @@ const barAnim = {
   },
 }
 
-const CookieBar = () => {
+const CookieBar = React.memo(({ data = {} }) => {
+  const { message, link } = data
+
   const hasMounted = useHasMounted()
   const { acceptedCookies, onAcceptCookies } = useAcceptCookies()
 
-  if (!hasMounted) return null
+  if (!hasMounted || !message) return null
 
   return (
     <AnimatePresence>
@@ -42,16 +45,25 @@ const CookieBar = () => {
           <div className="cookie-bar--content">
             <div className="cookie-bar--message">
               <p>
-                We use cookies to personalize and deliver appropriate content.{' '}
-                <br />
-                By clicking "Accept" you agree to our terms.
+                {message.split('\n').map((text, i) => {
+                  // using React.fragment to parse line breaks
+                  return (
+                    <React.Fragment key={i}>
+                      {text}
+                      {message.split('\n')[i + 1] && <br />}
+                    </React.Fragment>
+                  )
+                })}
               </p>
             </div>
 
             <div className="cookie-bar--actions">
-              <a href="#" className="btn is-text">
-                Learn More
-              </a>
+              {link && (
+                <CustomLink
+                  className="btn is-text"
+                  link={{ ...{ page: link }, ...{ title: 'Learn More' } }}
+                />
+              )}
               <button
                 onClick={() => onAcceptCookies()}
                 className="btn is-primary is-inverted"
@@ -64,7 +76,7 @@ const CookieBar = () => {
       )}
     </AnimatePresence>
   )
-}
+})
 
 function useAcceptCookies(cookieName = 'accept_cookies') {
   const [acceptedCookies, setAcceptedCookies] = useState(true)

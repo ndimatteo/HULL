@@ -13,7 +13,7 @@ export default {
     {
       title: '',
       name: 'sizes',
-      options: { columns: 3 }
+      options: { columns: 2 }
     }
   ],
   fields: [
@@ -64,6 +64,34 @@ export default {
         ]
       },
       validation: Rule => Rule.required(),
+      fieldset: 'sizes'
+    },
+    {
+      title: 'Justify',
+      name: 'justify',
+      type: 'string',
+      description: 'Control the X-axis positioning',
+      options: {
+        list: [
+          { title: 'Left', value: 'justify-self-start' },
+          { title: 'Center', value: 'justify-self-center' },
+          { title: 'Right', value: 'justify-self-end' }
+        ]
+      },
+      fieldset: 'sizes'
+    },
+    {
+      title: 'Align',
+      name: 'align',
+      type: 'string',
+      description: 'Control the Y-axis positioning',
+      options: {
+        list: [
+          { title: 'Top', value: 'self-start' },
+          { title: 'Middle', value: 'self-center' },
+          { title: 'Bottom', value: 'self-end' }
+        ]
+      },
       fieldset: 'sizes'
     },
     {

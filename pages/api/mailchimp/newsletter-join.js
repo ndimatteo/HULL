@@ -12,7 +12,7 @@ export default async function send(req, res) {
   }
 
   const {
-    body: { audience, email, fname, lname },
+    body: { audienceID, email },
   } = req
 
   // honeypot
@@ -21,7 +21,7 @@ export default async function send(req, res) {
     return res.status(200).json({ status: 202 })
   }
 
-  if (!email || !audience) {
+  if (!email || !audienceID) {
     console.log('no email or audience ID provided')
     return res
       .status(404)
@@ -30,7 +30,7 @@ export default async function send(req, res) {
 
   const subHash = crypto.createHash('md5').update(email).digest('hex')
 
-  const sendData = await mailchimp.lists.setListMember(audience, subHash, {
+  const sendData = await mailchimp.lists.setListMember(audienceID, subHash, {
     email_address: email,
     status_if_new: 'subscribed',
   })

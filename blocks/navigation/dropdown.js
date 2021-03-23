@@ -9,7 +9,7 @@ const Dropdown = ({ id, title, items, onClick }) => {
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
 
-  const variants = {
+  const dropdownAnim = {
     open: {
       opacity: 1,
       height: 'auto',
@@ -36,7 +36,7 @@ const Dropdown = ({ id, title, items, onClick }) => {
         className="dropdown--content"
         initial={isOpen ? 'open' : 'closed'}
         animate={isOpen ? 'open' : 'closed'}
-        variants={variants}
+        variants={dropdownAnim}
         transition={{ duration: 0.5, ease: [0.19, 1.0, 0.22, 1.0] }}
       >
         <ul className="dropdown--nav">

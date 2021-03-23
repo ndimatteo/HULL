@@ -42,7 +42,7 @@ const MyApp = ({ Component, pageProps, router }) => {
     })
 
     Router.events.on('routeChangeComplete', () => {
-      setLoading(false)
+      setTimeout(() => setLoading(false), 400) // accounts for page transition
     })
 
     Router.events.on('routeChangeError', () => {

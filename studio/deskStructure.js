@@ -16,6 +16,7 @@ import {
   FiGift,
   FiCopy,
   FiTag,
+  FiCheckSquare,
 } from 'react-icons/fi'
 
 import SeoPreview from './components/previews/seo/seo-preview'
@@ -36,6 +37,7 @@ const hiddenDocTypes = (listItem) =>
     'collection',
 
     'generalSettings',
+    'cookieSettings',
     'promoSettings',
     'headerSettings',
     'footerSettings',
@@ -66,6 +68,15 @@ export default () =>
                     .documentId('generalSettings')
                 )
                 .icon(FiSettings),
+              S.listItem()
+                .title('Cookie Consent')
+                .child(
+                  S.editor()
+                    .id('cookieSettings')
+                    .schemaType('cookieSettings')
+                    .documentId('cookieSettings')
+                )
+                .icon(FiCheckSquare),
               S.listItem()
                 .title('Promo Bar')
                 .child(

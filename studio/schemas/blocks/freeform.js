@@ -19,36 +19,6 @@ export default {
       type: 'complexPortableText'
     },
     {
-      title: 'Block Alignment',
-      name: 'blockAlign',
-      type: 'string',
-      description: 'Change the Alignment of the block inside the column',
-      options: {
-        list: [
-          { title: 'Left', value: 'mr-auto' },
-          { title: 'Center', value: 'mx-auto' },
-          { title: 'Right', value: 'ml-auto' }
-        ]
-      },
-      fieldset: 'blockOptions'
-    },
-    {
-      title: 'Text Alignment',
-      name: 'textAlign',
-      type: 'string',
-      description:
-        'Change the alignment of text (and other items) inside this block',
-      options: {
-        list: [
-          { title: 'Left', value: 'text-start' },
-          { title: 'Center', value: 'text-center' },
-          { title: 'Right', value: 'text-end' },
-          { title: 'Justify', value: 'text-justify' }
-        ]
-      },
-      fieldset: 'blockOptions'
-    },
-    {
       title: 'Max Width',
       name: 'maxWidth',
       type: 'string',
@@ -70,7 +40,24 @@ export default {
           { title: '6XL (72rem)', value: 'max-w-6xl' },
           { title: '7XL (80rem)', value: 'max-w-7xl' }
         ]
-      }
+      },
+      fieldset: 'blockOptions'
+    },
+    {
+      title: 'Text Alignment',
+      name: 'textAlign',
+      type: 'string',
+      description:
+        'Change the alignment of text (and other items) inside this block',
+      options: {
+        list: [
+          { title: 'Left', value: 'text-start' },
+          { title: 'Center', value: 'text-center' },
+          { title: 'Right', value: 'text-end' },
+          { title: 'Justify', value: 'text-justify' }
+        ]
+      },
+      fieldset: 'blockOptions'
     }
   ],
   preview: {

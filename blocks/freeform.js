@@ -4,14 +4,14 @@ import BlockContent from '@sanity/block-content-to-react'
 import { serializers } from '@lib/serializers'
 
 const Freeform = ({ data }) => {
-  const { blockAlign, textAlign, maxWidth, content } = data
+  const { maxWidth, textAlign, content } = data
 
   if (!content) return null
 
   return (
     <BlockContent
       renderContainerOnSingleChild
-      className={cx('rc', textAlign, blockAlign, maxWidth)}
+      className={cx('rc', maxWidth, textAlign)}
       blocks={content}
       serializers={serializers}
     />

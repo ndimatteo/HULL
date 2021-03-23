@@ -18,7 +18,7 @@
   }
 
   &--info {
-    @apply max-w-xl m-auto p-4 sm:p-8;
+    @apply w-full max-w-xl m-auto p-4 sm:p-8;
   }
 
   &--header {

@@ -9,8 +9,8 @@ import cx from 'classnames'
 import { isBrowser } from '@lib/helpers'
 
 import PromoBar from './promo-bar'
-import Menu from '@components/navigation/menu'
-import MegaNavigation from '@components/navigation/mega-nav'
+import Menu from '@blocks/navigation/menu'
+import MegaNavigation from '@blocks/navigation/mega-nav'
 import Icon from '@components/icon'
 
 // Context helpers

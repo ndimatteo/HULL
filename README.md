@@ -1,5 +1,5 @@
 <p align="center">
-<img src="public/HULL-Logo.svg" align="center" height="150" />
+<img src="public/HULL-Logo.svg" align="center" height="100" />
 </p>
 <p align="center">
   <strong>Headless Shopify starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
@@ -22,71 +22,52 @@
 </p>
 <br />
 
-# ✨ Features
-🟢 **= implemented**&nbsp;&nbsp;/&nbsp;&nbsp;
-🟡 **= in progress**&nbsp;&nbsp;/&nbsp;&nbsp;
-⚪ **= not started**
-
 ---
 
-- 🟢 utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
-- 🟢 Page Transitions powered by [Framer Motion](https://www.framer.com/motion/)
-- 🟢 Cart powered by [Shopify Buy SDK](https://www.npmjs.com/package/shopify-buy)
-- 🟢 Klaviyo Waitlist form for out-of-stock Products + Variants
-- 🟢 Klaviyo Newsletter form with opt-in feature _(with validation and success/failure states)_
-- 🟢 Contact Form with email notifications powered by SendGrid _(with validation and success/failure states)_
-- 🟢 Dynamic Page Routes with optional nesting _(ie. `/parent/child`)_
-- 🟢 Automatic `Sitemap.xml` generation
-- 🟢 Automatic `robots.txt` generation
-- 🟢 Automatic 301 Redirects from Sanity
-- 🟢 Live Preview content directly from Sanity
-- 🟢 Dynamic Modules for building page content, including:
-   - 🟢 Marquees
-   - 🟢 Image Galleries/Carousels
-   - 🟢 Accordions
-   - 🟢 Pull-out Drawers
-   - 🟢 Cursor Follows
-   - 🟡 Product Carousels
-   - ⚪ Instagram Feed
-- 🟢 Baseline styles using extracted component classes for cleaner code
-- 🟢 Simple Social icon navigation lists
-- 🟢 Lazyload Images + WEBP format by default
-- 🟡 Promotion Banner
-- ⚪ Default Blog setup
-- ⚪ Initial animations
-- ⚪ Scroll animations
-- 🟢 Accessibility features:
-   - 🟢 ARIA Landmark Roles
-   - 🟢 Default focus states preserved for keyboard navigation
-   - 🟢 Correctly Trap focus when Drawers are open with [focus-trap-react](https://www.npmjs.com/package/focus-trap-react)
-   - 🟢 Input-based Counters
-   - 🟢 Correctly associated button states
-   - 🟢 Required `alt` states for all images
-   - 🟢 Skip to Content link
-- 🟢 SEO features:
-   - 🟢 Page-level SEO/Share settings with previews
-   - 🟢 Fallback Global SEO/Share settings
-   - 🟢 Automatic JSON-LD Schema markup for Products
+<br />
+
+# ✨ Features
+
+- utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
+- Animations powered by [Framer Motion](https://www.framer.com/motion/)
+- Cart powered by [Shopify Buy SDK](https://www.npmjs.com/package/shopify-buy)
+- Inventory check for product pages using [SWR](https://swr.vercel.app)
+- Klaviyo waitlist form for out-of-stock products
+- Klaviyo newsletter form with opt-in field
+- Dynamic Page Routes for custom page creation
+- Automatic `Sitemap.xml` generation
+- Automatic `robots.txt` generation
+- Automatic 301 Redirects from Sanity
+- Live Preview content directly from Sanity
+- Modern Image component using Sanity's Hotspot, Crop, and automatic WEBP format
+- Modular page content for all pages, including dynamic grid layouts
+- Customizable Promotion Banner
+- Customizable Cookie Notice
+- Accessibility features:
+   - ARIA Landmark Roles
+   - Default focus states preserved for keyboard navigation
+   - Correctly trap focus for drawers with [focus-trap-react](https://www.npmjs.com/package/focus-trap-react)
+   - Roving tabindex for radio buttons
+   - Input-based quantity counters
+   - Required `alt` text for all images
+   - "Skip to Content" link
+- SEO features:
+   - Page-level SEO/Share settings with previews
+   - Fallback Global SEO/Share settings
+   - Automatic JSON-LD Schema markup for products
    
-### Headless Shopify
-- 🟢 Syncs Products from Shopify into Sanity
-- 🟢 Tracks product status _(draft/published)_ from Shopify to help control visibility while editing
-- 🟢 Automatic Variant option toggles
-- 🟢 Marks deleted products and variants for easy tracking
-- 🟢 SSR (Dynamic Rendering) of PDP pages
-- 🟢 Updates the URL on variant changes while keeping a clean history stack
-- 🟢 Accessible and clamped Quantity Counters
-- 🟢 Vanity Shop URL Masking
-- 🟢 Global Cart with access to all variant data for line items
-- 🟢 Supports Single Variant products out of the box
-- 🟢 PDP Photo Galleries with variant granularity
-- 🟢 default PLP for all products
-- 🟢 Custom PLPs with easy, Sanity-managed Collections
-- 🟢 Ability to surface a PDP option on PLP product cards
-- 🟡 Sanity-managed conditional Cart "add-ons"
-- ⚪ Ability to apply coupons to the checkout cart
-- ⚪ Account Management _(register/login/password/orders)_
-- ⚪ Customer Reviews Integration _(Yotpo? Okendo? Junip?)_
+### Shopify Integration Features
+- Automatically syncs products from Shopify into Sanity
+- Tracks product status _(draft/published)_ from Shopify to help control visibility while editing
+- Deleted products and variants are preserved and flagged in Sanity
+- Updates the URL on variant changes while keeping a clean history stack
+- Vanity shop URL masking
+- Global Cart with access to all variant data for line items
+- Supports Single Variant products out of the box
+- Product photo galleries with variant granularity
+- Automatic `/shop` page for all products, with ability to "feature" products
+- Custom collection pages
+- Ability to surface a variant option on product cards
 
 <br />
 
@@ -115,17 +96,18 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 Clone this repository from your GitHub account with the `use template` button
 
 ### 1) Sanity
-1. `npm install && sanity init` in the `/studio` folder
-2. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
+1. If you don't have the Sanity CLI installed, first run `npm install -g @sanity/cli` to install it globally
+2. `npm install && sanity init` in the `/studio` folder
+3. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
 ```
 ? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
 ```
-3. When it asks you what dataset configuration to use, go with the `default`
-4. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
+4. When it asks you what dataset configuration to use, go with the `default`
+5. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API):
     - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
     - Add your front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
-> ⚠️ **Note** <br />This Studio uses the new "actions" resolver to handle "singleton" documents. To adjust what documents should behave like singletons be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`
-    
+> ⚠️ **Important!** <br />For "singleton" documents, like settings sections, the schema uses a combination of `__experimental_actions` and the new [actions resolver](https://www.sanity.io/docs/document-actions). If you are using this outside of the official Sanity Starter, you will need to comment out the `__experimental_actions` line in "singleton" schemas to publish settings for the first time. This is because a singleton is still a document type, and one needs to exist first before it can be edited. Additionally, if you want to create additional "singleton" schemas, be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`.
+
 ### 2) Shopify Storefront Access
 1. Enable Private Apps in Shopify
    - Apps > "Manage Private Apps" *(text link in page footer)*
@@ -281,14 +263,26 @@ While not as easy as Netlify, what I prefer to do is:
 4. You or the client can now connect their newly transferred Github repo to their own Vercel account!
 </details>
 
+<details>
+<summary><strong>How can I see the bundle size of my website?</strong></summary>
+
+Simply run `npm run analyze` from the project folder. This will run a build of your site and automatically open the [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) visuals for your site's build files.
+</details>
+
 <br />
 
 # 💯 Shoutouts
-Huge ups to the following talented and rad folks who helped in countless ways. Thank you for all the support, code contributions, and for putting up with my _insane_ questions around headless shopify woes!
+Huge ups to the following talented and rad folks who helped in countless ways. Thank you for all the support, code contributions, and discussions.
+
+### Developers
 - 🔥 [@tuckercs](https://github.com/tuckercs)
 - 🍝 [@iamkevingreen](https://github.com/iamkevingreen)
 - 🧈 [@mikehwagz](https://github.com/mikehwagz)
 - 😎 [@dictions](https://github.com/dictions)
+
+### Designers
+  - [@thecollectedworks](https://www.instagram.com/thecollectedworks/)
+  - [@joyntnotjoint](https://www.instagram.com/joyntnotjoint/)
 
 <br />
 

@@ -1,17 +1,32 @@
-.accordion {
-  &:last-child {
-    @apply pb-0;
+.accordion-group {
+  &:not(:last-child) {
+    @apply mb-12;
   }
+}
+
+.accordion {
+  @apply border-t;
   
   &--toggle {
-    @apply text-left;
+    @apply clean-btn text-left flex justify-between items-center px-0 py-4 w-full bg-transparent font-semibold text-lg leading-snug;
   }
 
   &--icon {
-    /* style an icon */
+    @apply flex-shrink-0 block relative ml-8 w-3 h-3;
+    transition: transform .3s cubic-bezier(0.22, 1, 0.36, 1);
+
+    &::before,
+    &::after {
+      @apply block absolute top-1/2 transform -translate-y-1/2 inset-x-0 bg-current w-full h-px;
+      content: "";
+    }
+
+    &::after {
+      @apply rotate-90;
+    }
 
     .is-open & {
-      /* change style for open accordion */
+      @apply transform rotate-45;
     }
   }
 
@@ -20,6 +35,6 @@
   }
 
   &--inner {
-    @apply m-0 mx-auto p-0 pt-4 max-w-2xl;
+    @apply m-0 pb-12 max-w-2xl;
   }
 }

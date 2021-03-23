@@ -19,8 +19,7 @@ export default {
       title: 'Blocks',
       name: 'blocks',
       type: 'array',
-      of: [{ type: 'freeform' }, { type: 'accordions' }],
-      validation: Rule => Rule.required().length(1)
+      of: [{ type: 'freeform' }, { type: 'accordions' }]
     }
   ],
   preview: {

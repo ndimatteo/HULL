@@ -39,31 +39,7 @@ const Carousel = ({
         ))}
       </div>
 
-      {/* {scrollSnaps && thumbs && (
-        <div className="carousel--thumbs">
-          {thumbs.map((thumb, key) => (
-            <button
-              key={key}
-              onClick={() => scrollTo(key)}
-              aria-label={`Go to slide ${key + 1}`}
-              className={`carousel--thumb${
-                selectedIndex === key ? ' is-active' : ''
-              }`}
-            >
-              <Photo
-                photo={thumb}
-                srcsetSizes={[400]}
-                sizes="(min-width: 768px) 400px, 35vw'"
-                aspect="square"
-                width="500"
-                height="500"
-              />
-            </button>
-          ))}
-        </div>
-      )} */}
-
-      {slider && (
+      {slider && slider.details().size > 1 && (
         <div className="carousel--hud">
           <div className="carousel--nav">
             {hasArrows && (

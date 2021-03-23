@@ -11,6 +11,7 @@ import productVariant from './documents/shopify-variant'
 import collection from './documents/shopify-collection'
 
 import generalSettings from './documents/settings-general'
+import cookieSettings from './documents/settings-cookie'
 import promoSettings from './documents/settings-promo'
 import headerSettings from './documents/settings-header'
 import footerSettings from './documents/settings-footer'
@@ -74,6 +75,7 @@ export default createSchema({
     collection,
 
     generalSettings,
+    cookieSettings,
     promoSettings,
     headerSettings,
     footerSettings,

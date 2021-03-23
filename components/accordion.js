@@ -1,47 +1,53 @@
 import React, { useState, useEffect } from 'react'
-import { m, AnimatePresence } from 'framer-motion'
+import { m } from 'framer-motion'
+import cx from 'classnames'
 
 const Accordion = ({ toggle, onChange, id, title, children }) => {
-  const [open, setOpen] = useState(toggle)
+  const [isOpen, setIsOpen] = useState(toggle)
+
+  const accordionAnim = {
+    open: {
+      opacity: 1,
+      height: 'auto',
+    },
+    closed: {
+      opacity: 0,
+      height: 0,
+    },
+  }
 
   useEffect(() => {
-    setOpen(toggle)
+    setIsOpen(toggle)
   }, [toggle])
 
   useEffect(() => {
     if (onChange) {
       onChange(id, open)
     }
-  }, [open])
+  }, [isOpen])
 
   return (
     <div key={id} className="accordion">
       <button
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        className={`accordion--toggle${open ? ' is-open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-controls={`accordion-${id}`}
+        className={cx('accordion--toggle', { 'is-open': isOpen })}
       >
         {title}
         <div className="accordion--icon" />
       </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <m.section
-            key="content"
-            initial="collapsed"
-            animate="open"
-            exit="collapsed"
-            variants={{
-              open: { opacity: 1, height: 'auto' },
-              collapsed: { opacity: 0, height: 0 },
-            }}
-            transition={{ duration: 0.5, ease: [0.19, 1.0, 0.22, 1.0] }}
-            className="accordion--content"
-          >
-            <div className="accordion--inner">{children}</div>
-          </m.section>
-        )}
-      </AnimatePresence>
+
+      <m.div
+        id={`accordion-${id}`}
+        className="accordion--content"
+        initial={isOpen ? 'open' : 'closed'}
+        animate={isOpen ? 'open' : 'closed'}
+        variants={accordionAnim}
+        transition={{ duration: 0.5, ease: [0.19, 1.0, 0.22, 1.0] }}
+      >
+        <div className="accordion--inner">{children}</div>
+      </m.div>
     </div>
   )
 }

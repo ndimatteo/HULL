@@ -52,7 +52,6 @@ li[class*="moving"] * {
 
 .pt-editable * {
   font-family: 'Inter', 'Helvetica Neue', sans-serif !important;
-  font-weight: 400;
 }
 
 .btn {

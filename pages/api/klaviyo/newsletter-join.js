@@ -28,8 +28,8 @@ export default async function send(req, res) {
       {
         $consent: 'web',
         email: email,
-        first_name: fname,
-        last_name: lname,
+        // first_name: fname,
+        // last_name: lname,
       },
     ],
   }

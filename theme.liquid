@@ -18,11 +18,19 @@
     {%- endif -%}
 
      <script>
-      var loc = window.location
-      var isAccount = loc.pathname.indexOf('account') > -1 || loc.pathname.indexOf('challenge') > -1 || loc.pathname.indexOf('customers') > -1
+      var passlist = [
+        'account', // account-related routes (login, register, manage)
+        'challenge', // Shopify's integrated google recaptcha
+        'tools/recurring' // recharge-related routes
+      ]
       
-      if (!isAccount) {
-      	loc.host = 'YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL';
+      var loc = window.location
+      var bypass = passlist.some(function(str) {
+        return loc.pathname.indexOf(str) > -1
+      })
+      
+      if (!bypass) {
+        loc.host = 'YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL'
       }
     </script>
     

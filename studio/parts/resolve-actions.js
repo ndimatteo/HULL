@@ -6,7 +6,7 @@ import defaultResolve, {
 
 import { FiEye } from 'react-icons/fi'
 
-const remoteURL = 'https://insane.codes'
+const remoteURL = 'https://hull.dev'
 const localURL = 'http://localhost:3000'
 const previewURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL
@@ -16,6 +16,7 @@ const singletons = [
   'shopPage',
   'errorPage',
   'generalSettings',
+  'cookieSettings',
   'promoSettings',
   'headerSettings',
   'footerSettings',
