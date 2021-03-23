@@ -1,0 +1,51 @@
+{
+    "version": 2,
+    "title": "HULL Next.js E-commerce",
+    "description": "Headless e-commerce with Sanity and Shopify. Frontend built with Next.js",
+    "previewMedia": {
+      "type": "image",
+      "src": ".sanity-template/assets/temp-screenshot.png",
+      "alt": "inprogress"
+    },
+    "technologies": [
+      {
+        "id": "nextjs",
+        "name": "Next.js",
+        "url": "https://nextjs.org/"
+      },
+      {
+        "id": "vercel",
+        "name": "Vercel",
+        "url": "https://vercel.com/"
+      },
+      {
+        "id": "shopify",
+        "name": "Shopify",
+        "url": "https://shopify.com/"
+      }
+    ],
+    "deployment": {
+      "provider": "vercel",
+      "studio": {
+        "basePath": "/studio"
+      },
+      "envVars": {
+        "projectId": ["NEXT_PUBLIC_SANITY_PROJECT_ID"],
+        "dataset": ["NEXT_PUBLIC_SANITY_DATASET"]
+      },
+      "tokens": [
+          {
+              "label": "livePreview",
+              "role": "write",
+              "envVar": "SANITY_API_TOKEN"
+          }
+      ],
+      "corsOrigins": [
+        {
+          "origin": "http://localhost:3000",
+          "allowCredentials": true
+        }
+      ]
+    }
+  }
+  

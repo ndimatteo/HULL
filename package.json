@@ -3,11 +3,12 @@
   "version": "2.0.0",
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
-    "build": "next build",
+    "build": "echo 'Building Sanity to public/studio…' && cd studio && npx sanity build ../public/studio -y && cd .. && next build",
     "start": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build"
+    "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
+    "postinstall": "cd studio && npm install"
   },
   "sideEffects": false,
   "license": "MIT",
