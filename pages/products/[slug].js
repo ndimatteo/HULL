@@ -36,9 +36,9 @@ const Product = ({ data }) => {
   // find default variant for product
   const defaultVariant = product.variants?.find((v) => {
     const option = {
-      name: product.options[0]?.name,
-      value: product.options[0]?.values[0],
-      position: product.options[0]?.position,
+      name: product.options?.[0]?.name,
+      value: product.options?.[0]?.values[0],
+      position: product.options?.[0]?.position,
     }
     return hasObject(v.options, option)
   })
