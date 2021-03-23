@@ -30,8 +30,8 @@
         "basePath": "/studio"
       },
       "envVars": {
-        "projectId": ["NEXT_PUBLIC_SANITY_PROJECT_ID"],
-        "dataset": ["NEXT_PUBLIC_SANITY_DATASET"]
+        "dataset": ["SANITY_PROJECT_DATASET"],
+        "projectId": ["SANITY_PROJECT_ID"]
       },
       "tokens": [
           {
