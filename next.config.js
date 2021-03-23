@@ -30,8 +30,8 @@ async function fetchSanityRedirects() {
 module.exports = withBundleAnalyzer({
   env: {
     // Needed for Sanity powered data
-    SANITY_PROJECT_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
-    SANITY_PROJECT_ID: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    SANITY_PROJECT_DATASET: process.env.SANITY_PROJECT_DATASET,
+    SANITY_PROJECT_ID: process.env.SANITY_PROJECT_ID,
     SANITY_API_TOKEN: process.env.SANITY_API_TOKEN,
 
     // Needed for Shopify product syncs
