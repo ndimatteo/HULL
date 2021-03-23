@@ -28,10 +28,10 @@
 
 # ✨ Features
 
-- utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
+- Utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
 - Animations powered by [Framer Motion](https://www.framer.com/motion/)
 - Cart powered by [Shopify Buy SDK](https://www.npmjs.com/package/shopify-buy)
-- Inventory check for product pages using [SWR](https://swr.vercel.app)
+- Real-time inventory check for products using [SWR](https://swr.vercel.app)
 - Klaviyo waitlist form for out-of-stock products
 - Klaviyo newsletter form with opt-in field
 - Dynamic Page Routes for custom page creation
@@ -163,7 +163,7 @@ SENDGRID_API_KEY=XXXXXX
   - `SENDGRID_API_KEY` - Create an API key from "Settings" -> "API Keys" with "Restricted Access" to only "Mail Send"
   
 ### 5) Shopify Store Theme
-Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `your_frontsite_domain` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
+Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
 
 This will essentially "pass-through" URLs accessed at your Shopify Store to your true headless storefront *(ie. `shop.hull.com/products` -> `hull.com/products`)*
 
@@ -227,16 +227,21 @@ You still get all the tree-shaking benefits of Tailwind, _and_ you can still use
 Absolutely! This starter was actually born out of a non-shopify starter I had been using for my own client projects. Simply delete the shopify-specific logic and you've got yourself a fancy static starter powered by Next and Sanity!
 
 Here's a shortlist of what to remove:
-- Within the `/components` folder, remove `cart`, `product`, and `shop` folders
-- Within the `/pages/api` folder, remove `products` and `shopify` folders
+- Within the `/blocks` folder, remove `product` and `shop` folders
+- Within the `/lib` folder, remove:
+  - the `shopify.js` file,
+  - all Shopify-related context hooks from the `context.js` file
+  - all Shopify-related GROQs from the `api.js` file
+  - the `shopPage`, `collection`, and `product` switch cases from the `routes.js` file 
+- Within the `/modules` folder, remove:
+  - the `shop` folder
+  - all Shopify-related context hooks from the `shared/header.js` file
 - Within the `/pages` folder, remove `products` and `shop` folders
-- Within the `_app.js` file, remove `<ShopifyContextProvider />` and `<Cart />` components
+- Within the `/pages/api` folder, remove `shopify` folder
+- Within the `_app.js` file, remove the `<Cart />` component and import
 - Within the `/studio` folder, remove all shopify-related schemas, desk structures, and actions
-- Within the `/components/header.js` file, remove references to shopify `context` and `cart`
-- `/contexts` folder _(used for accessing shopify data anywhere)_
-- `/lib/shopify.js` file _(shopify client setup)_
-- `SHOPIFY_*` env variables from `next.config.js`
-- `shopify-buy` dependency from `package.json`
+- Remove all `SHOPIFY_*` env variables from `next.config.js`
+- Remove `shopify-buy` dependency from `package.json`
 </details>
 
 <details>
@@ -250,7 +255,7 @@ If you get this error in your CLI, you need to logout and log back in again. Sim
 
 Simply navigate directly to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
 
-_(making sure to replace [store_id] with your Shopify Store ID)_
+_(making sure to replace `[store_id]` with your Shopify Store ID)_
 </details>
 
 <details>
