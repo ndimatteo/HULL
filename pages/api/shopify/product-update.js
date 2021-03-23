@@ -239,10 +239,12 @@ export default async function send(req, res) {
   // create product if doesn't exist
   stx = stx.createIfNotExists(product)
 
+  // unset options field first, to avoid patch set issues
+  stx = stx.patch(`product-${id}`, (patch) => patch.unset(['options']))
+
   // patch (update) product document with core shopify data
-  stx = stx.patch(`product-${id}`, (patch) =>
-    patch.unset(['options']).set(productFields)
-  )
+  stx = stx.patch(`product-${id}`, (patch) => patch.set(productFields))
+
   // patch (update) title & slug if none has been set
   stx = stx.patch(`product-${id}`, (patch) =>
     patch.setIfMissing({ title: title })
