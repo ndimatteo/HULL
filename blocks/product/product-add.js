@@ -5,7 +5,16 @@ import { useSiteContext, useAddItem } from '@lib/context'
 
 const ProductAdd = ({ productID, quantity = 1, className, children }) => {
   const addItemToCart = useAddItem()
-  const { isLoading, isAdding } = useSiteContext()
+  const { shopifyClient, isLoading, isAdding } = useSiteContext()
+
+  // Check that Shopify is connected
+  if (!shopifyClient) {
+    return (
+      <span className={cx('is-disabled', className)} disabled>
+        Unavailable
+      </span>
+    )
+  }
 
   return (
     <>

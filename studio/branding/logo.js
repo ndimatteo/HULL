@@ -27,10 +27,10 @@ const Icon = styled.div`
   margin: -1em auto;
   color: white;
 
-  ${(props) =>
+  ${props =>
     props.isLogin &&
     css`
-      display: inline-block;
+      display: block;
       margin: 0 auto;
       height: 4em;
       color: black;
@@ -38,6 +38,7 @@ const Icon = styled.div`
 
   svg {
     display: block;
+    margin: 0 auto;
     height: 100%;
     width: auto;
     fill: currentColor;

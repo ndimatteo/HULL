@@ -5,8 +5,15 @@ export default async function send(req, res) {
     query: { id },
   } = req
 
+  const hasShopify =
+    process.env.SHOPIFY_STORE_ID && process.env.SHOPIFY_API_PASSWORD
+
   if (!id) {
     return res.status(401).json({ error: 'Product ID required' })
+  }
+
+  if (!hasShopify) {
+    return res.status(401).json({ error: 'Shopify API not setup' })
   }
 
   // Setup our Shopify connection
