@@ -40,6 +40,7 @@ const Hero = ({ data = {} }) => {
             <Photo
               photo={photos.desktopPhoto}
               width={1600}
+              srcSizes={[800, 1000, 1200, 1600]}
               sizes="100vw"
               layout="fill"
               className="hero--bg is-desktop"
