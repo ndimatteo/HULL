@@ -3,8 +3,8 @@ import cx from 'classnames'
 
 import Freeform from '@blocks/freeform'
 import Accordions from '@blocks/accordions'
+import ProductCard from '@blocks/shop/product-card'
 // import Carousel from '@blocks/Carousel'
-// import Product from '@blocks/product'
 // import Photo from '@blocks/photo'
 
 const Grid = ({ data = {} }) => {
@@ -81,6 +81,16 @@ const GridBlock = ({ block }) => {
       return <Freeform data={block} />
     case 'accordions':
       return <Accordions data={block} />
+    case 'productCard':
+      return (
+        <ProductCard
+          product={block.product}
+          hasVisuals
+          showGallery
+          showPrice
+          showOption
+        />
+      )
     default:
       return null
   }

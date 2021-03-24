@@ -6,7 +6,7 @@ import defaultResolve, {
 
 import { FiEye } from 'react-icons/fi'
 
-const remoteURL = 'https://hull.dev'
+const remoteURL = window.location.protocol + '//' + window.location.hostname
 const localURL = 'http://localhost:3000'
 const previewURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL

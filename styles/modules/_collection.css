@@ -24,7 +24,8 @@
 .product-card {
   @apply flex flex-col relative;
 
-  .collection & {
+  .collection &,
+  .marquee--product & {
     @apply p-8 border;
     margin: -.5px;
   }

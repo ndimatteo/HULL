@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 // import { useIntersection } from 'use-intersection'
 
-import ProductCard from './product-card'
+import ProductCard from '@blocks/shop/product-card'
 
 const Collection = ({
   products,

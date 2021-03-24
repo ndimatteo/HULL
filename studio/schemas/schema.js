@@ -33,6 +33,7 @@ import collectionGrid from './modules/collection-grid'
 // Block types
 import freeform from './blocks/freeform'
 import accordions from './blocks/accordions'
+import productCard from './blocks/product-card'
 
 // Object types
 import seo from './objects/seo'
@@ -99,6 +100,7 @@ export default createSchema({
     /* 3: Block types */
     freeform,
     accordions,
+    productCard,
 
     /* ----------------------- */
     /* 4: Generic Object types */

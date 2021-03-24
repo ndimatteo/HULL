@@ -128,7 +128,7 @@
   @apply border-b;
   
   &--item {
-    @apply flex items-center;
+    @apply flex;
   }
 
   &--text {
@@ -146,6 +146,21 @@
       html:not([data-theme='dark']) & {
         filter: invert(1);
       }
+    }
+  }
+
+  &--product {
+    @apply flex flex-col -my-px;
+    margin: -1px 0;
+    width: calc(80vw - 2rem);
+    max-width: 28rem;
+
+    * {
+      @apply whitespace-normal;
+    }
+
+    .product-card {
+      @apply flex-1;
     }
   }
 }

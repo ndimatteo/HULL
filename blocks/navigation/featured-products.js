@@ -1,6 +1,6 @@
 import React from 'react'
 
-import ProductCard from '@modules/shop/product-card'
+import ProductCard from '@blocks/shop/product-card'
 
 const FeaturedProducts = ({ products, onClick }) => {
   if (!products) return null
