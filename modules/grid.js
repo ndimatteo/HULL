@@ -84,11 +84,11 @@ const GridBlock = ({ block }) => {
     case 'productCard':
       return (
         <ProductCard
+          className="is-inline"
           product={block.product}
           hasVisuals
-          showGallery
+          showThumbs
           showPrice
-          showOption
         />
       )
     default:

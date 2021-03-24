@@ -154,6 +154,14 @@ h1,
       @apply mt-4 sm:mt-0 sm:ml-4;
     }
   }
+
+  .hero & {
+    font-size: clamp(
+      2.25rem,
+      calc(1rem + 3.5vw),
+      5rem
+    )
+  }
 }
 
 h2,
@@ -180,15 +188,11 @@ h4,
 a {
   .rc & {
     &:not(.btn) {
+      @apply hover:opacity-40;
       background-image: linear-gradient(var(--pageText), var(--pageText));
       background-position: 0% 100%;
       background-repeat: no-repeat;
       background-size: 100% 1px;
-
-      &:hover {
-        background-size: 100% 100%;
-        color: var(--pageBG);
-      }
     }
   }
 }

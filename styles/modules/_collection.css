@@ -30,6 +30,10 @@
     margin: -.5px;
   }
 
+  &.is-inline {
+    @apply my-4;
+  }
+
   &--thumb {
     @apply z-0;
   }
@@ -61,6 +65,10 @@
 
     .product-card--visuals + & {
       @apply mt-6;
+
+      .is-inline & {
+        @apply mt-4;
+      }
     }
   }
 
@@ -69,6 +77,10 @@
     
     .is-featured & {
       @apply text-base;
+    }
+
+    .is-inline & {
+      @apply text-2xl;
     }
 
     + .price {

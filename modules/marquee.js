@@ -35,7 +35,11 @@ const Marquee = ({ data = {} }) => {
                 )
               case 'photo':
                 return (
-                  <div key={key} className="marquee--photo">
+                  <div
+                    key={key}
+                    className="marquee--photo"
+                    style={{ flex: item.photo.aspectRatio }}
+                  >
                     <Photo
                       photo={item.photo}
                       hasPlaceholder={false}

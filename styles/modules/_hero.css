@@ -25,6 +25,6 @@
   }
 
   &--content {
-    @apply w-full max-w-5xl mx-auto px-4 pt-4 pb-12 text-center text-white;
+    @apply w-full max-w-5xl mx-auto px-4 pt-24 pb-12 text-center text-white;
   }
 }

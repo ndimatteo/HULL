@@ -136,7 +136,7 @@
   }
 
   &--photo {
-    @apply relative w-40 sm:w-80 py-8;
+    @apply relative w-32 sm:w-48 px-8 py-4 sm:px-12 sm:py-8;
 
     [data-theme='metal'] & {
       filter: invert(94%) sepia(59%) saturate(2450%) hue-rotate(35deg) brightness(122%) contrast(111%);
