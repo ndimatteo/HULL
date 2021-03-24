@@ -1,11 +1,11 @@
 {
     "version": 2,
-    "title": "HULL Next.js E-commerce",
-    "description": "Headless e-commerce with Sanity and Shopify. Frontend built with Next.js",
+    "title": "HULL – Shopify Starter",
+    "description": "Headless Shopify starter powered by Next.js + Sanity.io",
     "previewMedia": {
       "type": "image",
-      "src": ".sanity-template/assets/temp-screenshot.png",
-      "alt": "inprogress"
+      "src": ".sanity-template/assets/HULL-cover.png",
+      "alt": "HULL"
     },
     "technologies": [
       {

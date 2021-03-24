@@ -115,6 +115,7 @@
   input[type="text"],
   input[type="email"],
   input[type="number"],
+  input[type="password"],
   textarea {
     @apply relative appearance-none w-full h-full px-4 py-2 rounded-none border font-inherit text-base leading-none bg-transparent text-pageText;
 
