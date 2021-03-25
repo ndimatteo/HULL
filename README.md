@@ -91,7 +91,7 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 
 # 💀 Set Up
 
-Clone this repository from your GitHub account with the `use template` button
+Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) or clone this repository from your GitHub account with the [Use this template](https://github.com/ndimatteo/HULL/generate) button
 
 ### 1) Sanity
 1. If you don't have the [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli) installed, first run `npm install -g @sanity/cli` to install it globally
