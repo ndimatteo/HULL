@@ -93,9 +93,13 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 
 <br />
 
-# 💀 Set Up
+# Automatic Set Up
 
-Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) or clone this repository from your GitHub account with the [Use this template](https://github.com/ndimatteo/HULL/generate) button
+Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) with a pre-populated store! All you have to do is connect Shopify (follow step 2 and 3 below)
+
+# 💀 Manual Set Up
+
+Clone this repository from your GitHub account with the [Use this template](https://github.com/ndimatteo/HULL/generate) button
 
 ### 1) Sanity
 1. If you don't have the [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli) installed, first run `npm install -g @sanity/cli` to install it globally
