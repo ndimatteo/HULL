@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-  <a href="https://insane.codes">
+  <a href="https://hull.dev">
     <img src="https://img.shields.io/static/v1?label=&message=View%20Demo&style=for-the-badge&color=black&logo=vercel" />
   </a>
 </p>
