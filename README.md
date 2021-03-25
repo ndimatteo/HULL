@@ -19,7 +19,7 @@
 <p align="center">
   <a href="#-features">Features</a> •
   <a href="#-tours">Tours</a> •
-  <a href="#-set-up">Set Up</a> •
+  <a href="#-automatic-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
     <a href="#-deployment">Deployment</a> •
   <a href="#-extrastips">Extras</a>
@@ -93,9 +93,11 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 
 <br />
 
-# Automatic Set Up
+# 🔥 Automatic Set Up
 
-Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) with a pre-populated store! All you have to do is connect Shopify (follow step 2 and 3 below)
+Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! All you have to do is connect Shopify (follow step 2 and 3 below)
+
+<br />
 
 # 💀 Manual Set Up
 
