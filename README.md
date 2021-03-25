@@ -96,7 +96,7 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 Clone this repository from your GitHub account with the `use template` button
 
 ### 1) Sanity
-1. If you don't have the Sanity CLI installed, first run `npm install -g @sanity/cli` to install it globally
+1. If you don't have the [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli) installed, first run `npm install -g @sanity/cli` to install it globally
 2. `npm install && sanity init` in the `/studio` folder
 3. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
 ```
