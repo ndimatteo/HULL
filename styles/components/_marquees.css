@@ -1,4 +1,4 @@
-[data-marquee] {
+[data-marqy] {
   @apply relative overflow-hidden;
 
   * {
@@ -6,7 +6,7 @@
   }
 }
 
-[data-marquee-inner] {
+[data-marqy-inner] {
   @apply flex;
 
   [data-direction='right'] & {
@@ -18,7 +18,7 @@
   }
 }
 
-[data-marquee-content] {
+[data-marqy-content] {
   @apply flex;
   flex: 1 0 auto;
   animation-timing-function: linear;
@@ -43,7 +43,7 @@
   }
 }
 
-[data-marquee-item] {
+[data-marqy-item] {
   flex: 1 0 auto;
 }
 

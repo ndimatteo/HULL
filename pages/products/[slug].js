@@ -11,20 +11,22 @@ import { centsToPrice, hasObject } from '@lib/helpers'
 import { Module } from '@modules/index'
 
 // setup our activeVariant hook
-const useActiveVariant = (fallback) => {
+function useActiveVariant({ fallback, variants }) {
   const router = useRouter()
-  const id = router?.query?.variant
-  const activeVariant = id ? parseInt(id) : fallback
+  const queryID = parseInt(router?.query?.variant)
+  const hasVariant = variants.find((v) => v.id === queryID)
+  const activeVariant = hasVariant ? queryID : fallback
 
   const setActiveVariant = useCallback(
-    (variant) =>
+    (variant) => {
       router.replace(
         `/products/${router?.query?.slug}?variant=${variant}`,
         undefined,
         {
           shallow: true,
         }
-      ),
+      )
+    },
     [router]
   )
 
@@ -65,9 +67,14 @@ const Product = ({ data }) => {
   })
 
   // set our activeVariant state to our defaultVariant (if found) or first variant
-  const [activeVariant, setActiveVariant] = useActiveVariant(
-    defaultVariant?.id || page.product.variants[0].id
-  )
+  const [activeVariant, setActiveVariant] = useActiveVariant({
+    fallback: defaultVariant?.id || page.product.variants[0].id,
+    variants: page.product.variants,
+  })
+
+  // const [activeVariant, setActiveVariant] = useState(
+  //   defaultVariant?.id || page.product.variants[0].id
+  // )
 
   // Check our product inventory is still correct
   const { data: productInventory } = useSWR(
@@ -109,7 +116,7 @@ const Product = ({ data }) => {
               module={module}
               product={product}
               activeVariant={product.variants.find(
-                (v) => v.id === activeVariant
+                (v) => v.id == activeVariant
               )}
               onVariantChange={setActiveVariant}
             />
@@ -126,7 +133,7 @@ function getProductSchema(product, activeVariant, site) {
   const router = useRouter()
   const { query } = router
 
-  const variant = product.variants.find((v) => v.id === activeVariant)
+  const variant = product.variants.find((v) => v.id == activeVariant)
 
   return {
     '@context': 'http://schema.org',
