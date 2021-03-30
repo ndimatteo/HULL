@@ -95,53 +95,6 @@ const ProductOption = ({
               )}
             </RadioItem>
           )
-
-          // return (
-          //   <li key={key}>
-          //     {optSettings?.color ? (
-          //       <button
-          //         role="radio"
-          //         tabIndex={isActive ? 0 : -1}
-          //         aria-checked={isActive}
-          //         onClick={() =>
-          //           !isActive &&
-          //           changeOption(
-          //             option.name,
-          //             value,
-          //             variants,
-          //             activeVariant,
-          //             onChange
-          //           )
-          //         }
-          //         className={optionClassStates('option--swatch')}
-          //       >
-          //         <Swatch
-          //           label={`Select "${value}" ${option.name} option`}
-          //           color={optSettings?.color}
-          //         />
-          //       </button>
-          //     ) : (
-          //       <button
-          //         role="radio"
-          //         tabIndex={isActive ? 0 : -1}
-          //         aria-checked={isActive}
-          //         onClick={() =>
-          //           !isActive &&
-          //           changeOption(
-          //             option.name,
-          //             value,
-          //             variants,
-          //             activeVariant,
-          //             onChange
-          //           )
-          //         }
-          //         className={optionClassStates('btn is-block')}
-          //       >
-          //         {value}
-          //       </button>
-          //     )}
-          //   </li>
-          // )
         })}
       </RadioGroup>
     </div>
@@ -159,7 +112,7 @@ const changeOption = (name, value, variants, activeVariant, changeCallback) => {
   )
 
   if (newVariant && changeCallback) {
-    changeCallback(newVariant)
+    changeCallback(newVariant.id)
   }
 }
 

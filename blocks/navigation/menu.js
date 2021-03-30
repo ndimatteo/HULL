@@ -10,6 +10,8 @@ import Dropdown from './dropdown'
 const Menu = ({ items, useMegaNav, hasFocus = true, onClick, ...rest }) => {
   const router = useRouter()
 
+  if (!items) return null
+
   return (
     <ul {...rest}>
       {items.map((item, key) => {

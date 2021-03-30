@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import axios from 'axios'
 import useSWR from 'swr'
@@ -10,6 +10,28 @@ import { centsToPrice, hasObject } from '@lib/helpers'
 
 import { Module } from '@modules/index'
 
+// setup our activeVariant hook
+const useActiveVariant = (fallback) => {
+  const router = useRouter()
+  const id = router?.query?.variant
+  const activeVariant = id ? parseInt(id) : fallback
+
+  const setActiveVariant = useCallback(
+    (variant) =>
+      router.replace(
+        `/products/${router?.query?.slug}?variant=${variant}`,
+        undefined,
+        {
+          shallow: true,
+        }
+      ),
+    [router]
+  )
+
+  return [activeVariant, setActiveVariant]
+}
+
+// setup our inventory fetcher
 const fetchInventory = (url, id) =>
   axios
     .get(url, {
@@ -28,56 +50,41 @@ const Product = ({ data }) => {
 
   // extract our data
   const { site, page } = data
-  const { query } = router
 
   // set our Product state
   const [product, setProduct] = useState(page.product)
 
-  // find default variant for product
-  const defaultVariant = product.variants?.find((v) => {
+  // find the default variant for this product by matching against the first product option
+  const defaultVariant = page.product.variants?.find((v) => {
     const option = {
-      name: product.options?.[0]?.name,
-      value: product.options?.[0]?.values[0],
-      position: product.options?.[0]?.position,
+      name: page.product.options?.[0]?.name,
+      value: page.product.options?.[0]?.values[0],
+      position: page.product.options?.[0]?.position,
     }
     return hasObject(v.options, option)
   })
 
-  // find selected variant for product
-  const selectedVariant = product.variants.find((v) => v.id == query.variant)
-
-  // set active variant as default
-  const [activeVariant, setActiveVariant] = useState(
-    selectedVariant || defaultVariant || product.variants[0]
+  // set our activeVariant state to our defaultVariant (if found) or first variant
+  const [activeVariant, setActiveVariant] = useActiveVariant(
+    defaultVariant?.id || page.product.variants[0].id
   )
 
   // Check our product inventory is still correct
   const { data: productInventory } = useSWR(
     ['/api/shopify/product-inventory', page.product.id],
     (url, id) => fetchInventory(url, id),
-    { errorRetryCount: 2 }
+    { errorRetryCount: 3 }
   )
 
-  // Update the active variant when an option changes
-  const changeVariant = (variant) => {
-    setActiveVariant(variant)
-
-    router.replace(
-      `/products/[slug]`,
-      `/products/${page.product.slug}?variant=${variant.id}`,
-      { shallow: true }
-    )
-  }
-
-  // Rehydrate our inventory from SWR
+  // Rehydrate our product after inventory is fetched
   useEffect(() => {
-    if (productInventory) {
+    if (page.product && productInventory) {
       setProduct({
-        ...product,
+        ...page.product,
         inStock: productInventory.inStock,
         lowStock: productInventory.lowStock,
         variants: [
-          ...product.variants.map((v) => {
+          ...page.product.variants.map((v) => {
             const newInventory = productInventory.variants.find(
               (nv) => nv.id === v.id
             )
@@ -86,14 +93,7 @@ const Product = ({ data }) => {
         ],
       })
     }
-  }, [productInventory])
-
-  // Ensure the active variant matches the route query
-  useEffect(() => {
-    if (selectedVariant) {
-      setActiveVariant(selectedVariant)
-    }
-  }, [query.variant, selectedVariant])
+  }, [page.product, productInventory])
 
   return (
     <>
@@ -108,8 +108,10 @@ const Product = ({ data }) => {
               key={key}
               module={module}
               product={product}
-              activeVariant={activeVariant}
-              onVariantChange={changeVariant}
+              activeVariant={product.variants.find(
+                (v) => v.id === activeVariant
+              )}
+              onVariantChange={setActiveVariant}
             />
           ))}
         </Layout>
@@ -118,18 +120,19 @@ const Product = ({ data }) => {
   )
 }
 
-function getProductSchema(product, variant, site) {
+function getProductSchema(product, activeVariant, site) {
   if (!product) return null
 
   const router = useRouter()
   const { query } = router
+
+  const variant = product.variants.find((v) => v.id === activeVariant)
 
   return {
     '@context': 'http://schema.org',
     '@type': 'Product',
     name: product.title,
     price: centsToPrice(query.variant ? variant.price : product.price),
-    description: product.description,
     sku: query.variant ? variant.sku : product.sku,
     offers: {
       '@type': 'Offer',
