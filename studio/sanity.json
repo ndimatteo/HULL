@@ -16,7 +16,6 @@
     "@sanity/default-login",
     "@sanity/dashboard",
     "@sanity/desk-tool",
-    "dashboard-widget-structure-menu",
     "dashboard-widget-document-list",
     "media-library",
     "vercel-deploy",
