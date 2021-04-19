@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { m, AnimatePresence } from 'framer-motion'
+import axios from 'axios'
 
 const Waitlist = ({ variant, klaviyo }) => {
   const [submitting, setSubmitting] = useState(false)
@@ -27,17 +28,16 @@ const Waitlist = ({ variant, klaviyo }) => {
     setSubmitting(true)
     setError(false)
 
-    fetch('/api/klaviyo/waitlist-join', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        accountID: klaviyo,
-        variant: variant,
-        ...data,
-      }),
-    })
-      .then((res) => res.json())
-      .then((res) => {
+    axios
+      .post(
+        '/api/klaviyo/waitlist-join',
+        JSON.stringify({
+          accountID: klaviyo,
+          variant: variant,
+          ...data,
+        })
+      )
+      .then(() => {
         setSubmitting(false)
         setSuccess(true)
       })
