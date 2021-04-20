@@ -1,8 +1,7 @@
-import { AnimatePresence, m } from 'framer-motion'
 import React, { useState } from 'react'
-
-import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import { m, AnimatePresence } from 'framer-motion'
+import axios from 'axios'
 
 const Waitlist = ({ variant, klaviyo }) => {
   const [submitting, setSubmitting] = useState(false)
