@@ -1,7 +1,8 @@
+import { AnimatePresence, m } from 'framer-motion'
 import React, { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import { m, AnimatePresence } from 'framer-motion'
+
 import axios from 'axios'
+import { useForm } from 'react-hook-form'
 
 const Waitlist = ({ variant, klaviyo }) => {
   const [submitting, setSubmitting] = useState(false)
@@ -29,14 +30,11 @@ const Waitlist = ({ variant, klaviyo }) => {
     setError(false)
 
     axios
-      .post(
-        '/api/klaviyo/waitlist-join',
-        JSON.stringify({
-          accountID: klaviyo,
-          variant: variant,
-          ...data,
-        })
-      )
+      .post('/api/klaviyo/waitlist-join', {
+        accountID: klaviyo,
+        variant: variant,
+        ...data,
+      })
       .then(() => {
         setSubmitting(false)
         setSuccess(true)
