@@ -33,9 +33,9 @@ const ProductOption = ({
         value={
           activeVariant.options.find((opt) => opt.name === option.name).value
         }
-        onChange={(value) =>
+        onChange={(value) => {
           changeOption(option.name, value, variants, activeVariant, onChange)
-        }
+        }}
         className="option--values"
       >
         {option.values.map((value, key) => {

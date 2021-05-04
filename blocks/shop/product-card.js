@@ -62,6 +62,12 @@ const ProductCard = ({
     defaultVariant ? defaultVariant : product.variants[0]
   )
 
+  // assign the new variant when options are changed
+  const changeActiveVariant = (id) => {
+    const newActiveVariant = product.variants.find((v) => v.id === id)
+    setActiveVariant(newActiveVariant)
+  }
+
   return (
     <m.div
       initial="initial"
@@ -126,6 +132,7 @@ const ProductCard = ({
           )}
         </div>
 
+        {/* Surfaced Option */}
         {showOption && (
           <div className="product-card--option">
             {product.options?.map(
@@ -141,7 +148,7 @@ const ProductCard = ({
                     activeVariant={activeVariant}
                     strictMatch={false}
                     hideLabels
-                    onChange={setActiveVariant}
+                    onChange={changeActiveVariant}
                   />
                 )
             )}

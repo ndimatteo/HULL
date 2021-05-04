@@ -118,7 +118,7 @@ const Header = ({ data = {}, isTransparent }) => {
                           }
                         >
                           <div className="menu-mobile--primary">
-                            {menuMobilePrimary.items && (
+                            {menuMobilePrimary?.items && (
                               <Menu
                                 items={menuMobilePrimary.items}
                                 onClick={() => toggleMobileNav(false)}
@@ -127,7 +127,7 @@ const Header = ({ data = {}, isTransparent }) => {
                           </div>
 
                           <div className="menu-mobile--secondary">
-                            {menuMobileSecondary.items && (
+                            {menuMobileSecondary?.items && (
                               <Menu
                                 items={menuMobileSecondary.items}
                                 onClick={() => toggleMobileNav(false)}

@@ -49,7 +49,7 @@ const Marquee = ({ data = {} }) => {
                 )
               case 'product':
                 return (
-                  <div className="marquee--product">
+                  <div key={key} className="marquee--product">
                     <ProductCard
                       key={key}
                       product={item.product}

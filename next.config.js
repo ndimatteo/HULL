@@ -3,6 +3,7 @@ const client = sanityClient({
   dataset: process.env.SANITY_PROJECT_DATASET,
   projectId: process.env.SANITY_PROJECT_ID,
   useCdn: process.env.NODE_ENV === 'production',
+  apiVersion: '2021-03-25',
 })
 
 // see breakdown of code bloat
@@ -28,6 +29,9 @@ async function fetchSanityRedirects() {
 }
 
 module.exports = withBundleAnalyzer({
+  future: {
+    webpack5: true,
+  },
   env: {
     // Needed for Sanity powered data
     SANITY_PROJECT_DATASET: process.env.SANITY_PROJECT_DATASET,
