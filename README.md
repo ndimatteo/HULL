@@ -232,24 +232,15 @@ You still get all the tree-shaking benefits of Tailwind, _and_ you can still use
 <details>
 <summary><strong>Can I use this for non-Shopify projects?</strong></summary>
 
-Absolutely! This starter was actually born out of a non-shopify starter I had been using for my own client projects. Simply delete the shopify-specific logic and you've got yourself a fancy static starter powered by Next and Sanity!
+Absolutely! This starter was actually born out of a non-shopify starter I had been using for my own client projects.
 
-Here's a shortlist of what to remove:
-- Within the `/blocks` folder, remove `product` and `shop` folders
-- Within the `/lib` folder, remove:
-  - the `shopify.js` file,
-  - all Shopify-related context hooks from the `context.js` file
-  - all Shopify-related GROQs from the `api.js` file
-  - the `shopPage`, `collection`, and `product` switch cases from the `routes.js` file 
-- Within the `/modules` folder, remove:
-  - the `shop` folder
-  - all Shopify-related context hooks from the `shared/header.js` file
-- Within the `/pages` folder, remove `products` and `shop` folders
-- Within the `/pages/api` folder, remove `shopify` folder
-- Within the `_app.js` file, remove the `<Cart />` component and import
-- Within the `/studio` folder, remove all shopify-related schemas, desk structures, and actions
-- Remove all `SHOPIFY_*` env variables from `next.config.js`
-- Remove `shopify-buy` dependency from `package.json`
+I made a `marketing-starter` branch that is **HULL without all the Shopify logic**! The fastest way to get started is simply cloning that branch locally into an empty project folder:
+```
+git clone -b marketing-starter --single-branch git@github.com:ndimatteo/HULL.git .
+```
+
+You can read the [setup instructions](https://github.com/ndimatteo/HULL/tree/marketing-starter#-set-up) for this version from the branch's README.
+
 </details>
 
 <details>
