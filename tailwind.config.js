@@ -4,10 +4,10 @@ module.exports = {
   },
   purge: {
     content: [
-      './components/**/*.js',
-      './lib/**/*.js',
-      './modules/**/*.js',
-      './pages/**/*.js',
+      './components/**/*.{js,ts,jsx,tsx}',
+      './lib/**/*.{js,ts,jsx,tsx}',
+      './modules/**/*.{js,ts,jsx,tsx}',
+      './pages/**/*.{js,ts,jsx,tsx}',
     ],
     options: {
       safelist: [

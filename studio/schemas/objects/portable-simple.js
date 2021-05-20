@@ -15,7 +15,7 @@ export default {
       marks: {
         decorators: [
           { title: 'Strong', value: 'strong' },
-          { title: 'Emphasis', value: 'em' }
+          { title: 'Emphasis', value: 'em' },
         ],
         annotations: [
           {
@@ -23,7 +23,7 @@ export default {
             name: 'link',
             type: 'object',
             blockEditor: {
-              render: Button
+              render: Button,
             },
             fields: [
               {
@@ -35,23 +35,23 @@ export default {
                   { type: 'shopPage' },
                   { type: 'page' },
                   { type: 'collection' },
-                  { type: 'product' }
-                ]
+                  { type: 'product' },
+                ],
               },
               {
                 title: '(B) External URL',
                 name: 'url',
-                type: 'url'
+                type: 'url',
               },
               {
                 title: 'Style as Button?',
                 name: 'isButton',
-                type: 'boolean'
-              }
-            ]
-          }
-        ]
-      }
-    }
-  ]
+                type: 'boolean',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  ],
 }
