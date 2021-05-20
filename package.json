@@ -8,7 +8,9 @@
     "analyze": "cross-env ANALYZE=true next build",
     "analyze:server": "cross-env BUNDLE_ANALYZE=server next build",
     "analyze:browser": "cross-env BUNDLE_ANALYZE=browser next build",
-    "postinstall": "cd studio && npm install"
+    "postinstall": "cd studio && npm install",
+    "codegen": "sanity-codegen",
+    "typecheck": "tsc"
   },
   "sideEffects": false,
   "license": "MIT",
@@ -26,8 +28,10 @@
     "classnames": "^2.2.6",
     "contrast-color": "^1.0.1",
     "cross-env": "^7.0.3",
+    "decoders": "^1.23.5",
     "focus-trap-react": "^8.3.2",
     "framer-motion": "^4.0.3",
+    "groq": "^2.2.6",
     "js-cookie": "^2.2.1",
     "jsondiffpatch": "^0.4.1",
     "keen-slider": "^5.4.0",
@@ -50,11 +54,18 @@
     "use-intersection": "^0.2.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.2",
+    "@babel/preset-env": "^7.14.2",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@netlify/plugin-nextjs": "^3.3.0",
     "@next/bundle-analyzer": "^10.0.3",
     "@types/classnames": "^2.2.10",
     "@types/cookie": "^0.4.0",
+    "@types/js-cookie": "^2.2.6",
     "@types/node": "^14.14.16",
     "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.5",
     "@types/shopify-buy": "^2.10.5",
     "postcss": "^8.2.1",
     "postcss-custom-media": "^7.0.8",
@@ -63,6 +74,8 @@
     "postcss-mixins": "^6.2.3",
     "postcss-nested": "^4.2.3",
     "postcss-preset-env": "^6.7.0",
+    "prettier": "^2.3.0",
+    "sanity-codegen": "^0.9.3",
     "typescript": "^4.1.3"
   },
   "peerDependencies": {

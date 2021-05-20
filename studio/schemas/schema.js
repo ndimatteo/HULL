@@ -125,6 +125,6 @@ export default createSchema({
 
     accordion,
     figure,
-    horizontalRule
-  ])
+    horizontalRule,
+  ]),
 })
