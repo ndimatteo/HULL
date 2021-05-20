@@ -42,11 +42,10 @@ type ProductCounter = {
 
 const ProductCounter = React.memo(
   ({ id, defaultCount = 1, onUpdate, max = 10, className }: ProductCounter) => {
-    const [lineQuantity, setLineQuantity] = useState(defaultCount)
-
+    const [lineQuantity, setLineQuantity] = useState<number>(defaultCount)
     const [direction, setDirection] = useState<number>(1)
     const [motionKey, setMotionKey] = useState<number | string>(0)
-    const [isAnimating, setIsAnimating] = useState(false)
+    const [isAnimating, setIsAnimating] = useState<boolean>(false)
 
     const animateQuantity = useCallback(
       (amount, direction) => {
