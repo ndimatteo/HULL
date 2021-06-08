@@ -180,6 +180,8 @@ export default async function send(req, res) {
   // Check if the proudct exists in this sales channel (optional)
   const shopifyChannelProduct = await axios({
     url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/product_listings/${id}.json`,
+    method: 'GET',
+    headers: shopifyConfig,
   })
 
   console.log(shopifyChannelProduct)
