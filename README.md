@@ -132,6 +132,7 @@ Clone this repository from your GitHub account with the [Use this template](http
 ### 3) Shopify Webhooks
 1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
 2. add the following webhooks:
+  - product creation - `[your-domain]/api/shopify/product-update`
   - product update - `[your-domain]/api/shopify/product-update`
   - product deletion - `[your-domain]/api/shopify/product-delete`
 > ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You won't know your Vercel project domain until you deploy in a later step, just enter in what you think it will be for now!
