@@ -177,15 +177,6 @@ export default async function send(req, res) {
     headers: shopifyConfig,
   })
 
-  // Check if the proudct exists in this sales channel (optional)
-  const shopifyChannelProduct = await axios({
-    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/product_listings/${id}.json`,
-    method: 'GET',
-    headers: shopifyConfig,
-  })
-
-  console.log(shopifyChannelProduct)
-
   // See if our metafield exists
   const previousSync = shopifyProduct.data?.metafields.find(
     (mf) => mf.key === 'product_sync'
