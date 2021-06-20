@@ -40,7 +40,7 @@
 - Automatic `Sitemap.xml` generation
 - Automatic `robots.txt` generation
 - Automatic 301 Redirects from Sanity
-- Live Preview content directly from Sanity
+- Live Preview content directly from Sanity (Click `Preview` in the dropdown next to the `Publish` button to activate)
 - Modern Image component using Sanity's Hotspot, Crop, and automatic WEBP format
 - Modular page content for all pages, including dynamic grid layouts
 - Customizable Promotion Banner
