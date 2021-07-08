@@ -1,7 +1,8 @@
 import { GetServerSideProps } from 'next'
 import { SitemapStream, streamToPromise } from 'sitemap'
 import { createGzip } from 'zlib'
-import { getAllDocSlugs } from '@lib/api'
+
+import { getAllDocSlugs } from '@data'
 
 const Sitemap = () => {
   return (

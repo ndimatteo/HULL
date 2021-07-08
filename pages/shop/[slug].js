@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from '@components/layout'
-import { getAllDocSlugs, getCollection } from '@lib/api'
+import { getCollection, getAllDocSlugs } from '@data'
 
-import { Module } from '@modules/index'
+import Layout from '@components/layout'
+import { Module } from '@components/modules'
 
 const CollectionPage = ({ data }) => {
   const { site, page } = data

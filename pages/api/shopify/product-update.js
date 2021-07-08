@@ -1,6 +1,7 @@
 import axios from 'axios'
 import sanityClient from '@sanity/client'
 import crypto from 'crypto'
+import { nanoid } from 'nanoid'
 const getRawBody = require('raw-body')
 const jsondiffpatch = require('jsondiffpatch')
 
@@ -248,6 +249,19 @@ export default async function send(req, res) {
   // patch (update) title & slug if none has been set
   stx = stx.patch(`product-${id}`, (patch) =>
     patch.setIfMissing({ title: title })
+  )
+
+  // patch (update) productHero module if none has been set
+  stx = stx.patch(`product-${id}`, (patch) =>
+    patch.setIfMissing({
+      modules: [
+        {
+          _key: nanoid(),
+          _type: 'productHero',
+          active: true,
+        },
+      ],
+    })
   )
 
   // create variant if doesn't exist & patch (update) variant with core shopify data

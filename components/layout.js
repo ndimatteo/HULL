@@ -5,27 +5,9 @@ import { imageBuilder } from '@lib/sanity'
 
 import { isBrowser, useWindowSize } from '@lib/helpers'
 
-import generateSchema from '@lib/schema'
-
-import CookieBar from '@modules/shared/cookie-bar'
-import Header from '@modules/shared/header'
-import Footer from '@modules/shared/footer'
-
-if (isBrowser) {
-  console.groupCollapsed(
-    '%c💀 Site Credits',
-    'display:block;padding:0.125em 1em;font-family:courier;font-size:14px;font-weight:bold;line-height:2;text-transform:uppercase;background:black;color:white;'
-  )
-  console.log(
-    '%cDesign by Nick DiMatteo \n– https://nickdimatteo.com',
-    'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
-  )
-  console.log(
-    '%cWeb Development by Nick DiMatteo \n– https://nickdimatteo.com',
-    'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
-  )
-  console.groupEnd()
-}
+import CookieBar from '@components/cookie-bar'
+import Header from '@components/header'
+import Footer from '@components/footer'
 
 const duration = 0.4
 const variants = {
@@ -92,7 +74,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
         )}
 
         <link rel="preconnect" href="https://hull-demo.myshopify.com" />
-        <link rel="preconnect" href="https://cdn.sanity.io" crossorigin />
+        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
 
         <title>{metaTitle}</title>
         {metaDesc && <meta name="description" content={metaDesc} />}
@@ -137,7 +119,12 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
         {siteTitle && <meta name="og:site_name" content={siteTitle} />}
 
-        {schema && generateSchema(schema)}
+        {schema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        )}
       </Head>
 
       <CookieBar data={site.cookieConsent} />

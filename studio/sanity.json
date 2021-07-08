@@ -59,7 +59,7 @@
     },
     {
       "implements": "part:@sanity/form-builder/input-resolver",
-      "path": "./parts/input-resolver.js"
+      "path": "./parts/resolve-input.js"
     }
   ]
 }

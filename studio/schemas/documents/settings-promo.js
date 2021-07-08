@@ -28,9 +28,8 @@ export default {
       name: 'link',
       type: 'reference',
       to: [
-        { type: 'homePage' },
-        { type: 'shopPage' },
         { type: 'page' },
+        { type: 'shopPage' },
         { type: 'collection' },
         { type: 'product' }
       ],

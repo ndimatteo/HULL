@@ -1,7 +1,12 @@
+import { FiLink2 } from 'react-icons/fi'
+
+import { getStaticRoute, getDynamicRoute } from '../../lib/helpers'
+
 export default {
   title: 'Page',
   name: 'navPage',
   type: 'object',
+  icon: FiLink2,
   fields: [
     {
       title: 'Title',
@@ -14,12 +19,33 @@ export default {
       name: 'page',
       type: 'reference',
       to: [
-        { type: 'homePage' },
-        { type: 'shopPage' },
         { type: 'page' },
+        { type: 'shopPage' },
         { type: 'collection' },
         { type: 'product' }
       ]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      pageType: 'page._type',
+      pageSlug: 'page.slug.current'
+    },
+    prepare({ title, pageType, pageSlug }) {
+      console.log(pageType)
+      console.log(pageSlug)
+
+      const isStatic = getStaticRoute(pageType)
+      const isDynamic = getDynamicRoute(pageType)
+
+      return {
+        title: title,
+        subtitle:
+          isStatic !== false
+            ? `/${isStatic}`
+            : `/${isDynamic ? `${isDynamic}/` : ''}${pageSlug}`
+      }
+    }
+  }
 }

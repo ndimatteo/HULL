@@ -2,6 +2,8 @@ import { FiStar } from 'react-icons/fi'
 
 import ConditionalFields from '../../components/conditional-field'
 
+import customImage from '../../lib/custom-image'
+
 export default {
   title: 'Hero',
   name: 'hero',
@@ -30,16 +32,14 @@ export default {
       type: 'object',
       inputComponent: ConditionalFields,
       fields: [
-        {
+        customImage({
           title: 'Background Photo (mobile)',
-          name: 'mobilePhoto',
-          type: 'figure'
-        },
-        {
+          name: 'mobilePhoto'
+        }),
+        customImage({
           title: 'Background Photo (desktop)',
-          name: 'desktopPhoto',
-          type: 'figure'
-        }
+          name: 'desktopPhoto'
+        })
       ],
       options: {
         condition: (document, context) => context().bgType === 'photo'

@@ -16,19 +16,18 @@
 @import "components/_drawers";
 @import "components/_dropdowns";
 @import "components/_marquees";
-
-@import "modules/_cookie-bar";
-@import "modules/_promo-banner";
-@import "modules/_header";
-@import "modules/_mega-nav";
-@import "modules/_footer";
-@import "modules/_cart";
+@import "components/_cookie-bar";
+@import "components/_promo-banner";
+@import "components/_header";
+@import "components/_mega-nav";
+@import "components/_footer";
+@import "components/_cart";
+@import "components/_theme-switch";
 
 @import "modules/_hero";
 @import "modules/_divider";
 @import "modules/_collection";
 @import "modules/_product";
-@import "modules/_theme-switch";
 
 @import "_shame";
 

@@ -7,10 +7,28 @@ import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
+import { isBrowser } from '@lib/helpers'
+
 import { SiteContextProvider } from '@lib/context'
 
-import { isBrowser } from '@lib/helpers'
-import Cart from '@modules/shop/cart'
+import Cart from '@components/cart'
+
+// Console Credits
+if (isBrowser) {
+  console.groupCollapsed(
+    '%c💀 Site Credits',
+    'display:block;padding:0.125em 1em;font-family:courier;font-size:14px;font-weight:bold;line-height:2;text-transform:uppercase;background:black;color:white;'
+  )
+  console.log(
+    '%cDesign by Nick DiMatteo \n– https://nickdimatteo.com',
+    'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
+  )
+  console.log(
+    '%cWeb Development by Nick DiMatteo \n– https://nickdimatteo.com',
+    'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
+  )
+  console.groupEnd()
+}
 
 const MyApp = ({ Component, pageProps, router }) => {
   const [isLoading, setLoading] = useState(false)
@@ -41,8 +59,8 @@ const MyApp = ({ Component, pageProps, router }) => {
       setLoading(true)
     })
 
-    Router.events.on('routeChangeComplete', () => {
-      setTimeout(() => setLoading(false), 400) // accounts for page transition
+    Router.events.on('routeChangeComplete', (url) => {
+      setTimeout(() => setLoading(false), 400) // accounts for page transition time
     })
 
     Router.events.on('routeChangeError', () => {
@@ -68,7 +86,7 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [])
 
   return (
-    <ThemeProvider disableTransitionOnChange>
+    <ThemeProvider enableSystem={false} disableTransitionOnChange>
       <SiteContextProvider data={{ ...pageProps?.data?.site }}>
         <LazyMotion features={domAnimation}>
           {isLoading && (

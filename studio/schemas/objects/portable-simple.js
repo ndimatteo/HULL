@@ -31,9 +31,8 @@ export default {
                 name: 'page',
                 type: 'reference',
                 to: [
-                  { type: 'homePage' },
-                  { type: 'shopPage' },
                   { type: 'page' },
+                  { type: 'shopPage' },
                   { type: 'collection' },
                   { type: 'product' }
                 ]
@@ -46,7 +45,8 @@ export default {
               {
                 title: 'Style as Button?',
                 name: 'isButton',
-                type: 'boolean'
+                type: 'boolean',
+                initialValue: false
               }
             ]
           }

@@ -9,7 +9,8 @@ export default {
     {
       title: 'Display Product Hero?',
       name: 'active',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: true
     }
   ],
   preview: {

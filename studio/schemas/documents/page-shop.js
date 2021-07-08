@@ -27,6 +27,8 @@ export default {
       ],
       validation: Rule =>
         Rule.custom(blocks => {
+          if (!blocks) return true
+
           const collectionGrids = blocks.filter(
             block => block._type === 'collectionGrid'
           )
@@ -68,7 +70,7 @@ export default {
   preview: {
     prepare() {
       return {
-        title: 'Shop Page'
+        title: 'Shop All Page'
       }
     }
   }

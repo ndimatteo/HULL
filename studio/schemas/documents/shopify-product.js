@@ -15,7 +15,8 @@ export default {
     {
       title: 'Product Cards',
       name: 'cards',
-      description: 'These settings are for product listings and carts',
+      description:
+        'Define how this product should appear on collection pages and the cart',
       options: { columns: 2 }
     }
   ],
@@ -131,7 +132,7 @@ export default {
       name: 'useGallery',
       type: 'string',
       description:
-        'Display an inline gallery, instead of a thumbnail for listings',
+        'Display an inline gallery instead of thumbnails for this product on Collection pages',
       options: {
         list: [
           { title: 'Yes', value: 'true' },
@@ -187,6 +188,8 @@ export default {
       ],
       validation: Rule =>
         Rule.custom(blocks => {
+          if (!blocks) return true
+
           const productHeros = blocks.filter(
             block => block._type === 'productHero'
           )

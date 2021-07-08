@@ -1,35 +1,23 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { m } from 'framer-motion'
 import cx from 'classnames'
 
-const Accordion = ({ toggle, onChange, id, title, children }) => {
-  const [isOpen, setIsOpen] = useState(toggle)
+const accordionAnim = {
+  open: {
+    opacity: 1,
+    height: 'auto',
+  },
+  closed: {
+    opacity: 0,
+    height: 0,
+  },
+}
 
-  const accordionAnim = {
-    open: {
-      opacity: 1,
-      height: 'auto',
-    },
-    closed: {
-      opacity: 0,
-      height: 0,
-    },
-  }
-
-  useEffect(() => {
-    setIsOpen(toggle)
-  }, [toggle])
-
-  useEffect(() => {
-    if (onChange) {
-      onChange(id, open)
-    }
-  }, [isOpen])
-
+const Accordion = ({ id, isOpen = false, onToggle, title, children }) => {
   return (
     <div key={id} className="accordion">
       <button
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => onToggle(id, !isOpen)}
         aria-expanded={isOpen ? 'true' : 'false'}
         aria-controls={`accordion-${id}`}
         className={cx('accordion--toggle', { 'is-open': isOpen })}

@@ -1,5 +1,7 @@
 import { FiLayers } from 'react-icons/fi'
 
+import customImage from '../../lib/custom-image'
+
 export default {
   title: 'Cart Photos',
   name: 'productCartPhotos',
@@ -20,11 +22,10 @@ export default {
         }
       }
     },
-    {
+    customImage({
       title: 'Thumbnail',
-      name: 'cartPhoto',
-      type: 'figure'
-    }
+      name: 'cartPhoto'
+    })
   ],
   preview: {
     select: {

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from '@components/layout'
-import { getStaticPage, modules, allProducts } from '@lib/api'
+import { getStaticPage, queries } from '@data'
 
-import { Module } from '@modules/index'
+import Layout from '@components/layout'
+import { Module } from '@components/modules'
 
 const Shop = ({ data }) => {
   const { site, page } = data
@@ -28,9 +28,9 @@ export async function getStaticProps({ preview, previewData }) {
     *[_type == "shopPage"] | order(_updatedAt desc)[0]{
       hasTransparentHeader,
       modules[]{
-        ${modules}
+        ${queries.modules}
       },
-      "products": ${allProducts(preview)},
+      "products": ${queries.allProducts(preview)},
       "featuredProducts": featuredProducts[]->productID,
       seo
     }

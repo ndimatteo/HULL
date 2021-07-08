@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from '@components/layout'
-import { getStaticPage, modules } from '@lib/api'
+import { getStaticPage, queries } from '@data'
 
-import { Module } from '@modules/index'
+import Layout from '@components/layout'
+import { Module } from '@components/modules'
 
 const Home = ({ data }) => {
   const { site, page } = data
@@ -20,10 +20,10 @@ const Home = ({ data }) => {
 export async function getStaticProps({ preview, previewData }) {
   const pageData = await getStaticPage(
     `
-    *[_type == "homePage"] | order(_updatedAt desc)[0]{
+    *[_type == "page" && _id == ${queries.homeID}] | order(_updatedAt desc)[0]{
       hasTransparentHeader,
       modules[]{
-        ${modules}
+        ${queries.modules}
       },
       seo
     }

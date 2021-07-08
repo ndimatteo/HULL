@@ -7,8 +7,9 @@ import {
   Header4,
   Button
 } from '../../components/block-renders'
-
 import ConditionalFields from '../../components/conditional-field'
+
+import customImage from '../../lib/custom-image'
 
 export default {
   title: 'Rich Text',
@@ -97,9 +98,8 @@ export default {
                 name: 'page',
                 type: 'reference',
                 to: [
-                  { type: 'homePage' },
-                  { type: 'shopPage' },
                   { type: 'page' },
+                  { type: 'shopPage' },
                   { type: 'collection' },
                   { type: 'product' }
                 ]
@@ -112,7 +112,8 @@ export default {
               {
                 title: 'Style as Button?',
                 name: 'isButton',
-                type: 'boolean'
+                type: 'boolean',
+                initialValue: false
               },
               {
                 name: 'styles',
@@ -150,7 +151,7 @@ export default {
                   }
                 ],
                 options: {
-                  condition: (document, context) => context().isButton === true
+                  condition: (_, context) => context().isButton === true
                 }
               }
             ]
@@ -158,9 +159,7 @@ export default {
         ]
       }
     },
-    {
-      type: 'figure'
-    },
+    customImage(),
     {
       type: 'horizontalRule'
     }

@@ -1,5 +1,7 @@
 import { FiLayers } from 'react-icons/fi'
 
+import customImage from '../../lib/custom-image'
+
 export default {
   title: 'Gallery',
   name: 'productGalleryPhotos',
@@ -24,7 +26,7 @@ export default {
       title: 'Gallery Photo(s)',
       name: 'photos',
       type: 'array',
-      of: [{ type: 'figure' }],
+      of: [customImage()],
       options: {
         layout: 'grid'
       }

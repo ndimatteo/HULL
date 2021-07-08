@@ -15,10 +15,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "paths": {
-      "@blocks/*": ["blocks/*"],
-      "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
-      "@modules/*": ["modules/*"],
+      "@data": ["data/index"],
+      "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
     },
   },

@@ -40,11 +40,14 @@ const Link = ({ link, children, ...rest }) => {
     // Internal Page
   } else {
     const isDynamic = getDynamicRoute(link.page?.type)
+    const isHome = link.page?.isHome
 
     return (
       <NextLink
         href={
-          isStatic !== false
+          isHome
+            ? '/'
+            : isStatic !== false
             ? `/${isStatic}`
             : `/${isDynamic ? `${isDynamic}/` : ''}${link.page?.slug}`
         }
