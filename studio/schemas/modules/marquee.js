@@ -1,5 +1,7 @@
 import { FiRepeat } from 'react-icons/fi'
 
+import customImage from '../../lib/custom-image'
+
 export default {
   title: 'Marquee',
   name: 'marquee',
@@ -41,11 +43,7 @@ export default {
             }
           }
         },
-        {
-          title: 'Photo',
-          name: 'photo',
-          type: 'figure'
-        },
+        customImage(),
         {
           title: 'Product',
           name: 'product',
@@ -60,6 +58,7 @@ export default {
       name: 'speed',
       type: 'number',
       description: 'Pick a number between 0-1 (0.5 is the default)',
+      initialValue: 0.5,
       validation: Rule =>
         Rule.min(0)
           .max(1)
@@ -69,12 +68,14 @@ export default {
       title: 'Reverse direction?',
       name: 'reverse',
       type: 'boolean',
+      initialValue: false,
       fieldset: 'options'
     },
     {
       title: 'Pause on hover?',
       name: 'pausable',
       type: 'boolean',
+      initialValue: false,
       fieldset: 'options'
     }
   ],

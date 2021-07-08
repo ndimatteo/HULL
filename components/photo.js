@@ -8,7 +8,7 @@ const Photo = ({
   photo,
   width,
   height,
-  srcSizes = [400, 800, 1000],
+  srcSizes = [400, 600, 800, 1000, 1200],
   sizes = '(min-width: 940px) 50vw, 100vw',
   layout = 'intrinsic',
   quality = 80,
@@ -17,7 +17,7 @@ const Photo = ({
   onLoad,
   className,
 }) => {
-  if (!photo) return null
+  if (!photo?.asset) return null
 
   const imageRef = useRef()
   const [isLoaded, setIsLoaded] = useState(false)

@@ -1,9 +1,9 @@
 import React from 'react'
 
-import Layout from '@components/layout'
-import { getStaticPage, modules } from '@lib/api'
+import { getStaticPage, queries } from '@data'
 
-import { Module } from '@modules/index'
+import Layout from '@components/layout'
+import { Module } from '@components/modules'
 
 const ErrorPage = ({ data }) => {
   const { site, menus, page } = data
@@ -26,9 +26,9 @@ const ErrorPage = ({ data }) => {
 export async function getStaticProps({ preview, previewData }) {
   const pageData = await getStaticPage(
     `
-    *[_type == "errorPage"] | order(_updatedAt desc)[0]{
+    *[_type == "page" && _id == ${queries.errorID}] | order(_updatedAt desc)[0]{
       modules[]{
-        ${modules}
+        ${queries.modules}
       },
       seo
     }

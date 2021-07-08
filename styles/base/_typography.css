@@ -1,6 +1,6 @@
-@layer base {
-  /* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap'); */
+@tailwind base;
 
+@layer base {
   html,
   body {
     -webkit-tap-highlight-color: transparent;
@@ -10,11 +10,6 @@
 
   body {
     @apply bg-pageBG text-pageText font-sans leading-none;
-    font-size: 14px;
-
-    @media (--md) {
-      font-size: 16px;
-    }
   }
 
   p {

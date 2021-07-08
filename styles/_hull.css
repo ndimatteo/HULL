@@ -1,11 +1,3 @@
-/* ----- Mixins ----- */
-
-.is-hashed {
-  background-image: repeating-linear-gradient(-45deg, hsla(var(--pageText-hsl), .5) 0, hsla(var(--pageText-hsl), .5) 1px, transparent 0, transparent 50%);
-  background-size: 8px 8px;
-  background-repeat: repeat;
-}
-
 /* ----- Buttons -----*/
 
 .btn {
@@ -13,7 +5,7 @@
   @apply inline-block relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
 
   /* default: hover */
-  &:not(.is-primary):not(.is-white):not(.is-disabled):not(.is-soldout) {
+  &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout) {
     &.is-active,
     &:hover {
       @apply bg-pageText border-pageText text-pageBG;
@@ -21,10 +13,11 @@
   }
 
   /* default: inverted */
-  &.is-inverted {
+  &.is-inverted,
+  .is-inverted & {
     @apply bg-pageText border-pageBG text-pageBG;
 
-    &:not(.is-primary):not(.is-white):not(.is-disabled):not(.is-soldout) {
+    &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout) {
       &.is-active,
       &:hover {
         @apply bg-pageBG border-pageBG text-pageText;
@@ -44,7 +37,8 @@
     @apply bg-pageText border-pageText text-pageBG;
 
     /* primary: inverted */
-    &.is-inverted {
+    &.is-inverted,
+    .is-inverted & {
       @apply bg-pageBG border-pageBG text-pageText;
     }
   }

@@ -1,4 +1,4 @@
-import { FiGrid } from 'react-icons/fi'
+import { FiAlignLeft } from 'react-icons/fi'
 
 const getBlockNames = types => {
   const typeNames = types.map(type => {
@@ -21,7 +21,7 @@ export default {
   title: 'Content Grid',
   name: 'grid',
   type: 'object',
-  icon: FiGrid,
+  icon: FiAlignLeft,
   fields: [
     {
       title: 'Grid Size',
@@ -60,7 +60,7 @@ export default {
       const name = getBlockNames(columns.map(col => col.blocks[0]._type))
 
       const image = (columns[0].blocks[0].content || []).find(
-        block => block._type === 'figure'
+        block => block._type === 'photo'
       )
 
       return {

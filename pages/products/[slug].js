@@ -3,12 +3,13 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import useSWR from 'swr'
 
+import { getProduct, getAllDocSlugs } from '@data'
+
 import Error from '@pages/404'
 import Layout from '@components/layout'
-import { getAllDocSlugs, getProduct } from '@lib/api'
-import { centsToPrice, hasObject } from '@lib/helpers'
+import { Module } from '@components/modules'
 
-import { Module } from '@modules/index'
+import { centsToPrice, hasObject } from '@lib/helpers'
 
 // setup our activeVariant hook
 function useActiveVariant({ fallback, variants }) {

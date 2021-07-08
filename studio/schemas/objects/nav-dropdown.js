@@ -1,9 +1,10 @@
-import { FiAlertCircle } from 'react-icons/fi'
+import { FiCornerRightDown, FiAlertCircle } from 'react-icons/fi'
 
 export default {
   title: 'Dropdown',
   name: 'navDropdown',
   type: 'object',
+  icon: FiCornerRightDown,
   fields: [
     {
       title: 'Title',

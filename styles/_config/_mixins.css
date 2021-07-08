@@ -1,24 +1,28 @@
-.clean-btn {
-  @apply appearance-none no-underline cursor-pointer font-inherit;
-}
+@tailwind components;
 
-.sr-only {
-  @apply absolute m-0 p-0 border-0 w-px h-px overflow-hidden whitespace-nowrap;
-  clip: rect(1px, 1px, 1px, 1px);
-  clip-path: inset(50%);
-}
+@layer components {
+  .clean-btn {
+    @apply appearance-none no-underline cursor-pointer font-inherit;
+  }
 
-.is-textured {
-  background-image: radial-gradient(var(--pageText) 9%, transparent 9%), radial-gradient(var(--pageText) 9%, transparent 9%);
-  background-position: 0 0, 8px 8px;
-  background-size: 16px 16px;
-}
+  .sr-only {
+    @apply absolute m-0 p-0 border-0 w-px h-px overflow-hidden whitespace-nowrap;
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+  }
 
-.is-textured-dark {
-  background-color: var(--pageText);
-  background-image: radial-gradient(var(--pageBG) 9%, transparent 9%), radial-gradient(var(--pageBG) 9%, transparent 9%);
-  background-position: 0 0, 8px 8px;
-  background-size: 16px 16px;
+  .is-textured {
+    background-image: radial-gradient(var(--pageText) 9%, transparent 9%), radial-gradient(var(--pageText) 9%, transparent 9%);
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+  }
+
+  .is-textured-dark {
+    background-color: var(--pageText);
+    background-image: radial-gradient(var(--pageBG) 9%, transparent 9%), radial-gradient(var(--pageBG) 9%, transparent 9%);
+    background-position: 0 0, 8px 8px;
+    background-size: 16px 16px;
+  }
 }
 
 @keyframes pulse {

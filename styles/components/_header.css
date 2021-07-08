@@ -1,0 +1,263 @@
+a[href="#content"].skip-link {
+  @apply block fixed top-0 left-1/2 transform -translate-x-1/2 -translate-y-full z-90 px-2 py-1 bg-pageBG text-pageText text-xs font-semibold uppercase;
+
+  &:focus {
+    @apply translate-y-0 outline-none;
+  }
+}
+
+.header {
+  @apply sticky top-0 inset-x-0 z-50;
+
+  &.is-overlay {
+    @apply h-0;
+  }
+
+  &--outer {
+    @apply relative;
+  }
+  
+  &--inner {
+    @apply relative z-20 p-1 sm:p-4 bg-pageBG;
+
+    .is-overlay & {
+      @apply bg-transparent transition-colors duration-300;
+    }
+
+    .has-bg & {
+      @apply bg-pageBG;
+    }
+
+    .is-white & {
+      @apply text-white delay-75;
+    }
+  }
+  
+  &--content {
+    @apply flex flex-col items-center relative z-30;
+  }
+
+  &--border {
+    @apply absolute inset-x-0 bottom-0 z-20 border-t;
+    transition: opacity 0s .6s linear;
+
+    .is-white & {
+      @apply border-white;
+      transition-duration: .2s;
+      transition-delay: 0s;
+      /* &:not(.is-hidden) {
+        transition-delay: 0s;
+      } */
+    }
+
+    &.is-hidden {
+      @apply opacity-0;
+      transition-delay: 0s;
+    }
+  }
+
+  &--observer {
+    @apply absolute top-8;
+  }
+}
+
+.logo {
+  @apply flex flex-col relative z-10;
+
+  &--link {
+    @apply clean-btn block p-2 bg-transparent;
+
+    svg {
+      @apply block fill-current w-auto h-12;
+    }
+  }
+}
+
+.menu-toggle {
+  @apply sm:hidden absolute inset-y-0 left-0 z-60 clean-btn p-4 bg-transparent;
+
+  .is-overlay:not(.has-bg) & {
+    @apply transition-colors duration-300;
+  }
+
+  &.is-open {
+    @apply text-pageText;
+  }
+}
+
+.hamburger {
+  @apply relative flex flex-col items-center justify-center mx-auto w-7;
+
+  &::before,
+  &::after {
+    @apply block relative w-full h-0 border-t;
+    content: "";
+    margin: 6px 0;
+    transition: opacity 0s .2s linear, transform .2s .2s ease-out;
+
+    .is-open & {
+      @apply opacity-0;
+      transition: opacity 0s .2s linear, transform .2s ease-out;
+    }
+  }
+
+  &::before {
+    .is-open & {
+      transform: translateY(5px);
+    }
+  }
+
+  &::after {
+    .is-open & {
+      transform: translateY(-5px);
+    }
+  }
+
+  &--icon {
+    @apply block relative w-full h-0 border-t;
+    transition: border 0s .2s linear;
+
+    .is-open & {
+      @apply border-transparent;
+    }
+
+    &::before,
+    &::after {
+      @apply block absolute w-full h-0 border-t opacity-0;
+      content: "";
+      top: calc(50% - .5px);
+      transition: opacity 0s .2s, transform .2s ease-out;
+
+      .is-open & {
+        @apply opacity-100;
+        transition: transform .2s .2s ease-out;
+      }
+    }
+
+    &::before {
+      .is-open & {
+        transform: rotate(45deg);
+      }
+    }
+
+    &::after {
+      .is-open & {
+        transform: rotate(-45deg);
+      }
+    }
+  }
+}
+
+.cart-toggle {
+  @apply clean-btn flex items-center relative bg-transparent -mr-2 p-2 font-semibold uppercase;
+  font: inherit;
+
+  &--count {
+    @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG opacity-30 text-xs leading-loose;
+
+    &.is-active {
+      @apply opacity-100;
+    }
+  }
+}
+
+.main-navigation {
+  &--desktop {
+    @apply hidden sm:flex justify-between items-center absolute inset-0;
+
+    .menu-left,
+    .menu-right {
+      @apply flex items-center;
+    }
+
+    ul {
+      @apply flex;
+
+      li {
+        @apply mx-2;
+      }
+
+      button {
+        @apply clean-btn bg-transparent;
+        font: inherit;
+      }
+
+      a,
+      button {
+        @apply block p-2 text-sm leading-normal font-semibold uppercase;
+      }
+    }
+  }
+
+  &--mobile {
+    @apply sm:hidden flex justify-end items-center absolute inset-0;
+
+    .menu-mobile {
+      @apply fixed top-0 left-0 w-full h-screen z-50 flex flex-col bg-pageBG text-pageText;
+      height: calc(var(--vh, 1vh) * 100);
+      max-width: 420px;
+      will-change: transform;
+
+      @media (min-width: 421px) {
+        border-right-width: 1px;
+      }
+
+      &--backdrop {
+        @apply fixed inset-0 z-40 bg-black bg-opacity-40 pointer-events-none opacity-0;
+        transition: opacity .15s linear;
+
+        &.is-active {
+          @apply pointer-events-auto opacity-100;
+          backdrop-filter: blur(6px);
+        }
+      }
+
+      &--inner {
+        @apply flex-1 flex flex-col overflow-y-scroll px-4 pb-4;
+        padding-top: calc(var(--headerHeight, 10rem) + 1.5rem);
+      }
+
+      button {
+        @apply clean-btn bg-transparent;
+        font: inherit;
+      }
+
+      a,
+      button {
+        @apply block p-0;
+      }
+
+      &--primary {
+        ul {
+          @apply flex flex-col;
+        }
+
+        a,
+        button {
+          @apply text-4xl leading-normal;
+        }
+      }
+
+      &--secondary {
+        @apply pt-8;
+
+        ul {
+          @apply flex flex-col;
+        }
+
+        a,
+        button {
+          @apply text-xl leading-normal;
+        }
+      }
+
+      &--featured {
+        @apply flex;
+      }
+    }
+  }
+
+  .cart-toggle {
+    @apply mx-2 p-2 text-sm leading-normal font-semibold uppercase;
+  }
+}

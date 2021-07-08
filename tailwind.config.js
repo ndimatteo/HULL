@@ -2,14 +2,18 @@ module.exports = {
   corePlugins: {
     preflight: false,
   },
+  mode: 'jit',
   purge: {
     content: [
+      './blocks/**/*.js',
       './components/**/*.js',
       './lib/**/*.js',
       './modules/**/*.js',
       './pages/**/*.js',
+      './tailwind.safelist.txt',
     ],
     options: {
+      // Note: safelist is not utlized in JIT mode, use tailwind.safelist.txt instead
       safelist: [
         /^grid-cols-/,
         /^xs:grid-cols-/,

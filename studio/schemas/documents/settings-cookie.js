@@ -15,6 +15,12 @@ export default {
       }
     },
     {
+      title: 'Enabled?',
+      name: 'enabled',
+      type: 'boolean',
+      description: 'Control the display of the cookie consent notice.'
+    },
+    {
       title: 'Message',
       name: 'message',
       type: 'text',
@@ -26,9 +32,8 @@ export default {
       name: 'link',
       type: 'reference',
       to: [
-        { type: 'homePage' },
-        { type: 'shopPage' },
         { type: 'page' },
+        { type: 'shopPage' },
         { type: 'collection' },
         { type: 'product' }
       ],

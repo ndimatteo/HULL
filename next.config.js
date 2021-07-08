@@ -29,9 +29,6 @@ async function fetchSanityRedirects() {
 }
 
 module.exports = withBundleAnalyzer({
-  future: {
-    webpack5: true,
-  },
   env: {
     // Needed for Sanity powered data
     SANITY_PROJECT_DATASET: process.env.SANITY_PROJECT_DATASET,
@@ -55,6 +52,9 @@ module.exports = withBundleAnalyzer({
 
     // Needed for SendGrid forms
     SENDGRID_API_KEY: process.env.SENDGRID_API_KEY,
+
+    // Needed for Google Tag Manager
+    GTM_ID: process.env.GTM_ID,
   },
   async redirects() {
     const sanityRedirects = await fetchSanityRedirects()

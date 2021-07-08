@@ -52,6 +52,10 @@
 
       .btn {
         @apply sm:px-0 sm:border-0 sm:bg-transparent sm:text-pageText;
+
+        &.is-disabled {
+          @apply opacity-60;
+        }
       }
     }
   }

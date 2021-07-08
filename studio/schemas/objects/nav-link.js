@@ -1,7 +1,10 @@
+import { FiExternalLink } from 'react-icons/fi'
+
 export default {
   title: 'Link',
   name: 'navLink',
   type: 'object',
+  icon: FiExternalLink,
   fields: [
     {
       title: 'Title',
@@ -15,5 +18,17 @@ export default {
       type: 'url',
       description: 'enter an external URL'
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      url: 'url'
+    },
+    prepare({ title, url }) {
+      return {
+        title: title,
+        subtitle: url
+      }
+    }
+  }
 }

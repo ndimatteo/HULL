@@ -2,9 +2,9 @@
   @apply relative z-10;
 
   &.is-open {
-    @media (--sm) {
-      @apply z-30;
-
+    @apply sm:z-30;
+    
+    @screen sm {
       .dropdown--content {
         @apply opacity-100 visible pointer-events-auto;
       }
@@ -21,9 +21,9 @@
 
   &--content {
     @apply relative h-0 overflow-y-hidden;
+    @apply sm:absolute sm:top-full sm:whitespace-nowrap sm:overflow-y-visible sm:opacity-0 sm:invisible sm:pointer-events-none sm:transition-all;
 
-    @media (--sm) {
-      @apply absolute top-full whitespace-nowrap overflow-y-visible opacity-0 invisible pointer-events-none transition-all;
+    @screen sm {
       height: auto !important; /* override mobile accordion styles */
     }
   }

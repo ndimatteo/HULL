@@ -2,9 +2,7 @@ import createSchema from 'part:@sanity/base/schema-creator'
 import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // Document types
-import homePage from './documents/page-home'
 import shopPage from './documents/page-shop'
-import errorPage from './documents/page-error'
 import page from './documents/page'
 import product from './documents/shopify-product'
 import productVariant from './documents/shopify-variant'
@@ -22,8 +20,6 @@ import redirect from './documents/redirect'
 
 // Module types
 import grid from './modules/grid'
-import gridColumn from './modules/grid-column'
-import gridSize from './modules/grid-size'
 import hero from './modules/hero'
 import marquee from './modules/marquee'
 import dividerPhoto from './modules/divider-photo'
@@ -31,12 +27,9 @@ import newsletter from './modules/newsletter'
 import productHero from './modules/product-hero'
 import collectionGrid from './modules/collection-grid'
 
-// Block types
-import freeform from './blocks/freeform'
-import accordions from './blocks/accordions'
-import productCard from './blocks/product-card'
-
 // Object types
+import gridColumn from './objects/grid-column'
+import gridSize from './objects/grid-size'
 import seo from './objects/seo'
 
 import productGalleryPhotos from './objects/product-gallery-photos'
@@ -50,13 +43,15 @@ import navDropdown from './objects/nav-dropdown'
 import navPage from './objects/nav-page'
 import navLink from './objects/nav-link'
 import socialLink from './objects/social-link'
+import horizontalRule from './objects/horizontal-rule'
 
 import simplePortableText from './objects/portable-simple'
 import complexPortableText from './objects/portable-complex'
 
+import freeform from './objects/freeform'
+import accordions from './objects/accordions'
 import accordion from './objects/accordion'
-import figure from './objects/figure'
-import horizontalRule from './objects/horizontal-rule'
+import productCard from './objects/product-card'
 
 /*  ------------------------------------------ */
 /*  Your Schema documents / modules / objects
@@ -68,9 +63,7 @@ export default createSchema({
   types: schemaTypes.concat([
     /* ----------------- */
     /* 1: Document types */
-    homePage,
     shopPage,
-    errorPage,
     page,
     product,
     productVariant,
@@ -89,8 +82,6 @@ export default createSchema({
     /* --------------- */
     /* 2: Module types */
     grid,
-    gridColumn,
-    gridSize,
     hero,
     marquee,
     dividerPhoto,
@@ -98,14 +89,10 @@ export default createSchema({
     productHero,
     collectionGrid,
 
-    /* -------------- */
-    /* 3: Block types */
-    freeform,
-    accordions,
-    productCard,
-
     /* ----------------------- */
-    /* 4: Generic Object types */
+    /* 3: Generic Object types */
+    gridColumn,
+    gridSize,
     seo,
 
     productGalleryPhotos,
@@ -119,12 +106,14 @@ export default createSchema({
     navPage,
     navLink,
     socialLink,
+    horizontalRule,
 
     simplePortableText,
     complexPortableText,
 
+    freeform,
+    accordions,
     accordion,
-    figure,
-    horizontalRule
+    productCard
   ])
 })

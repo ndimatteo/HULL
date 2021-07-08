@@ -5,6 +5,18 @@ export default {
   __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
+      title: 'Home Page',
+      name: 'home',
+      type: 'reference',
+      to: [{ type: 'page' }]
+    },
+    {
+      title: 'Error Page (404)',
+      name: 'error',
+      type: 'reference',
+      to: [{ type: 'page' }]
+    },
+    {
       title: 'Live Site URL',
       description: 'The root domain or subdomain of your website.',
       name: 'siteURL',

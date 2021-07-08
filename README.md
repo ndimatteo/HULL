@@ -60,6 +60,7 @@
    
 ### Shopify Integration Features
 - Automatically syncs products from Shopify into Sanity
+- Custom action to sync product cart thumbnails back to Shopify from Sanity
 - Tracks product status _(draft/published)_ from Shopify to help control visibility while editing
 - Deleted products and variants are preserved and flagged in Sanity
 - Updates the URL on variant changes while keeping a clean history stack
@@ -158,6 +159,9 @@ MAILCHIMP_SERVER=usX
 
 // Needed for SendGrid forms:
 SENDGRID_API_KEY=XXXXXX
+
+// Needed for Google Tag Manager:
+GTM_ID=XXX-XXXXXX
 ```
 3. Update all the `XXXXXX` values, here's where to find each:
   - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
@@ -170,11 +174,12 @@ SENDGRID_API_KEY=XXXXXX
   - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
   - `MAILCHIMP_SERVER` - This is the server your account is from. It's in the URL when logged in and at the end of your API Key
   - `SENDGRID_API_KEY` - Create an API key from "Settings" -> "API Keys" with "Restricted Access" to only "Mail Send"
+  - `GTM_ID` - If using Google Tag Manager this is your Container ID
   
 ### 5) Shopify Store Theme
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
 
-This will essentially "pass-through" URLs accessed at your Shopify Store to your true headless storefront *(ie. `shop.hull.com/products` -> `hull.com/products`)*
+This will essentially "pass-through" URLs accessed at your Shopify Store to your true headless storefront *(ie. `shop.hull.dev/products` -> `hull.dev/products`)*
 
 <br />
 

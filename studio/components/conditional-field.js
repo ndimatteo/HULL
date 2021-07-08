@@ -1,31 +1,14 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import Fieldset from 'part:@sanity/components/fieldsets/default'
-import { setIfMissing } from 'part:@sanity/form-builder/patch-event'
-import {
-  FormBuilderInput,
-  withDocument,
-  withValuePath
-} from 'part:@sanity/form-builder'
-import fieldStyle from '@sanity/form-builder/lib/inputs/ObjectInput/styles/Field.css'
+import PropTypes from 'prop-types'
+
+import { FormBuilderInput } from '@sanity/form-builder/lib/FormBuilderInput'
+import { withDocument, withValuePath } from 'part:@sanity/form-builder'
+
+import { Stack } from '@sanity/ui'
+
+import { setIfMissing } from '@sanity/form-builder/PatchEvent'
 
 const isFunction = obj => !!(obj && obj.constructor && obj.call && obj.apply)
-
-/**
- *
- * condition comes from a field in the document schema
- *
- * {
- *   name: 'objectTitle',
- *   title: 'object Title'
- *   type: 'object',
- *   options: {
- *		condition: (document: obj, context: func) => bool
- *	 }
- *   fields : []
- * }
- *
- */
 
 class ConditionalFields extends React.PureComponent {
   static propTypes = {
@@ -47,6 +30,8 @@ class ConditionalFields extends React.PureComponent {
   }
 
   firstFieldInput = React.createRef()
+
+  state = { showFields: false }
 
   focus() {
     this.firstFieldInput.current && this.firstFieldInput.current.focus()
@@ -95,23 +80,36 @@ class ConditionalFields extends React.PureComponent {
     onChange(event)
   }
 
-  render() {
-    const { document, type, value, level, onFocus, onBlur } = this.props
+  handleConditionCheck = async () => {
+    const { document, type } = this.props
+
     const condition =
       (isFunction(type.options.condition) && type.options.condition) ||
       function() {
         return true
       }
-    const showFields = !!condition(document, this.getContext.bind(this))
 
-    if (!showFields) return <></>
+    const showFields = await condition(document, this.getContext.bind(this))
+    this.setState({ showFields })
+  }
+
+  async componentDidMount() {
+    await this.handleConditionCheck()
+  }
+
+  async componentDidUpdate() {
+    await this.handleConditionCheck()
+  }
+
+  render() {
+    const { type, value, level, onFocus, onBlur } = this.props
+
+    if (!this.state.showFields) return <></>
 
     return (
-      <>
+      <Stack space={[3, 3, 4, 5]}>
         {type.fields.map((field, i) => (
-          // Delegate to the generic FormBuilderInput. It will resolve and insert the actual input component
-          // for the given field type
-          <div className={fieldStyle.root} key={i} style={{ marginBottom: -1 }}>
+          <div key={i}>
             <FormBuilderInput
               level={level + 1}
               ref={i === 0 ? this.firstFieldInput : null}
@@ -125,7 +123,7 @@ class ConditionalFields extends React.PureComponent {
             />
           </div>
         ))}
-      </>
+      </Stack>
     )
   }
 }

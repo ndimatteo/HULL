@@ -28,15 +28,3 @@
   --pageBG-hsl: 0, 0%, 0%;
   --pageText-hsl: 90, 100%, 56%;
 }
-
-@custom-media --xs (min-width: 480px);
-@custom-media --sm (min-width: 768px);
-@custom-media --md (min-width: 940px);
-@custom-media --lg (min-width: 1200px);
-@custom-media --xl (min-width: 1600px);
-
-@custom-media --xsMax (max-width: 479px);
-@custom-media --smMax (max-width: 767px);
-@custom-media --mdMax (max-width: 939px);
-@custom-media --lgMax (max-width: 1199px);
-@custom-media --xlMax (max-width: 1599px);
