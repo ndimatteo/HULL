@@ -5,10 +5,8 @@ module.exports = {
   mode: 'jit',
   purge: {
     content: [
-      './blocks/**/*.js',
       './components/**/*.js',
       './lib/**/*.js',
-      './modules/**/*.js',
       './pages/**/*.js',
       './tailwind.safelist.txt',
     ],
