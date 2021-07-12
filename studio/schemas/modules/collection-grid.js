@@ -9,7 +9,8 @@ export default {
     {
       title: 'Display Collection Grid?',
       name: 'active',
-      type: 'boolean'
+      type: 'boolean',
+      initialValue: true
     }
   ],
   preview: {

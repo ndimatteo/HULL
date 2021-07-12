@@ -134,10 +134,6 @@
     @apply ml-4;
   }
 
-  &--variant {
-    @apply text-xs;
-  }
-
   &--tools {
     @apply flex justify-between relative z-10 mt-auto pt-6;
   }

@@ -33,7 +33,6 @@ const previewURL =
 
 const hiddenDocTypes = listItem =>
   ![
-    'shopPage',
     'page',
     'product',
     'productVariant',
@@ -64,24 +63,48 @@ const currentHomePage = S.listItem()
     `)
 
     if (!data?.home)
-      return S.document().views([
-        S.view
-          .component(() => (
-            <Card padding={4}>
-              <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
-                <Text align="center" size={[2]}>
-                  Home Page has not been set. Visit the Settings page to
-                  activate.
-                </Text>
-              </Card>
-            </Card>
-          ))
-          .title('Home Page')
-      ])
+      return S.component(() => (
+        <Card padding={4}>
+          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
+            <Text align="center" size={[2]}>
+              The Home Page has not been set. Visit the Settings page to
+              activate.
+            </Text>
+          </Card>
+        </Card>
+      )).title('Home Page')
 
     return S.document()
       .id(data.home._id)
       .schemaType('page')
+  })
+
+// Extract our shop page
+const currentShopPage = S.listItem()
+  .title('Shop All Page')
+  .icon(FiShoppingCart)
+  .child(async () => {
+    const data = await sanityClient.fetch(`
+    *[_type == "generalSettings"][0]{
+      shop->{_id}
+    }
+  `)
+
+    if (!data?.shop)
+      return S.component(() => (
+        <Card padding={4}>
+          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
+            <Text align="center" size={[2]}>
+              The Shop All Page has not been set. Visit the Settings page to
+              activate.
+            </Text>
+          </Card>
+        </Card>
+      )).title('Shop All Page')
+
+    return S.document()
+      .id(data.shop._id)
+      .schemaType('collection')
   })
 
 // Extract our error page
@@ -96,20 +119,16 @@ const currentErrorPage = S.listItem()
     `)
 
     if (!data?.error)
-      return S.document().views([
-        S.view
-          .component(() => (
-            <Card padding={4}>
-              <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
-                <Text align="center" size={[2]}>
-                  Error Page has not been set. Visit the Settings page to
-                  activate.
-                </Text>
-              </Card>
-            </Card>
-          ))
-          .title('Error Page')
-      ])
+      return S.component(() => (
+        <Card padding={4}>
+          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
+            <Text align="center" size={[2]}>
+              The Error Page has not been set. Visit the Settings page to
+              activate.
+            </Text>
+          </Card>
+        </Card>
+      )).title('Error Page')
 
     return S.document()
       .id(data.error._id)
@@ -209,6 +228,7 @@ export default () =>
             .title('Pages')
             .items([
               currentHomePage,
+              currentShopPage,
               currentErrorPage,
               S.listItem()
                 .title('Other Pages')
@@ -308,6 +328,11 @@ export default () =>
                 .child(
                   S.documentTypeList('collection')
                     .title('Collections')
+                    .filter(
+                      `_type == "collection" && !(_id in [
+                        *[_type == "generalSettings"][0].shop._ref,
+                      ]) && !(_id in path("drafts.**"))`
+                    )
                     .child(documentId =>
                       S.document()
                         .documentId(documentId)
@@ -321,16 +346,6 @@ export default () =>
                             .title('SEO Preview')
                         ])
                     )
-                ),
-              S.listItem()
-                .title('Shop All Page')
-                .icon(FiShoppingCart)
-                .child(
-                  S.editor()
-                    .title('Shop All Page')
-                    .id('shopPage')
-                    .schemaType('shopPage')
-                    .documentId('shopPage')
                 )
             ])
         )

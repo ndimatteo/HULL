@@ -14,7 +14,6 @@ export const Module = ({
   activeVariant,
   onVariantChange,
   collectionProducts,
-  featuredProducts,
 }) => {
   const type = module._type
 
@@ -36,12 +35,7 @@ export const Module = ({
         />
       )
     case 'collectionGrid':
-      return (
-        <Collection
-          products={collectionProducts}
-          featuredProducts={featuredProducts}
-        />
-      )
+      return <Collection products={collectionProducts} />
     default:
       return null
   }

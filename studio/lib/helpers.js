@@ -39,8 +39,6 @@ export const getPtPreview = content => {
 
 export const getStaticRoute = name => {
   switch (name) {
-    case 'shopPage':
-      return 'shop'
     default:
       return false
   }

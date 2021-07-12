@@ -68,7 +68,7 @@
 - Global Cart with access to all variant data for line items
 - Supports Single Variant products out of the box
 - Product photo galleries with variant granularity
-- Automatic `/shop` page for all products, with ability to "feature" products
+- Dynamic `/shop` collection page
 - Custom collection pages
 - Ability to surface a variant option on product cards
 

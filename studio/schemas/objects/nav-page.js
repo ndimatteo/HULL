@@ -18,12 +18,7 @@ export default {
       title: 'Page',
       name: 'page',
       type: 'reference',
-      to: [
-        { type: 'page' },
-        { type: 'shopPage' },
-        { type: 'collection' },
-        { type: 'product' }
-      ]
+      to: [{ type: 'page' }, { type: 'collection' }, { type: 'product' }]
     }
   ],
   preview: {
@@ -33,9 +28,6 @@ export default {
       pageSlug: 'page.slug.current'
     },
     prepare({ title, pageType, pageSlug }) {
-      console.log(pageType)
-      console.log(pageSlug)
-
       const isStatic = getStaticRoute(pageType)
       const isDynamic = getDynamicRoute(pageType)
 

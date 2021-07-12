@@ -17,7 +17,6 @@ const frontendURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL
 
 const singletons = [
-  'shopPage',
   'generalSettings',
   'cookieSettings',
   'promoSettings',
@@ -29,7 +28,7 @@ const singletons = [
 
 const editAndDelete = ['product', 'productVariant']
 
-const previews = ['page', 'shopPage', 'product', 'collection']
+const previews = ['page', 'product', 'collection']
 
 const PreviewAction = props => {
   const slug = props.draft

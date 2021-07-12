@@ -38,6 +38,10 @@
       "path": "./deskStructure.js"
     },
     {
+      "implements": "part:@sanity/base/new-document-structure",
+      "path": "./docStructure.js"
+    },
+    {
       "implements": "part:@sanity/dashboard/config",
       "path": "./dashboardConfig.js"
     },

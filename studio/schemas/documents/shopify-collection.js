@@ -65,7 +65,21 @@ export default {
         {
           title: 'Product',
           type: 'reference',
-          to: [{ type: 'product' }]
+          to: [{ type: 'product' }],
+          options: {
+            filter: ({ document }) => {
+              const addedProducts = document.products
+                .map(p => p._ref)
+                .filter(Boolean)
+
+              return {
+                filter: '!(_id in $ids)',
+                params: {
+                  ids: addedProducts
+                }
+              }
+            }
+          }
         }
       ],
       validation: Rule => Rule.unique()

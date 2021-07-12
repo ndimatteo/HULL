@@ -32,7 +32,6 @@ export default {
                 type: 'reference',
                 to: [
                   { type: 'page' },
-                  { type: 'shopPage' },
                   { type: 'collection' },
                   { type: 'product' }
                 ]

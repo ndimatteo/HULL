@@ -6,14 +6,9 @@ import { listAnim } from '@lib/animate'
 
 import ProductCard from '@components/product-card'
 
-const Collection = ({
-  products,
-  featuredProducts = [],
-  paginationLimit = 3,
-}) => {
+const Collection = ({ products, paginationLimit = 3 }) => {
   if (!products || products.length === 0) return null
-
-  const orderedProducts = mapOrder(products, featuredProducts, 'id')
+  const orderedProducts = products
 
   const hasPagination = paginationLimit > 0
   const [hasMore, setMore] = useState(products.length > paginationLimit)
@@ -89,7 +84,7 @@ const Collection = ({
 function mapOrder(array, myorder, key) {
   if (!array) return
 
-  var order = myorder.reduce((r, k, i) => ((r[k] = i + 1), r), {})
+  var order = myorder?.reduce((r, k, i) => ((r[k] = i + 1), r), {})
   const theSort = array.sort(
     (a, b) => (order[a[key]] || Infinity) - (order[b[key]] || Infinity)
   )

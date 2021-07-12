@@ -4,7 +4,7 @@ import * as queries from './queries'
 // Fetch all dynamic docs
 export async function getAllDocSlugs(doc) {
   const data = await getSanityClient().fetch(
-    `*[_type == "${doc}" && !(_id in [${queries.homeID}, ${queries.errorID}])]{ "slug": slug.current }`
+    `*[_type == "${doc}" && !(_id in [${queries.homeID}, ${queries.shopID}, ${queries.errorID}])]{ "slug": slug.current }`
   )
   return data
 }

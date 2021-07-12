@@ -11,6 +11,12 @@ export default {
       to: [{ type: 'page' }]
     },
     {
+      title: 'Shop Page',
+      name: 'shop',
+      type: 'reference',
+      to: [{ type: 'collection' }]
+    },
+    {
       title: 'Error Page (404)',
       name: 'error',
       type: 'reference',

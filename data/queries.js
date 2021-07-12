@@ -1,14 +1,25 @@
 // Construct our "home" and "error" page GROQ
 export const homeID = `*[_type=="generalSettings"][0].home->_id`
+export const shopID = `*[_type=="generalSettings"][0].shop->_id`
 export const errorID = `*[_type=="generalSettings"][0].error->_id`
 
-// Construct our "menu items" GROQ
+// Construct our "page" GROQ
+const page = `
+  "type": _type,
+  "slug": slug.current,
+  "isHome": _id == ${homeID},
+  "isShop": _id == ${shopID}
+`
+
+// Construct our "link" GROQ
 const link = `
   _key,
   _type,
   title,
   url,
-  "page": page->{"type": _type, "slug": slug.current}
+  "page": page->{
+    ${page}
+  }
 `
 
 // Construct our "image meta" GROQ
@@ -33,7 +44,9 @@ export const ptContent = `
       "url": @.url,
       "isButton": @.isButton,
       "styles": @.styles{style, isLarge, isBlock},
-      "page":@.page->{"type": _type, "slug": slug.current, "isHome": _id == ${homeID}}
+      "page":@.page->{
+        ${page}
+      }
     }
   },
   _type == "photo" => {
@@ -229,7 +242,9 @@ export const site = `
       "promo": *[_type == "promoSettings"][0]{
         display,
         text,
-        "link": link->{"type": _type, "slug": slug.current}
+        "link": link->{
+          ${page}
+        }
       },
       menuDesktopLeft->{
         items[]{
