@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Head from 'next/head'
 import { m } from 'framer-motion'
 import { imageBuilder } from '@lib/sanity'
@@ -31,19 +31,39 @@ const variants = {
 
 const Layout = ({ site = {}, page = {}, schema, children }) => {
   // set <head> variables
-  const siteTitle = site.seo?.siteTitle
+  const siteTitle = site.title
   const siteIcon = site.seo?.siteIcon
 
-  const metaTitle = page.seo?.metaTitle || site.seo?.metaTitle
+  const templateTags = [
+    {
+      tag: '{{page_title}}',
+      value: page.title,
+    },
+    {
+      tag: '{{site_title}}',
+      value: siteTitle,
+    },
+  ]
+
+  const metaTitle = replaceTemplateTags(
+    page.seo?.metaTitle || site.seo?.metaTitle,
+    templateTags
+  )
   const metaDesc = page.seo?.metaDesc || site.seo?.metaDesc
 
-  const shareTitle = page.seo?.shareTitle || site.seo?.shareTitle
+  const shareTitle = replaceTemplateTags(
+    page.seo?.shareTitle || site.seo?.shareTitle,
+    templateTags
+  )
   const shareDesc = page.seo?.shareDesc || site.seo?.shareDesc
   const shareGraphic =
     page.seo?.shareGraphic?.asset || site.seo?.shareGraphic?.asset
 
   // set window height var
   const { height: windowHeight } = useWindowSize()
+
+  // set header height
+  const [headerHeight, setHeaderHeight] = useState(null)
 
   useEffect(() => {
     if (isBrowser) {
@@ -117,7 +137,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
         <meta property="og:type" content="website" />
         <meta name="twitter:card" content="summary_large_image" />
 
-        {siteTitle && <meta name="og:site_name" content={siteTitle} />}
+        {siteTitle && <meta property="og:site_name" content={siteTitle} />}
 
         {schema && (
           <script
@@ -129,8 +149,18 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
       <CookieBar data={site.cookieConsent} />
 
-      <m.div initial="initial" animate="enter" exit="exit" variants={variants}>
-        <Header data={site.header} isTransparent={page.hasTransparentHeader} />
+      <m.div
+        initial="initial"
+        animate="enter"
+        exit="exit"
+        variants={variants}
+        style={headerHeight ? { '--headerHeight': `${headerHeight}px` } : null}
+      >
+        <Header
+          data={site.header}
+          isTransparent={page.hasTransparentHeader}
+          onSetup={({ height }) => setHeaderHeight(height)}
+        />
         <main id="content">{children}</main>
         <Footer data={site.footer} />
       </m.div>
@@ -139,3 +169,14 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 }
 
 export default Layout
+
+// replace template tags with values
+function replaceTemplateTags(string, templateTags = []) {
+  let newString = string
+
+  templateTags.map((v) => {
+    newString = newString.replace(new RegExp(v.tag, 'g'), v.value)
+  })
+
+  return newString
+}

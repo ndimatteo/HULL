@@ -1,10 +1,11 @@
-import { FiFile } from 'react-icons/fi'
+import React from 'react'
+import { Browser } from 'phosphor-react'
 
 export default {
   title: 'Page',
   name: 'page',
   type: 'document',
-  icon: FiFile,
+  icon: () => <Browser />,
   fields: [
     {
       name: 'title',

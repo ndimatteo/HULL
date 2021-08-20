@@ -1,3 +1,10 @@
+import { sortTypes } from '../studio/schemas/objects/shop-sort'
+
+// Create our sorting fallback titles from Sanity
+const sortFallbacks = sortTypes
+  .map((type) => `type == "${type.value}" => "${type.title}"`)
+  .join(',')
+
 // Construct our "home" and "error" page GROQ
 export const homeID = `*[_type=="generalSettings"][0].home->_id`
 export const shopID = `*[_type=="generalSettings"][0].shop->_id`
@@ -57,6 +64,7 @@ export const ptContent = `
 // Construct our "product" GROQ
 export const product = `
   {
+    "publishDate": coalesce(publishDate, _createdAt),
     "slug": slug.current,
     "id": productID,
     title,
@@ -91,7 +99,7 @@ export const product = `
     },
     optionSettings[]{
       forOption,
-      color
+      "color": color->color,
     },
     "variants": *[_type == "productVariant" && productID == ^.productID && wasDeleted != true && isDraft != true]{
       "id": variantID,
@@ -218,16 +226,26 @@ export const modules = `
   _type == 'collectionGrid' => {
     _type,
     _key,
+    "sort": *[_type == "shopSettings"][0].sort{
+      isActive,
+      options[]{
+        "slug": type,
+        "title": coalesce(title, select(
+          ${sortFallbacks}
+        ))
+      }
+    },
   }
 `
 
 // Construct our "site" GROQ
 export const site = `
   "site": {
+    "title": *[_type == "generalSettings"][0].siteTitle,
     "rootDomain": *[_type == "generalSettings"][0].siteURL,
-    "cart": *[_type == "cartSettings"][0]{
+    "shop": *[_type == "shopSettings"][0]{
       storeURL,
-      message
+      cartMessage
     },
     "productCounts": [ {"slug": "all", "count": count(*[_type == "product"])} ] + *[_type == "collection"]{
       "slug": slug.current,
@@ -326,7 +344,6 @@ export const site = `
       ]
     },
     "seo": *[_type == "seoSettings"][0]{
-      siteTitle,
       metaTitle,
       metaDesc,
       shareTitle,

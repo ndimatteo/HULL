@@ -7,7 +7,7 @@ import {
   useRadioItemContext,
 } from '@components/radio-group'
 
-export default function RadioItem({ value, children, ...rest }) {
+export default function RadioItem({ title, value, children, ...rest }) {
   const groupContext = useRadioGroupContext()
   const itemContext = useRadioItemContext()
 
@@ -74,6 +74,7 @@ export default function RadioItem({ value, children, ...rest }) {
     <button
       ref={itemRef}
       role="radio"
+      title={title}
       tabIndex={isChecked ? 0 : -1}
       aria-checked={isChecked}
       onClick={handleClick}

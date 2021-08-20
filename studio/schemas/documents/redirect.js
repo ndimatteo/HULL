@@ -1,20 +1,25 @@
-import { FiRepeat } from 'react-icons/fi'
+import React from 'react'
+import { Shuffle } from 'phosphor-react'
 
 export default {
   title: 'Redirect',
   name: 'redirect',
   type: 'document',
-  icon: FiRepeat,
+  icon: () => <Shuffle />,
   fields: [
     {
       title: 'From',
       name: 'from',
-      type: 'string'
+      type: 'string',
+      description:
+        'Do not include the full domain, only the path. For example: /old-page'
     },
     {
       title: 'To',
       name: 'to',
-      type: 'string'
+      type: 'string',
+      description:
+        'Do not include the full domain, only the path. For example: /new-page'
     },
     {
       title: 'Is Permanent?',

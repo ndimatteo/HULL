@@ -1,3 +1,6 @@
+import React from 'react'
+import { Circle } from 'phosphor-react'
+
 export const getTypeTitles = types => {
   const typeNames = types.map(type => {
     switch (type) {
@@ -53,4 +56,29 @@ export const getDynamicRoute = name => {
     default:
       return false
   }
+}
+
+export const getSwatch = color => {
+  console.log(color)
+  return (
+    <Circle
+      color={color}
+      weight="fill"
+      style={{
+        boxShadow: '0 0 0 1px rgba(255,255,255,.4), 0 0 0 1px rgba(0,0,0,.15)',
+        borderRadius: '50%'
+      }}
+    />
+  )
+}
+
+export const assemblePageUrl = ({ document, options }) => {
+  const { slug } = document
+  const { previewURL } = options
+  if (!previewURL) {
+    console.warn('Missing preview URL', { slug, previewURL })
+    return ''
+  }
+
+  return previewURL + (slug ? `/${slug.current}` : '')
 }

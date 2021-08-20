@@ -21,15 +21,24 @@ const DynamicSelect = React.forwardRef((props, ref) => {
     /*  ------------------------------------------------------------ */
     dynamicOptions = document[options.fromField]
       .map(opt => {
+        // bail if we can't find the subfield
+        if (!(options.fromSubField in opt)) return null
+
+        // map over the subfield to build our list of options
         return opt[options.fromSubField].map(val => ({
           title: `${opt[options.fromFieldData.title]} - ${val}`,
           value: `${opt[options.fromFieldData.title]}:${val}`
         }))
       })
       .flat(1)
+      .filter(x => x != null)
 
     // Map basic field array data
   } else {
+    // bail if we can't find the field
+    if (!(options.fromField in document)) return null
+
+    // map over the field to build our list of options
     dynamicOptions = document[options.fromField].map(opt => ({
       title: opt[options.fromFieldData.title].toString(),
       value: opt[options.fromFieldData.value].toString()

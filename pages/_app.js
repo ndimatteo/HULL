@@ -33,6 +33,8 @@ if (isBrowser) {
 const MyApp = ({ Component, pageProps, router }) => {
   const [isLoading, setLoading] = useState(false)
 
+  const { data } = pageProps
+
   // The scroll location on the page is not restored on history changes
   useEffect(() => {
     window.history.scrollRestoration = 'manual'
@@ -87,7 +89,7 @@ const MyApp = ({ Component, pageProps, router }) => {
 
   return (
     <ThemeProvider enableSystem={false} disableTransitionOnChange>
-      <SiteContextProvider data={{ ...pageProps?.data?.site }}>
+      <SiteContextProvider data={{ ...data?.site }}>
         <LazyMotion features={domAnimation}>
           {isLoading && (
             <Head>
@@ -104,7 +106,7 @@ const MyApp = ({ Component, pageProps, router }) => {
             <Component key={router.asPath.split('?')[0]} {...pageProps} />
           </AnimatePresence>
 
-          <Cart data={{ ...pageProps?.data?.site }} />
+          <Cart data={{ ...data?.site }} />
         </LazyMotion>
       </SiteContextProvider>
     </ThemeProvider>

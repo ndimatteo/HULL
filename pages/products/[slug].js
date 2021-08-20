@@ -155,7 +155,7 @@ function getProductSchema(product, activeVariant, site) {
     },
     brand: {
       '@type': 'Brand',
-      name: site.seo.siteTitle,
+      name: site.title,
     },
   }
 }

@@ -1,10 +1,11 @@
-import { FiGrid } from 'react-icons/fi'
+import React from 'react'
+import { SquaresFour } from 'phosphor-react'
 
 export default {
   title: 'Collection',
   name: 'collection',
   type: 'document',
-  icon: FiGrid,
+  icon: () => <SquaresFour />,
   fields: [
     {
       name: 'title',

@@ -1,5 +1,13 @@
 .collection {
-  @apply overflow-hidden border-b;
+  @apply border-b;
+
+  &--tools {
+    @apply sticky top-[var(--headerHeight)] z-10 flex justify-between border-b bg-pageBG;
+  }
+
+  &--content {
+    @apply relative z-0 overflow-hidden;
+  }
   
   &--grid {
     @apply grid grid-cols-1 md:grid-cols-3 -m-px;
@@ -7,6 +15,14 @@
 
   &--pagination {
     @apply relative p-4 sm:py-8 is-textured bg-pageBG border-t text-center;
+  }
+
+  &--sort {
+    @apply flex items-center ml-auto px-4;
+
+    &-title {
+      @apply mr-2 font-semibold;
+    }
   }
 }
 
@@ -32,6 +48,10 @@
 
   &.is-inline {
     @apply my-4;
+  }
+
+  &--visuals {
+    @apply relative;
   }
 
   &--thumb {
@@ -118,6 +138,15 @@
       &--values {
         @apply mx-auto;
       }
+    }
+  }
+
+  &--add {
+    @apply absolute bottom-0 inset-x-0 z-30 text-center mx-4 mb-8 opacity-0 invisible translate-y-1/2 transition-all;
+    will-change: transform;
+
+    .product-card:hover & {
+      @apply opacity-100 visible translate-y-0;
     }
   }
 }

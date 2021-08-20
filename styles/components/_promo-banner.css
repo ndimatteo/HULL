@@ -3,7 +3,7 @@
   scroll-behavior: smooth;
 
   &--content {
-    @apply inline-flex px-8 py-2 text-sm font-semibold;
+    @apply flex justify-center px-8 py-2 text-sm font-semibold;
   }
 
   &--link {

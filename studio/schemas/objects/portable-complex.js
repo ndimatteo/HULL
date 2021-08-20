@@ -138,7 +138,8 @@ export default {
                     type: 'boolean',
                     options: {
                       layout: 'checkbox'
-                    }
+                    },
+                    initialValue: false
                   },
                   {
                     title: 'Full Width',
@@ -146,7 +147,8 @@ export default {
                     type: 'boolean',
                     options: {
                       layout: 'checkbox'
-                    }
+                    },
+                    initialValue: false
                   }
                 ],
                 options: {

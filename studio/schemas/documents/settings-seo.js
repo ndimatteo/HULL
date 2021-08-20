@@ -5,12 +5,6 @@ export default {
   __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
-      title: 'Site Title',
-      name: 'siteTitle',
-      type: 'string',
-      description: 'The name of your site, usually your company/brand name.'
-    },
-    {
       title: 'Default Meta Title',
       name: 'metaTitle',
       type: 'string',

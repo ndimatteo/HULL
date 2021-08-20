@@ -25,6 +25,7 @@ export async function getStaticProps({ preview, previewData }) {
       modules[]{
         ${queries.modules}
       },
+      title,
       seo
     }
   `,

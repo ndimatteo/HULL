@@ -1,5 +1,5 @@
 a[href="#content"].skip-link {
-  @apply block fixed top-0 left-1/2 transform -translate-x-1/2 -translate-y-full z-90 px-2 py-1 bg-pageBG text-pageText text-xs font-semibold uppercase;
+  @apply block fixed top-0 left-1/2 -translate-x-1/2 -translate-y-full z-90 px-2 py-1 bg-pageBG text-pageText text-xs font-semibold uppercase;
 
   &:focus {
     @apply translate-y-0 outline-none;

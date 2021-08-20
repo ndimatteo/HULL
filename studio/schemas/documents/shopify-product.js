@@ -1,4 +1,5 @@
-import { FiGift } from 'react-icons/fi'
+import React from 'react'
+import { Gift } from 'phosphor-react'
 
 export default {
   name: 'product',
@@ -20,7 +21,7 @@ export default {
       options: { columns: 2 }
     }
   ],
-  icon: FiGift,
+  icon: () => <Gift />,
   fields: [
     {
       title: 'Product Title',
@@ -126,6 +127,23 @@ export default {
       type: 'array',
       of: [{ type: 'productOptionSettings' }],
       description: 'Define additional settings for product options'
+    },
+    {
+      title: 'Filters',
+      name: 'filters',
+      type: 'array',
+      of: [
+        {
+          title: 'Filter',
+          type: 'reference',
+          to: [{ type: 'filter' }]
+        }
+      ],
+      options: {
+        editModal: 'popover'
+      },
+      validation: Rule => Rule.unique(),
+      description: 'Define what filters are associated with this product'
     },
     {
       title: 'Use Galleries',

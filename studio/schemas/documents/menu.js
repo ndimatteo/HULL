@@ -1,10 +1,11 @@
-import { FiMenu } from 'react-icons/fi'
+import React from 'react'
+import { List } from 'phosphor-react'
 
 export default {
   title: 'Menu',
   name: 'menu',
   type: 'document',
-  icon: FiMenu,
+  icon: () => <List />,
   fields: [
     {
       title: 'Title',
@@ -12,8 +13,8 @@ export default {
       type: 'string'
     },
     {
-      name: 'slug',
       title: 'Slug',
+      name: 'slug',
       type: 'slug',
       description: 'required',
       options: {
@@ -27,5 +28,18 @@ export default {
       type: 'array',
       of: [{ type: 'navPage' }, { type: 'navLink' }, { type: 'navDropdown' }]
     }
-  ]
+  ],
+  preview: {
+    select: {
+      title: 'title',
+      items: 'items'
+    },
+    prepare({ title = 'Untitled', items = [] }) {
+      return {
+        title,
+        subtitle: `${items.length} link(s)`,
+        media: List
+      }
+    }
+  }
 }

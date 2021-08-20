@@ -29,6 +29,7 @@ export async function getStaticProps({ preview, previewData }) {
       products[wasDeleted != true && isDraft != true${
         preview?.active ? ' && _id in path("drafts.**")' : ''
       }]->${queries.product},
+      title,
       seo
     }
   `,

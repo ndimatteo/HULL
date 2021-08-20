@@ -23,6 +23,12 @@ export default {
       to: [{ type: 'page' }]
     },
     {
+      title: 'Site Title',
+      name: 'siteTitle',
+      type: 'string',
+      description: 'The name of your site, usually your company/brand name.'
+    },
+    {
       title: 'Live Site URL',
       description: 'The root domain or subdomain of your website.',
       name: 'siteURL',

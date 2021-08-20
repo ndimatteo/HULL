@@ -35,7 +35,7 @@ export const Module = ({
         />
       )
     case 'collectionGrid':
-      return <Collection products={collectionProducts} />
+      return <Collection products={collectionProducts} sort={module.sort} />
     default:
       return null
   }

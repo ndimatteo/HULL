@@ -1,34 +1,53 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useIntersection } from 'use-intersection'
-import { m } from 'framer-motion'
+import { AnimatePresence, m } from 'framer-motion'
+
+import { useFilters, sortAsc, sortDesc } from '@lib/helpers'
 
 import { listAnim } from '@lib/animate'
 
+import Filter from '@components/filter'
 import ProductCard from '@components/product-card'
 
-const Collection = ({ products, paginationLimit = 3 }) => {
+const Collection = ({ products, paginationLimit = 3, sort }) => {
   if (!products || products.length === 0) return null
-  const orderedProducts = products
 
-  const hasPagination = paginationLimit > 0
-  const [hasMore, setMore] = useState(products.length > paginationLimit)
-  const [paginatedProducts, setPaginatedProducts] = useState([
-    ...orderedProducts.slice(0, paginationLimit),
+  const [hasPagination, setHasPagination] = useState(
+    paginationLimit > 0 && products.length > paginationLimit
+  )
+  const [currentCount, setCurrentCount] = useState(
+    hasPagination ? paginationLimit : products.length
+  )
+
+  const [currentFilters, setCurrentFilters] = useFilters([
+    {
+      name: 'sort',
+      value: sort?.options[0]?.slug,
+    },
   ])
 
-  const productsList = hasPagination ? paginatedProducts : orderedProducts
+  // calculate our product order and pagination
+  const orderedProducts = filterAndSort(products, currentFilters)
+  const paginatedProducts = [...orderedProducts.slice(0, currentCount)]
 
-  // setup "load more" functionality
+  // handle filter updates
+  const updateFilter = useCallback(
+    (name, value) => {
+      const newFilters = currentFilters.map((filter) =>
+        filter.name === name ? { ...filter, value: value } : filter
+      )
+      setCurrentFilters(newFilters)
+    },
+    [currentFilters]
+  )
+
+  // handle load more
   const loadMore = useCallback(() => {
-    const curPage = paginatedProducts.length
-    const nextPage = orderedProducts.slice(curPage, curPage + paginationLimit)
-    const newPage = [...paginatedProducts, ...nextPage]
+    const newCount = currentCount + paginationLimit
 
-    if (hasMore) {
-      setPaginatedProducts(newPage)
-      setMore(newPage.length < orderedProducts.length ? true : false)
-    }
-  }, [orderedProducts, paginatedProducts])
+    setCurrentCount(newCount)
+    setHasPagination(newCount < orderedProducts.length)
+  }, [currentCount, orderedProducts])
 
   // setup "load more" functionality
   const loadMoreRef = useRef(null)
@@ -45,50 +64,85 @@ const Collection = ({ products, paginationLimit = 3 }) => {
 
   return (
     <section className="collection">
-      <m.div
-        initial="hide"
-        animate="show"
-        exit="hide"
-        variants={listAnim}
-        className="collection--grid"
-      >
-        {productsList.map((product, key) => (
-          <ProductCard
-            key={key}
-            index={key}
-            product={product}
-            hasVisuals={product.photos.main || product.photos.listing}
-            showGallery={product.photos.main && product.useGallery === 'true'}
-            showThumbs={
-              product.photos.listing && product.useGallery === 'false'
-            }
-            showOption={product.surfaceOption}
-            showPrice
-          />
-        ))}
-      </m.div>
+      <div className="collection--tools">
+        {sort?.isActive && (
+          <div className="collection--sort is-right">
+            <Filter
+              name="sort"
+              displayTitle={
+                <span className="collection--sort-title">Sort:</span>
+              }
+              activeOption={
+                currentFilters.find((filter) => filter.name === 'sort').value
+              }
+              options={sort.options}
+              onChange={updateFilter}
+            />
+          </div>
+        )}
+      </div>
+      <div className="collection--content">
+        <AnimatePresence exitBeforeEnter>
+          <m.div
+            key={currentFilters.map((f) => f.value).join('-')}
+            initial="hide"
+            animate="show"
+            exit="hide"
+            variants={listAnim}
+            className="collection--grid"
+          >
+            {paginatedProducts.map((product) => (
+              <ProductCard
+                key={product.id}
+                product={product}
+                hasVisuals={product.photos.main || product.photos.listing}
+                showGallery={
+                  product.photos.main && product.useGallery === 'true'
+                }
+                showThumbs={
+                  product.photos.listing && product.useGallery === 'false'
+                }
+                showOption={product.surfaceOption}
+                showPrice
+                showQuickAdd
+              />
+            ))}
+          </m.div>
+        </AnimatePresence>
 
-      {hasPagination && hasMore && (
-        <div ref={loadMoreRef} className="collection--pagination">
-          {hasMore && (
+        {hasPagination && (
+          <div ref={loadMoreRef} className="collection--pagination">
             <button className="btn is-large" onClick={loadMore}>
               Load More
             </button>
-          )}
-        </div>
-      )}
+          </div>
+        )}
+      </div>
     </section>
   )
 }
 
-function mapOrder(array, myorder, key) {
-  if (!array) return
+function filterAndSort(products, filters) {
+  const sort = filters.find((filter) => filter.name === 'sort').value
+  let productsCopy = [...products]
 
-  var order = myorder?.reduce((r, k, i) => ((r[k] = i + 1), r), {})
-  const theSort = array.sort(
-    (a, b) => (order[a[key]] || Infinity) - (order[b[key]] || Infinity)
-  )
-  return theSort
+  switch (sort) {
+    case 'priceAsc':
+      return sortAsc(productsCopy, 'price')
+    case 'priceDesc':
+      return sortDesc(productsCopy, 'price')
+    case 'alphaAsc':
+      return sortAsc(productsCopy, 'title')
+    case 'alphaDesc':
+      return sortDesc(productsCopy, 'title')
+    case 'dateAsc':
+      return sortAsc(productsCopy, 'publishDate')
+    case 'dateDesc':
+      return sortDesc(productsCopy, 'publishDate')
+    case 'featured':
+    default:
+      return products
+  }
 }
 
 export default Collection

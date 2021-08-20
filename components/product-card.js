@@ -10,6 +10,7 @@ import {
   ProductThumbnail,
   ProductPrice,
   ProductOption,
+  ProductAdd,
 } from '@components/product'
 
 const itemAnim = {
@@ -31,12 +32,12 @@ const itemAnim = {
 
 const ProductCard = ({
   product,
-  index,
   hasVisuals,
   showGallery,
   showThumbs,
   showPrice,
   showOption,
+  showQuickAdd,
   className,
   onClick,
 }) => {
@@ -86,6 +87,16 @@ const ProductCard = ({
               <ProductThumbnail
                 thumbnails={product.photos.listing}
                 activeVariant={activeVariant}
+              />
+            </div>
+          )}
+
+          {/* Quick Add */}
+          {showQuickAdd && activeVariant.inStock && (
+            <div className="product-card--add">
+              <ProductAdd
+                productID={activeVariant.id}
+                className="btn is-primary is-white is-large"
               />
             </div>
           )}
