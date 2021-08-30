@@ -1,0 +1,52 @@
+.filters {
+  @apply max-w-sm;
+
+  &--header {
+    @apply flex items-center relative px-4 py-3 sm:px-8 sm:py-6 text-sm leading-normal font-semibold uppercase;
+
+    &::after {
+      @apply absolute inset-x-0 bottom-0 border-t;
+      content: "";
+    }
+  }
+
+  &--title {
+    @apply flex items-center h-12 mr-auto;
+  }
+
+  &--count {
+    @apply opacity-30 ml-2;
+  }
+
+  &--content {
+    @apply flex-1 flex flex-col overflow-y-scroll p-4 sm:px-8 sm:py-2;
+  }
+
+  &--footer {
+    @apply relative px-4 pb-4 sm:px-8 sm:pb-8;
+  }
+}
+
+.filter-group {
+  &:first-child {
+    @apply border-t-0;
+  }
+  
+  &--options {
+    @apply grid grid-cols-1 gap-y-4 justify-items-start mt-2;
+  }
+}
+
+.filter-option {
+  &.is-swatch {
+    @apply inline-flex flex-col text-center;
+
+    .swatch {
+      @apply w-[40px] h-[40px];
+    }
+  }
+  
+  &--label {
+    @apply mt-1 text-xs font-semibold;
+  }
+}

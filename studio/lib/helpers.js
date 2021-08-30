@@ -59,7 +59,6 @@ export const getDynamicRoute = name => {
 }
 
 export const getSwatch = color => {
-  console.log(color)
   return (
     <Circle
       color={color}

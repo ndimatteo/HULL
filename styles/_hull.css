@@ -61,6 +61,12 @@
   }
 
 
+  /* small sized button */
+  &.is-small {
+    @apply px-3 py-1;
+  }
+
+
   /* large sized button */
   &.is-large {
     @apply text-2xl font-normal px-7;

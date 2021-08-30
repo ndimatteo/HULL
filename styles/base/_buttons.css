@@ -10,6 +10,6 @@
   }
 
   &.is-disabled {
-    @apply cursor-default pointer-events-none;
+    @apply cursor-default pointer-events-none opacity-60;
   }
 }

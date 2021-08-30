@@ -17,11 +17,19 @@
     @apply relative p-4 sm:py-8 is-textured bg-pageBG border-t text-center;
   }
 
-  &--sort {
-    @apply flex items-center ml-auto px-4;
+  &--filter-actions {
+    @apply flex items-center px-4;
 
-    &-title {
-      @apply mr-2 font-semibold;
+    .filters-toggle {
+      @apply clean-btn flex items-center relative bg-transparent -mr-2 p-4 text-sm leading-normal font-semibold uppercase;
+
+      &--count {
+        @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG text-xs leading-loose;
+      }
+    }
+
+    .filters-reset {
+      @apply hidden sm:block ml-2;
     }
   }
 }
@@ -34,6 +42,27 @@
   /* Only show product counts for the mega-nav */
   .mega-nav & {
     @apply inline-block;
+  }
+}
+
+.collection-sort {
+  @apply flex items-center ml-auto px-4;
+
+  .listbox--btn {
+    @apply p-4;
+  }
+
+  &--title {
+    @apply hidden sm:block mr-2 text-sm leading-normal font-semibold uppercase;
+  }
+
+  &--icon {
+    @apply inline-block mr-2 rounded-full border w-[10px] h-[10px];
+
+    .is-open & {
+      @apply bg-pageText;
+      animation: pulse 2s infinite;
+    }
   }
 }
 

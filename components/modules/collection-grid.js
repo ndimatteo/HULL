@@ -1,15 +1,16 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import { useIntersection } from 'use-intersection'
 import { AnimatePresence, m } from 'framer-motion'
 
-import { useFilters, sortAsc, sortDesc } from '@lib/helpers'
+import { useParams, cartesian, sortAsc, sortDesc } from '@lib/helpers'
 
 import { listAnim } from '@lib/animate'
 
-import Filter from '@components/filter'
+import CollectionFilter from '@components/collection-filter'
+import CollectionSort from '@components/collection-sort'
 import ProductCard from '@components/product-card'
 
-const Collection = ({ products, paginationLimit = 3, sort }) => {
+const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
   if (!products || products.length === 0) return null
 
   const [hasPagination, setHasPagination] = useState(
@@ -19,26 +20,63 @@ const Collection = ({ products, paginationLimit = 3, sort }) => {
     hasPagination ? paginationLimit : products.length
   )
 
-  const [currentFilters, setCurrentFilters] = useFilters([
+  const filterGroups = filter.groups
+
+  const [currentParams, setCurrentParams] = useParams([
     {
       name: 'sort',
       value: sort?.options[0]?.slug,
     },
+    ...filterGroups.map((g) => ({
+      name: g.slug,
+      value: null,
+    })),
   ])
 
+  // calculate our sort
+  const activeSort = currentParams.find(
+    (filter) => filter.name === 'sort'
+  ).value
+
+  // calculate our filters
+  const currentFilters = currentParams.filter((f) => f.name !== 'sort')
+  const activeFilters = currentFilters.map((filter) => {
+    const validOptions = filterGroups
+      .find((g) => g.slug === filter.name)
+      ?.options.map((o) => o.slug)
+
+    const currentOptions = Array.isArray(filter.value)
+      ? filter.value
+      : filter.value?.split(',') || []
+
+    return {
+      name: filter.name,
+      values: [
+        ...new Set(
+          currentOptions
+            .filter(Boolean)
+            .filter((f) => validOptions?.includes(f))
+        ),
+      ],
+    }
+  })
+
   // calculate our product order and pagination
-  const orderedProducts = filterAndSort(products, currentFilters)
+  const orderedProducts = useFilterAndSort(products, activeFilters, activeSort)
   const paginatedProducts = [...orderedProducts.slice(0, currentCount)]
 
-  // handle filter updates
-  const updateFilter = useCallback(
-    (name, value) => {
-      const newFilters = currentFilters.map((filter) =>
-        filter.name === name ? { ...filter, value: value } : filter
-      )
-      setCurrentFilters(newFilters)
+  // handle filter + sort updates
+  const updateParams = useCallback(
+    (params) => {
+      const newFilters = currentParams.map((filter) => {
+        const matchedParam = params?.find((p) => p.name === filter.name)
+
+        return matchedParam ? { ...filter, value: matchedParam?.value } : filter
+      })
+
+      setCurrentParams(newFilters)
     },
-    [currentFilters]
+    [currentParams]
   )
 
   // handle load more
@@ -46,11 +84,10 @@ const Collection = ({ products, paginationLimit = 3, sort }) => {
     const newCount = currentCount + paginationLimit
 
     setCurrentCount(newCount)
-    setHasPagination(newCount < orderedProducts.length)
   }, [currentCount, orderedProducts])
 
   // setup "load more" functionality
-  const loadMoreRef = useRef(null)
+  const loadMoreRef = useRef()
   const loadMoreTrigger = useIntersection(loadMoreRef, {
     threshold: 1,
   })
@@ -62,29 +99,35 @@ const Collection = ({ products, paginationLimit = 3, sort }) => {
   //   }
   // }, [loadMoreTrigger])
 
+  useEffect(() => {
+    setHasPagination(currentCount < orderedProducts.length)
+  }, [currentCount, orderedProducts])
+
   return (
     <section className="collection">
       <div className="collection--tools">
+        {filter?.isActive && (
+          <CollectionFilter
+            filterGroups={filterGroups}
+            activeFilters={activeFilters}
+            itemCount={orderedProducts.length}
+            onChange={updateParams}
+          />
+        )}
+
         {sort?.isActive && (
-          <div className="collection--sort is-right">
-            <Filter
-              name="sort"
-              displayTitle={
-                <span className="collection--sort-title">Sort:</span>
-              }
-              activeOption={
-                currentFilters.find((filter) => filter.name === 'sort').value
-              }
-              options={sort.options}
-              onChange={updateFilter}
-            />
-          </div>
+          <CollectionSort
+            sortOptions={sort.options}
+            activeSort={activeSort}
+            onChange={updateParams}
+          />
         )}
       </div>
+
       <div className="collection--content">
         <AnimatePresence exitBeforeEnter>
           <m.div
-            key={currentFilters.map((f) => f.value).join('-')}
+            key={currentParams.map((f) => f.value).join('-')}
             initial="hide"
             animate="show"
             exit="hide"
@@ -122,26 +165,41 @@ const Collection = ({ products, paginationLimit = 3, sort }) => {
   )
 }
 
-function filterAndSort(products, filters) {
-  const sort = filters.find((filter) => filter.name === 'sort').value
-  let productsCopy = [...products]
+const useFilterAndSort = (products, filters, sort) => {
+  const filterCombos = useMemo(
+    () =>
+      cartesian(...filters.filter((f) => f.values.length).map((f) => f.values)),
+    [filters]
+  )
+
+  const filteredProducts = useMemo(
+    () =>
+      products.filter((product) => {
+        return filterCombos.some((combo) => {
+          const hasCombo = combo.every((x) => product.filters?.includes(x))
+
+          return hasCombo
+        })
+      }),
+    [filters]
+  )
 
   switch (sort) {
     case 'priceAsc':
-      return sortAsc(productsCopy, 'price')
+      return sortAsc(filteredProducts, 'price')
     case 'priceDesc':
-      return sortDesc(productsCopy, 'price')
+      return sortDesc(filteredProducts, 'price')
     case 'alphaAsc':
-      return sortAsc(productsCopy, 'title')
+      return sortAsc(filteredProducts, 'title')
     case 'alphaDesc':
-      return sortDesc(productsCopy, 'title')
+      return sortDesc(filteredProducts, 'title')
     case 'dateAsc':
-      return sortAsc(productsCopy, 'publishDate')
+      return sortAsc(filteredProducts, 'publishDate')
     case 'dateDesc':
-      return sortDesc(productsCopy, 'publishDate')
+      return sortDesc(filteredProducts, 'publishDate')
     case 'featured':
     default:
-      return products
+      return filteredProducts
   }
 }
 

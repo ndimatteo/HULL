@@ -73,10 +73,6 @@ const Product = ({ data }) => {
     variants: page.product.variants,
   })
 
-  // const [activeVariant, setActiveVariant] = useState(
-  //   defaultVariant?.id || page.product.variants[0].id
-  // )
-
   // Check our product inventory is still correct
   const { data: productInventory } = useSWR(
     ['/api/shopify/product-inventory', page.product.id],

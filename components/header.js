@@ -109,7 +109,7 @@ const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
                         className={cx('menu-toggle', {
                           'is-open': isMobileNavOpen,
                         })}
-                        aria-expanded={isMobileNavOpen ? 'true' : 'false'}
+                        aria-expanded={isMobileNavOpen}
                         aria-controls="mobile-nav"
                         aria-label="Toggle Menu"
                       >

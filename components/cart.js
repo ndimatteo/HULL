@@ -31,7 +31,7 @@ const Cart = ({ data }) => {
   const [hasFocus, setHasFocus] = useState(false)
   const [checkoutLink, setCheckoutLink] = useState(checkoutURL)
 
-  const handleKeyup = (e) => {
+  const handleKeyDown = (e) => {
     if (e.which === 27) {
       toggleCart(false)
     }
@@ -77,7 +77,7 @@ const Cart = ({ data }) => {
             },
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          onKeyUp={(e) => handleKeyup(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
           onAnimationComplete={() => setHasFocus(isCartOpen)}
           className={cx('cart is-inverted', {
             'is-active': isCartOpen,

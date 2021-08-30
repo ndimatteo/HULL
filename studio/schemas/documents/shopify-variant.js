@@ -111,7 +111,9 @@ export default {
     {
       title: 'Display Title',
       name: 'title',
-      type: 'string'
+      type: 'string',
+      description:
+        'Shown where variant names appear (for example: Above the product title in the cart)'
     },
     {
       title: 'SEO / Share Settings',

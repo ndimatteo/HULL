@@ -17,7 +17,7 @@
 }
 
 .control {
-  @apply flex flex-col relative text-left bg-pageBG;
+  @apply flex flex-col relative text-left;
 
   &--group {
     @apply grid gap-y-2 grid-cols-1 sm:grid-cols-2;

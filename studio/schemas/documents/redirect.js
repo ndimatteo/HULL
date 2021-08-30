@@ -12,14 +12,14 @@ export default {
       name: 'from',
       type: 'string',
       description:
-        'Do not include the full domain, only the path. For example: /old-page'
+        'Do not include the full domain or leading slash. For example: old-page'
     },
     {
       title: 'To',
       name: 'to',
       type: 'string',
       description:
-        'Do not include the full domain, only the path. For example: /new-page'
+        'Do not include the full domain or leading slash. For example: new-page'
     },
     {
       title: 'Is Permanent?',

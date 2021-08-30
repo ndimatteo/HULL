@@ -27,19 +27,36 @@ export default {
             },
             fields: [
               {
-                title: '(A) Internal Page',
+                title: 'Link Type',
+                name: 'linkType',
+                type: 'string',
+                options: {
+                  list: [
+                    { title: 'Internal Page', value: 'internal' },
+                    { title: 'External URL', value: 'external' }
+                  ],
+                  layout: 'radio',
+                  direction: 'horizontal'
+                },
+                initialValue: 'internal',
+                validation: Rule => Rule.required()
+              },
+              {
+                title: 'Internal Page',
                 name: 'page',
                 type: 'reference',
                 to: [
                   { type: 'page' },
                   { type: 'collection' },
                   { type: 'product' }
-                ]
+                ],
+                hidden: ({ parent }) => parent.linkType !== 'internal'
               },
               {
-                title: '(B) External URL',
+                title: 'External URL',
                 name: 'url',
-                type: 'url'
+                type: 'url',
+                hidden: ({ parent }) => parent.linkType !== 'external'
               },
               {
                 title: 'Style as Button?',

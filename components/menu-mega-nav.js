@@ -25,7 +25,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
   const activeNavRect = useRect(activeNav, { observe: true })
   const [hasFocus, setHasFocus] = useState(false)
 
-  const handleKeyup = (e) => {
+  const handleKeyDown = (e) => {
     if (e.which === 27) {
       toggleMegaNav(false)
     }
@@ -46,7 +46,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
         <div
           ref={!meganav.isOpen ? activeNav : null}
           className="mega-nav"
-          onKeyUp={(e) => handleKeyup(e)}
+          onKeyDown={(e) => handleKeyDown(e)}
         >
           {dropdowns.map((dropdown, key) => {
             const isActive =

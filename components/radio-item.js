@@ -1,6 +1,6 @@
 import { useRef, useEffect } from 'react'
 
-import { wrap, Keys } from '@lib/helpers'
+import { wrap } from '@lib/helpers'
 
 import {
   useRadioGroupContext,
@@ -37,23 +37,23 @@ export default function RadioItem({ title, value, children, ...rest }) {
     let flag = false
 
     // listen for one of our key presses
-    switch (ev.keyCode) {
-      case Keys.SPACE:
-      case Keys.RETURN: {
+    switch (ev.code) {
+      case 'Space':
+      case 'Enter': {
         onChange(value)
         flag = true
         break
       }
 
-      case Keys.UP:
-      case Keys.LEFT: {
+      case 'ArrowUp':
+      case 'ArrowLeft': {
         onChange(items[wrap(index - 1, items.length)].props.value)
         flag = true
         break
       }
 
-      case Keys.DOWN:
-      case Keys.RIGHT: {
+      case 'ArrowDown':
+      case 'ArrowRight': {
         onChange(items[wrap(index + 1, items.length)].props.value)
         flag = true
         break

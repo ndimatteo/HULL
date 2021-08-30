@@ -3,21 +3,28 @@ import { m, AnimatePresence } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
 import cx from 'classnames'
 
-import { Keys } from '@lib/helpers'
-import { itemAnim } from '@lib/animate'
-
 import RadioGroup from '@components/radio-group'
 import RadioItem from '@components/radio-item'
 
-const Filter = ({ name, displayTitle, options, activeOption, onChange }) => {
+const Listbox = ({
+  id,
+  name,
+  label,
+  before,
+  after,
+  options,
+  activeOption,
+  onChange = () => {},
+}) => {
   const groupRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
 
-  const defaultOption = options[0].slug
-  const currentOption = options.find((option) => option.slug === activeOption)
+  const defaultOption = options[0]
+  const currentOption =
+    options.find((option) => option.slug === activeOption) || defaultOption
 
   const handleOnChange = (value) => {
-    onChange(name, value)
+    onChange([{ name, value }])
     setIsOpen(false)
   }
 
@@ -29,8 +36,8 @@ const Filter = ({ name, displayTitle, options, activeOption, onChange }) => {
   function handleKeyDown(e) {
     let flag = false
 
-    switch (e.keyCode) {
-      case Keys.ESC: {
+    switch (e.code) {
+      case 'Escape': {
         setIsOpen(false)
         flag = true
         break
@@ -65,15 +72,22 @@ const Filter = ({ name, displayTitle, options, activeOption, onChange }) => {
   }, [isOpen])
 
   return (
-    <div ref={groupRef} className="filter-group">
+    <div ref={groupRef} className="listbox">
+      <span id={`${id}-label`} className="sr-only">
+        {label}
+      </span>
+
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={cx('filter-group--btn', { 'is-open': isOpen })}
+        className={cx('listbox--btn', { 'is-open': isOpen })}
+        aria-expanded={isOpen}
+        aria-labelledby={`${id}-label`}
       >
-        <span className="filter-group--btn-icon"></span>
-        {displayTitle}
-        {currentOption.title}
+        {before}
+        {currentOption?.title}
+        {after}
       </button>
+
       <AnimatePresence initial={false}>
         {isOpen && (
           <FocusTrap
@@ -81,7 +95,7 @@ const Filter = ({ name, displayTitle, options, activeOption, onChange }) => {
               clickOutsideDeactivates: true,
             }}
           >
-            <div className="filter-group--content">
+            <div className="listbox--content">
               <m.div
                 initial="hide"
                 animate="show"
@@ -95,20 +109,25 @@ const Filter = ({ name, displayTitle, options, activeOption, onChange }) => {
                   },
                 }}
                 transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                className="filter-group--dropdown"
+                className="listbox--dropdown"
               >
                 <RadioGroup
-                  value={activeOption}
+                  value={currentOption.slug}
                   onChange={(value) => handleOnChange(value)}
-                  className="filter is-dropdown"
+                  role="listbox"
+                  className="listbox--options is-inverted"
                 >
                   {options.map((option, key) => {
                     return (
                       <RadioItem
                         key={key}
                         value={option.slug}
-                        className={cx('filter--item', {
-                          'is-active': option.slug === defaultOption,
+                        role="option"
+                        aria-selected={
+                          option.slug === currentOption.slug ? 'true' : 'false'
+                        }
+                        className={cx('listbox--item', {
+                          'is-active': option.slug === currentOption.slug,
                         })}
                       >
                         {option.title}
@@ -125,4 +144,4 @@ const Filter = ({ name, displayTitle, options, activeOption, onChange }) => {
   )
 }
 
-export default Filter
+export default Listbox

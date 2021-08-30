@@ -42,7 +42,7 @@ export default {
       title: 'Cart Message',
       name: 'cartMessage',
       type: 'string',
-      description: 'Display a message below the cart checkout button'
+      description: 'Display a message below the cart checkout button.'
     }
   ],
   preview: {

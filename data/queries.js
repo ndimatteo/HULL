@@ -31,7 +31,7 @@ const link = `
 
 // Construct our "image meta" GROQ
 export const imageMeta = `
-  alt,
+  "alt": coalesce(alt, asset->alt),
   asset,
   crop,
   customRatio,
@@ -115,7 +115,8 @@ export const product = `
       },
       seo
     },
-    "klaviyoAccountID": *[_type == "generalSettings"][0].klaviyoAccountID
+    "klaviyoAccountID": *[_type == "generalSettings"][0].klaviyoAccountID,
+    "filters": filters[]->slug.current
   }
 `
 
@@ -226,6 +227,20 @@ export const modules = `
   _type == 'collectionGrid' => {
     _type,
     _key,
+    "filter": *[_type == "shopSettings"][0].filter{
+      isActive,
+      groups[]{
+        "id": _key,
+        title,
+        "slug": slug.current,
+        options[]->{
+          type,
+          title,
+          "slug": slug.current,
+          "color": color->color
+        }
+      }
+    },
     "sort": *[_type == "shopSettings"][0].sort{
       isActive,
       options[]{
@@ -258,6 +273,7 @@ export const site = `
     },
     "header": *[_type == "headerSettings"][0]{
       "promo": *[_type == "promoSettings"][0]{
+        enabled,
         display,
         text,
         "link": link->{

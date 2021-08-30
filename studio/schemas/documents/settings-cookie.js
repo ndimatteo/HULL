@@ -25,14 +25,16 @@ export default {
       name: 'message',
       type: 'text',
       rows: 2,
-      description: 'Your cookie consent message.'
+      description: 'Your cookie consent message.',
+      hidden: ({ parent }) => !parent.enabled
     },
     {
       title: 'Link',
       name: 'link',
       type: 'reference',
-      to: [{ type: 'page' }, { type: 'collection' }, { type: 'product' }],
-      description: 'Show a link to "Learn More" about your cookie policy.'
+      to: [{ type: 'page' }],
+      description: 'Show a link to "Learn More" about your cookie policy.',
+      hidden: ({ parent }) => !parent.enabled
     }
   ],
   preview: {

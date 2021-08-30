@@ -15,7 +15,7 @@
 @import "components/_cursors";
 @import "components/_drawers";
 @import "components/_dropdowns";
-@import "components/_filters";
+@import "components/_listboxes";
 @import "components/_marquees";
 @import "components/_cookie-bar";
 @import "components/_promo-banner";
@@ -28,6 +28,7 @@
 @import "modules/_hero";
 @import "modules/_divider";
 @import "modules/_collection";
+@import "modules/_filters";
 @import "modules/_product";
 
 @import "_shame";

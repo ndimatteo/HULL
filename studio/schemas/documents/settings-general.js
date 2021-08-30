@@ -8,19 +8,23 @@ export default {
       title: 'Home Page',
       name: 'home',
       type: 'reference',
-      to: [{ type: 'page' }]
+      to: [{ type: 'page' }],
+      description: 'This page will show at the root of your domain.'
     },
     {
       title: 'Shop Page',
       name: 'shop',
       type: 'reference',
-      to: [{ type: 'collection' }]
+      to: [{ type: 'collection' }],
+      description: 'This collection will show at: /shop.'
     },
     {
       title: 'Error Page (404)',
       name: 'error',
       type: 'reference',
-      to: [{ type: 'page' }]
+      to: [{ type: 'page' }],
+      description:
+        'This page will show for any URL at your domain that does not exist yet.'
     },
     {
       title: 'Site Title',

@@ -13,12 +13,19 @@ const accordionAnim = {
   },
 }
 
-const Accordion = ({ id, isOpen = false, onToggle, title, children }) => {
+const Accordion = ({
+  id,
+  isOpen = false,
+  onToggle = () => {},
+  title,
+  className,
+  children,
+}) => {
   return (
-    <div key={id} className="accordion">
+    <div key={id} className={cx('accordion', className)}>
       <button
         onClick={() => onToggle(id, !isOpen)}
-        aria-expanded={isOpen ? 'true' : 'false'}
+        aria-expanded={isOpen}
         aria-controls={`accordion-${id}`}
         className={cx('accordion--toggle', { 'is-open': isOpen })}
       >

@@ -4,7 +4,6 @@ import { Sliders, CheckSquare, Lightning } from 'phosphor-react'
 import { getSwatch } from '../../lib/helpers'
 
 const getIcon = (type, color) => {
-  console.log(type)
   switch (type) {
     case 'swatch':
       return getSwatch(color)
@@ -28,8 +27,7 @@ export default {
       options: {
         list: [
           { title: 'Simple', value: ' ' },
-          { title: 'Swatch', value: 'swatch' },
-          { title: 'Dynamic', value: 'dynamic' }
+          { title: 'Swatch', value: 'swatch' }
         ]
       },
       initialValue: ' '
@@ -53,7 +51,10 @@ export default {
       title: 'Color',
       name: 'color',
       type: 'reference',
-      to: [{ type: 'solidColor' }]
+      to: [{ type: 'solidColor' }],
+      hidden: ({ parent }) => {
+        return parent.type !== 'swatch'
+      }
     }
   ],
   preview: {

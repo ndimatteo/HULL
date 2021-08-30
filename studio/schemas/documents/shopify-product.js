@@ -136,7 +136,19 @@ export default {
         {
           title: 'Filter',
           type: 'reference',
-          to: [{ type: 'filter' }]
+          to: [{ type: 'filter' }],
+          options: {
+            filter: ({ parent }) => {
+              const addedFilters = parent.map(p => p._ref).filter(Boolean)
+
+              return {
+                filter: '!(_id in $ids)',
+                params: {
+                  ids: addedFilters
+                }
+              }
+            }
+          }
         }
       ],
       options: {
