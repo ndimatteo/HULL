@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import cx from 'classnames'
 
+import { ConditionalWrapper } from '@lib/helpers'
+
 import Drawer from '@components/drawer'
 import Accordion from '@components/accordion'
 import Swatch from '@components/swatch'
@@ -9,14 +11,11 @@ import Icon from '@components/icon'
 const CollectionFilter = ({
   filterGroups,
   activeFilters = [],
-  itemCount,
+  filtersTotal,
+  itemTotal,
   onChange,
 }) => {
   const [filtersOpen, setFiltersOpen] = useState(false)
-
-  const filtersTotal = activeFilters.reduce((acc, cur) => {
-    return Number(acc + cur.values.length)
-  }, 0)
 
   const handleClearFilters = () => {
     const clearedFilters = activeFilters.map((filter) => ({
@@ -81,7 +80,7 @@ const CollectionFilter = ({
             <FilterGroup
               key={key}
               group={group}
-              activeFilters={activeFilters.find((f) => f.name === group.slug)}
+              activeOptions={activeFilters.find((f) => f.name === group.slug)}
               onChange={onChange}
             />
           ))}
@@ -92,10 +91,10 @@ const CollectionFilter = ({
           <button
             onClick={() => setFiltersOpen(false)}
             className={cx('btn is-primary is-inverted is-large is-block', {
-              'is-disabled': itemCount === 0,
+              'is-disabled': itemTotal === 0,
             })}
           >
-            {itemCount > 0 ? `Show ${itemCount} Results` : 'No Results'}
+            {itemTotal > 0 ? `Show ${itemTotal} Results` : 'No Results'}
           </button>
         </div>
       </Drawer>
@@ -104,10 +103,12 @@ const CollectionFilter = ({
 }
 
 // Build our filter group accordion
-const FilterGroup = ({ group, activeFilters, onChange }) => {
+const FilterGroup = ({ group, activeOptions, onChange }) => {
   const [isOpen, setIsOpen] = useState(true)
 
-  const { id, title, options } = group
+  const { id, title, display, options } = group
+
+  const groupTotal = activeOptions.values.length
 
   const toggleGroup = (_, state) => {
     setIsOpen(state)
@@ -123,6 +124,10 @@ const FilterGroup = ({ group, activeFilters, onChange }) => {
         <>
           <span id={`filter-group-${id}`} className="filter-group--title">
             {title}
+
+            {groupTotal > 0 && (
+              <span className="filter-group--count">({groupTotal})</span>
+            )}
           </span>
         </>
       }
@@ -130,13 +135,15 @@ const FilterGroup = ({ group, activeFilters, onChange }) => {
       <div
         role="group"
         aria-labelledby={`filter-group-${id}`}
-        className="filter-group--options"
+        className={cx('filter-group--options', {
+          'is-grid': display === 'grid',
+        })}
       >
         {options?.map((option, key) => (
           <FilterOption
             key={key}
             option={option}
-            activeFilters={activeFilters}
+            activeOptions={activeOptions}
             onChange={onChange}
           />
         ))}
@@ -146,10 +153,10 @@ const FilterGroup = ({ group, activeFilters, onChange }) => {
 }
 
 // Build out our filter option
-const FilterOption = ({ option, activeFilters, onChange }) => {
+const FilterOption = ({ option, activeOptions, onChange }) => {
   const { type, title, slug, color } = option
 
-  const { name: filterGroup, values } = activeFilters
+  const { name: filterGroup, values } = activeOptions
 
   const isChecked = values?.includes(slug)
 
@@ -177,32 +184,34 @@ const FilterOption = ({ option, activeFilters, onChange }) => {
         'is-active': isChecked,
       })}
     >
-      {!type.trim() && (
-        <div className="control">
-          <input
-            id={`filter-${slug}`}
-            name={filterGroup}
-            type="checkbox"
-            value={slug}
-            checked={values?.includes(slug) || false}
-            onChange={handleFilterChange}
-          />
-          <label
-            htmlFor={`filter-${slug}`}
-            className="control--label for-checkbox"
-          >
-            <Icon name="Checkmark" />
-            {title}
-          </label>
-        </div>
-      )}
-
-      {type === 'swatch' && (
-        <>
-          <Swatch label={title} color={color} />
+      <div className="control">
+        <input
+          id={`filter-${slug}`}
+          name={filterGroup}
+          type="checkbox"
+          value={slug}
+          checked={values?.includes(slug) || false}
+          onChange={handleFilterChange}
+        />
+        <label
+          htmlFor={`filter-${slug}`}
+          className="control--label for-checkbox"
+        >
+          <div className="filter-option--icon">
+            <ConditionalWrapper
+              condition={type === 'swatch'}
+              wrapper={(children) => (
+                <Swatch label={title} color={color}>
+                  {children}
+                </Swatch>
+              )}
+            >
+              <Icon name="Checkmark" />
+            </ConditionalWrapper>
+          </div>
           <div className="filter-option--label">{title}</div>
-        </>
-      )}
+        </label>
+      </div>
     </div>
   )
 }

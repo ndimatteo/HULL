@@ -32,6 +32,18 @@
       @apply hidden sm:block ml-2;
     }
   }
+
+  &--filter-chips {
+    @apply flex bg-pageText;
+    
+    .accordion {
+      @apply border-0;
+
+      &--inner {
+        @apply max-w-none p-0 border-b border-pageText;
+      }
+    }
+  }
 }
 
 .collection-count {

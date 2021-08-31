@@ -39,6 +39,7 @@ const Drawer = ({
     <InPortal id="drawer">
       <>
         <FocusTrap
+          active={isActive}
           focusTrapOptions={{
             fallbackFocus: () => drawerRef.current,
             allowOutsideClick: true,

@@ -233,6 +233,7 @@ export const modules = `
         "id": _key,
         title,
         "slug": slug.current,
+        display,
         options[]->{
           type,
           title,

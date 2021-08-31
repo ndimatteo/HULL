@@ -66,7 +66,7 @@ const MegaNavigation = ({ items = [], headerHeight }) => {
                     <m.div
                       initial="hide"
                       animate={isActive ? 'show' : 'hide'}
-                      onAnimationComplete={() => setHasFocus(isActive)}
+                      onAnimationComplete={(v) => setHasFocus(v === 'show')}
                       variants={swipeAnim}
                       className="mega-item--content"
                     >

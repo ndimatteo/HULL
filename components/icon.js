@@ -117,6 +117,13 @@ const getIcon = (name, color) => {
           d="M12.1 52.1l24.4 24.4 53-53"
         />
       )
+    case 'Chevron Down':
+      return (
+        <polygon
+          points="51.5 85.657 8.672 42.828 14.328 37.172 51.5 74.343 88.672 37.172 94.328 42.828 51.5 85.657"
+          fill={color}
+        />
+      )
     default:
       return <path />
   }

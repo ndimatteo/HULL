@@ -7,6 +7,7 @@ import { useParams, cartesian, sortAsc, sortDesc } from '@lib/helpers'
 import { listAnim } from '@lib/animate'
 
 import CollectionFilter from '@components/collection-filter'
+import CollectionFilterChips from '@components/collection-filter-chips'
 import CollectionSort from '@components/collection-sort'
 import ProductCard from '@components/product-card'
 
@@ -61,6 +62,11 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
     }
   })
 
+  // calculate total active filters
+  const filtersTotal = activeFilters.reduce((acc, cur) => {
+    return Number(acc + cur.values.length)
+  }, 0)
+
   // calculate our product order and pagination
   const orderedProducts = useFilterAndSort(products, activeFilters, activeSort)
   const paginatedProducts = [...orderedProducts.slice(0, currentCount)]
@@ -92,16 +98,17 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
     threshold: 1,
   })
 
+  // update pagination when the count or products change
+  useEffect(() => {
+    setHasPagination(currentCount < orderedProducts.length)
+  }, [currentCount, orderedProducts])
+
   // trigger load more when scrolled to "load more" ref
   // useEffect(() => {
   //   if (loadMoreTrigger) {
   //     loadMore()
   //   }
   // }, [loadMoreTrigger])
-
-  useEffect(() => {
-    setHasPagination(currentCount < orderedProducts.length)
-  }, [currentCount, orderedProducts])
 
   return (
     <section className="collection">
@@ -110,7 +117,8 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
           <CollectionFilter
             filterGroups={filterGroups}
             activeFilters={activeFilters}
-            itemCount={orderedProducts.length}
+            filtersTotal={filtersTotal}
+            itemTotal={orderedProducts.length}
             onChange={updateParams}
           />
         )}
@@ -123,6 +131,16 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
           />
         )}
       </div>
+
+      {filter?.isActive && (
+        <CollectionFilterChips
+          id="collection-filter-chips"
+          filterGroups={filterGroups}
+          activeFilters={activeFilters}
+          filtersTotal={filtersTotal}
+          onClick={updateParams}
+        />
+      )}
 
       <div className="collection--content">
         <AnimatePresence exitBeforeEnter>
@@ -151,15 +169,15 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
               />
             ))}
           </m.div>
-        </AnimatePresence>
 
-        {hasPagination && (
-          <div ref={loadMoreRef} className="collection--pagination">
-            <button className="btn is-large" onClick={loadMore}>
-              Load More
-            </button>
-          </div>
-        )}
+          {hasPagination && (
+            <div ref={loadMoreRef} className="collection--pagination">
+              <button className="btn is-large" onClick={loadMore}>
+                Load More
+              </button>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )

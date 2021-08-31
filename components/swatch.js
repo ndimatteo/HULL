@@ -1,7 +1,7 @@
 import React from 'react'
 import { contrastColor } from 'contrast-color'
 
-const Swatch = ({ label, color }) => {
+const Swatch = ({ label, color, children }) => {
   if (!color) return null
 
   return (
@@ -14,7 +14,9 @@ const Swatch = ({ label, color }) => {
           ? contrastColor({ bgColor: color?.hex })
           : null,
       }}
-    />
+    >
+      {children}
+    </div>
   )
 }
 

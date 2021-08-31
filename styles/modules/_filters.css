@@ -31,22 +31,80 @@
   &:first-child {
     @apply border-t-0;
   }
+
+  &--count {
+    @apply inline-block align-middle opacity-30 ml-2 text-xs;
+  }
   
   &--options {
-    @apply grid grid-cols-1 gap-y-4 justify-items-start mt-2;
+    @apply flex flex-wrap gap-y-4 justify-items-start mt-2;
+
+    &.is-grid {
+      @apply grid grid-cols-3 gap-4;
+    }
   }
 }
 
 .filter-option {
+  @apply w-full;
+
+  .is-grid & {
+    @apply border p-2 text-center transition-colors duration-200;
+
+    &.is-active {
+      @apply bg-pageBG text-pageText border-pageBG;
+    }
+
+    .control {
+      &--label {
+        @apply block text-center;
+      }
+    }
+  }
+  
   &.is-swatch {
-    @apply inline-flex flex-col text-center;
+    @apply inline-flex flex-col w-auto ml-1 mr-5 text-center;
 
     .swatch {
       @apply w-[40px] h-[40px];
+    }
+
+    .control {
+      &--label {
+        @apply flex flex-col items-center;
+
+        svg {
+          @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-transparent border-none;
+          
+          path {
+            color: var(--swatchBorder);
+          }
+        }
+      }
+    }
+
+    input:checked + {
+      .control--label {
+        svg {
+          @apply bg-transparent;
+        }
+      }
+    }
+  }
+
+  &--icon {
+    @apply relative;
+
+    .is-grid & {
+      @apply hidden;
     }
   }
   
   &--label {
     @apply mt-1 text-xs font-semibold;
+
+    .is-swatch & {
+      @apply mt-2;
+    }
   }
 }

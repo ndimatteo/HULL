@@ -40,6 +40,10 @@
 
     .is-active & {
       @apply border-pageText opacity-100;
+
+      .is-inverted & {
+        @apply border-pageBG;
+      }
     }
 
     li:not(.is-soldout):not(.is-active) button:hover & {

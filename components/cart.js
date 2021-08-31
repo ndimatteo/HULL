@@ -78,7 +78,7 @@ const Cart = ({ data }) => {
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           onKeyDown={(e) => handleKeyDown(e)}
-          onAnimationComplete={() => setHasFocus(isCartOpen)}
+          onAnimationComplete={(v) => setHasFocus(v === 'show')}
           className={cx('cart is-inverted', {
             'is-active': isCartOpen,
             'is-updating': isUpdating,
