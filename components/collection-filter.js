@@ -61,17 +61,26 @@ const CollectionFilter = ({
             )}
           </div>
 
-          {filtersTotal > 0 && (
+          <div className="filters--actions">
+            {filtersTotal > 0 && (
+              <button
+                onClick={() => {
+                  handleClearFilters()
+                  setFiltersOpen(false)
+                }}
+                className="filters-reset btn is-small"
+              >
+                Clear All
+              </button>
+            )}
+
             <button
-              onClick={() => {
-                handleClearFilters()
-                setFiltersOpen(false)
-              }}
-              className="filters-reset btn is-small"
+              className="filters-close"
+              onClick={() => setFiltersOpen(false)}
             >
-              Clear All
+              Done
             </button>
-          )}
+          </div>
         </div>
 
         {/* Filter Groups */}

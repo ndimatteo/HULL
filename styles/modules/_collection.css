@@ -10,7 +10,15 @@
   }
   
   &--grid {
-    @apply grid grid-cols-1 md:grid-cols-3 -m-px;
+    @apply grid grid-cols-1 md:grid-cols-3;
+
+    &.is-empty {
+      @apply grid-cols-1;
+    }
+  }
+
+  &--empty {
+    @apply flex justify-center px-8 py-16 min-h-[35vh];
   }
 
   &--pagination {
@@ -18,10 +26,10 @@
   }
 
   &--filter-actions {
-    @apply flex items-center px-4;
+    @apply flex items-center px-2 sm:px-4;
 
     .filters-toggle {
-      @apply clean-btn flex items-center relative bg-transparent -mr-2 p-4 text-sm leading-normal font-semibold uppercase;
+      @apply clean-btn flex items-center relative bg-transparent p-4 text-sm leading-normal font-semibold uppercase;
 
       &--count {
         @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG text-xs leading-loose;
@@ -58,7 +66,7 @@
 }
 
 .collection-sort {
-  @apply flex items-center ml-auto px-4;
+  @apply flex items-center ml-auto px-2 sm:px-4;
 
   .listbox--btn {
     @apply p-4;

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import { useIntersection } from 'use-intersection'
 import { AnimatePresence, m } from 'framer-motion'
+import cx from 'classnames'
 
 import { useParams, cartesian, sortAsc, sortDesc } from '@lib/helpers'
 
@@ -145,12 +146,17 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
       <div className="collection--content">
         <AnimatePresence exitBeforeEnter>
           <m.div
-            key={currentParams.map((f) => f.value).join('-')}
+            key={currentParams
+              .map((f) => f.value)
+              .filter(Boolean)
+              .join('-')}
             initial="hide"
             animate="show"
             exit="hide"
             variants={listAnim}
-            className="collection--grid"
+            className={cx('collection--grid', {
+              'is-empty': !orderedProducts.length,
+            })}
           >
             {paginatedProducts.map((product) => (
               <ProductCard
@@ -168,6 +174,12 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
                 showQuickAdd
               />
             ))}
+
+            {orderedProducts.length === 0 && (
+              <div className="collection--empty">
+                <p>No products found.</p>
+              </div>
+            )}
           </m.div>
 
           {hasPagination && (

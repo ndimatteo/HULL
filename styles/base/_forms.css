@@ -72,7 +72,7 @@
     }
 
     &.for-checkbox {
-      @apply transform-none inline-flex relative top-auto left-auto mx-auto sm:mx-0 p-0 cursor-pointer;
+      @apply transform-none inline-flex relative top-auto left-auto p-0 cursor-pointer;
 
       svg {
         @apply block flex-none mr-4 p-1 pointer-events-none border border-current transition-colors;
