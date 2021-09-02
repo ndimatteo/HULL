@@ -30,161 +30,170 @@ const itemAnim = {
   },
 }
 
-const ProductCard = ({
-  product,
-  hasVisuals,
-  showGallery,
-  showThumbs,
-  showPrice,
-  showOption,
-  showQuickAdd,
-  activeFilters,
-  className,
-  onClick,
-}) => {
-  if (!product) return null
+const ProductCard = React.forwardRef(
+  (
+    {
+      product,
+      hasVisuals,
+      showGallery,
+      showThumbs,
+      showPrice,
+      showOption,
+      showQuickAdd,
+      activeFilters,
+      className,
+      onClick,
+    },
+    ref
+  ) => {
+    if (!product) return null
 
-  const activeFilterValues =
-    activeFilters?.flatMap((f) =>
-      f.values.map((v) => ({
-        name: f.name,
-        value: v,
-      }))
-    ) || []
+    const activeFilterValues =
+      activeFilters?.flatMap((f) =>
+        f.values.map((v) => ({
+          name: f.name,
+          value: v,
+        }))
+      ) || []
 
-  // select the default variant based current active filters
-  const defaultOption = activeFilterValues
-    .map((filter) => {
-      const currentFilter = product.filters.find(
-        (f) => f.slug === filter.value && f.forOption
-      )
+    // select the default variant based current active filters
+    const defaultOption = activeFilterValues
+      .map((filter) => {
+        const currentFilter = product.filters.find(
+          (f) => f.slug === filter.value && f.forOption
+        )
 
-      if (!currentFilter) return null
+        if (!currentFilter) return null
 
-      const option = currentFilter.forOption.split(':')
+        const option = currentFilter.forOption.split(':')
 
-      return {
-        name: option[0],
-        value: option[1],
-      }
-    })
-    .filter(Boolean)
-
-  // find default variant for product
-  const defaultVariant = product.variants?.find((v) => {
-    const currentOption = defaultOption?.length
-      ? defaultOption[defaultOption.length - 1]
-      : {
-          name: product.options[0]?.name,
-          value: product.options[0]?.values[0],
+        return {
+          name: option[0],
+          value: option[1],
         }
+      })
+      .filter(Boolean)
 
-    return hasObject(v.options, currentOption)
-  })
+    // find default variant for product
+    const defaultVariant = product.variants?.find((v) => {
+      const currentOption = defaultOption?.length
+        ? defaultOption[defaultOption.length - 1]
+        : {
+            name: product.options[0]?.name,
+            value: product.options[0]?.values[0],
+          }
 
-  // set active variant as default
-  const [activeVariant, setActiveVariant] = useState(
-    defaultVariant ? defaultVariant : product.variants[0]
-  )
+      return hasObject(v.options, currentOption)
+    })
 
-  // assign the new variant when options are changed
-  const changeActiveVariant = (id) => {
-    const newActiveVariant = product.variants.find((v) => v.id === id)
-    setActiveVariant(newActiveVariant)
-  }
+    // set active variant as default
+    const [activeVariant, setActiveVariant] = useState(
+      defaultVariant ? defaultVariant : product.variants[0]
+    )
 
-  return (
-    <m.div variants={itemAnim} className={cx('product-card', className)}>
-      {hasVisuals && (
-        <div className="product-card--visuals">
-          {/* Show Gallery */}
-          {showGallery && (
-            <div className="product-card--gallery">
-              <ProductGallery
-                photosets={product.photos.main}
-                activeVariant={activeVariant}
-                hasArrows
-                hasDots
-                hasDrag={false}
-              />
-            </div>
-          )}
+    // assign the new variant when options are changed
+    const changeActiveVariant = (id) => {
+      const newActiveVariant = product.variants.find((v) => v.id === id)
+      setActiveVariant(newActiveVariant)
+    }
 
-          {/* Show Thumbnail */}
-          {showThumbs && (
-            <div className="product-card--thumb">
-              <ProductThumbnail
-                thumbnails={product.photos.listing}
-                activeVariant={activeVariant}
-              />
-            </div>
-          )}
+    return (
+      <m.div
+        ref={ref}
+        variants={itemAnim}
+        className={cx('product-card', className)}
+      >
+        {hasVisuals && (
+          <div className="product-card--visuals">
+            {/* Show Gallery */}
+            {showGallery && (
+              <div className="product-card--gallery">
+                <ProductGallery
+                  photosets={product.photos.main}
+                  activeVariant={activeVariant}
+                  hasArrows
+                  hasDots
+                  hasDrag={false}
+                />
+              </div>
+            )}
 
-          {/* Quick Add */}
-          {showQuickAdd && activeVariant.inStock && (
-            <div className="product-card--add">
-              <ProductAdd
-                productID={activeVariant.id}
-                className="btn is-primary is-white is-large"
-              />
-            </div>
-          )}
-        </div>
-      )}
+            {/* Show Thumbnail */}
+            {showThumbs && (
+              <div className="product-card--thumb">
+                <ProductThumbnail
+                  thumbnails={product.photos.listing}
+                  activeVariant={activeVariant}
+                />
+              </div>
+            )}
 
-      <div className="product-card--details">
-        <div className="product-card--header">
-          <h2 className="product-card--title">
-            <Link
-              href={`/products/${
-                product.slug +
-                (product.surfaceOption ? `?variant=${activeVariant.id}` : '')
-              }`}
-              scroll={false}
-            >
-              <a className="product-card--link" onClick={onClick}>
-                {product.title}
-              </a>
-            </Link>
-          </h2>
-
-          {showPrice && (
-            <ProductPrice
-              price={activeVariant ? activeVariant.price : product.price}
-              comparePrice={
-                activeVariant
-                  ? activeVariant.comparePrice
-                  : product.comparePrice
-              }
-            />
-          )}
-        </div>
-
-        {/* Surfaced Option */}
-        {showOption && (
-          <div className="product-card--option">
-            {product.options?.map(
-              (option, key) =>
-                option.position === parseInt(product.surfaceOption) &&
-                option.values.length > 1 && (
-                  <ProductOption
-                    key={key}
-                    position={key}
-                    option={option}
-                    optionSettings={product.optionSettings}
-                    variants={product.variants}
-                    activeVariant={activeVariant}
-                    strictMatch={false}
-                    hideLabels
-                    onChange={changeActiveVariant}
-                  />
-                )
+            {/* Quick Add */}
+            {showQuickAdd && activeVariant.inStock && (
+              <div className="product-card--add is-inverted">
+                <ProductAdd
+                  productID={activeVariant.id}
+                  className="btn is-primary is-white is-large"
+                />
+              </div>
             )}
           </div>
         )}
-      </div>
-    </m.div>
-  )
-}
+
+        <div className="product-card--details">
+          <div className="product-card--header">
+            <h2 className="product-card--title">
+              <Link
+                href={`/products/${
+                  product.slug +
+                  (product.surfaceOption ? `?variant=${activeVariant.id}` : '')
+                }`}
+                scroll={false}
+              >
+                <a className="product-card--link" onClick={onClick}>
+                  {product.title}
+                </a>
+              </Link>
+            </h2>
+
+            {showPrice && (
+              <ProductPrice
+                price={activeVariant ? activeVariant.price : product.price}
+                comparePrice={
+                  activeVariant
+                    ? activeVariant.comparePrice
+                    : product.comparePrice
+                }
+              />
+            )}
+          </div>
+
+          {/* Surfaced Option */}
+          {showOption && (
+            <div className="product-card--option">
+              {product.options?.map(
+                (option, key) =>
+                  option.position === parseInt(product.surfaceOption) &&
+                  option.values.length > 1 && (
+                    <ProductOption
+                      key={key}
+                      position={key}
+                      option={option}
+                      optionSettings={product.optionSettings}
+                      variants={product.variants}
+                      activeVariant={activeVariant}
+                      strictMatch={false}
+                      hideLabels
+                      onChange={changeActiveVariant}
+                    />
+                  )
+              )}
+            </div>
+          )}
+        </div>
+      </m.div>
+    )
+  }
+)
 
 export default ProductCard

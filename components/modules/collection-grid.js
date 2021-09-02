@@ -1,6 +1,5 @@
 import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react'
 import { useIntersection } from 'use-intersection'
-import { AnimatePresence, m } from 'framer-motion'
 import cx from 'classnames'
 
 import {
@@ -11,8 +10,6 @@ import {
   clampRange,
 } from '@lib/helpers'
 
-import { listAnim } from '@lib/animate'
-
 import CollectionFilter from '@components/collection-filter'
 import CollectionFilterChips from '@components/collection-filter-chips'
 import CollectionSort from '@components/collection-sort'
@@ -22,6 +19,8 @@ const Collection = ({ data = {} }) => {
   const { title, products, filter, sort, paginationLimit } = data
 
   if (!products || products.length === 0) return null
+
+  // const collectionItems = useRef([])
 
   const [hasPagination, setHasPagination] = useState(
     paginationLimit > 0 && products.length > paginationLimit
@@ -53,7 +52,9 @@ const Collection = ({ data = {} }) => {
   ).value
 
   // calculate our filters
-  const currentFilters = currentParams.filter((f) => f.name !== 'sort')
+  const currentFilters = currentParams.filter(
+    (f) => !['page', 'sort'].includes(f.name)
+  )
   const activeFilters = currentFilters.map((filter) => {
     const validOptions = filterGroups
       .find((g) => g.slug === filter.name)
@@ -106,9 +107,11 @@ const Collection = ({ data = {} }) => {
       orderedProducts.length
     )
 
-    setCurrentCount(newCount)
-    // updateParams([{ name: 'index', value: `${newCount}` }])
-  }, [currentCount, orderedProducts])
+    const newPage = Math.ceil(newCount / paginationLimit)
+
+    // setCurrentCount(newCount)
+    updateParams([{ name: 'page', value: `${newPage > 1 ? newPage : null}` }])
+  }, [currentCount, orderedProducts, paginationLimit])
 
   // setup "load more" functionality
   const loadMoreRef = useRef()
@@ -118,8 +121,20 @@ const Collection = ({ data = {} }) => {
 
   // update pagination when the count or products change
   useEffect(() => {
+    const desiredPage = currentParams.find((p) => p.name === 'page').value
+    const maxPage = Math.ceil(orderedProducts.length / paginationLimit)
+
+    const newCount =
+      desiredPage > 1 && desiredPage <= maxPage
+        ? clampRange(paginationLimit * desiredPage, 1, orderedProducts.length)
+        : null
+
+    if (newCount) {
+      setCurrentCount(newCount)
+    }
+
     setHasPagination(currentCount < orderedProducts.length)
-  }, [currentCount, orderedProducts])
+  }, [currentCount, orderedProducts, currentParams, paginationLimit])
 
   // trigger load more when scrolled to "load more" ref
   // useEffect(() => {
@@ -127,16 +142,6 @@ const Collection = ({ data = {} }) => {
   //     loadMore()
   //   }
   // }, [loadMoreTrigger])
-
-  console.log({ currentParams })
-
-  console.log(
-    currentParams
-      .filter((f) => f.name !== 'index')
-      .map((f) => f.value)
-      .filter(Boolean)
-      .join('-')
-  )
 
   return (
     <section className="collection">
@@ -176,11 +181,13 @@ const Collection = ({ data = {} }) => {
             'is-empty': !orderedProducts.length,
           })}
         >
-          {paginatedProducts.map((product) => (
+          {paginatedProducts.map((product, key) => (
             <ProductCard
+              // ref={(node) => (collectionItems.current[key] = node)}
               key={
                 product.id +
                 currentParams
+                  .filter((f) => f.name !== 'page')
                   .map((f) => f.value)
                   .filter(Boolean)
                   .join('-')
