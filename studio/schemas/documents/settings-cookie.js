@@ -2,7 +2,7 @@ export default {
   title: 'Cookie Consent Settings',
   name: 'cookieSettings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
+  // __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
       name: 'cookiePolicyNote',

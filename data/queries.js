@@ -230,6 +230,8 @@ export const modules = `
   _type == 'collectionGrid' => {
     _type,
     _key,
+    "title": ^.title,
+    "paginationLimit": *[_type == "shopSettings"][0].paginationLimit,
     "filter": *[_type == "shopSettings"][0].filter{
       isActive,
       groups[]{

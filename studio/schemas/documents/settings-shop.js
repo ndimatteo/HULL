@@ -29,6 +29,19 @@ export default {
         })
     },
     {
+      title: 'Collection Pagination Limit',
+      name: 'paginationLimit',
+      type: 'number',
+      description:
+        'The number of products to show in a collection to show/load at a time',
+      validation: Rule =>
+        Rule.integer()
+          .positive()
+          .min(3)
+          .max(100),
+      initialValue: 12
+    },
+    {
       title: 'Filter',
       name: 'filter',
       type: 'shopFilter'

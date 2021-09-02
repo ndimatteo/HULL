@@ -25,6 +25,10 @@
     @apply relative p-4 sm:py-8 is-textured bg-pageBG border-t text-center;
   }
 
+  &--count {
+    @apply relative p-4 sm:py-8 bg-pageBG border-t text-center;
+  }
+
   &--filter-actions {
     @apply flex items-center px-2 sm:px-4;
 

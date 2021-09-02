@@ -2,7 +2,7 @@ export default {
   title: 'Promo Bar Settings',
   name: 'promoSettings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
+  // __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
       title: 'Enable Promo Bar?',

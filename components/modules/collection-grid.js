@@ -3,7 +3,13 @@ import { useIntersection } from 'use-intersection'
 import { AnimatePresence, m } from 'framer-motion'
 import cx from 'classnames'
 
-import { useParams, cartesian, sortAsc, sortDesc } from '@lib/helpers'
+import {
+  useParams,
+  cartesian,
+  sortAsc,
+  sortDesc,
+  clampRange,
+} from '@lib/helpers'
 
 import { listAnim } from '@lib/animate'
 
@@ -12,7 +18,9 @@ import CollectionFilterChips from '@components/collection-filter-chips'
 import CollectionSort from '@components/collection-sort'
 import ProductCard from '@components/product-card'
 
-const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
+const Collection = ({ data = {} }) => {
+  const { title, products, filter, sort, paginationLimit } = data
+
   if (!products || products.length === 0) return null
 
   const [hasPagination, setHasPagination] = useState(
@@ -25,6 +33,10 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
   const filterGroups = filter.groups
 
   const [currentParams, setCurrentParams] = useParams([
+    {
+      name: 'page',
+      value: null,
+    },
     {
       name: 'sort',
       value: sort?.options[0]?.slug,
@@ -88,9 +100,14 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
 
   // handle load more
   const loadMore = useCallback(() => {
-    const newCount = currentCount + paginationLimit
+    const newCount = clampRange(
+      currentCount + paginationLimit,
+      1,
+      orderedProducts.length
+    )
 
     setCurrentCount(newCount)
+    // updateParams([{ name: 'index', value: `${newCount}` }])
   }, [currentCount, orderedProducts])
 
   // setup "load more" functionality
@@ -110,6 +127,16 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
   //     loadMore()
   //   }
   // }, [loadMoreTrigger])
+
+  console.log({ currentParams })
+
+  console.log(
+    currentParams
+      .filter((f) => f.name !== 'index')
+      .map((f) => f.value)
+      .filter(Boolean)
+      .join('-')
+  )
 
   return (
     <section className="collection">
@@ -144,59 +171,58 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
       )}
 
       <div className="collection--content">
-        <AnimatePresence exitBeforeEnter>
-          <m.div
-            key={currentParams
-              .map((f) => f.value)
-              .filter(Boolean)
-              .join('-')}
-            initial="hide"
-            animate="show"
-            exit="hide"
-            variants={listAnim}
-            className={cx('collection--grid', {
-              'is-empty': !orderedProducts.length,
-            })}
-          >
-            {paginatedProducts.map((product) => (
-              <ProductCard
-                key={
-                  product.id +
-                  currentParams
-                    .map((f) => f.value)
-                    .filter(Boolean)
-                    .join('-')
-                }
-                product={product}
-                activeFilters={activeFilters}
-                hasVisuals={product.photos.main || product.photos.listing}
-                showGallery={
-                  product.photos.main && product.useGallery === 'true'
-                }
-                showThumbs={
-                  product.photos.listing && product.useGallery === 'false'
-                }
-                showOption={product.surfaceOption}
-                showPrice
-                showQuickAdd
-              />
-            ))}
+        <div
+          className={cx('collection--grid', {
+            'is-empty': !orderedProducts.length,
+          })}
+        >
+          {paginatedProducts.map((product) => (
+            <ProductCard
+              key={
+                product.id +
+                currentParams
+                  .map((f) => f.value)
+                  .filter(Boolean)
+                  .join('-')
+              }
+              product={product}
+              activeFilters={activeFilters}
+              hasVisuals={product.photos.main || product.photos.listing}
+              showGallery={product.photos.main && product.useGallery === 'true'}
+              showThumbs={
+                product.photos.listing && product.useGallery === 'false'
+              }
+              showOption={product.surfaceOption}
+              showPrice
+              showQuickAdd
+            />
+          ))}
 
-            {orderedProducts.length === 0 && (
-              <div className="collection--empty">
-                <p>No products found.</p>
-              </div>
-            )}
-          </m.div>
-
-          {hasPagination && (
-            <div ref={loadMoreRef} className="collection--pagination">
-              <button className="btn is-large" onClick={loadMore}>
-                Load More
-              </button>
+          {orderedProducts.length === 0 && (
+            <div className="collection--empty">
+              <p>No products found.</p>
             </div>
           )}
-        </AnimatePresence>
+        </div>
+
+        {hasPagination && (
+          <div ref={loadMoreRef} className="collection--pagination">
+            <button className="btn is-large" onClick={loadMore}>
+              Load More
+              <span className="sr-only">
+                {' '}
+                products from the "{title}" collection
+              </span>
+            </button>
+          </div>
+        )}
+
+        <div className="collection--count">
+          <p aria-live="polite" role="status" aria-atomic="true">
+            Showing {paginatedProducts.length} of {orderedProducts.length}{' '}
+            products
+          </p>
+        </div>
       </div>
     </section>
   )

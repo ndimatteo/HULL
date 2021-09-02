@@ -62,7 +62,6 @@ const ProductCard = ({
       if (!currentFilter) return null
 
       const option = currentFilter.forOption.split(':')
-      console.log({ currentFilter })
 
       return {
         name: option[0],

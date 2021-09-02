@@ -33,7 +33,9 @@ const CollectionFilterChips = ({
               const currentValues =
                 activeFilters.find((f) => f.name === filter.name)?.values || []
 
-              const newValues = currentValues.filter((v) => v !== filter.value)
+              const newValues = currentValues
+                .filter((v) => v !== filter.value)
+                .join()
 
               const option = filterGroups
                 .find((f) => f.slug === filter.name)
@@ -48,7 +50,7 @@ const CollectionFilterChips = ({
                     onClick([
                       {
                         name: filter.name,
-                        value: newValues.join(),
+                        value: newValues || null,
                       },
                     ])
                   }
