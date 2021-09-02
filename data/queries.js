@@ -116,7 +116,10 @@ export const product = `
       seo
     },
     "klaviyoAccountID": *[_type == "generalSettings"][0].klaviyoAccountID,
-    "filters": filters[]->slug.current
+    "filters": filters[]{
+      "slug": filter->slug.current,
+      forOption
+    }
   }
 `
 
@@ -365,8 +368,12 @@ export const site = `
       metaDesc,
       shareTitle,
       shareDesc,
-      shareGraphic
+      shareGraphic,
+      "favicon": favicon.asset->url,
+      "faviconLegacy": faviconLegacy.asset->url,
+      touchIcon
     },
+    "gtmID": *[_type == "generalSettings"][0].gtmID,
   }
 `
 

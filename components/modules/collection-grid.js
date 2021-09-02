@@ -160,8 +160,15 @@ const Collection = ({ products, paginationLimit = 3, filter, sort }) => {
           >
             {paginatedProducts.map((product) => (
               <ProductCard
-                key={product.id}
+                key={
+                  product.id +
+                  currentParams
+                    .map((f) => f.value)
+                    .filter(Boolean)
+                    .join('-')
+                }
                 product={product}
+                activeFilters={activeFilters}
                 hasVisuals={product.photos.main || product.photos.listing}
                 showGallery={
                   product.photos.main && product.useGallery === 'true'
@@ -206,7 +213,8 @@ const useFilterAndSort = (products, filters, sort) => {
     () =>
       products.filter((product) => {
         return filterCombos.some((combo) => {
-          const hasCombo = combo.every((x) => product.filters?.includes(x))
+          const productFilters = product.filters?.map((f) => f.slug)
+          const hasCombo = combo.every((x) => productFilters?.includes(x))
 
           return hasCombo
         })

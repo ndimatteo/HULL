@@ -14,7 +14,7 @@ export default {
   title: 'Sort',
   name: 'shopSort',
   type: 'object',
-  description: 'Display a sort dropdown on shop collection pages.',
+  description: 'Display a sort dropdown on shop collection pages',
   options: {
     collapsible: true
   },

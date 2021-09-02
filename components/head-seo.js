@@ -5,7 +5,10 @@ import { imageBuilder } from '@lib/sanity'
 const HeadSEO = ({ site = {}, page = {}, schema }) => {
   // set <head> variables
   const siteTitle = site.title
-  const siteIcon = site.seo?.siteIcon
+
+  const siteFavicon = site.seo?.favicon || '/favicon.svg'
+  const siteFaviconLegacy = site.seo?.faviconLegacy || '/favicon.ico'
+  const siteTouchIcon = site.seo?.touchIcon
 
   const templateTags = [
     {
@@ -39,17 +42,13 @@ const HeadSEO = ({ site = {}, page = {}, schema }) => {
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       <meta name="format-detection" content="telephone=no" />
 
-      <link preload="true" rel="icon" href="/favicon.svg" />
-      <link
-        preload="true"
-        rel="mask-icon"
-        href="/favicon.svg"
-        color="#000000"
-      />
-      {siteIcon && (
+      <link rel="icon" href={siteFaviconLegacy} sizes="any" />
+      <link preload="true" rel="icon" type="image/svg+xml" href={siteFavicon} />
+      <link preload="true" rel="mask-icon" href={siteFavicon} color="#000000" />
+      {siteTouchIcon && (
         <link
           rel="apple-touch-icon"
-          href={imageBuilder.image(siteIcon).width(180).height(180).url()}
+          href={imageBuilder.image(siteTouchIcon).width(192).height(192).url()}
         />
       )}
 

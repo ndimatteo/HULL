@@ -8,10 +8,12 @@ export default async function send(req, res) {
   const hasShopify =
     process.env.SHOPIFY_STORE_ID && process.env.SHOPIFY_API_PASSWORD
 
+  // Bail if no product ID was supplied
   if (!id) {
     return res.status(401).json({ error: 'Product ID required' })
   }
 
+  // Bail if no Shopify API credentials were supplied
   if (!hasShopify) {
     return res.status(401).json({ error: 'Shopify API not setup' })
   }
@@ -22,15 +24,31 @@ export default async function send(req, res) {
     'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
   }
 
-  // Fetch the metafields for this product
+  // Fetch our product from Shopify
   const shopifyProduct = await axios({
     url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/api/2021-01/products/${id}.json`,
     method: 'GET',
     headers: shopifyConfig,
   })
+    .then((response) => {
+      if (response.data?.product) {
+        return response.data.product
+      } else {
+        return null
+      }
+    })
+    .catch(() => {
+      return null
+    })
 
-  const variants = shopifyProduct.data.product.variants
+  // bail if Shopify can't find the product
+  if (!shopifyProduct)
+    return res.status(401).json({ error: 'Product not found' })
 
+  // get our products variants
+  const variants = shopifyProduct.variants
+
+  // construct our inventory object
   const product = {
     inStock: variants.some(
       (v) => v.inventory_quantity > 0 || v.inventory_policy === 'continue'

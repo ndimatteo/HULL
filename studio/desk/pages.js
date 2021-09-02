@@ -1,12 +1,41 @@
 import React from 'react'
 import S from '@sanity/desk-tool/structure-builder'
 import sanityClient from 'part:@sanity/base/client'
+import { IntentLink, Link } from 'part:@sanity/base/router'
 
-import { Card, Text } from '@sanity/ui'
+import { Card, Stack, Text } from '@sanity/ui'
 
 import { House, Browser, ShoppingCart, WarningOctagon } from 'phosphor-react'
 
 import { standardViews } from './previews/standard'
+
+const EmptyNotice = ({ title, type, link, linkTitle }) => {
+  if (!title || !type || !link || !linkTitle) return null
+
+  return (
+    <Card padding={4}>
+      <Card padding={[5]} radius={2} shadow={1} tone="critical">
+        <Stack space={[3]}>
+          <Text align="center" size={[2]} weight="semibold">
+            The {title} has not been set.
+          </Text>
+          <Text align="center" size={[2]}>
+            Set your {title} from the <Link href={link}>{linkTitle}</Link>
+          </Text>
+        </Stack>
+      </Card>
+
+      <Stack padding={3} space={[3]}>
+        <Text align="center" muted size={[1]}>
+          Don't have a {type} yet?{' '}
+          <IntentLink intent="create" params={{ type }}>
+            Create one now
+          </IntentLink>
+        </Text>
+      </Stack>
+    </Card>
+  )
+}
 
 // Extract our home page
 const currentHomePage = S.listItem()
@@ -21,14 +50,12 @@ const currentHomePage = S.listItem()
 
     if (!data?.home)
       return S.component(() => (
-        <Card padding={4}>
-          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
-            <Text align="center" size={[2]}>
-              The Home Page has not been set. Visit the Settings page to
-              activate.
-            </Text>
-          </Card>
-        </Card>
+        <EmptyNotice
+          title="Home Page"
+          type="page"
+          link="settings;general"
+          linkTitle="General Settings"
+        />
       )).title('Home Page')
 
     return S.document()
@@ -50,14 +77,12 @@ const currentShopPage = S.listItem()
 
     if (!data?.shop)
       return S.component(() => (
-        <Card padding={4}>
-          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
-            <Text align="center" size={[2]}>
-              The Shop All Page has not been set. Visit the Settings page to
-              activate.
-            </Text>
-          </Card>
-        </Card>
+        <EmptyNotice
+          title="Shop Page"
+          type="collection"
+          link="settings;general"
+          linkTitle="General Settings"
+        />
       )).title('Shop All Page')
 
     return S.document()
@@ -79,14 +104,12 @@ const currentErrorPage = S.listItem()
 
     if (!data?.error)
       return S.component(() => (
-        <Card padding={4}>
-          <Card padding={[3, 3, 4]} radius={2} shadow={1} tone="critical">
-            <Text align="center" size={[2]}>
-              The Error Page has not been set. Visit the Settings page to
-              activate.
-            </Text>
-          </Card>
-        </Card>
+        <EmptyNotice
+          title="Error Page"
+          type="page"
+          link="settings;general"
+          linkTitle="General Settings"
+        />
       )).title('Error Page')
 
     return S.document()

@@ -11,16 +11,19 @@ export default {
   icon: FiAlignLeft,
   fields: [
     {
-      title: 'Sizes',
+      title: 'Column Sizes',
       name: 'sizes',
       type: 'array',
       of: [{ type: 'gridSize' }],
+      description:
+        'Define the display size of this column for different screen widths',
       validation: Rule => Rule.required().min(1)
     },
     {
-      title: 'Blocks',
+      title: 'Content Blocks',
       name: 'blocks',
       type: 'array',
+      description: 'The content that exists inside this column',
       of: [
         { type: 'freeform' },
         { type: 'accordions' },
@@ -31,13 +34,14 @@ export default {
   preview: {
     select: {
       sizes: 'sizes.0',
-      block: 'blocks.0'
+      blocks: 'blocks'
     },
-    prepare({ sizes, block }) {
+    prepare({ sizes, blocks }) {
       const { width } = sizes
+      const types = blocks.map(block => block._type)
 
-      const title = getTypeTitles([block._type])
-      const subtitle = getTypeSubtitle(block)
+      const title = getTypeTitles(types)
+      const subtitle = ''
 
       return {
         title: title || 'Block',

@@ -10,22 +10,21 @@ export default {
       options: {
         headline: 'Important',
         message:
-          'This displays an "implied consent" cookie notice to users to help comply with GDPR laws. It is strongly encouraged to include a link to details about your cookies usage and policies.',
+          'This displays an "implied consent" cookie notice to users to help comply with GDPR laws. It is strongly encouraged to include a link to your cookie usage and policies.',
         tone: 'caution'
       }
     },
     {
-      title: 'Enabled?',
+      title: 'Enable Cookie Consent?',
       name: 'enabled',
-      type: 'boolean',
-      description: 'Control the display of the cookie consent notice.'
+      type: 'boolean'
     },
     {
       title: 'Message',
       name: 'message',
       type: 'text',
       rows: 2,
-      description: 'Your cookie consent message.',
+      description: 'Your cookie consent message',
       hidden: ({ parent }) => !parent.enabled
     },
     {
@@ -33,7 +32,7 @@ export default {
       name: 'link',
       type: 'reference',
       to: [{ type: 'page' }],
-      description: 'Show a link to "Learn More" about your cookie policy.',
+      description: 'Show a link to "Learn More" about your cookie policy',
       hidden: ({ parent }) => !parent.enabled
     }
   ],

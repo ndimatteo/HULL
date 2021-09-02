@@ -5,10 +5,9 @@ export default {
   __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
-      title: 'Enabled?',
+      title: 'Enable Promo Bar?',
       name: 'enabled',
-      type: 'boolean',
-      description: 'Control the display of the promo bar.'
+      type: 'boolean'
     },
     {
       title: 'Display Location',

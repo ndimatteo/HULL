@@ -27,7 +27,7 @@ export default {
       name: 'hasTransparentHeader',
       type: 'boolean',
       description:
-        'When toggled on, the header will appear with a transparent background over the first content module and text/logos will be white until scrolling is engaged.',
+        'When activated the header will overlay the first content module with a transparent background and white text until scrolling is engaged.',
       initialValue: false
     },
     {

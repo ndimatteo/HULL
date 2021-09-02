@@ -1,12 +1,22 @@
 import React from 'react'
+import Error from 'next/error'
 
 import { getStaticPage, queries } from '@data'
 
 import Layout from '@components/layout'
 import { Module } from '@components/modules'
 
-const ErrorPage = ({ data }) => {
+const NotFoundPage = ({ data }) => {
   const { site, menus, page } = data
+
+  if (!page) {
+    return (
+      <Error
+        title={`"Error Page (404)" is not set in Sanity, or the page data is missing`}
+        statusCode="Data Error"
+      />
+    )
+  }
 
   return (
     <Layout
@@ -47,4 +57,4 @@ export async function getStaticProps({ preview, previewData }) {
   }
 }
 
-export default ErrorPage
+export default NotFoundPage

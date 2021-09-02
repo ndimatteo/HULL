@@ -5,7 +5,7 @@ import useSWR from 'swr'
 
 import { getProduct, getAllDocSlugs } from '@data'
 
-import Error from '@pages/404'
+import NotFoundPage from '@pages/404'
 import Layout from '@components/layout'
 import { Module } from '@components/modules'
 
@@ -48,7 +48,7 @@ const Product = ({ data }) => {
   const router = useRouter()
 
   if (!router.isFallback && !data) {
-    return <Error statusCode={404} />
+    return <NotFoundPage statusCode={404} />
   }
 
   // extract our data

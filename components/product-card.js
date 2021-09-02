@@ -38,19 +38,49 @@ const ProductCard = ({
   showPrice,
   showOption,
   showQuickAdd,
+  activeFilters,
   className,
   onClick,
 }) => {
   if (!product) return null
 
+  const activeFilterValues =
+    activeFilters?.flatMap((f) =>
+      f.values.map((v) => ({
+        name: f.name,
+        value: v,
+      }))
+    ) || []
+
+  // select the default variant based current active filters
+  const defaultOption = activeFilterValues
+    .map((filter) => {
+      const currentFilter = product.filters.find(
+        (f) => f.slug === filter.value && f.forOption
+      )
+
+      if (!currentFilter) return null
+
+      const option = currentFilter.forOption.split(':')
+      console.log({ currentFilter })
+
+      return {
+        name: option[0],
+        value: option[1],
+      }
+    })
+    .filter(Boolean)
+
   // find default variant for product
   const defaultVariant = product.variants?.find((v) => {
-    const option = {
-      name: product.options[0]?.name,
-      value: product.options[0]?.values[0],
-      position: product.options[0]?.position,
-    }
-    return hasObject(v.options, option)
+    const currentOption = defaultOption?.length
+      ? defaultOption[defaultOption.length - 1]
+      : {
+          name: product.options[0]?.name,
+          value: product.options[0]?.values[0],
+        }
+
+    return hasObject(v.options, currentOption)
   })
 
   // set active variant as default

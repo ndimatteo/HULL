@@ -20,7 +20,7 @@
     "@reach/rect": "^0.16.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.7.0",
-    "@sanity/image-url": "^0.140.19",
+    "@sanity/image-url": "^1.0.1",
     "@vimeo/player": "^2.15.3",
     "axios": "^0.21.0",
     "base64-string": "^1.1.2",

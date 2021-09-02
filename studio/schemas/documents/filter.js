@@ -3,7 +3,7 @@ import { Sliders, CheckSquare, Lightning } from 'phosphor-react'
 
 import { getSwatch } from '../../lib/helpers'
 
-const getIcon = (type, color) => {
+export const getIcon = (type, color) => {
   switch (type) {
     case 'swatch':
       return getSwatch(color)

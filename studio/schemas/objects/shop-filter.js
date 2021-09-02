@@ -4,7 +4,7 @@ export default {
   title: 'Filter',
   name: 'shopFilter',
   type: 'object',
-  description: 'Display a filter drawer on shop collection pages.',
+  description: 'Display a filter drawer on shop collection pages',
   options: {
     collapsible: true
   },

@@ -1,9 +1,10 @@
 import React from 'react'
+import Error from 'next/error'
 import { useRouter } from 'next/router'
 
 import { getPage, getAllDocSlugs } from '@data'
 
-import Error from '@pages/404'
+import NotFoundPage from '@pages/404'
 
 import Layout from '@components/layout'
 import { Module } from '@components/modules'
@@ -12,7 +13,7 @@ const Page = ({ data }) => {
   const router = useRouter()
 
   if (!router.isFallback && !data) {
-    return <Error statusCode={404} />
+    return <NotFoundPage statusCode={404} />
   }
 
   const { site, page } = data

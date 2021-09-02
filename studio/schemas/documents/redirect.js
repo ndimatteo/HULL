@@ -8,21 +8,29 @@ export default {
   icon: () => <Shuffle />,
   fields: [
     {
-      title: 'From',
+      title: 'From (slug)',
       name: 'from',
       type: 'string',
-      description:
-        'Do not include the full domain or leading slash. For example: old-page'
+      description: (
+        <>
+          Do not include the full domain or leading slash. For example:{' '}
+          <code>old-page</code>
+        </>
+      )
     },
     {
-      title: 'To',
+      title: 'To (slug)',
       name: 'to',
       type: 'string',
-      description:
-        'Do not include the full domain or leading slash. For example: new-page'
+      description: (
+        <>
+          Do not include the full domain or leading slash. For example:{' '}
+          <code>new-page</code>
+        </>
+      )
     },
     {
-      title: 'Is Permanent?',
+      title: 'Is this a permanent redirect (301)?',
       name: 'isPermanent',
       type: 'boolean'
     }

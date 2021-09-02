@@ -1,21 +1,6 @@
-import { FiAlignLeft } from 'react-icons/fi'
+import { FiAlignLeft, FiHelpCircle } from 'react-icons/fi'
 
-const getBlockNames = types => {
-  const typeNames = types.map(type => {
-    switch (type) {
-      case 'freeform':
-        return 'Freeform'
-      case 'accordions':
-        return 'Accordions'
-      case 'productCard':
-        return 'Product Card'
-      default:
-        return null
-    }
-  })
-
-  return typeNames.join(' + ')
-}
+import { getTypeTitles } from '../../lib/helpers'
 
 export default {
   title: 'Content Grid',
@@ -24,9 +9,20 @@ export default {
   icon: FiAlignLeft,
   fields: [
     {
+      name: 'gridNote',
+      type: 'note',
+      options: {
+        icon: FiHelpCircle,
+        headline: 'How to setup a Grid',
+        message: `Grids are first defined by the number of "spaces" they should have. Visually, you can think of this like available cells in a spreadsheet or table. Then, we define the columns that should exist within this grid, and what "space(s)" they should occupy at different screen sizes.`
+      }
+    },
+    {
       title: 'Grid Size',
       name: 'size',
       type: 'number',
+      description:
+        'Set the default number of column spaces available for this grid',
       options: {
         list: [
           { title: '1', value: 1 },
@@ -43,13 +39,15 @@ export default {
           { title: '12', value: 12 }
         ]
       },
-      validation: Rule => Rule.required()
+      validation: Rule => Rule.required(),
+      initialValue: 12
     },
     {
       title: 'Columns',
       name: 'columns',
       type: 'array',
-      of: [{ type: 'gridColumn' }]
+      of: [{ type: 'gridColumn' }],
+      description: 'The columns that are part of this grid'
     }
   ],
   preview: {
@@ -57,7 +55,7 @@ export default {
       columns: 'columns'
     },
     prepare({ columns }) {
-      const name = getBlockNames(columns.map(col => col.blocks[0]._type))
+      const name = getTypeTitles(columns.map(col => col.blocks[0]._type))
 
       const image = (columns[0].blocks[0].content || []).find(
         block => block._type === 'photo'

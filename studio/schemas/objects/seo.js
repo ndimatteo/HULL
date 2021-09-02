@@ -38,7 +38,7 @@ export default {
       name: 'shareDesc',
       type: 'text',
       rows: 3,
-      description: 'Description for social sharing cards.',
+      description: 'Recommended size: 1200x630 (PNG or JPG)',
       validation: Rule =>
         Rule.max(150).warning(
           'Longer descriptions may be truncated by social sites'
