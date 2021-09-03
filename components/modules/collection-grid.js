@@ -109,7 +109,7 @@ const Collection = ({ data = {} }) => {
 
     const newPage = Math.ceil(newCount / paginationLimit)
 
-    // setCurrentCount(newCount)
+    setCurrentCount(newCount)
     updateParams([{ name: 'page', value: `${newPage > 1 ? newPage : null}` }])
   }, [currentCount, orderedProducts, paginationLimit])
 
@@ -129,12 +129,24 @@ const Collection = ({ data = {} }) => {
         ? clampRange(paginationLimit * desiredPage, 1, orderedProducts.length)
         : null
 
+    // const pageProductIndex =
+    //   newCount < orderedProducts?.length
+    //     ? newCount - paginationLimit
+    //     : orderedProducts.length - 1
+
     if (newCount) {
       setCurrentCount(newCount)
+      // collectionItems.current[pageProductIndex]?.querySelector('[href]').focus()
     }
 
     setHasPagination(currentCount < orderedProducts.length)
-  }, [currentCount, orderedProducts, currentParams, paginationLimit])
+  }, [
+    currentCount,
+    orderedProducts,
+    currentParams,
+    paginationLimit,
+    // collectionItems,
+  ])
 
   // trigger load more when scrolled to "load more" ref
   // useEffect(() => {

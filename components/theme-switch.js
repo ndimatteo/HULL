@@ -8,7 +8,7 @@ import Swatch from '@components/swatch'
 const themes = [
   { title: 'Light Mode', name: 'light', color: { hex: '#f4f4f0' } },
   { title: 'Dark Mode', name: 'dark', color: { hex: '#000000' } },
-  { title: 'Metal Mode', name: 'metal', color: { hex: '#8fff1f' } },
+  { title: 'Metal Mode', name: 'metal', color: { hex: '#FB1B15' } },
 ]
 
 const ThemeSwitch = () => {
