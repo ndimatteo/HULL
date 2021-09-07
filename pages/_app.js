@@ -7,7 +7,8 @@ import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
-import { isBrowser } from '@lib/helpers'
+import { isBrowser, useScrollRestoration } from '@lib/helpers'
+import { pageTransitionSpeed } from '@lib/animate'
 
 import { SiteContextProvider } from '@lib/context'
 
@@ -35,10 +36,8 @@ const MyApp = ({ Component, pageProps, router }) => {
 
   const { data } = pageProps
 
-  // The scroll location on the page is not restored on history changes
-  useEffect(() => {
-    window.history.scrollRestoration = 'manual'
-  }, [router])
+  // Handle scroll position on history change
+  useScrollRestoration(router, pageTransitionSpeed)
 
   // Trigger our loading class
   useEffect(() => {
@@ -47,22 +46,18 @@ const MyApp = ({ Component, pageProps, router }) => {
     }
   }, [isLoading])
 
-  // Setup Next router events
+  // Setup page transition loading states
   useEffect(() => {
-    Router.events.on('routeChangeStart', (url) => {
-      // Bail if we're just changing a URL parameter
-      if (
-        url.indexOf('?') > -1 &&
-        url.split('?')[0] === router.asPath.split('?')[0]
-      )
-        return
+    Router.events.on('routeChangeStart', (_, { shallow }) => {
+      // Bail if we're just changing URL parameters
+      if (shallow) return
 
       // Otherwise, start loading
       setLoading(true)
     })
 
-    Router.events.on('routeChangeComplete', (url) => {
-      setTimeout(() => setLoading(false), 400) // accounts for page transition time
+    Router.events.on('routeChangeComplete', () => {
+      setTimeout(() => setLoading(false), pageTransitionSpeed)
     })
 
     Router.events.on('routeChangeError', () => {
@@ -99,7 +94,6 @@ const MyApp = ({ Component, pageProps, router }) => {
           <AnimatePresence
             exitBeforeEnter
             onExitComplete={() => {
-              window.scrollTo(0, 0)
               document.body.classList.remove('overflow-hidden')
             }}
           >

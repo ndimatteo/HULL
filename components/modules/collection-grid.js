@@ -1,5 +1,4 @@
 import React, { useState, useRef, useMemo, useCallback, useEffect } from 'react'
-import { useIntersection } from 'use-intersection'
 import cx from 'classnames'
 
 import {
@@ -20,7 +19,7 @@ const Collection = ({ data = {} }) => {
 
   if (!products || products.length === 0) return null
 
-  // const collectionItems = useRef([])
+  const collectionItems = useRef([])
 
   const [hasPagination, setHasPagination] = useState(
     paginationLimit > 0 && products.length > paginationLimit
@@ -113,12 +112,6 @@ const Collection = ({ data = {} }) => {
     updateParams([{ name: 'page', value: `${newPage > 1 ? newPage : null}` }])
   }, [currentCount, orderedProducts, paginationLimit])
 
-  // setup "load more" functionality
-  const loadMoreRef = useRef()
-  const loadMoreTrigger = useIntersection(loadMoreRef, {
-    threshold: 1,
-  })
-
   // update pagination when the count or products change
   useEffect(() => {
     const desiredPage = currentParams.find((p) => p.name === 'page').value
@@ -129,14 +122,16 @@ const Collection = ({ data = {} }) => {
         ? clampRange(paginationLimit * desiredPage, 1, orderedProducts.length)
         : null
 
-    // const pageProductIndex =
-    //   newCount < orderedProducts?.length
-    //     ? newCount - paginationLimit
-    //     : orderedProducts.length - 1
+    const pageProductIndex =
+      newCount < orderedProducts?.length
+        ? newCount - paginationLimit
+        : orderedProducts.length - 1
 
     if (newCount) {
       setCurrentCount(newCount)
-      // collectionItems.current[pageProductIndex]?.querySelector('[href]').focus()
+      collectionItems.current[pageProductIndex]?.querySelector('[href]').focus({
+        preventScroll: true,
+      })
     }
 
     setHasPagination(currentCount < orderedProducts.length)
@@ -145,15 +140,8 @@ const Collection = ({ data = {} }) => {
     orderedProducts,
     currentParams,
     paginationLimit,
-    // collectionItems,
+    collectionItems,
   ])
-
-  // trigger load more when scrolled to "load more" ref
-  // useEffect(() => {
-  //   if (loadMoreTrigger) {
-  //     loadMore()
-  //   }
-  // }, [loadMoreTrigger])
 
   return (
     <section className="collection">
@@ -195,7 +183,7 @@ const Collection = ({ data = {} }) => {
         >
           {paginatedProducts.map((product, key) => (
             <ProductCard
-              // ref={(node) => (collectionItems.current[key] = node)}
+              ref={(node) => (collectionItems.current[key] = node)}
               key={
                 product.id +
                 currentParams
@@ -225,7 +213,7 @@ const Collection = ({ data = {} }) => {
         </div>
 
         {hasPagination && (
-          <div ref={loadMoreRef} className="collection--pagination">
+          <div className="collection--pagination">
             <button className="btn is-large" onClick={loadMore}>
               Load More
               <span className="sr-only">

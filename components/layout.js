@@ -3,13 +3,13 @@ import Script from 'next/script'
 import { m } from 'framer-motion'
 
 import { isBrowser, useWindowSize } from '@lib/helpers'
+import { pageTransitionSpeed } from '@lib/animate'
 
 import HeadSEO from '@components/head-seo'
 import CookieBar from '@components/cookie-bar'
 import Header from '@components/header'
 import Footer from '@components/footer'
 
-const duration = 0.4
 const variants = {
   initial: {
     opacity: 0,
@@ -17,15 +17,19 @@ const variants = {
   enter: {
     opacity: 1,
     transition: {
-      duration: duration,
-      delay: 0.3,
+      duration: pageTransitionSpeed / 1000,
+      delay: 0.2,
       ease: 'linear',
       when: 'beforeChildren',
     },
   },
   exit: {
     opacity: 0,
-    transition: { duration: duration, ease: 'linear', when: 'beforeChildren' },
+    transition: {
+      duration: pageTransitionSpeed / 1000,
+      ease: 'linear',
+      when: 'beforeChildren',
+    },
   },
 }
 
@@ -59,8 +63,6 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
         />
       )}
 
-      <CookieBar data={site.cookieConsent} />
-
       <m.div
         initial="initial"
         animate="enter"
@@ -68,6 +70,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
         variants={variants}
         style={headerHeight ? { '--headerHeight': `${headerHeight}px` } : null}
       >
+        <CookieBar data={site.cookieConsent} />
         <Header
           data={site.header}
           isTransparent={page.hasTransparentHeader}

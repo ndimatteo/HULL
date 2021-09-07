@@ -93,6 +93,7 @@ const Listbox = ({
           <FocusTrap
             focusTrapOptions={{
               clickOutsideDeactivates: true,
+              preventScroll: true,
             }}
           >
             <div className="listbox--content">
