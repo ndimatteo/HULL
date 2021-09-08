@@ -10,8 +10,10 @@
   }
 
   .swatch {
+    @apply border;
+    
     &::before {
-      @apply opacity-100;
+      @apply opacity-0;
     }
   }
 }

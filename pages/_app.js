@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
@@ -10,7 +10,11 @@ import '../styles/app.css'
 import { isBrowser, useScrollRestoration } from '@lib/helpers'
 import { pageTransitionSpeed } from '@lib/animate'
 
-import { SiteContextProvider } from '@lib/context'
+import {
+  SiteContextProvider,
+  useSiteContext,
+  useTogglePageTransition,
+} from '@lib/context'
 
 import Cart from '@components/cart'
 
@@ -25,14 +29,15 @@ if (isBrowser) {
     'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
   )
   console.log(
-    '%cWeb Development by Nick DiMatteo \n– https://nickdimatteo.com',
+    '%cDevelopment by Nick DiMatteo \n– https://nickdimatteo.com',
     'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
   )
   console.groupEnd()
 }
 
-const MyApp = ({ Component, pageProps, router }) => {
-  const [isLoading, setLoading] = useState(false)
+const Site = ({ Component, pageProps, router }) => {
+  const togglePageTransition = useTogglePageTransition()
+  const { isPageTransition } = useSiteContext()
 
   const { data } = pageProps
 
@@ -42,9 +47,9 @@ const MyApp = ({ Component, pageProps, router }) => {
   // Trigger our loading class
   useEffect(() => {
     if (isBrowser) {
-      document.documentElement.classList.toggle('is-loading', isLoading)
+      document.documentElement.classList.toggle('is-loading', isPageTransition)
     }
-  }, [isLoading])
+  }, [isPageTransition])
 
   // Setup page transition loading states
   useEffect(() => {
@@ -53,15 +58,15 @@ const MyApp = ({ Component, pageProps, router }) => {
       if (shallow) return
 
       // Otherwise, start loading
-      setLoading(true)
+      togglePageTransition(true)
     })
 
     Router.events.on('routeChangeComplete', () => {
-      setTimeout(() => setLoading(false), pageTransitionSpeed)
+      setTimeout(() => togglePageTransition(false), pageTransitionSpeed)
     })
 
     Router.events.on('routeChangeError', () => {
-      setLoading(false)
+      togglePageTransition(false)
     })
   }, [])
 
@@ -83,25 +88,34 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [])
 
   return (
+    <LazyMotion features={domAnimation}>
+      {isPageTransition && (
+        <Head>
+          <title>Loading...</title>
+        </Head>
+      )}
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          document.body.classList.remove('overflow-hidden')
+        }}
+      >
+        <Component key={router.asPath.split('?')[0]} {...pageProps} />
+      </AnimatePresence>
+
+      <Cart data={{ ...data?.site }} />
+    </LazyMotion>
+  )
+}
+
+// Site wrapped with Context Providers
+const MyApp = ({ Component, pageProps, router }) => {
+  const { data } = pageProps
+
+  return (
     <ThemeProvider enableSystem={false} disableTransitionOnChange>
       <SiteContextProvider data={{ ...data?.site }}>
-        <LazyMotion features={domAnimation}>
-          {isLoading && (
-            <Head>
-              <title>Loading...</title>
-            </Head>
-          )}
-          <AnimatePresence
-            exitBeforeEnter
-            onExitComplete={() => {
-              document.body.classList.remove('overflow-hidden')
-            }}
-          >
-            <Component key={router.asPath.split('?')[0]} {...pageProps} />
-          </AnimatePresence>
-
-          <Cart data={{ ...data?.site }} />
-        </LazyMotion>
+        <Site Component={Component} pageProps={pageProps} router={router} />
       </SiteContextProvider>
     </ThemeProvider>
   )

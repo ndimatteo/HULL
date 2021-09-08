@@ -5,34 +5,13 @@ import useSWR from 'swr'
 
 import { getProduct, getAllDocSlugs } from '@data'
 
+import { useParams, usePrevious, centsToPrice, hasObject } from '@lib/helpers'
+
+import { useSiteContext } from '@lib/context'
+
 import NotFoundPage from '@pages/404'
 import Layout from '@components/layout'
 import { Module } from '@components/modules'
-
-import { centsToPrice, hasObject } from '@lib/helpers'
-
-// setup our activeVariant hook
-function useActiveVariant({ fallback, variants }) {
-  const router = useRouter()
-  const queryID = parseInt(router?.query?.variant)
-  const hasVariant = variants.find((v) => v.id === queryID)
-  const activeVariant = hasVariant ? queryID : fallback
-
-  const setActiveVariant = useCallback(
-    (variant) => {
-      router.replace(
-        `/products/${router?.query?.slug}?variant=${variant}`,
-        undefined,
-        {
-          shallow: true,
-        }
-      )
-    },
-    [router]
-  )
-
-  return [activeVariant, setActiveVariant]
-}
 
 // setup our inventory fetcher
 const fetchInventory = (url, id) =>
@@ -46,6 +25,7 @@ const fetchInventory = (url, id) =>
 
 const Product = ({ data }) => {
   const router = useRouter()
+  const { isPageTransition } = useSiteContext()
 
   if (!router.isFallback && !data) {
     return <NotFoundPage statusCode={404} />
@@ -67,20 +47,46 @@ const Product = ({ data }) => {
     return hasObject(v.options, option)
   })
 
-  // set our activeVariant state to our defaultVariant (if found) or first variant
-  const [activeVariant, setActiveVariant] = useActiveVariant({
-    fallback: defaultVariant?.id || page.product.variants[0].id,
-    variants: page.product.variants,
-  })
+  // set up our variant URL params
+  const [currentParams, setCurrentParams] = useParams([
+    {
+      name: 'variant',
+      value: defaultVariant?.id || page.product.variants[0].id,
+    },
+  ])
+  const previousParams = usePrevious(currentParams)
 
-  // Check our product inventory is still correct
+  // determine which params set to use
+  const activeParams =
+    isPageTransition && previousParams ? previousParams : currentParams
+
+  // set our activeVariant
+  const activeVariant = activeParams.find(
+    (filter) => filter.name === 'variant'
+  ).value
+
+  // handle variant change
+  const updateVariant = useCallback(
+    (id) => {
+      setCurrentParams([
+        ...activeParams,
+        {
+          name: 'variant',
+          value: `${id}`,
+        },
+      ])
+    },
+    [activeParams]
+  )
+
+  // check our product inventory is still correct
   const { data: productInventory } = useSWR(
     ['/api/shopify/product-inventory', page.product.id],
     (url, id) => fetchInventory(url, id),
     { errorRetryCount: 3 }
   )
 
-  // Rehydrate our product after inventory is fetched
+  // rehydrate our product after inventory is fetched
   useEffect(() => {
     if (page.product && productInventory) {
       setProduct({
@@ -115,7 +121,7 @@ const Product = ({ data }) => {
               activeVariant={product.variants.find(
                 (v) => v.id == activeVariant
               )}
-              onVariantChange={setActiveVariant}
+              onVariantChange={updateVariant}
             />
           ))}
         </Layout>

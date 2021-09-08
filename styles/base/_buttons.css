@@ -1,5 +1,5 @@
 .btn {
-  @apply clean-btn;
+  @apply clean-btn p-0 bg-transparent;
 
   &.is-block {
     @apply block w-full;

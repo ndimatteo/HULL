@@ -1,4 +1,10 @@
-/* ----- Buttons -----*/
+/* ----- Section ----- */
+.section {
+  @apply border-b;
+}
+
+
+/* ----- Buttons ----- */
 
 .btn {
   /* default style button */
@@ -122,6 +128,21 @@
 }
 
 
+/* ----- Accordions ----- */
+
+.accordion {
+  @apply border-t;
+
+  &--toggle {
+    @apply font-semibold text-lg leading-snug;
+  }
+
+  &--inner {
+    @apply pb-12 max-w-2xl;
+  }
+}
+
+
 /* ----- Marquees ----- */
 
 .marquee {
@@ -166,10 +187,112 @@
 }
 
 
-/* ----- Marquees ----- */
+/* ----- Collections ----- */
 
 .collection {
   &--grid {
     @apply -m-px;
+  }
+}
+
+.product-card {
+  .collection &,
+  .marquee--product & {
+    @apply p-8 border;
+    margin: -.5px;
+  }
+
+  .price {
+    @apply flex items-center justify-center;
+
+    &--current {
+      @apply sm:text-base sm:leading-normal font-semibold;
+    }
+
+    &--discount {
+      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
+    }
+  }
+
+  &--option {
+    .option {
+      @apply m-0 p-0 border-0;
+
+      &--values {
+        @apply mx-auto;
+      }
+    }
+  }
+}
+
+
+/* ----- Products ----- */
+
+.product {
+  @apply border-b;
+  
+  &--content {
+    @apply items-stretch md:gap-px md:bg-pageText;
+  }
+
+  &--gallery {
+    @apply xs:p-8 md:p-24 bg-pageBG border-b md:border-none;
+
+    .carousel {
+      @apply max-w-xl mx-auto;
+    }
+  }
+
+  &--header {
+    @apply flex pb-2 border-b;
+
+    .price {
+      @apply flex flex-col items-end mt-auto ml-auto;
+
+      &--current {
+        @apply text-xl leading-normal font-semibold;
+      }
+
+      &--discount {
+        @apply mb-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
+      }
+    }
+  }
+
+  &--name {
+    @apply text-3xl leading-snug;
+  }
+
+  &--title {
+    @apply pr-8 sm:pr-12;
+  }
+
+  &--variant {
+    @apply text-sm leading-relaxed tracking-wider font-semibold uppercase;
+
+    .label {
+      @apply -my-1 scale-90;
+    }
+  }
+
+  &--actions {
+    @apply sticky bottom-0 mt-4 p-4 md:p-8 border-t bg-pageBG is-textured text-center;
+
+    .counter {
+      @apply hidden sm:inline-flex;
+    }
+  }
+}
+
+.option {
+  @apply border-t;
+
+  &--title {
+    @apply mr-12 text-xs font-semibold uppercase tracking-wider;
+  }
+
+  &--values {
+    @apply flex flex-wrap justify-end ml-auto gap-2 gap-y-2 gap-x-2;
+    grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   }
 }

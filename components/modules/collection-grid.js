@@ -3,11 +3,14 @@ import cx from 'classnames'
 
 import {
   useParams,
+  usePrevious,
   cartesian,
   sortAsc,
   sortDesc,
   clampRange,
 } from '@lib/helpers'
+
+import { useSiteContext } from '@lib/context'
 
 import CollectionFilter from '@components/collection-filter'
 import CollectionFilterChips from '@components/collection-filter-chips'
@@ -18,6 +21,8 @@ const Collection = ({ data = {} }) => {
   const { title, products, filter, sort, paginationLimit } = data
 
   if (!products || products.length === 0) return null
+
+  const { isPageTransition } = useSiteContext()
 
   const collectionItems = useRef([])
 
@@ -44,14 +49,17 @@ const Collection = ({ data = {} }) => {
       value: null,
     })),
   ])
+  const previousParams = usePrevious(currentParams)
+
+  // determine which params set to use
+  const activeParams =
+    isPageTransition && previousParams ? previousParams : currentParams
 
   // calculate our sort
-  const activeSort = currentParams.find(
-    (filter) => filter.name === 'sort'
-  ).value
+  const activeSort = activeParams.find((filter) => filter.name === 'sort').value
 
   // calculate our filters
-  const currentFilters = currentParams.filter(
+  const currentFilters = activeParams.filter(
     (f) => !['page', 'sort'].includes(f.name)
   )
   const activeFilters = currentFilters.map((filter) => {
@@ -87,7 +95,7 @@ const Collection = ({ data = {} }) => {
   // handle filter + sort updates
   const updateParams = useCallback(
     (params) => {
-      const newFilters = currentParams.map((filter) => {
+      const newFilters = activeParams.map((filter) => {
         const matchedParam = params?.find((p) => p.name === filter.name)
 
         return matchedParam ? { ...filter, value: matchedParam?.value } : filter
@@ -95,7 +103,7 @@ const Collection = ({ data = {} }) => {
 
       setCurrentParams(newFilters)
     },
-    [currentParams]
+    [activeParams]
   )
 
   // handle load more
@@ -114,7 +122,7 @@ const Collection = ({ data = {} }) => {
 
   // update pagination when the count or products change
   useEffect(() => {
-    const desiredPage = currentParams.find((p) => p.name === 'page').value
+    const desiredPage = activeParams.find((p) => p.name === 'page').value
     const maxPage = Math.ceil(orderedProducts.length / paginationLimit)
 
     const newCount =
@@ -138,7 +146,7 @@ const Collection = ({ data = {} }) => {
   }, [
     currentCount,
     orderedProducts,
-    currentParams,
+    activeParams,
     paginationLimit,
     collectionItems,
   ])
@@ -186,7 +194,7 @@ const Collection = ({ data = {} }) => {
               ref={(node) => (collectionItems.current[key] = node)}
               key={
                 product.id +
-                currentParams
+                activeParams
                   .filter((f) => f.name !== 'page')
                   .map((f) => f.value)
                   .filter(Boolean)

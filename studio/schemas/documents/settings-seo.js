@@ -38,7 +38,7 @@ export default {
       title: 'Default Share Title',
       name: 'shareTitle',
       type: 'string',
-      description: 'TItle used for social sharing cards',
+      description: 'Title used for social sharing cards',
       validation: Rule =>
         Rule.max(50).warning('Longer titles may be truncated by social sites')
     },
@@ -47,7 +47,7 @@ export default {
       name: 'shareDesc',
       type: 'text',
       rows: 3,
-      description: 'Description for social sharing cards',
+      description: 'Description used for social sharing cards',
       validation: Rule =>
         Rule.max(150).warning(
           'Longer descriptions may be truncated by social sites'

@@ -93,12 +93,6 @@
 .product-card {
   @apply flex flex-col relative;
 
-  .collection &,
-  .marquee--product & {
-    @apply p-8 border;
-    margin: -.5px;
-  }
-
   &.is-inline {
     @apply my-4;
   }
@@ -137,11 +131,7 @@
     @apply text-center;
 
     .product-card--visuals + & {
-      @apply mt-6;
-
-      .is-inline & {
-        @apply mt-4;
-      }
+      @apply mt-4;
     }
   }
 
@@ -170,28 +160,8 @@
     }
   }
 
-  .price {
-    @apply flex items-center justify-center;
-
-    &--current {
-      @apply sm:text-base sm:leading-normal font-semibold;
-    }
-
-    &--discount {
-      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
-    }
-  }
-
   &--option {
     @apply relative z-30 mt-4;
-
-    .option {
-      @apply m-0 p-0 border-0;
-
-      &--values {
-        @apply mx-auto;
-      }
-    }
   }
 
   &--add {
