@@ -26,7 +26,7 @@ export default async function handler(req, res) {
   if (!productID || !cartPhotos?.length) {
     return res.status(200).json({
       error:
-        'must be a POST request with a Product ID that contains Cart Thumbnails',
+        'Must be a POST request with a Product ID that contains Cart Thumbnails',
     })
   }
 

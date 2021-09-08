@@ -39,10 +39,10 @@ const runMiddleware = (req, res, fn) => {
 export default async function send(req, res) {
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST') {
-    console.log('must be a POST request with a product ID')
+    console.error('Must be a POST request with a product ID')
     return res
       .status(200)
-      .json({ error: 'must be a POST request with a product ID' })
+      .json({ error: 'Must be a POST request with a product ID' })
   }
 
   /*  ------------------------------ */
@@ -63,14 +63,16 @@ export default async function send(req, res) {
 
   // bail if shopify integrity doesn't match
   if (hmac !== generatedHash) {
-    console.log('not verified from Shopify')
-    return res.status(200).json({ error: 'not verified from Shopify' })
+    console.error('Unable to verify from Shopify')
+    return res.status(200).json({ error: 'Unable to verify from Shopify' })
   }
 
   // extract shopify data
   const {
     body: { status, id, title, handle, options, variants },
   } = req
+
+  console.info(`Sync triggered for product: ${title} (id: ${id})`)
 
   /*  ------------------------------ */
   /*  Construct our product objects
@@ -165,6 +167,8 @@ export default async function send(req, res) {
   /*  Check for previous sync
   /*  ------------------------------ */
 
+  console.log('Checking for previous sync data...')
+
   // Setup our Shopify connection
   const shopifyConfig = {
     'Content-Type': 'application/json',
@@ -185,11 +189,11 @@ export default async function send(req, res) {
 
   // Metafield found
   if (previousSync) {
-    console.log('Comparing previous sync...')
+    console.log('Previous sync found, comparing differences...')
 
     // Differences found
     if (jsondiffpatch.diff(JSON.parse(previousSync.value), productCompare)) {
-      console.log('discrepancy found...')
+      console.warn('Critical difference found! Start sync...')
 
       // update our shopify metafield with the new data before continuing sync with Sanity
       axios({
@@ -207,14 +211,14 @@ export default async function send(req, res) {
 
       // No changes found
     } else {
-      console.log('no difference, sync complete!')
+      console.info('No differences found, sync complete!')
       return res
         .status(200)
         .json({ error: 'nothing to sync, product up-to-date' })
     }
     // No metafield created yet, let's do that
   } else {
-    console.log('Metafield not found, create new')
+    console.warn('No previous sync found, Start sync...')
     axios({
       url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/products/${id}/metafields.json`,
       method: 'POST',
@@ -234,7 +238,7 @@ export default async function send(req, res) {
   /*  Begin Sanity Product Sync
   /*  ------------------------------ */
 
-  console.log('product sync starting...')
+  console.log('Writing product to Sanity...')
   let stx = sanity.transaction()
 
   // create product if doesn't exist
@@ -290,7 +294,8 @@ export default async function send(req, res) {
 
   const result = await stx.commit()
 
-  console.log('sync complete!')
+  console.info('Sync complete!')
+  console.log(result)
 
   res.statusCode = 200
   res.json(JSON.stringify(result))

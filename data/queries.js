@@ -256,6 +256,9 @@ export const modules = `
         ))
       }
     },
+    "noFilterResults": *[_type == "shopSettings"][0].noFilterResults[]{
+      ${ptContent}
+    },
   }
 `
 

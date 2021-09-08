@@ -16,9 +16,11 @@ import CollectionFilter from '@components/collection-filter'
 import CollectionFilterChips from '@components/collection-filter-chips'
 import CollectionSort from '@components/collection-sort'
 import ProductCard from '@components/product-card'
+import BlockContent from '@components/block-content'
 
 const Collection = ({ data = {} }) => {
-  const { title, products, filter, sort, paginationLimit } = data
+  const { title, products, filter, sort, paginationLimit, noFilterResults } =
+    data
 
   if (!products || products.length === 0) return null
 
@@ -215,7 +217,20 @@ const Collection = ({ data = {} }) => {
 
           {orderedProducts.length === 0 && (
             <div className="collection--empty">
-              <p>No products found.</p>
+              {noFilterResults && <BlockContent blocks={noFilterResults} />}
+              <button
+                className="filters-reset btn is-large"
+                onClick={() =>
+                  updateParams(
+                    activeFilters.map((filter) => ({
+                      name: filter.name,
+                      value: null,
+                    }))
+                  )
+                }
+              >
+                Clear Filters
+              </button>
             </div>
           )}
         </div>
@@ -232,12 +247,14 @@ const Collection = ({ data = {} }) => {
           </div>
         )}
 
-        <div className="collection--count">
-          <p aria-live="polite" role="status" aria-atomic="true">
-            Showing {paginatedProducts.length} of {orderedProducts.length}{' '}
-            products
-          </p>
-        </div>
+        {orderedProducts.length && (
+          <div className="collection--count">
+            <p aria-live="polite" role="status" aria-atomic="true">
+              Showing {paginatedProducts.length} of {orderedProducts.length}{' '}
+              products
+            </p>
+          </div>
+        )}
       </div>
     </section>
   )

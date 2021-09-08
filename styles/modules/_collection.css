@@ -18,7 +18,11 @@
   }
 
   &--empty {
-    @apply flex justify-center px-8 py-16 min-h-[35vh];
+    @apply px-8 py-16 min-h-[35vh] text-center;
+
+    .filters-reset {
+      @apply mt-8;
+    }
   }
 
   &--pagination {
@@ -70,14 +74,18 @@
 }
 
 .collection-sort {
-  @apply flex items-center ml-auto px-2 sm:px-4;
+  @apply flex ml-auto px-2 sm:px-4;
 
-  .listbox--btn {
-    @apply p-4;
+  .listbox {
+    @apply flex;
+
+    &--btn {
+      @apply text-sm leading-normal p-4;
+    }
   }
 
   &--title {
-    @apply hidden sm:block mr-2 text-sm leading-normal font-semibold uppercase;
+    @apply hidden sm:inline mr-2 font-semibold uppercase;
   }
 
   &--icon {

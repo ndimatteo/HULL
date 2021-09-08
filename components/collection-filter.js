@@ -30,7 +30,7 @@ const CollectionFilter = ({
     <>
       <div className="collection--filter-actions">
         <button onClick={() => setFiltersOpen(true)} className="filters-toggle">
-          Filters
+          Show Filters
           {filtersTotal > 0 && (
             <span className="filters-toggle--count">{filtersTotal}</span>
           )}

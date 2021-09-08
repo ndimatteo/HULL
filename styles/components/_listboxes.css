@@ -2,7 +2,7 @@
   @apply relative z-20;
   
   &--btn {
-    @apply clean-btn flex items-center relative z-10 p-0 text-left bg-transparent text-base;
+    @apply clean-btn relative z-10 p-0 text-left bg-transparent text-base;
   }
 
   &--content {

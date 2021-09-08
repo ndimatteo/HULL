@@ -36,10 +36,10 @@ const runMiddleware = (req, res, fn) => {
 export default async function send(req, res) {
   // bail if it's not a post request or it's missing an ID
   if (req.method !== 'POST') {
-    console.log('must be a POST request with a product ID')
+    console.error('Must be a POST request with a product ID')
     return res
       .status(200)
-      .json({ error: 'must be a POST request with a product ID' })
+      .json({ error: 'Must be a POST request with a product ID' })
   }
 
   /*  ------------------------------ */
@@ -60,20 +60,20 @@ export default async function send(req, res) {
 
   // bail if shopify integrity doesn't match
   if (hmac !== generatedHash) {
-    console.log('not verified from Shopify')
-    return res.status(200).json({ error: 'not verified from Shopify' })
+    console.error('Unable to verify from Shopify')
+    return res.status(200).json({ error: 'Unable to verify from Shopify' })
   }
 
   // extract shopify data
   const {
-    body: { id },
+    body: { id, title },
   } = req
 
   /*  ------------------------------ */
   /*  Begin Sanity Product Sync
   /*  ------------------------------ */
 
-  console.log('[delete] product sync starting...')
+  console.log(`Deleting product from Sanity: ${title} (id: ${id})`)
   let stx = sanity.transaction()
 
   // patch (update) product document with core shopify data
@@ -81,7 +81,8 @@ export default async function send(req, res) {
 
   const result = await stx.commit()
 
-  console.log('sync complete!')
+  console.info('Sync complete!')
+  console.log(result)
 
   res.statusCode = 200
   res.json(JSON.stringify(result))

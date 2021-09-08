@@ -42,6 +42,12 @@ export default {
       initialValue: 12
     },
     {
+      title: 'Empty Filter Results',
+      name: 'noFilterResults',
+      type: 'complexPortableText',
+      description: 'Display text when a filtered collection is empty'
+    },
+    {
       title: 'Filter',
       name: 'filter',
       type: 'shopFilter'

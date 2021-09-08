@@ -11,15 +11,15 @@ export default async function send(req, res) {
 
   // honeypot
   if (req.body.fullname !== '') {
-    console.log('stuck in honey')
+    console.warn('Stuck in honey 🍯')
     return res.status(200).json({ status: 202 })
   }
 
   if (!email || !listID) {
-    console.log('no email or list ID provided')
+    console.warn('No email or list ID provided')
     return res
       .status(404)
-      .json({ error: 'must contain an email address and list ID' })
+      .json({ error: 'Must contain an email address and list ID' })
   }
 
   const payload = {
