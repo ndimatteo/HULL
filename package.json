@@ -1,6 +1,6 @@
 {
   "name": "hull",
-  "version": "2.1.0",
+  "version": "2.5.0",
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && npx sanity build ../public/studio -y && cd .. && next build",
