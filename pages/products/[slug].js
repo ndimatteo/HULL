@@ -47,11 +47,13 @@ const Product = ({ data }) => {
     return hasObject(v.options, option)
   })
 
+  const defaultVariantID = defaultVariant?.id ?? page.product.variants[0].id
+
   // set up our variant URL params
   const [currentParams, setCurrentParams] = useParams([
     {
       name: 'variant',
-      value: defaultVariant?.id || page.product.variants[0].id,
+      value: defaultVariantID,
     },
   ])
   const previousParams = usePrevious(currentParams)
@@ -60,19 +62,25 @@ const Product = ({ data }) => {
   const activeParams =
     isPageTransition && previousParams ? previousParams : currentParams
 
-  // set our activeVariant
-  const activeVariant = activeParams.find(
+  // find our activeVariantID ID
+  const paramVariantID = activeParams.find(
     (filter) => filter.name === 'variant'
   ).value
+  const foundVariant = page.product.variants?.find(
+    (v) => v.id == paramVariantID
+  )
+  const activeVariantID = foundVariant ? paramVariantID : defaultVariantID
 
   // handle variant change
   const updateVariant = useCallback(
     (id) => {
+      const isValidVariant = page.product.variants.find((v) => v.id == id)
+
       setCurrentParams([
         ...activeParams,
         {
           name: 'variant',
-          value: `${id}`,
+          value: isValidVariant ? `${id}` : defaultVariantID,
         },
       ])
     },
@@ -111,7 +119,7 @@ const Product = ({ data }) => {
         <Layout
           site={site}
           page={page}
-          schema={getProductSchema(product, activeVariant, site)}
+          schema={getProductSchema(product, activeVariantID, site)}
         >
           {page.modules?.map((module, key) => (
             <Module
@@ -119,7 +127,7 @@ const Product = ({ data }) => {
               module={module}
               product={product}
               activeVariant={product.variants.find(
-                (v) => v.id == activeVariant
+                (v) => v.id == activeVariantID
               )}
               onVariantChange={updateVariant}
             />
@@ -130,13 +138,13 @@ const Product = ({ data }) => {
   )
 }
 
-function getProductSchema(product, activeVariant, site) {
+function getProductSchema(product, activeVariantID, site) {
   if (!product) return null
 
   const router = useRouter()
   const { query } = router
 
-  const variant = product.variants.find((v) => v.id == activeVariant)
+  const variant = product.variants.find((v) => v.id == activeVariantID)
 
   return {
     '@context': 'http://schema.org',
