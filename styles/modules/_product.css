@@ -37,19 +37,19 @@
     }
   }
 
-  &--title {
-    @apply pr-8 sm:pr-12;
-  }
-
   &--name {
     @apply m-0 text-3xl leading-snug;
+  }
+
+  &--title {
+    @apply pr-8 sm:pr-12;
   }
 
   &--variant {
     @apply flex items-center mb-2 text-sm leading-relaxed tracking-wider font-semibold uppercase;
 
     .label {
-      @apply -my-1 transform scale-90;
+      @apply -my-1 scale-90;
     }
   }
 
@@ -61,7 +61,7 @@
     @apply sm:flex sticky bottom-0 mt-4 p-4 md:p-8 border-t bg-pageBG is-textured text-center;
 
     .counter {
-      @apply hidden sm:inline-flex;
+      @apply hidden sm:inline-flex mr-4;
     }
   }
 
@@ -78,7 +78,7 @@
   }
 
   &--values {
-    @apply flex flex-wrap justify-end gap-2 gap-y-2 gap-x-2 ml-auto;
+    @apply flex flex-wrap justify-end ml-auto gap-2 gap-y-2 gap-x-2;
     grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   }
 

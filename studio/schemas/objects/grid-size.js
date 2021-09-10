@@ -2,8 +2,6 @@ import React from 'react'
 import { FiSliders, FiHelpCircle } from 'react-icons/fi'
 import { Avatar } from '@sanity/ui'
 
-// import Note from '@components/note'
-
 export default {
   title: 'Column Size',
   name: 'gridSize',
@@ -18,26 +16,27 @@ export default {
   ],
   fields: [
     {
-      name: 'gridNote',
+      name: 'gridSizeNote',
       type: 'note',
       options: {
         icon: FiHelpCircle,
-        headline: 'What’s this',
-        message: `The "Width" and "Start" fields correlate with the "Grid Size" set for this Grid module. For example, say you have an 8 column grid: Setting a column width of 4 would make a 50% width column, while a start column of 5 would make it start 50% in (the 5th column of the 8-column grid).`
+        headline: 'How to setup column sizes',
+        message: `Always start with a "Default" breakpoint and work your way up. Visually, think about how many grid "spaces" you want your column to occupy at each breakpoint.<br /><br />You can also offset your column if you want it to have a gap in the grid spaces, just set the "space" you want the column to start in.<br /><br />The "Justify" and "Align" options can help position the column within the grid.`
       }
     },
     {
       title: 'Breakpoint',
       name: 'breakpoint',
       type: 'string',
+      description: 'Control what screen width this is for',
       options: {
         list: [
           { title: 'Default', value: ' ' },
-          { title: 'XS', value: 'xs' },
-          { title: 'SM', value: 'sm' },
-          { title: 'MD', value: 'md' },
-          { title: 'LG', value: 'lg' },
-          { title: 'XL', value: 'xl' }
+          { title: 'XS (480px and up)', value: 'xs' },
+          { title: 'SM (768px and up)', value: 'sm' },
+          { title: 'MD (940px and up)', value: 'md' },
+          { title: 'LG (1200px and up)', value: 'lg' },
+          { title: 'XL (1600px and up)', value: 'xl' }
         ]
       },
       validation: Rule => Rule.required(),
@@ -47,6 +46,7 @@ export default {
       title: 'Width',
       name: 'width',
       type: 'number',
+      description: 'Set how many grid spaces this occupies',
       options: {
         list: [
           { title: '1', value: 1 },
@@ -98,6 +98,7 @@ export default {
       title: 'Start (offset)',
       name: 'start',
       type: 'number',
+      description: 'Set the grid space this starts in',
       options: {
         list: [
           { title: '1', value: 1 },
@@ -121,12 +122,12 @@ export default {
     select: {
       breakpoint: 'breakpoint',
       width: 'width',
-      offset: 'offset'
+      start: 'start'
     },
-    prepare({ breakpoint, width, offset }) {
+    prepare({ breakpoint, width, start }) {
       return {
-        title: `Grid width: ${width}`,
-        subtitle: offset ? `offset: ${offset}` : null,
+        title: `Width: ${width}`,
+        subtitle: start ? `Offset: ${start}` : null,
         media: (
           <Avatar
             initials={breakpoint && breakpoint.trim() ? breakpoint : 'D'}

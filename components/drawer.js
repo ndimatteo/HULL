@@ -1,71 +1,82 @@
-import React, { useEffect } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useEffect, useRef, useState } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
+import cx from 'classnames'
 
-const Drawer = ({ title, open, toggle, children }) => {
-  if (typeof document === `undefined`) {
-    return null
-  }
+import { InPortal } from '../lib/helpers'
 
-  const toggleBodyClass = (state) => {
-    if (typeof document !== `undefined`) {
-      document.body.classList.toggle('drawer-open', state)
+const Drawer = ({
+  direction = 'right',
+  isOpen = false,
+  onClose = () => {},
+  className,
+  children,
+}) => {
+  const drawerRef = useRef()
+  const [isActive, setIsActive] = useState(isOpen)
+
+  useEffect(() => {
+    setIsActive(isOpen)
+  }, [isOpen])
+
+  const handleKeyDown = (e) => {
+    if (e.which === 27) {
+      onClose(false)
     }
   }
 
   useEffect(() => {
-    toggleBodyClass(open)
-  }, [open])
+    if (isActive) {
+      document.addEventListener('keydown', handleKeyDown)
+    }
 
-  return ReactDOM.createPortal(
-    <AnimatePresence initial={false}>
-      {open && (
-        <FocusTrap>
-          <div className="drawer--wrapper">
-            <m.div
-              key="drawerBG"
-              initial="hidden"
-              animate="visible"
-              exit="hidden"
-              variants={{
-                visible: { opacity: 1 },
-                hidden: { opacity: 0 },
-              }}
-              transition={{ duration: 0.4, ease: [0.19, 1.0, 0.22, 1.0] }}
-              className="drawer--backdrop"
-              onClick={() => toggle(false)}
-            />
-            <m.nav
-              key="drawer"
-              initial="close"
-              animate="open"
-              exit="close"
-              variants={{
-                open: { x: '0%' },
-                close: { x: '100%' },
-              }}
-              transition={{ duration: 0.5, ease: [0.19, 1.0, 0.22, 1.0] }}
-              className="drawer"
-            >
-              <div className="drawer--inner">
-                <div className="drawer--header">
-                  {title && <div className="drawer--title">{title}</div>}
-                  <button
-                    className="btn drawer--close"
-                    onClick={() => toggle(false)}
-                  >
-                    Done
-                  </button>
-                </div>
-                <div className="drawer--content">{children}</div>
-              </div>
-            </m.nav>
-          </div>
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [isActive])
+
+  return (
+    <InPortal id="drawer">
+      <>
+        <FocusTrap
+          active={isActive}
+          focusTrapOptions={{
+            fallbackFocus: () => drawerRef.current,
+            allowOutsideClick: true,
+          }}
+        >
+          <m.nav
+            ref={drawerRef}
+            key="drawer"
+            initial="hide"
+            animate={isActive ? 'show' : 'hide'}
+            variants={{
+              show: {
+                x: '0%',
+              },
+              hide: {
+                x: direction === 'right' ? '100%' : '-100%',
+              },
+            }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className={cx('drawer is-inverted', className, {
+              'is-right': direction === 'right',
+              'is-left': direction === 'left',
+              'is-active': isActive,
+            })}
+          >
+            <div className="drawer--inner">{children}</div>
+          </m.nav>
         </FocusTrap>
-      )}
-    </AnimatePresence>,
-    document.querySelector('#drawer')
+
+        <div
+          className={cx('drawer--backdrop', {
+            'is-active': isOpen,
+          })}
+          onClick={() => onClose(false)}
+        />
+      </>
+    </InPortal>
   )
 }
 

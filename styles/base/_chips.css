@@ -1,0 +1,36 @@
+.chip-group {
+  @apply flex overflow-x-auto hide-scrollbar;
+  mask-image: linear-gradient(90deg,transparent 0, #000 1rem, #000 calc(100% - 1rem), transparent);
+
+  &--list {
+    @apply p-4 whitespace-nowrap;
+  }
+
+  .chip {
+    @apply mr-2;
+  }
+}
+
+.chip {
+  @apply clean-btn inline-flex items-center justify-center align-middle bg-pageBG text-pageText rounded-full p-2 font-semibold;
+
+  &--label {
+    @apply px-2 max-w-[10rem] overflow-hidden overflow-ellipsis;
+  }
+
+  &--icon {
+    @apply w-6 h-6 p-1 -my-2 -mx-1 rounded-full transition-colors duration-300;
+
+    .chip:hover & {
+      background: hsla(var(--pageText-hsl), .2);
+    }
+
+    svg {
+      @apply block;
+    }
+  }
+}
+
+.remove-chip {
+  @apply rotate-45;
+}

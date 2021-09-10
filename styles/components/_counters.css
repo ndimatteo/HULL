@@ -1,10 +1,30 @@
 .counter {
-  @apply inline-grid h-full;
+  @apply inline-grid h-full p-2 border rounded-full bg-pageBG text-pageText;
   grid-template-columns: auto auto auto;
+
+  &.is-inverted {
+    @apply bg-transparent text-pageBG;
+  }
+
+  &.is-small {
+    @apply p-1;
+  }
 
   &--down,
   &--up {
-    @apply m-0 p-0 bg-transparent;
+    @apply w-8 h-8 -my-px p-2 bg-transparent rounded-full transition-colors duration-300;
+
+    .cart & {
+      @apply my-0;
+    }
+
+    &:hover {
+      background: hsla(var(--pageText-hsl), .2);
+
+      .is-inverted & {
+        background: hsla(var(--pageBG-hsl), .2);
+      }
+    }
 
     svg {
       @apply block;
@@ -17,7 +37,11 @@
   }
   
   &--amount {
-    @apply relative overflow-hidden w-12;
+    @apply relative overflow-hidden w-12 text-xs font-mono;
+
+    .cart & {
+      @apply w-8;
+    }
 
     &:focus-within {
       outline: 1px dashed var(--pageText);
@@ -42,7 +66,7 @@
     }
     
     input {
-      @apply relative bg-transparent border-0 rounded-none appearance-none p-0 w-full h-full text-center text-current text-base outline-none;
+      @apply relative bg-transparent border-0 rounded-none appearance-none p-1 w-full h-full text-center text-current text-base outline-none;
       font-feature-settings: "tnum";
     }
   }

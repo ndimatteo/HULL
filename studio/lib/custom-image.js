@@ -39,30 +39,21 @@ export default ({ hasDisplayOptions = true, ...props } = {}) => {
         title: 'Alternative text',
         name: 'alt',
         type: 'string',
-        description: 'Important for SEO and accessiblity.',
-        options: {
-          isHighlighted: true
-        },
-        validation: Rule => {
-          return Rule.custom((field, context) =>
-            'asset' in context.parent && field === undefined
-              ? 'Required! (think about non-visual readers)'
-              : true
-          )
-        }
+        description: 'Important for SEO and accessiblity.'
       }
     ],
     preview: {
       select: {
         asset: 'asset',
-        alt: 'alt',
+        alt: 'asset.alt',
+        customAlt: 'alt',
         customRatio: 'customRatio'
       },
-      prepare({ alt, customRatio, asset }) {
+      prepare({ alt, customAlt, customRatio, asset }) {
         const crop = crops.find(crop => crop.value === customRatio)
 
         return {
-          title: alt || '(alt text missing)',
+          title: customAlt ?? alt ?? '(alt text missing)',
           subtitle: crop.title,
           media: asset
         }

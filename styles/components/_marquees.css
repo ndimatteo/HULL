@@ -63,3 +63,44 @@
     animation: none !important;
   }
 }
+
+.marquee {
+  @apply border-b;
+  
+  &--item {
+    @apply flex;
+  }
+
+  &--text {
+    @apply block p-8 text-5xl leading-none;
+  }
+
+  &--photo {
+    @apply relative w-32 sm:w-48 px-8 py-4 sm:px-12 sm:py-8;
+
+    [data-theme='metal'] & {
+      filter: invert(94%) sepia(59%) saturate(2450%) hue-rotate(35deg) brightness(122%) contrast(111%);
+    }
+
+    img {
+      html:not([data-theme='dark']) & {
+        filter: invert(1);
+      }
+    }
+  }
+
+  &--product {
+    @apply flex flex-col -my-px;
+    margin: -1px 0;
+    width: calc(80vw - 2rem);
+    max-width: 28rem;
+
+    * {
+      @apply whitespace-normal;
+    }
+
+    .product-card {
+      @apply flex-1;
+    }
+  }
+}

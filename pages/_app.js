@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import Router from 'next/router'
 import Head from 'next/head'
 import { ThemeProvider } from 'next-themes'
@@ -7,9 +7,14 @@ import { LazyMotion, domAnimation, AnimatePresence } from 'framer-motion'
 import '../styles/tailwind.css'
 import '../styles/app.css'
 
-import { isBrowser } from '@lib/helpers'
+import { isBrowser, useScrollRestoration } from '@lib/helpers'
+import { pageTransitionSpeed } from '@lib/animate'
 
-import { SiteContextProvider } from '@lib/context'
+import {
+  SiteContextProvider,
+  useSiteContext,
+  useTogglePageTransition,
+} from '@lib/context'
 
 import Cart from '@components/cart'
 
@@ -24,47 +29,44 @@ if (isBrowser) {
     'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
   )
   console.log(
-    '%cWeb Development by Nick DiMatteo \n– https://nickdimatteo.com',
+    '%cDevelopment by Nick DiMatteo \n– https://nickdimatteo.com',
     'display:block;font-family:courier;font-size:12px;font-weight:bold;line-height:1;color:black;'
   )
   console.groupEnd()
 }
 
-const MyApp = ({ Component, pageProps, router }) => {
-  const [isLoading, setLoading] = useState(false)
+const Site = ({ Component, pageProps, router }) => {
+  const togglePageTransition = useTogglePageTransition()
+  const { isPageTransition } = useSiteContext()
 
-  // The scroll location on the page is not restored on history changes
-  useEffect(() => {
-    window.history.scrollRestoration = 'manual'
-  }, [router])
+  const { data } = pageProps
+
+  // Handle scroll position on history change
+  useScrollRestoration(router, pageTransitionSpeed)
 
   // Trigger our loading class
   useEffect(() => {
     if (isBrowser) {
-      document.documentElement.classList.toggle('is-loading', isLoading)
+      document.documentElement.classList.toggle('is-loading', isPageTransition)
     }
-  }, [isLoading])
+  }, [isPageTransition])
 
-  // Setup Next router events
+  // Setup page transition loading states
   useEffect(() => {
-    Router.events.on('routeChangeStart', (url) => {
-      // Bail if we're just changing a URL parameter
-      if (
-        url.indexOf('?') > -1 &&
-        url.split('?')[0] === router.asPath.split('?')[0]
-      )
-        return
+    Router.events.on('routeChangeStart', (_, { shallow }) => {
+      // Bail if we're just changing URL parameters
+      if (shallow) return
 
       // Otherwise, start loading
-      setLoading(true)
+      togglePageTransition(true)
     })
 
-    Router.events.on('routeChangeComplete', (url) => {
-      setTimeout(() => setLoading(false), 400) // accounts for page transition time
+    Router.events.on('routeChangeComplete', () => {
+      setTimeout(() => togglePageTransition(false), pageTransitionSpeed)
     })
 
     Router.events.on('routeChangeError', () => {
-      setLoading(false)
+      togglePageTransition(false)
     })
   }, [])
 
@@ -86,26 +88,34 @@ const MyApp = ({ Component, pageProps, router }) => {
   }, [])
 
   return (
-    <ThemeProvider enableSystem={false} disableTransitionOnChange>
-      <SiteContextProvider data={{ ...pageProps?.data?.site }}>
-        <LazyMotion features={domAnimation}>
-          {isLoading && (
-            <Head>
-              <title>Loading...</title>
-            </Head>
-          )}
-          <AnimatePresence
-            exitBeforeEnter
-            onExitComplete={() => {
-              window.scrollTo(0, 0)
-              document.body.classList.remove('overflow-hidden')
-            }}
-          >
-            <Component key={router.asPath.split('?')[0]} {...pageProps} />
-          </AnimatePresence>
+    <LazyMotion features={domAnimation}>
+      {isPageTransition && (
+        <Head>
+          <title>Loading...</title>
+        </Head>
+      )}
+      <AnimatePresence
+        exitBeforeEnter
+        onExitComplete={() => {
+          document.body.classList.remove('overflow-hidden')
+        }}
+      >
+        <Component key={router.asPath.split('?')[0]} {...pageProps} />
+      </AnimatePresence>
 
-          <Cart data={{ ...pageProps?.data?.site }} />
-        </LazyMotion>
+      <Cart data={{ ...data?.site }} />
+    </LazyMotion>
+  )
+}
+
+// Site wrapped with Context Providers
+const MyApp = ({ Component, pageProps, router }) => {
+  const { data } = pageProps
+
+  return (
+    <ThemeProvider enableSystem={false} disableTransitionOnChange>
+      <SiteContextProvider data={{ ...data?.site }}>
+        <Site Component={Component} pageProps={pageProps} router={router} />
       </SiteContextProvider>
     </ThemeProvider>
   )

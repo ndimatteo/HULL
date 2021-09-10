@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react'
-import Head from 'next/head'
+import React, { useEffect, useState } from 'react'
+import Script from 'next/script'
 import { m } from 'framer-motion'
-import { imageBuilder } from '@lib/sanity'
 
 import { isBrowser, useWindowSize } from '@lib/helpers'
+import { pageTransitionSpeed } from '@lib/animate'
 
+import HeadSEO from '@components/head-seo'
 import CookieBar from '@components/cookie-bar'
 import Header from '@components/header'
 import Footer from '@components/footer'
 
-const duration = 0.4
 const variants = {
   initial: {
     opacity: 0,
@@ -17,33 +17,28 @@ const variants = {
   enter: {
     opacity: 1,
     transition: {
-      duration: duration,
-      delay: 0.3,
+      duration: pageTransitionSpeed / 1000,
+      delay: 0.2,
       ease: 'linear',
       when: 'beforeChildren',
     },
   },
   exit: {
     opacity: 0,
-    transition: { duration: duration, ease: 'linear', when: 'beforeChildren' },
+    transition: {
+      duration: pageTransitionSpeed / 1000,
+      ease: 'linear',
+      when: 'beforeChildren',
+    },
   },
 }
 
 const Layout = ({ site = {}, page = {}, schema, children }) => {
-  // set <head> variables
-  const siteTitle = site.seo?.siteTitle
-  const siteIcon = site.seo?.siteIcon
-
-  const metaTitle = page.seo?.metaTitle || site.seo?.metaTitle
-  const metaDesc = page.seo?.metaDesc || site.seo?.metaDesc
-
-  const shareTitle = page.seo?.shareTitle || site.seo?.shareTitle
-  const shareDesc = page.seo?.shareDesc || site.seo?.shareDesc
-  const shareGraphic =
-    page.seo?.shareGraphic?.asset || site.seo?.shareGraphic?.asset
-
   // set window height var
   const { height: windowHeight } = useWindowSize()
+
+  // set header height
+  const [headerHeight, setHeaderHeight] = useState(null)
 
   useEffect(() => {
     if (isBrowser) {
@@ -53,84 +48,34 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
 
   return (
     <>
-      <Head>
-        <meta charSet="utf-8" />
-        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-        <meta name="format-detection" content="telephone=no" />
+      <HeadSEO site={site} page={page} schema={schema} />
 
-        <link preload="true" rel="icon" href="/favicon.svg" />
-        <link
-          preload="true"
-          rel="mask-icon"
-          href="/favicon.svg"
-          color="#000000"
+      {site.gtmID && (
+        <Script
+          id="gtm"
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','${site.gtmID}');`,
+          }}
         />
-        {siteIcon && (
-          <link
-            rel="apple-touch-icon"
-            href={imageBuilder.image(siteIcon).width(180).height(180).url()}
-          />
-        )}
+      )}
 
-        <link rel="preconnect" href="https://hull-demo.myshopify.com" />
-        <link rel="preconnect" href="https://cdn.sanity.io" crossOrigin="" />
-
-        <title>{metaTitle}</title>
-        {metaDesc && <meta name="description" content={metaDesc} />}
-
-        {shareTitle && (
-          <>
-            <meta property="og:title" content={shareTitle} />
-            <meta name="twitter:title" content={shareTitle} />
-          </>
-        )}
-
-        {shareDesc && (
-          <>
-            <meta property="og:description" content={shareDesc} />
-            <meta name="twitter:description" content={shareDesc} />
-          </>
-        )}
-
-        {shareGraphic && (
-          <>
-            <meta
-              property="og:image"
-              content={imageBuilder
-                .image(shareGraphic)
-                .width(1200)
-                .height(630)
-                .url()}
-            />
-            <meta
-              name="twitter:image"
-              content={imageBuilder
-                .image(shareGraphic)
-                .width(1200)
-                .height(630)
-                .url()}
-            />
-          </>
-        )}
-
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-
-        {siteTitle && <meta name="og:site_name" content={siteTitle} />}
-
-        {schema && (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-          />
-        )}
-      </Head>
-
-      <CookieBar data={site.cookieConsent} />
-
-      <m.div initial="initial" animate="enter" exit="exit" variants={variants}>
-        <Header data={site.header} isTransparent={page.hasTransparentHeader} />
+      <m.div
+        initial="initial"
+        animate="enter"
+        exit="exit"
+        variants={variants}
+        style={headerHeight ? { '--headerHeight': `${headerHeight}px` } : null}
+      >
+        <CookieBar data={site.cookieConsent} />
+        <Header
+          data={site.header}
+          isTransparent={page.hasTransparentHeader}
+          onSetup={({ height }) => setHeaderHeight(height)}
+        />
         <main id="content">{children}</main>
         <Footer data={site.footer} />
       </m.div>

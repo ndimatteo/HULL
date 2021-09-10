@@ -17,9 +17,9 @@ import {
 import CartItem from '@components/cart-item'
 
 const Cart = ({ data }) => {
-  const { cart } = data
+  const { shop } = data
 
-  if (!cart) return null
+  if (!shop) return null
 
   const { isCartOpen, isUpdating } = useSiteContext()
   const { subTotal } = useCartTotals()
@@ -31,7 +31,7 @@ const Cart = ({ data }) => {
   const [hasFocus, setHasFocus] = useState(false)
   const [checkoutLink, setCheckoutLink] = useState(checkoutURL)
 
-  const handleKeyup = (e) => {
+  const handleKeyDown = (e) => {
     if (e.which === 27) {
       toggleCart(false)
     }
@@ -49,10 +49,10 @@ const Cart = ({ data }) => {
   // update our checkout URL to use our custom domain name
   useEffect(() => {
     if (checkoutURL) {
-      const buildCheckoutLink = cart.storeURL
+      const buildCheckoutLink = shop.storeURL
         ? checkoutURL.replace(
             /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g,
-            cart.storeURL
+            shop.storeURL
           )
         : checkoutURL
       setCheckoutLink(buildCheckoutLink)
@@ -77,8 +77,8 @@ const Cart = ({ data }) => {
             },
           }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          onKeyUp={(e) => handleKeyup(e)}
-          onAnimationComplete={() => setHasFocus(isCartOpen)}
+          onKeyDown={(e) => handleKeyDown(e)}
+          onAnimationComplete={(v) => setHasFocus(v === 'show')}
           className={cx('cart is-inverted', {
             'is-active': isCartOpen,
             'is-updating': isUpdating,
@@ -117,8 +117,8 @@ const Cart = ({ data }) => {
                   {isUpdating ? 'Updating...' : 'Checkout'}
                 </a>
 
-                {cart.message && (
-                  <p className="cart--message">{cart.message}</p>
+                {shop.cartMessage && (
+                  <p className="cart--message">{shop.cartMessage}</p>
                 )}
               </div>
             )}

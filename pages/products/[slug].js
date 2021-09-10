@@ -5,34 +5,13 @@ import useSWR from 'swr'
 
 import { getProduct, getAllDocSlugs } from '@data'
 
-import Error from '@pages/404'
+import { useParams, usePrevious, centsToPrice, hasObject } from '@lib/helpers'
+
+import { useSiteContext } from '@lib/context'
+
+import NotFoundPage from '@pages/404'
 import Layout from '@components/layout'
 import { Module } from '@components/modules'
-
-import { centsToPrice, hasObject } from '@lib/helpers'
-
-// setup our activeVariant hook
-function useActiveVariant({ fallback, variants }) {
-  const router = useRouter()
-  const queryID = parseInt(router?.query?.variant)
-  const hasVariant = variants.find((v) => v.id === queryID)
-  const activeVariant = hasVariant ? queryID : fallback
-
-  const setActiveVariant = useCallback(
-    (variant) => {
-      router.replace(
-        `/products/${router?.query?.slug}?variant=${variant}`,
-        undefined,
-        {
-          shallow: true,
-        }
-      )
-    },
-    [router]
-  )
-
-  return [activeVariant, setActiveVariant]
-}
 
 // setup our inventory fetcher
 const fetchInventory = (url, id) =>
@@ -46,9 +25,10 @@ const fetchInventory = (url, id) =>
 
 const Product = ({ data }) => {
   const router = useRouter()
+  const { isPageTransition } = useSiteContext()
 
   if (!router.isFallback && !data) {
-    return <Error statusCode={404} />
+    return <NotFoundPage statusCode={404} />
   }
 
   // extract our data
@@ -67,24 +47,54 @@ const Product = ({ data }) => {
     return hasObject(v.options, option)
   })
 
-  // set our activeVariant state to our defaultVariant (if found) or first variant
-  const [activeVariant, setActiveVariant] = useActiveVariant({
-    fallback: defaultVariant?.id || page.product.variants[0].id,
-    variants: page.product.variants,
-  })
+  const defaultVariantID = defaultVariant?.id ?? page.product.variants[0].id
 
-  // const [activeVariant, setActiveVariant] = useState(
-  //   defaultVariant?.id || page.product.variants[0].id
-  // )
+  // set up our variant URL params
+  const [currentParams, setCurrentParams] = useParams([
+    {
+      name: 'variant',
+      value: defaultVariantID,
+    },
+  ])
+  const previousParams = usePrevious(currentParams)
 
-  // Check our product inventory is still correct
+  // determine which params set to use
+  const activeParams =
+    isPageTransition && previousParams ? previousParams : currentParams
+
+  // find our activeVariantID ID
+  const paramVariantID = activeParams.find(
+    (filter) => filter.name === 'variant'
+  ).value
+  const foundVariant = page.product.variants?.find(
+    (v) => v.id == paramVariantID
+  )
+  const activeVariantID = foundVariant ? paramVariantID : defaultVariantID
+
+  // handle variant change
+  const updateVariant = useCallback(
+    (id) => {
+      const isValidVariant = page.product.variants.find((v) => v.id == id)
+
+      setCurrentParams([
+        ...activeParams,
+        {
+          name: 'variant',
+          value: isValidVariant ? `${id}` : defaultVariantID,
+        },
+      ])
+    },
+    [activeParams]
+  )
+
+  // check our product inventory is still correct
   const { data: productInventory } = useSWR(
     ['/api/shopify/product-inventory', page.product.id],
     (url, id) => fetchInventory(url, id),
     { errorRetryCount: 3 }
   )
 
-  // Rehydrate our product after inventory is fetched
+  // rehydrate our product after inventory is fetched
   useEffect(() => {
     if (page.product && productInventory) {
       setProduct({
@@ -109,7 +119,7 @@ const Product = ({ data }) => {
         <Layout
           site={site}
           page={page}
-          schema={getProductSchema(product, activeVariant, site)}
+          schema={getProductSchema(product, activeVariantID, site)}
         >
           {page.modules?.map((module, key) => (
             <Module
@@ -117,9 +127,9 @@ const Product = ({ data }) => {
               module={module}
               product={product}
               activeVariant={product.variants.find(
-                (v) => v.id == activeVariant
+                (v) => v.id == activeVariantID
               )}
-              onVariantChange={setActiveVariant}
+              onVariantChange={updateVariant}
             />
           ))}
         </Layout>
@@ -128,13 +138,13 @@ const Product = ({ data }) => {
   )
 }
 
-function getProductSchema(product, activeVariant, site) {
+function getProductSchema(product, activeVariantID, site) {
   if (!product) return null
 
   const router = useRouter()
   const { query } = router
 
-  const variant = product.variants.find((v) => v.id == activeVariant)
+  const variant = product.variants.find((v) => v.id == activeVariantID)
 
   return {
     '@context': 'http://schema.org',
@@ -155,7 +165,7 @@ function getProductSchema(product, activeVariant, site) {
     },
     brand: {
       '@type': 'Brand',
-      name: site.seo.siteTitle,
+      name: site.title,
     },
   }
 }

@@ -1,4 +1,7 @@
-import { FiGift } from 'react-icons/fi'
+import React from 'react'
+import { Gift } from 'phosphor-react'
+
+import { getIcon } from './filter'
 
 export default {
   name: 'product',
@@ -20,7 +23,7 @@ export default {
       options: { columns: 2 }
     }
   ],
-  icon: FiGift,
+  icon: () => <Gift />,
   fields: [
     {
       title: 'Product Title',
@@ -128,6 +131,66 @@ export default {
       description: 'Define additional settings for product options'
     },
     {
+      title: 'Filters',
+      name: 'filters',
+      type: 'array',
+      description: 'Define what filters are associated with this product',
+      of: [
+        {
+          title: 'Filter',
+          name: 'filter',
+          type: 'object',
+          fields: [
+            {
+              title: 'Filter',
+              name: 'filter',
+              type: 'reference',
+              to: [{ type: 'filter' }]
+            },
+            {
+              title: 'Wich option is this for?',
+              name: 'forOption',
+              type: 'string',
+              options: {
+                list: [{ title: 'All', value: '' }],
+                fromField: 'options',
+                fromSubField: 'values',
+                fromFieldData: {
+                  title: 'name',
+                  value: 'position'
+                }
+              }
+            }
+          ],
+          preview: {
+            select: {
+              title: 'filter.title',
+              type: 'filter.type',
+              color: 'filter.color.color',
+              forOption: 'forOption'
+            },
+            prepare({ title = 'Untitled', type, color, forOption }) {
+              const displayType = type && type.trim() ? type : 'simple'
+              const option = forOption ? forOption.split(':') : null
+
+              return {
+                title,
+                subtitle:
+                  option && option.length > 1
+                    ? `${option[0]}: ${option[1]}`
+                    : 'All Variants',
+                media: getIcon(displayType, color?.hex.toUpperCase())
+              }
+            }
+          }
+        }
+      ],
+      options: {
+        editModal: 'popover'
+      },
+      validation: Rule => Rule.unique()
+    },
+    {
       title: 'Use Galleries',
       name: 'useGallery',
       type: 'string',
@@ -173,7 +236,7 @@ export default {
       name: 'hasTransparentHeader',
       type: 'boolean',
       description:
-        'When toggled on, the header will appear with a transparent background over the first content module and text/logos will be white until scrolling is engaged.'
+        'When activated the header will overlay the first content module with a transparent background and white text until scrolling is engaged.'
     },
     {
       title: 'Page Modules',

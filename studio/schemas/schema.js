@@ -6,13 +6,15 @@ import page from './documents/page'
 import product from './documents/shopify-product'
 import productVariant from './documents/shopify-variant'
 import collection from './documents/shopify-collection'
+import filter from './documents/filter'
+import solidColor from './documents/color'
 
 import generalSettings from './documents/settings-general'
 import cookieSettings from './documents/settings-cookie'
 import promoSettings from './documents/settings-promo'
 import headerSettings from './documents/settings-header'
 import footerSettings from './documents/settings-footer'
-import cartSettings from './documents/settings-cart'
+import shopSettings from './documents/settings-shop'
 import seoSettings from './documents/settings-seo'
 import menu from './documents/menu'
 import redirect from './documents/redirect'
@@ -30,6 +32,9 @@ import collectionGrid from './modules/collection-grid'
 import gridColumn from './objects/grid-column'
 import gridSize from './objects/grid-size'
 import seo from './objects/seo'
+
+import shopFilter from './objects/shop-filter'
+import shopSort from './objects/shop-sort'
 
 import productGalleryPhotos from './objects/product-gallery-photos'
 import productListingPhotos from './objects/product-listing-photos'
@@ -52,6 +57,8 @@ import accordions from './objects/accordions'
 import accordion from './objects/accordion'
 import productCard from './objects/product-card'
 
+import participant from './objects/participant'
+
 /*  ------------------------------------------ */
 /*  Your Schema documents / modules / objects
 /*  ------------------------------------------ */
@@ -66,13 +73,15 @@ export default createSchema({
     product,
     productVariant,
     collection,
+    filter,
+    solidColor,
 
     generalSettings,
     cookieSettings,
     promoSettings,
     headerSettings,
     footerSettings,
-    cartSettings,
+    shopSettings,
     seoSettings,
     menu,
     redirect,
@@ -93,6 +102,9 @@ export default createSchema({
     gridSize,
     seo,
 
+    shopFilter,
+    shopSort,
+
     productGalleryPhotos,
     productListingPhotos,
     productCartPhotos,
@@ -112,6 +124,8 @@ export default createSchema({
     freeform,
     accordions,
     accordion,
-    productCard
+    productCard,
+
+    participant
   ])
 })

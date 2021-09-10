@@ -23,8 +23,8 @@
 
 [data-theme='metal'] {
   --pageBG: #000000;
-  --pageText: #8fff1f;
+  --pageText: #FB1B15;
 
   --pageBG-hsl: 0, 0%, 0%;
-  --pageText-hsl: 90, 100%, 56%;
+  --pageText-hsl: 2, 92%, 53%;
 }

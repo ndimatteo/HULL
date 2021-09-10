@@ -1,4 +1,5 @@
-import { FiGift } from 'react-icons/fi'
+import React from 'react'
+import { Copy } from 'phosphor-react'
 
 export default {
   name: 'productVariant',
@@ -18,7 +19,7 @@ export default {
       options: { columns: 2 }
     }
   ],
-  icon: FiGift,
+  icon: () => <Copy />,
   fields: [
     {
       name: 'productTitle',
@@ -110,7 +111,9 @@ export default {
     {
       title: 'Display Title',
       name: 'title',
-      type: 'string'
+      type: 'string',
+      description:
+        'Shown where variant names appear (for example: Above the product title in the cart)'
     },
     {
       title: 'SEO / Share Settings',

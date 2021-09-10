@@ -10,7 +10,6 @@ const FeaturedProducts = ({ products, onClick }) => {
       {products.map((product, key) => (
         <ProductCard
           key={key}
-          index={key}
           product={product}
           hasVisuals={product.photos.main || product.photos.listing}
           showThumbs={product.photos.listing}

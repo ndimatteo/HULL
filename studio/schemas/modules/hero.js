@@ -1,7 +1,5 @@
 import { FiStar } from 'react-icons/fi'
 
-import ConditionalFields from '../../components/conditional-field'
-
 import customImage from '../../lib/custom-image'
 
 export default {
@@ -23,14 +21,15 @@ export default {
         list: [
           { title: 'Photo', value: 'photo' },
           { title: 'Video', value: 'video' }
-        ]
+        ],
+        layout: 'radio',
+        direction: 'horizontal'
       },
       validation: Rule => Rule.required()
     },
     {
       name: 'photos',
       type: 'object',
-      inputComponent: ConditionalFields,
       fields: [
         customImage({
           title: 'Background Photo (mobile)',
@@ -41,14 +40,13 @@ export default {
           name: 'desktopPhoto'
         })
       ],
-      options: {
-        condition: (document, context) => context().bgType === 'photo'
+      hidden: ({ parent }) => {
+        return parent.bgType !== 'photo'
       }
     },
     {
       name: 'video',
       type: 'object',
-      inputComponent: ConditionalFields,
       fields: [
         {
           title: 'Background Video',
@@ -64,8 +62,8 @@ export default {
           description: 'Short title/description of the video'
         }
       ],
-      options: {
-        condition: (document, context) => context().bgType === 'video'
+      hidden: ({ parent }) => {
+        return parent.bgType !== 'video'
       }
     }
   ],

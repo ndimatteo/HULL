@@ -150,7 +150,7 @@ const Newsletter = ({ data = {} }) => {
                 />
                 <label
                   htmlFor={`acceptTerms-${id}`}
-                  className="control--label for-checkbox"
+                  className="control--label for-checkbox mx-auto sm:mx-0"
                 >
                   <Icon name="Checkmark" />
                   {terms && <BlockContent blocks={terms} />}

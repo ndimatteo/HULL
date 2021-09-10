@@ -1,4 +1,5 @@
 import React from 'react'
+import Error from 'next/error'
 
 import { getStaticPage, queries } from '@data'
 
@@ -7,6 +8,15 @@ import { Module } from '@components/modules'
 
 const Shop = ({ data }) => {
   const { site, page } = data
+
+  if (!page) {
+    return (
+      <Error
+        title={`"Shop Page" is not set in Sanity, or the page data is missing`}
+        statusCode="Data Error"
+      />
+    )
+  }
 
   return (
     <Layout site={site} page={page}>
@@ -29,6 +39,7 @@ export async function getStaticProps({ preview, previewData }) {
       products[wasDeleted != true && isDraft != true${
         preview?.active ? ' && _id in path("drafts.**")' : ''
       }]->${queries.product},
+      title,
       seo
     }
   `,

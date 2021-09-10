@@ -35,14 +35,22 @@
       },
       "tokens": [
           {
-              "label": "livePreview",
+              "label": "Live Preview",
               "role": "write",
               "envVar": "SANITY_API_TOKEN"
           }
       ],
       "corsOrigins": [
         {
+          "origin": "https://*.vercel.app",
+          "allowCredentials": true
+        },
+        {
           "origin": "http://localhost:3000",
+          "allowCredentials": true
+        },
+        {
+          "origin": "http://localhost:3333",
           "allowCredentials": true
         }
       ]

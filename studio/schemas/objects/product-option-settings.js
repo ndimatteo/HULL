@@ -1,24 +1,13 @@
 import React from 'react'
-import { FiSettings } from 'react-icons/fi'
-import { FaCircle } from 'react-icons/fa'
+import { Gear } from 'phosphor-react'
 
-const getSwatch = color => {
-  return (
-    <FaCircle
-      color={color}
-      style={{
-        boxShadow: '0 0 0 1px rgba(255,255,255,.4)',
-        borderRadius: '50%'
-      }}
-    />
-  )
-}
+import { getSwatch } from '../../lib/helpers'
 
 export default {
   title: 'option Settings',
   name: 'productOptionSettings',
   type: 'object',
-  icon: FiSettings,
+  icon: () => <Gear />,
   fields: [
     {
       title: 'Wich option is this for?',
@@ -37,20 +26,19 @@ export default {
     {
       title: 'Color Swatch',
       name: 'color',
-      type: 'color',
-      options: {
-        disableAlpha: true
-      },
+      type: 'reference',
+      to: [{ type: 'solidColor' }],
       validation: Rule => Rule.required()
     }
   ],
   preview: {
     select: {
-      color: 'color',
+      color: 'color.color',
       forOption: 'forOption'
     },
     prepare({ color, forOption }) {
       const option = forOption ? forOption.split(':') : null
+
       return {
         title:
           option && option.length > 1

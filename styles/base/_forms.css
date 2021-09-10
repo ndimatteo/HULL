@@ -17,7 +17,7 @@
 }
 
 .control {
-  @apply flex flex-col relative text-left bg-pageBG;
+  @apply flex flex-col relative text-left;
 
   &--group {
     @apply grid gap-y-2 grid-cols-1 sm:grid-cols-2;
@@ -61,7 +61,7 @@
   }
 
   &--label {
-    @apply absolute top-1/2 transform -translate-y-1/2 left-0 px-4 py-2;
+    @apply absolute top-1/2 -translate-y-1/2 left-0 px-4 py-2;
 
     .is-filled & {
       @apply hidden;
@@ -72,7 +72,7 @@
     }
 
     &.for-checkbox {
-      @apply transform-none inline-flex relative top-auto left-auto mx-auto sm:mx-0 p-0 cursor-pointer;
+      @apply transform-none inline-flex relative top-auto left-auto p-0 cursor-pointer;
 
       svg {
         @apply block flex-none mr-4 p-1 pointer-events-none border border-current transition-colors;
@@ -109,7 +109,7 @@
   }
 
   &--error {
-    @apply absolute bottom-full left-1/2 transform -translate-x-1/2 translate-y-1/2 px-2 rounded-full bg-pageText text-pageBG text-xs leading-normal font-semibold;
+    @apply absolute bottom-full left-1/2 -translate-x-1/2 translate-y-1/2 px-2 rounded-full bg-pageText text-pageBG text-xs leading-normal font-semibold;
   }
 
   &--pot {

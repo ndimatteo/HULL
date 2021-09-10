@@ -10,14 +10,14 @@ import { setIfMissing } from '@sanity/form-builder/PatchEvent'
 
 const isFunction = obj => !!(obj && obj.constructor && obj.call && obj.apply)
 
-class ConditionalFields extends React.PureComponent {
+class ConditionalField extends React.PureComponent {
   static propTypes = {
     type: PropTypes.shape({
       title: PropTypes.string,
       name: PropTypes.string.isRequired,
       fields: PropTypes.array.isRequired,
       options: PropTypes.shape({
-        condition: PropTypes.func.isRequired
+        hidden: PropTypes.func.isRequired
       }).isRequired
     }).isRequired,
     level: PropTypes.number,
@@ -84,7 +84,7 @@ class ConditionalFields extends React.PureComponent {
     const { document, type } = this.props
 
     const condition =
-      (isFunction(type.options.condition) && type.options.condition) ||
+      (isFunction(type.options.hidden) && type.options.hidden) ||
       function() {
         return true
       }
@@ -128,4 +128,4 @@ class ConditionalFields extends React.PureComponent {
   }
 }
 
-export default withValuePath(withDocument(ConditionalFields))
+export default withValuePath(withDocument(ConditionalField))

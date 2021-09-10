@@ -1,6 +1,6 @@
 {
   "name": "hull",
-  "version": "2.1.0",
+  "version": "2.5.0",
   "scripts": {
     "dev": "cross-env NODE_ENV=development next dev",
     "build": "echo 'Building Sanity to public/studio…' && cd studio && npx sanity build ../public/studio -y && cd .. && next build",
@@ -17,10 +17,10 @@
   },
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.25",
-    "@reach/rect": "^0.15.0",
+    "@reach/rect": "^0.16.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.7.0",
-    "@sanity/image-url": "^0.140.19",
+    "@sanity/image-url": "^1.0.1",
     "@vimeo/player": "^2.15.3",
     "axios": "^0.21.0",
     "base64-string": "^1.1.2",
@@ -29,13 +29,14 @@
     "cross-env": "^7.0.3",
     "focus-trap-react": "^8.3.2",
     "framer-motion": "^4.0.3",
-    "js-cookie": "^2.2.1",
+    "js-cookie": "^3.0.0",
     "jsondiffpatch": "^0.4.1",
     "keen-slider": "^5.4.0",
     "marqy": "^0.0.8",
     "next": "^11.0.0",
     "next-themes": "^0.0.15",
     "qs": "^6.10.1",
+    "query-string": "^7.0.1",
     "raw-body": "^2.4.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -43,8 +44,7 @@
     "react-keyed-flatten-children": "^1.3.0",
     "shopify-buy": "^2.11.0",
     "sitemap": "^7.0.0",
-    "swr": "^0.5.4",
-    "tailwindcss": "^2.0.2",
+    "swr": "^1.0.0",
     "use-intersection": "^0.2.1"
   },
   "devDependencies": {
@@ -54,11 +54,10 @@
     "@types/node": "^16.0.1",
     "@types/react": "^17.0.0",
     "@types/shopify-buy": "^2.10.5",
+    "autoprefixer": "^10.3.1",
     "postcss": "^8.2.1",
-    "postcss-flexbugs-fixes": "^5.0.2",
     "postcss-import": "^14.0.2",
-    "postcss-nested": "^5.0.5",
-    "postcss-preset-env": "^6.7.0",
+    "tailwindcss": "^2.2.4",
     "typescript": "^4.3.5"
   },
   "peerDependencies": {

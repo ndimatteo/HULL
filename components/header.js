@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { m } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
 import { useIntersection } from 'use-intersection'
@@ -21,7 +21,7 @@ import Menu from '@components/menu'
 import MegaNavigation from '@components/menu-mega-nav'
 import Icon from '@components/icon'
 
-const Header = ({ data = {}, isTransparent }) => {
+const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
   // expand our header data
   const {
     promo,
@@ -33,6 +33,7 @@ const Header = ({ data = {}, isTransparent }) => {
 
   // setup states
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
+  const [headerHeight, setHeaderHeight] = useState(null)
   const observerRef = useRef()
   const observerIsVisible = useIntersection(observerRef)
   const headerRef = useRef()
@@ -51,6 +52,16 @@ const Header = ({ data = {}, isTransparent }) => {
   // context helpers
   const { meganav } = useSiteContext()
   const toggleMegaNav = useToggleMegaNav()
+
+  useEffect(() => {
+    if (headerRect) {
+      setHeaderHeight(headerRect.height)
+    }
+  }, [headerRect])
+
+  useEffect(() => {
+    onSetup({ height: headerHeight })
+  }, [headerHeight])
 
   return (
     <>
@@ -98,7 +109,7 @@ const Header = ({ data = {}, isTransparent }) => {
                         className={cx('menu-toggle', {
                           'is-open': isMobileNavOpen,
                         })}
-                        aria-expanded={isMobileNavOpen ? 'true' : 'false'}
+                        aria-expanded={isMobileNavOpen}
                         aria-controls="mobile-nav"
                         aria-label="Toggle Menu"
                       >
@@ -120,14 +131,7 @@ const Header = ({ data = {}, isTransparent }) => {
                         transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
                         className="menu-mobile"
                       >
-                        <div
-                          className="menu-mobile--inner"
-                          style={
-                            headerRect?.height
-                              ? { '--headerHeight': `${headerRect.height}px` }
-                              : null
-                          }
-                        >
+                        <div className="menu-mobile--inner">
                           <div className="menu-mobile--primary">
                             {menuMobilePrimary?.items && (
                               <Menu
@@ -200,7 +204,7 @@ const Header = ({ data = {}, isTransparent }) => {
               ...(menuDesktopRight?.items || []),
             ]}
             headerHeight={
-              isTransparent && observerIsVisible ? headerRect?.height : false
+              isTransparent && observerIsVisible ? headerHeight : false
             }
           />
         </div>

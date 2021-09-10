@@ -30,7 +30,6 @@ class SeoPreviews extends React.PureComponent {
       .fetch(
         `
         *[_type == "seoSettings"][0]{
-          siteTitle,
           metaTitle,
           metaDesc,
           shareTitle,

@@ -31,7 +31,7 @@ const ProductOption = ({
 
       <RadioGroup
         value={
-          activeVariant.options.find((opt) => opt.name === option.name).value
+          activeVariant?.options.find((opt) => opt.name === option.name)?.value
         }
         onChange={(value) => {
           changeOption(option.name, value, variants, activeVariant, onChange)
@@ -76,6 +76,7 @@ const ProductOption = ({
           return (
             <RadioItem
               key={key}
+              title={`${option.name}: ${value}`}
               value={value}
               className={cx({
                 btn: !optSettings?.color,

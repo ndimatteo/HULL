@@ -11,6 +11,15 @@
     clip-path: inset(50%);
   }
 
+  .hide-scrollbar {
+    -ms-overflow-style:none;
+    scrollbar-width:none;
+    
+    &::-webkit-scrollbar{
+      @apply hidden;
+    }
+  }
+
   .is-textured {
     background-image: radial-gradient(var(--pageText) 9%, transparent 9%), radial-gradient(var(--pageText) 9%, transparent 9%);
     background-position: 0 0, 8px 8px;

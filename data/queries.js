@@ -1,3 +1,10 @@
+import { sortTypes } from '../studio/schemas/objects/shop-sort'
+
+// Create our sorting fallback titles from Sanity
+const sortFallbacks = sortTypes
+  .map((type) => `type == "${type.value}" => "${type.title}"`)
+  .join(',')
+
 // Construct our "home" and "error" page GROQ
 export const homeID = `*[_type=="generalSettings"][0].home->_id`
 export const shopID = `*[_type=="generalSettings"][0].shop->_id`
@@ -24,7 +31,7 @@ const link = `
 
 // Construct our "image meta" GROQ
 export const imageMeta = `
-  alt,
+  "alt": coalesce(alt, asset->alt),
   asset,
   crop,
   customRatio,
@@ -57,6 +64,7 @@ export const ptContent = `
 // Construct our "product" GROQ
 export const product = `
   {
+    "publishDate": coalesce(publishDate, _createdAt),
     "slug": slug.current,
     "id": productID,
     title,
@@ -91,7 +99,7 @@ export const product = `
     },
     optionSettings[]{
       forOption,
-      color
+      "color": color->color,
     },
     "variants": *[_type == "productVariant" && productID == ^.productID && wasDeleted != true && isDraft != true]{
       "id": variantID,
@@ -107,7 +115,11 @@ export const product = `
       },
       seo
     },
-    "klaviyoAccountID": *[_type == "generalSettings"][0].klaviyoAccountID
+    "klaviyoAccountID": *[_type == "generalSettings"][0].klaviyoAccountID,
+    "filters": filters[]{
+      "slug": filter->slug.current,
+      forOption
+    }
   }
 `
 
@@ -218,16 +230,46 @@ export const modules = `
   _type == 'collectionGrid' => {
     _type,
     _key,
+    "title": ^.title,
+    "paginationLimit": *[_type == "shopSettings"][0].paginationLimit,
+    "filter": *[_type == "shopSettings"][0].filter{
+      isActive,
+      groups[]{
+        "id": _key,
+        title,
+        "slug": slug.current,
+        display,
+        options[]->{
+          type,
+          title,
+          "slug": slug.current,
+          "color": color->color
+        }
+      }
+    },
+    "sort": *[_type == "shopSettings"][0].sort{
+      isActive,
+      options[]{
+        "slug": type,
+        "title": coalesce(title, select(
+          ${sortFallbacks}
+        ))
+      }
+    },
+    "noFilterResults": *[_type == "shopSettings"][0].noFilterResults[]{
+      ${ptContent}
+    },
   }
 `
 
 // Construct our "site" GROQ
 export const site = `
   "site": {
+    "title": *[_type == "generalSettings"][0].siteTitle,
     "rootDomain": *[_type == "generalSettings"][0].siteURL,
-    "cart": *[_type == "cartSettings"][0]{
+    "shop": *[_type == "shopSettings"][0]{
       storeURL,
-      message
+      cartMessage
     },
     "productCounts": [ {"slug": "all", "count": count(*[_type == "product"])} ] + *[_type == "collection"]{
       "slug": slug.current,
@@ -240,6 +282,7 @@ export const site = `
     },
     "header": *[_type == "headerSettings"][0]{
       "promo": *[_type == "promoSettings"][0]{
+        enabled,
         display,
         text,
         "link": link->{
@@ -326,13 +369,16 @@ export const site = `
       ]
     },
     "seo": *[_type == "seoSettings"][0]{
-      siteTitle,
       metaTitle,
       metaDesc,
       shareTitle,
       shareDesc,
-      shareGraphic
+      shareGraphic,
+      "favicon": favicon.asset->url,
+      "faviconLegacy": faviconLegacy.asset->url,
+      touchIcon
     },
+    "gtmID": *[_type == "generalSettings"][0].gtmID,
   }
 `
 

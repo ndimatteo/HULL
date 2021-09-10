@@ -2,7 +2,7 @@ export default {
   title: 'Footer Settings',
   name: 'footerSettings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
+  // __experimental_actions: ['update', 'publish'], // disable for initial publish
   fieldsets: [
     {
       title: 'Block One',

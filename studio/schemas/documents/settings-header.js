@@ -1,10 +1,10 @@
-import { FiAlertCircle } from 'react-icons/fi'
+import { WarningCircle } from 'phosphor-react'
 
 export default {
   title: 'Header Settings',
   name: 'headerSettings',
   type: 'document',
-  __experimental_actions: ['update', 'publish'], // disable for initial publish
+  // __experimental_actions: ['update', 'publish'], // disable for initial publish
   fieldsets: [
     {
       title: 'Desktop',
@@ -24,7 +24,7 @@ export default {
       name: 'navNote',
       type: 'note',
       options: {
-        icon: FiAlertCircle,
+        icon: WarningCircle,
         headline: 'Note',
         message: `On desktop, dropdowns will appear as a "mega-nav". On mobile, dropdowns will appear as accordions. The "Cart" toggle will always appear to the right of the header on all screen sizes.`,
         tone: 'caution'

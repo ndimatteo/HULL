@@ -159,9 +159,6 @@ MAILCHIMP_SERVER=usX
 
 // Needed for SendGrid forms:
 SENDGRID_API_KEY=XXXXXX
-
-// Needed for Google Tag Manager:
-GTM_ID=XXX-XXXXXX
 ```
 3. Update all the `XXXXXX` values, here's where to find each:
   - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
@@ -170,11 +167,10 @@ GTM_ID=XXX-XXXXXX
   - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
   - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
   - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
-  - `KLAVIYO_API_KEY` - This is your Public API Key / Site ID from your Klaviyo Account "Settings" -> "API Keys"
+  - `KLAVIYO_API_KEY` - Create a Private API Key from your Klaviyo Account "Settings" -> "API Keys"
   - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
   - `MAILCHIMP_SERVER` - This is the server your account is from. It's in the URL when logged in and at the end of your API Key
   - `SENDGRID_API_KEY` - Create an API key from "Settings" -> "API Keys" with "Restricted Access" to only "Mail Send"
-  - `GTM_ID` - If using Google Tag Manager this is your Container ID
   
 ### 5) Shopify Store Theme
 Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL` with your actual frontsite domain URL **(do not include protocol or trailing slash)**

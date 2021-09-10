@@ -1,0 +1,126 @@
+.filters {
+  @apply max-w-md sm:max-w-sm;
+
+  @media (min-width: 449px) {
+    @apply border-r;
+  }
+
+  &--header {
+    @apply flex items-center relative px-4 py-3 sm:px-8 sm:py-6 text-sm leading-normal font-semibold uppercase;
+
+    &::after {
+      @apply absolute inset-x-0 bottom-0 border-t;
+      content: "";
+    }
+  }
+
+  &--title {
+    @apply flex items-center h-12 mr-auto;
+  }
+
+  &--count {
+    @apply opacity-30 ml-2;
+  }
+
+  &--actions {
+    @apply flex items-center;
+  }
+
+  &--content {
+    @apply flex-1 flex flex-col overflow-y-scroll p-4 sm:px-8 sm:py-2;
+  }
+
+  &--footer {
+    @apply relative px-4 pb-4 sm:px-8 sm:pb-8;
+  }
+
+  &--footer-actions {
+    @apply border-t pt-4 sm:pt-8;
+  }
+}
+
+.filters-close {
+  @apply clean-btn bg-transparent -mr-2 mx-2 p-2 text-sm leading-normal font-semibold uppercase;
+}
+
+.filter-group {
+  &:first-child {
+    @apply border-t-0;
+  }
+
+  &--count {
+    @apply inline-block align-middle opacity-30 ml-2 text-xs;
+  }
+  
+  &--options {
+    @apply flex flex-wrap gap-y-4 justify-items-start mt-2;
+
+    &.is-grid {
+      @apply grid grid-cols-3 gap-4;
+    }
+  }
+}
+
+.filter-option {
+  @apply w-full;
+
+  .is-grid & {
+    @apply border p-2 text-center transition-colors duration-200;
+
+    &.is-active {
+      @apply bg-pageBG text-pageText border-pageBG;
+    }
+
+    .control {
+      &--label {
+        @apply block text-center;
+      }
+    }
+  }
+  
+  &.is-swatch {
+    @apply inline-flex flex-col w-auto ml-1 mr-5 text-center;
+
+    .swatch {
+      @apply w-[40px] h-[40px];
+    }
+
+    .control {
+      &--label {
+        @apply flex flex-col items-center;
+
+        svg {
+          @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-transparent border-none;
+          
+          path {
+            color: var(--swatchBorder);
+          }
+        }
+      }
+    }
+
+    input:checked + {
+      .control--label {
+        svg {
+          @apply bg-transparent;
+        }
+      }
+    }
+  }
+
+  &--icon {
+    @apply relative;
+
+    .is-grid & {
+      @apply hidden;
+    }
+  }
+  
+  &--label {
+    @apply mt-1 text-xs font-semibold;
+
+    .is-swatch & {
+      @apply mt-2;
+    }
+  }
+}

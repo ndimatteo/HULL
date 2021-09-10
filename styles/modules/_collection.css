@@ -1,12 +1,64 @@
 .collection {
-  @apply overflow-hidden border-b;
+  @apply border-b;
+  
+  &--tools {
+    @apply sticky top-[var(--headerHeight)] z-10 flex justify-between bg-pageBG border-b;
+  }
+
+  &--content {
+    @apply relative z-0 overflow-hidden;
+  }
   
   &--grid {
     @apply grid grid-cols-1 md:grid-cols-3 -m-px;
+
+    &.is-empty {
+      @apply grid-cols-1;
+    }
+  }
+
+  &--empty {
+    @apply px-8 py-16 min-h-[35vh] text-center;
+
+    .filters-reset {
+      @apply mt-8;
+    }
   }
 
   &--pagination {
-    @apply relative p-4 sm:py-8 is-textured bg-pageBG border-t text-center;
+    @apply relative p-4 sm:py-8 text-center is-textured bg-pageBG border-t;
+  }
+
+  &--count {
+    @apply relative p-4 sm:py-8 text-center bg-pageBG border-t;
+  }
+
+  &--filter-actions {
+    @apply flex items-center px-2 sm:px-4;
+
+    .filters-toggle {
+      @apply clean-btn flex items-center relative p-4 bg-transparent text-sm leading-normal font-semibold uppercase;
+
+      &--count {
+        @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG text-xs leading-loose;
+      }
+    }
+
+    .filters-reset {
+      @apply hidden sm:block ml-2;
+    }
+  }
+
+  &--filter-chips {
+    @apply flex bg-pageText;
+
+    .accordion {
+      @apply border-0;
+
+      &--inner {
+        @apply max-w-none p-0 border-b border-pageText;
+      }
+    }
   }
 }
 
@@ -21,17 +73,45 @@
   }
 }
 
+.collection-sort {
+  @apply flex ml-auto px-2 sm:px-4;
+
+  .listbox {
+    @apply flex;
+
+    &--btn {
+      @apply p-4 text-sm leading-normal;
+    }
+  }
+
+  &--title {
+    @apply hidden sm:inline mr-2 font-semibold uppercase;
+  }
+
+  &--icon {
+    @apply inline-block mr-2 w-[10px] h-[10px] rounded-full border;
+
+    .is-open & {
+      @apply bg-pageText;
+      animation: pulse 2s infinite;
+    }
+  }
+}
+
 .product-card {
   @apply flex flex-col relative;
 
   .collection &,
-  .marquee--product & {
-    @apply p-8 border;
-    margin: -.5px;
+  .marquee & {
+    @apply p-8 m-[-0.5px] border;
   }
 
   &.is-inline {
     @apply my-4;
+  }
+
+  &--visuals {
+    @apply relative;
   }
 
   &--thumb {
@@ -64,17 +144,13 @@
     @apply text-center;
 
     .product-card--visuals + & {
-      @apply mt-6;
-
-      .is-inline & {
-        @apply mt-4;
-      }
+      @apply mt-4;
     }
   }
 
   &--title {
     @apply m-0 !important;
-    
+
     .is-featured & {
       @apply text-base;
     }
@@ -97,18 +173,6 @@
     }
   }
 
-  .price {
-    @apply flex items-center justify-center;
-
-    &--current {
-      @apply sm:text-base sm:leading-normal font-semibold;
-    }
-
-    &--discount {
-      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
-    }
-  }
-
   &--option {
     @apply relative z-30 mt-4;
 
@@ -120,13 +184,34 @@
       }
     }
   }
+
+  &--add {
+    @apply absolute bottom-0 inset-x-0 z-30 text-center mx-4 mb-8 opacity-0 invisible translate-y-1/2 transition-all;
+    will-change: transform;
+
+    .product-card:hover & {
+      @apply opacity-100 visible translate-y-0;
+    }
+  }
+
+  .price {
+    @apply flex items-center justify-center;
+
+    &--current {
+      @apply sm:text-base sm:leading-normal font-semibold;
+    }
+
+    &--discount {
+      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
+    }
+  }
 }
 
 .product-featured {
   @apply flex flex-col relative;
 
   h2 {
-    @apply mt-4 text-base font-semibold text-center transition-opacity duration-200;
+    @apply mt-4 text-center text-base font-semibold transition-opacity duration-200;
 
     .product-featured:hover & {
         @apply opacity-100 visible;
