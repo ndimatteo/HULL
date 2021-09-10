@@ -34,6 +34,7 @@
 - Animations powered by [Framer Motion](https://www.framer.com/motion/)
 - Cart powered by [Shopify Buy SDK](https://www.npmjs.com/package/shopify-buy)
 - Real-time inventory check for products using [SWR](https://swr.vercel.app)
+- Customizable Filtering & Sorting for product collections
 - Klaviyo waitlist form for out-of-stock products
 - Klaviyo newsletter form with opt-in field
 - Dynamic Page Routes for custom page creation
