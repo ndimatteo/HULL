@@ -1,8 +1,8 @@
 .collection {
   @apply border-b;
-
+  
   &--tools {
-    @apply sticky top-[var(--headerHeight)] z-10 flex justify-between border-b bg-pageBG;
+    @apply sticky top-[var(--headerHeight)] z-10 flex justify-between bg-pageBG border-b;
   }
 
   &--content {
@@ -10,7 +10,7 @@
   }
   
   &--grid {
-    @apply grid grid-cols-1 md:grid-cols-3;
+    @apply grid grid-cols-1 md:grid-cols-3 -m-px;
 
     &.is-empty {
       @apply grid-cols-1;
@@ -26,18 +26,18 @@
   }
 
   &--pagination {
-    @apply relative p-4 sm:py-8 is-textured bg-pageBG border-t text-center;
+    @apply relative p-4 sm:py-8 text-center is-textured bg-pageBG border-t;
   }
 
   &--count {
-    @apply relative p-4 sm:py-8 bg-pageBG border-t text-center;
+    @apply relative p-4 sm:py-8 text-center bg-pageBG border-t;
   }
 
   &--filter-actions {
     @apply flex items-center px-2 sm:px-4;
 
     .filters-toggle {
-      @apply clean-btn flex items-center relative bg-transparent p-4 text-sm leading-normal font-semibold uppercase;
+      @apply clean-btn flex items-center relative p-4 bg-transparent text-sm leading-normal font-semibold uppercase;
 
       &--count {
         @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG text-xs leading-loose;
@@ -51,7 +51,7 @@
 
   &--filter-chips {
     @apply flex bg-pageText;
-    
+
     .accordion {
       @apply border-0;
 
@@ -80,7 +80,7 @@
     @apply flex;
 
     &--btn {
-      @apply text-sm leading-normal p-4;
+      @apply p-4 text-sm leading-normal;
     }
   }
 
@@ -89,7 +89,7 @@
   }
 
   &--icon {
-    @apply inline-block mr-2 rounded-full border w-[10px] h-[10px];
+    @apply inline-block mr-2 w-[10px] h-[10px] rounded-full border;
 
     .is-open & {
       @apply bg-pageText;
@@ -100,6 +100,11 @@
 
 .product-card {
   @apply flex flex-col relative;
+
+  .collection &,
+  .marquee & {
+    @apply p-8 m-[-0.5px] border;
+  }
 
   &.is-inline {
     @apply my-4;
@@ -145,7 +150,7 @@
 
   &--title {
     @apply m-0 !important;
-    
+
     .is-featured & {
       @apply text-base;
     }
@@ -170,6 +175,14 @@
 
   &--option {
     @apply relative z-30 mt-4;
+
+    .option {
+      @apply m-0 p-0 border-0;
+
+      &--values {
+        @apply mx-auto;
+      }
+    }
   }
 
   &--add {
@@ -180,13 +193,25 @@
       @apply opacity-100 visible translate-y-0;
     }
   }
+
+  .price {
+    @apply flex items-center justify-center;
+
+    &--current {
+      @apply sm:text-base sm:leading-normal font-semibold;
+    }
+
+    &--discount {
+      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
+    }
+  }
 }
 
 .product-featured {
   @apply flex flex-col relative;
 
   h2 {
-    @apply mt-4 text-base font-semibold text-center transition-opacity duration-200;
+    @apply mt-4 text-center text-base font-semibold transition-opacity duration-200;
 
     .product-featured:hover & {
         @apply opacity-100 visible;

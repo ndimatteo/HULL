@@ -5,10 +5,10 @@
 }
 
 .accordion {
-  @apply w-full;
+  @apply w-full border-t;
   
   &--toggle {
-    @apply clean-btn text-left flex justify-between items-center px-0 py-4 w-full bg-transparent;
+    @apply clean-btn text-left flex justify-between items-center px-0 py-4 w-full bg-transparent font-semibold text-lg leading-snug;
   }
 
   &--icon {
@@ -29,6 +29,6 @@
   }
 
   &--inner {
-    @apply m-0;
+    @apply m-0 pb-12 max-w-2xl;
   }
 }

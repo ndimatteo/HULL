@@ -1,5 +1,9 @@
 .filters {
-  @apply max-w-sm;
+  @apply max-w-md sm:max-w-sm;
+
+  @media (min-width: 449px) {
+    @apply border-r;
+  }
 
   &--header {
     @apply flex items-center relative px-4 py-3 sm:px-8 sm:py-6 text-sm leading-normal font-semibold uppercase;
@@ -28,6 +32,10 @@
 
   &--footer {
     @apply relative px-4 pb-4 sm:px-8 sm:pb-8;
+  }
+
+  &--footer-actions {
+    @apply border-t pt-4 sm:pt-8;
   }
 }
 

@@ -1,14 +1,86 @@
 .btn {
-  @apply clean-btn p-0 bg-transparent;
+  /* default style button */
+  @apply clean-btn inline-block relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs;
 
+  /* default: hover */
+  &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout) {
+    &.is-active,
+    &:hover {
+      @apply bg-pageText border-pageText text-pageBG;
+    }
+  }
+
+  /* default: inverted */
+  &.is-inverted,
+  .is-inverted & {
+    @apply bg-pageText border-pageBG text-pageBG;
+
+    &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout) {
+      &.is-active,
+      &:hover {
+        @apply bg-pageBG border-pageBG text-pageText;
+      }
+    }
+  }
+
+  /* default: disabled */
+  &.is-disabled:not(.is-primary),
+  &.is-soldout {
+    @apply bg-pageBG opacity-20;
+  }
+
+
+  /* primary style button */
+  &.is-primary {
+    @apply bg-pageText border-pageText text-pageBG;
+
+    /* primary: inverted */
+    &.is-inverted,
+    .is-inverted & {
+      @apply bg-pageBG border-pageBG text-pageText;
+    }
+  }
+
+
+  /* white style button */
+  &.is-white {
+    @apply bg-white border-white text-black;
+  }
+
+
+  /* text-based button */
+  &.is-text {
+    @apply px-0 bg-transparent border-transparent;
+
+    &.is-disabled,
+    &:not(.is-disabled):hover {
+      @apply opacity-60;
+    }
+  }
+
+
+  /* small sized button */
+  &.is-small {
+    @apply px-3 py-1;
+  }
+
+
+  /* large sized button */
+  &.is-large {
+    @apply text-2xl font-normal px-7;
+  }
+
+  /* full width button */
   &.is-block {
     @apply block w-full;
   }
 
+  /* loading button state */
   &.is-loading {
     @apply cursor-wait !important;
   }
 
+  /* disabled button state */
   &.is-disabled {
     @apply cursor-default pointer-events-none opacity-60;
   }

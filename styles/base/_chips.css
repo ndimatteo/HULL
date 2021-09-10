@@ -1,5 +1,5 @@
 .chip-group {
-  @apply flex overflow-x-auto;
+  @apply flex overflow-x-auto hide-scrollbar;
   mask-image: linear-gradient(90deg,transparent 0, #000 1rem, #000 calc(100% - 1rem), transparent);
 
   &--list {
@@ -13,12 +13,6 @@
 
 .chip {
   @apply clean-btn inline-flex items-center justify-center align-middle bg-pageBG text-pageText rounded-full p-2 font-semibold;
-
-  &--group {
-    
-  }
-
-  
 
   &--label {
     @apply px-2 max-w-[10rem] overflow-hidden overflow-ellipsis;

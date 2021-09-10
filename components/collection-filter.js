@@ -97,14 +97,16 @@ const CollectionFilter = ({
 
         {/* Filter Footer */}
         <div className="filters--footer">
-          <button
-            onClick={() => setFiltersOpen(false)}
-            className={cx('btn is-primary is-inverted is-large is-block', {
-              'is-disabled': itemTotal === 0,
-            })}
-          >
-            {itemTotal > 0 ? `Show ${itemTotal} Results` : 'No Results'}
-          </button>
+          <div className="filters--footer-actions">
+            <button
+              onClick={() => setFiltersOpen(false)}
+              className={cx('btn is-primary is-inverted is-large is-block', {
+                'is-disabled': itemTotal === 0,
+              })}
+            >
+              {itemTotal > 0 ? `Show ${itemTotal} Results` : 'No Results'}
+            </button>
+          </div>
         </div>
       </Drawer>
     </>
