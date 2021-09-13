@@ -48,10 +48,6 @@
         {
           "origin": "http://localhost:3000",
           "allowCredentials": true
-        },
-        {
-          "origin": "http://localhost:3333",
-          "allowCredentials": true
         }
       ]
     }
