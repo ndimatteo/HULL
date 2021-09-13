@@ -97,7 +97,9 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 
 # 🔥 Automatic Set Up
 
-Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! All you have to do is connect Shopify (follow step 2 and 3 below)
+Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! Once deployed, simply follow step 2 and 3 below to connect your Shopify store.
+> ⚠️ **Important!** <br />Existing products will not automatically sync into Sanity. You will need to trigger this by making a change to your product(s) in Shopify.
+
 
 <br />
 
@@ -137,7 +139,7 @@ Clone this repository from your GitHub account with the [Use this template](http
   - product creation - `[your-domain]/api/shopify/product-update`
   - product update - `[your-domain]/api/shopify/product-update`
   - product deletion - `[your-domain]/api/shopify/product-delete`
-> ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You won't know your Vercel project domain until you deploy in a later step, just enter in what you think it will be for now!
+> ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You may not know your Vercel project URL until you deploy, feel free to enter something temporary, but make sure to update this once deployed!
 
 ### 4) NextJS
 1. `npm install` in the project root folder on local
