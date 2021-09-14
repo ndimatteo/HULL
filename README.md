@@ -217,11 +217,9 @@ While this starter is relatively opinionated, the goal was three-fold:
 2. Solve common UX problems and complex logic so you can focus on the fun stuff
 3. Create a more approachable starter for anyone looking to build production-ready headless Shopify experiences
 
-That being said, I understand this means a lot of what's included is **very opinionated**. However, you'll find that at it's core the structure and naming conventions lend itself to really making it your own. 
+That being said, I understand this means a lot of what's included is **very opinionated**. However, you'll find that at it's core the structure and naming conventions lend itself to really making it your own.
 
-By now, I'm sure you noticed the ridiculous-looking [demo site](https://insane.codes/) (I love 90's metal, can you tell?)
-
-I've purposefully used extracted component classes, not only for cleaner file structure, but also so you can easily work in your own styles exclusively within the styles folder. Feel free to extend our outright remove the applied styles for all the components!
+I've purposefully used extracted component classes, not only for cleaner file structure, but also so you can easily work in your own styles exclusively within the styles folder. Feel free to extend or outright remove the applied styles for all of the components!
 </details>
 
 <details>
