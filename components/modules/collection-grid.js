@@ -247,7 +247,7 @@ const Collection = ({ data = {} }) => {
           </div>
         )}
 
-        {orderedProducts.length && (
+        {orderedProducts?.length > 0 && (
           <div className="collection--count">
             <p aria-live="polite" role="status" aria-atomic="true">
               Showing {paginatedProducts.length} of {orderedProducts.length}{' '}

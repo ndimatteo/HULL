@@ -9,7 +9,7 @@ const ProductForm = ({ product, activeVariant, onVariantChange }) => {
     <div className="product--options">
       {product.options?.map(
         (option, key) =>
-          option.values?.length && (
+          option.values?.length > 0 && (
             <ProductOption
               key={key}
               position={key}

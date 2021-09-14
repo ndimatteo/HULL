@@ -45,19 +45,12 @@ a[href="#content"].skip-link {
       @apply border-white;
       transition-duration: .2s;
       transition-delay: 0s;
-      /* &:not(.is-hidden) {
-        transition-delay: 0s;
-      } */
     }
 
     &.is-hidden {
       @apply opacity-0;
       transition-delay: 0s;
     }
-  }
-
-  &--observer {
-    @apply absolute top-8;
   }
 }
 
