@@ -1,3 +1,4 @@
+import React from 'react'
 import { decodeAssetUrl } from '../../lib/helpers'
 
 export default {
@@ -11,7 +12,16 @@ export default {
       type: 'note',
       options: {
         headline: 'Template Tags',
-        message: `You can use <code>{{page_title}}</code> and <code>{{site_title}}</code> to dynamically display the page title and global site title in the "Meta Title" and "Share Title" fields below.`,
+        message: (
+          <>
+            <span>
+              You can use <code>{`{{ page_title }}`}</code> and{' '}
+              <code>{`{{ site_title }}`}</code> to dynamically display the page
+              title and global site title in the "Meta Title" and "Share Title"
+              fields below.
+            </span>
+          </>
+        ),
         tone: 'primary'
       }
     },

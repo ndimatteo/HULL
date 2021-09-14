@@ -1,10 +1,10 @@
-import { FiGift } from 'react-icons/fi'
+import { Gift } from 'phosphor-react'
 
 export default {
   title: 'Product Card',
   name: 'productCard',
   type: 'object',
-  icon: FiGift,
+  icon: Gift,
   fields: [
     {
       title: 'Product',

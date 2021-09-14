@@ -1,4 +1,4 @@
-import { FiAlignLeft } from 'react-icons/fi'
+import { TextAlignLeft } from 'phosphor-react'
 
 import { getPtPreview } from '../../lib/helpers'
 
@@ -6,7 +6,7 @@ export default {
   title: 'Freeform',
   name: 'freeform',
   type: 'object',
-  icon: FiAlignLeft,
+  icon: TextAlignLeft,
   fieldsets: [
     {
       title: '',

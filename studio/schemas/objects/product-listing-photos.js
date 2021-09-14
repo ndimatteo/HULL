@@ -1,4 +1,4 @@
-import { FiLayers } from 'react-icons/fi'
+import { Stack } from 'phosphor-react'
 
 import customImage from '../../lib/custom-image'
 
@@ -6,7 +6,7 @@ export default {
   title: 'Listing Photos',
   name: 'productListingPhotos',
   type: 'object',
-  icon: FiLayers,
+  icon: Stack,
   fields: [
     {
       title: 'Wich Variants is this for?',

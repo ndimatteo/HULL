@@ -1,10 +1,10 @@
-import { FiShoppingBag } from 'react-icons/fi'
+import { ShoppingBag } from 'phosphor-react'
 
 export default {
   title: 'Product Hero',
   name: 'productHero',
   type: 'object',
-  icon: FiShoppingBag,
+  icon: ShoppingBag,
   fields: [
     {
       title: 'Display Product Hero?',

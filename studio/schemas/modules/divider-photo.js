@@ -1,4 +1,4 @@
-import { FiImage } from 'react-icons/fi'
+import { Image } from 'phosphor-react'
 
 import customImage from '../../lib/custom-image'
 
@@ -6,7 +6,7 @@ export default {
   title: 'Divider Photo',
   name: 'dividerPhoto',
   type: 'object',
-  icon: FiImage,
+  icon: Image,
   fields: [customImage()],
   preview: {
     select: {

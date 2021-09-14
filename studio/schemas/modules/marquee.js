@@ -1,4 +1,4 @@
-import { FiRepeat } from 'react-icons/fi'
+import { Infinity } from 'phosphor-react'
 
 import customImage from '../../lib/custom-image'
 
@@ -6,7 +6,7 @@ export default {
   title: 'Marquee',
   name: 'marquee',
   type: 'object',
-  icon: FiRepeat,
+  icon: Infinity,
   fieldsets: [
     {
       title: '',
@@ -81,7 +81,7 @@ export default {
   ],
   preview: {
     select: {
-      text: 'text'
+      text: 'items.0.text'
     },
     prepare({ text }) {
       return {

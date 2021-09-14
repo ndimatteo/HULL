@@ -1,10 +1,10 @@
-import { FiCornerRightDown, FiAlertCircle } from 'react-icons/fi'
+import { ArrowBendRightDown, WarningCircle } from 'phosphor-react'
 
 export default {
   title: 'Dropdown',
   name: 'navDropdown',
   type: 'object',
-  icon: FiCornerRightDown,
+  icon: ArrowBendRightDown,
   fields: [
     {
       title: 'Title',
@@ -22,7 +22,7 @@ export default {
       name: 'featuredNote',
       type: 'note',
       options: {
-        icon: FiAlertCircle,
+        icon: WarningCircle,
         headline: 'Gotcha',
         message: `Featured products are only for menus that appear in desktop "mega-navs".`,
         tone: 'caution'
