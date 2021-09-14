@@ -1,4 +1,4 @@
-import { FiFilter } from 'react-icons/fi'
+import { Funnel } from 'phosphor-react'
 
 export default {
   title: 'Filter',
@@ -24,6 +24,7 @@ export default {
           title: 'Group',
           name: 'group',
           type: 'object',
+          icon: Funnel,
           fields: [
             {
               title: 'Display',
@@ -93,8 +94,7 @@ export default {
             },
             prepare({ title }) {
               return {
-                title: title,
-                media: FiFilter
+                title: title
               }
             }
           }

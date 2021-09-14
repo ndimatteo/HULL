@@ -1,4 +1,4 @@
-import { FiLink2 } from 'react-icons/fi'
+import { LinkSimpleHorizontal } from 'phosphor-react'
 
 import { getStaticRoute, getDynamicRoute } from '../../lib/helpers'
 
@@ -6,7 +6,7 @@ export default {
   title: 'Page',
   name: 'navPage',
   type: 'object',
-  icon: FiLink2,
+  icon: LinkSimpleHorizontal,
   fields: [
     {
       title: 'Title',

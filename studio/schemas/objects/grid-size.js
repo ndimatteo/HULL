@@ -1,12 +1,11 @@
 import React from 'react'
-import { FiSliders, FiHelpCircle } from 'react-icons/fi'
+import { Question } from 'phosphor-react'
 import { Avatar } from '@sanity/ui'
 
 export default {
   title: 'Column Size',
   name: 'gridSize',
   type: 'object',
-  icon: FiSliders,
   fieldsets: [
     {
       title: '',
@@ -19,9 +18,23 @@ export default {
       name: 'gridSizeNote',
       type: 'note',
       options: {
-        icon: FiHelpCircle,
+        icon: Question,
         headline: 'How to setup column sizes',
-        message: `Always start with a "Default" breakpoint and work your way up. Visually, think about how many grid "spaces" you want your column to occupy at each breakpoint.<br /><br />You can also offset your column if you want it to have a gap in the grid spaces, just set the "space" you want the column to start in.<br /><br />The "Justify" and "Align" options can help position the column within the grid.`
+        message: (
+          <>
+            Always start with a "Default" breakpoint and work your way up.
+            Visually, think about how many grid "spaces" you want your column to
+            occupy at each breakpoint.
+            <br />
+            <br />
+            You can also offset your column if you want it to have a gap in the
+            grid spaces, just set the "space" you want the column to start in.
+            <br />
+            <br />
+            The "Justify" and "Align" options can help position the column
+            within the grid.
+          </>
+        )
       }
     },
     {

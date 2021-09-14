@@ -1,10 +1,10 @@
-import { FiSend } from 'react-icons/fi'
+import { PaperPlaneTilt } from 'phosphor-react'
 
 export default {
   title: 'Newsletter Form',
   name: 'newsletter',
   type: 'object',
-  icon: FiSend,
+  icon: PaperPlaneTilt,
   fields: [
     {
       name: 'klaviyoNote',

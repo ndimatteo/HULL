@@ -1,14 +1,14 @@
 import React from 'react'
-import { FiAlignLeft } from 'react-icons/fi'
+import { TextAlignLeft } from 'phosphor-react'
 import { Avatar } from '@sanity/ui'
 
-import { getTypeTitles, getTypeSubtitle } from '../../lib/helpers'
+import { getTypeTitles } from '../../lib/helpers'
 
 export default {
   title: 'Column',
   name: 'gridColumn',
   type: 'object',
-  icon: FiAlignLeft,
+  icon: TextAlignLeft,
   fields: [
     {
       title: 'Column Sizes',

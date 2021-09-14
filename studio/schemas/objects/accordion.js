@@ -1,10 +1,10 @@
-import { FiMaximize2 } from 'react-icons/fi'
+import { CaretCircleDown } from 'phosphor-react'
 
 export default {
   title: 'Accordion',
   name: 'accordion',
   type: 'object',
-  icon: FiMaximize2,
+  icon: CaretCircleDown,
   fields: [
     {
       title: 'Title',

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 
 import defaultResolve, {
@@ -9,7 +9,7 @@ import defaultResolve, {
 
 import { useToast } from '@sanity/ui'
 
-import { FiEye, FiShoppingBag } from 'react-icons/fi'
+import { Eye, Storefront } from 'phosphor-react'
 
 const remoteURL = window.location.protocol + '//' + window.location.hostname
 const localURL = 'http://localhost:3000'
@@ -36,7 +36,7 @@ const PreviewAction = props => {
     : props.published?.slug?.current
   return {
     label: 'Open Preview',
-    icon: FiEye,
+    icon: () => <Eye weight="light" data-sanity-icon="eye" />,
     onHandle: () => {
       window.open(
         `${frontendURL}/api/preview?token=HULL&type=${props.type}&slug=${slug ||
@@ -53,8 +53,8 @@ const ShopifyAction = props => {
 
   return {
     disabled: !props.published?.productID,
-    label: isSyncing ? 'Syncing...' : 'Sync to Shopify',
-    icon: FiShoppingBag,
+    label: isSyncing ? 'Syncing...' : 'Sync images to Shopify',
+    icon: () => <Storefront weight="light" data-sanity-icon="storefront" />,
     onHandle: () => {
       setIsSyncing(true)
 

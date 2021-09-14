@@ -1,10 +1,10 @@
-import { FiExternalLink } from 'react-icons/fi'
+import { ArrowSquareOut } from 'phosphor-react'
 
 export default {
   title: 'Link',
   name: 'navLink',
   type: 'object',
-  icon: FiExternalLink,
+  icon: ArrowSquareOut,
   fields: [
     {
       title: 'Title',

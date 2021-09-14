@@ -1,10 +1,10 @@
-import { FiGift } from 'react-icons/fi'
+import { SquaresFour } from 'phosphor-react'
 
 export default {
   title: 'Collection Grid',
   name: 'collectionGrid',
   type: 'object',
-  icon: FiGift,
+  icon: SquaresFour,
   fields: [
     {
       title: 'Display Collection Grid?',

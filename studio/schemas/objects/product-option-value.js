@@ -1,10 +1,10 @@
-import { FiCheckCircle } from 'react-icons/fi'
+import { CheckCircle } from 'phosphor-react'
 
 export default {
   title: 'Option',
   name: 'productOptionValue',
   type: 'object',
-  icon: FiCheckCircle,
+  icon: CheckCircle,
   fields: [
     {
       title: 'Name',

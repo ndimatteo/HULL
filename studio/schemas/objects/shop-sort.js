@@ -1,4 +1,4 @@
-import { FiShuffle } from 'react-icons/fi'
+import { SortAscending } from 'phosphor-react'
 
 export const sortTypes = [
   { title: 'Featured', value: 'featured' },
@@ -34,6 +34,7 @@ export default {
           title: 'Option',
           name: 'option',
           type: 'object',
+          icon: SortAscending,
           fields: [
             {
               title: 'Type',
@@ -60,8 +61,7 @@ export default {
 
               return {
                 title: title || sortTitle,
-                subtitle: title ? sortTitle : '',
-                media: FiShuffle
+                subtitle: title ? sortTitle : ''
               }
             }
           }

@@ -1,11 +1,12 @@
-import { FiMinus } from 'react-icons/fi'
+import { Minus } from 'phosphor-react'
+
 import HR from '../../components/hr'
 
 export default {
   title: 'Horizontal Rule',
   name: 'horizontalRule',
   type: 'object',
-  icon: FiMinus,
+  icon: Minus,
   fields: [
     {
       type: 'string',
