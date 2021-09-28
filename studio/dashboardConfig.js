@@ -6,7 +6,7 @@ export default {
         title: 'Recently edited',
         order: '_updatedAt desc',
         limit: 10,
-        types: ['page', 'product', 'collection']
+        types: ['page']
       },
       layout: { width: 'medium' }
     },

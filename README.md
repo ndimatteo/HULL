@@ -2,7 +2,7 @@
 <img src="public/HULL-Logo.svg" align="center" height="100" />
 </p>
 <p align="center">
-  <strong>Headless Shopify starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
+  <strong>Starter built on <a href="https://nextjs.org">Next.js</a></strong> 🤘 <br />
   <strong>Headless CMS powered by <a href="https://sanity.io">Sanity.io</a></strong> ⚡<br />
 </p>
 
@@ -10,16 +10,11 @@
   <a href="https://hull.dev">
     <img src="https://img.shields.io/static/v1?label=&message=View%20Demo&style=for-the-badge&color=black&logo=vercel" />
   </a>
-  <br />
-  <a href="https://www.sanity.io/create?template=ndimatteo/HULL">
-    <img src="https://img.shields.io/static/v1?label=Sanity&message=Create%20Project&style=for-the-badge&color=156dff&labelColor=black" />
-  </a>
 </p>
 
 <p align="center">
   <a href="#-features">Features</a> •
-  <a href="#-tours">Tours</a> •
-  <a href="#-automatic-set-up">Set Up</a> •
+  <a href="#-set-up">Set Up</a> •
   <a href="#-spin-up">Spin Up</a> •
     <a href="#-deployment">Deployment</a> •
   <a href="#-extrastips">Extras</a>
@@ -32,10 +27,6 @@
 
 - Utility-first CSS with [Tailwind CSS](https://tailwindcss.com)
 - Animations powered by [Framer Motion](https://www.framer.com/motion/)
-- Cart powered by [Shopify Buy SDK](https://www.npmjs.com/package/shopify-buy)
-- Real-time inventory check for products using [SWR](https://swr.vercel.app)
-- Customizable Filtering & Sorting for product collections
-- Klaviyo waitlist form for out-of-stock products
 - Klaviyo newsletter form with opt-in field
 - Dynamic Page Routes for custom page creation
 - Automatic `Sitemap.xml` generation
@@ -57,53 +48,10 @@
 - SEO features:
    - Page-level SEO/Share settings with previews
    - Fallback Global SEO/Share settings
-   - Automatic JSON-LD Schema markup for products
-   
-### Shopify Integration Features
-- Automatically syncs products from Shopify into Sanity
-- Custom action to sync product cart thumbnails back to Shopify from Sanity
-- Tracks product status _(draft/published)_ from Shopify to help control visibility while editing
-- Deleted products and variants are preserved and flagged in Sanity
-- Updates the URL on variant changes while keeping a clean history stack
-- Vanity shop URL masking
-- Global Cart with access to all variant data for line items
-- Supports Single Variant products out of the box
-- Product photo galleries with variant granularity
-- Dynamic `/shop` collection page
-- Custom collection pages
-- Ability to surface a variant option on product cards
 
 <br />
 
-# 🎧 Tours
-Still not sold? Here's some videos to get you psyched:
-
-**Famous 5-Minute Setup™ - `Coming Soon`** <br />
-_From sync to sale, watch me spin up a fresh storefront in under 5 minutes!_
-
-**Explore the file Structure - `Coming Soon`** <br />
-_In-depth look at the file structure, naming conventions, and logic under the hood_
-
-**Setting up your first Product - `Coming Soon`** <br />
-_Explore the Product settings within Sanity and how to properly setup PDP pages and PLP cards_
-
-**Connecting to Klaviyo and testing your Forms - `Coming Soon`** <br />
-_Learn how to quickly connect Klaviyo to utilize product waitlist and newsletter forms_
-
-**Setup your first Vercel deployment - `Coming Soon`** <br />
-_Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clients to trigger deploys_
-
-<br />
-
-# 🔥 Automatic Set Up
-
-Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! Once deployed, simply follow step 2 and 3 below to connect your Shopify store.
-> ⚠️ **Important!** <br />Existing products will not automatically sync into Sanity. You will need to trigger this by making a change to your product(s) in Shopify.
-
-
-<br />
-
-# 💀 Manual Set Up
+# 💀 Set Up
 
 Clone this repository from your GitHub account with the [Use this template](https://github.com/ndimatteo/HULL/generate) button
 
@@ -120,38 +68,13 @@ Clone this repository from your GitHub account with the [Use this template](http
     - Add your front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
 > ⚠️ **Important!** <br />For "singleton" documents, like settings sections, the schema uses a combination of `__experimental_actions` and the new [actions resolver](https://www.sanity.io/docs/document-actions). If you are using this outside of the official Sanity Starter, you will need to comment out the `__experimental_actions` line in "singleton" schemas to publish settings for the first time. This is because a singleton is still a document type, and one needs to exist first before it can be edited. Additionally, if you want to create additional "singleton" schemas, be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`.
 
-### 2) Shopify Storefront Access
-1. Enable Private Apps in Shopify
-   - Apps > "Manage Private Apps" *(text link in page footer)*
-   - Enable Private Apps
-2. Create new Private App
-   - Apps > Manage Private Apps > "Create private app" 
-   - Give this a relevant name, I prefer: "Headless Storefront", so it's clear what it's being used for
-   - Use your dev email to know when there are issues
-   - Change Admin API permissions on "Products" to `Read and write`
-   - Allow this app to access your storefront data using the Storefront API, with at least the following permissions:
-      - Read inventory of products and their variants
-      - Read and modify checkouts
-
-### 3) Shopify Webhooks
-1. Go to "Settings" *(bottom left)* -> "Notifications" -> "Webhooks" *(very bottom)*
-2. add the following webhooks:
-  - product creation - `[your-domain]/api/shopify/product-update`
-  - product update - `[your-domain]/api/shopify/product-update`
-  - product deletion - `[your-domain]/api/shopify/product-delete`
-> ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You may not know your Vercel project URL until you deploy, feel free to enter something temporary, but make sure to update this once deployed!
-
-### 4) NextJS
+### 2) NextJS
 1. `npm install` in the project root folder on local
 2. Create an `.env.local` file in the project folder, and add the following variables:
 ```
 SANITY_PROJECT_DATASET=production
 SANITY_PROJECT_ID=XXXXXX
 SANITY_API_TOKEN=XXXXXX
-SHOPIFY_STORE_ID=XXXXXX
-SHOPIFY_API_TOKEN=XXXXXX
-SHOPIFY_API_PASSWORD=XXXXXX
-SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
 
 // Needed for Klaviyo forms:
 KLAVIYO_API_KEY=XXXXXX
@@ -166,19 +89,10 @@ SENDGRID_API_KEY=XXXXXX
 3. Update all the `XXXXXX` values, here's where to find each:
   - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
   - `SANITY_API_TOKEN` - Generate an API token for your Sanity project. Access your project from the Sanity Manage dashboard, and navigate to: "Settings" -> "API" -> "Add New Token" button. Make sure you give `read + write` access!
-  - `SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
-  - `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
-  - `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
-  - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" *(very bottom of page)*
   - `KLAVIYO_API_KEY` - Create a Private API Key from your Klaviyo Account "Settings" -> "API Keys"
   - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
   - `MAILCHIMP_SERVER` - This is the server your account is from. It's in the URL when logged in and at the end of your API Key
   - `SENDGRID_API_KEY` - Create an API key from "Settings" -> "API Keys" with "Restricted Access" to only "Mail Send"
-  
-### 5) Shopify Store Theme
-Since we're serving our store through a headless environment, we don't want visitors accessing our unused shopify theme. The domain for this is visible during checkout, and is publicly accessible. To silence it, replace your current theme's `theme.liquid` file with the one from this repo, and replace `YOUR_STOREFRONT_DOMAIN_NO_PROTOCOL` with your actual frontsite domain URL **(do not include protocol or trailing slash)**
-
-This will essentially "pass-through" URLs accessed at your Shopify Store to your true headless storefront *(ie. `shop.hull.dev/products` -> `hull.dev/products`)*
 
 <br />
 
@@ -215,7 +129,7 @@ Once you hand off to the client you'll want to give them the ability to generate
 While this starter is relatively opinionated, the goal was three-fold:
 1. Use high-quality packages that don't get in the way
 2. Solve common UX problems and complex logic so you can focus on the fun stuff
-3. Create a more approachable starter for anyone looking to build production-ready headless Shopify experiences
+3. Create a more approachable starter for anyone looking to build production-ready headless experiences
 
 That being said, I understand this means a lot of what's included is **very opinionated**. However, you'll find that at it's core the structure and naming conventions lend itself to really making it your own.
 
@@ -233,31 +147,9 @@ You still get all the tree-shaking benefits of Tailwind, _and_ you can still use
 </details>
 
 <details>
-<summary><strong>Can I use this for non-Shopify projects?</strong></summary>
-
-Absolutely! This starter was actually born out of a non-shopify starter I had been using for my own client projects.
-
-I made a `marketing-starter` branch that is **HULL without all the Shopify logic**! The fastest way to get started is simply cloning that branch locally into an empty project folder:
-```
-git clone -b marketing-starter --single-branch git@github.com:ndimatteo/HULL.git .
-```
-
-You can read the [setup instructions](https://github.com/ndimatteo/HULL/tree/marketing-starter#-set-up) for this version from the branch's README.
-
-</details>
-
-<details>
 <summary><strong>Error: Failed to communicate with the Sanity API</strong></summary>
 
 If you get this error in your CLI, you need to logout and log back in again. Simply do `sanity logout` and then `sanity login` to fix.
-</details>
-
-<details>
-<summary><strong>Access your "product_sync" metafields in Shopify without using a plugin</strong></summary>
-
-Simply navigate directly to: `https://[store_id].myshopify.com/admin/bulk?resource_name=Product&edit=metafields.sanity.product_sync`
-
-_(making sure to replace `[store_id]` with your Shopify Store ID)_
 </details>
 
 <details>

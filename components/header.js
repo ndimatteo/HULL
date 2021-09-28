@@ -9,12 +9,7 @@ import cx from 'classnames'
 
 import { isBrowser } from '@lib/helpers'
 
-import {
-  useSiteContext,
-  useToggleMegaNav,
-  useToggleCart,
-  useCartCount,
-} from '@lib/context'
+import { useSiteContext, useToggleMegaNav } from '@lib/context'
 
 import PromoBar from '@components/promo-bar'
 import Menu from '@components/menu'
@@ -160,8 +155,6 @@ const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
                       />
                     </div>
                   </FocusTrap>
-
-                  <CartToggle />
                 </div>
 
                 {/* Desktop Header Menu */}
@@ -184,8 +177,6 @@ const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
                         useMegaNav
                       />
                     )}
-
-                    <CartToggle />
                   </div>
                 </div>
               </nav>
@@ -212,24 +203,6 @@ const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
 
       <span ref={observerRef} className="header--observer" />
     </>
-  )
-}
-
-const CartToggle = () => {
-  const toggleCart = useToggleCart()
-  const cartCount = useCartCount()
-
-  return (
-    <button className="cart-toggle" onClick={() => toggleCart()}>
-      Cart
-      <span
-        className={cx('cart-toggle--count', {
-          'is-active': cartCount > 0,
-        })}
-      >
-        {cartCount}
-      </span>
-    </button>
   )
 }
 

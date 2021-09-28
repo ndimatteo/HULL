@@ -88,19 +88,4 @@
       }
     }
   }
-
-  &--product {
-    @apply flex flex-col -my-px;
-    margin: -1px 0;
-    width: calc(80vw - 2rem);
-    max-width: 28rem;
-
-    * {
-      @apply whitespace-normal;
-    }
-
-    .product-card {
-      @apply flex-1;
-    }
-  }
 }

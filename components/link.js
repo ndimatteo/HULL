@@ -4,19 +4,9 @@ import cx from 'classnames'
 
 import { getStaticRoute, getDynamicRoute } from '@lib/routes'
 
-import { useProductCount } from '@lib/context'
-
 const Link = ({ link, children, ...rest }) => {
   const isLink = !!link.url
   const isStatic = getStaticRoute(link.page?.type)
-
-  // if a collection, get product count
-  const isCollection = ['collection'].includes(link.page?.type)
-  const productCounts = useProductCount()
-
-  const collectionCount = productCounts(
-    (isCollection && link.page?.slug) || 'all'
-  )
 
   // External Link
   if (isLink) {
@@ -42,13 +32,12 @@ const Link = ({ link, children, ...rest }) => {
   } else {
     const isDynamic = getDynamicRoute(link.page?.type)
     const isHome = link.page?.isHome
-    const isShop = link.page?.isShop
 
     return (
       <NextLink
         href={
-          isHome || isShop
-            ? `/${isShop ? 'shop' : ''}`
+          isHome
+            ? '/'
             : isStatic !== false
             ? `/${isStatic}`
             : `/${isDynamic ? `${isDynamic}/` : ''}${link.page?.slug}`
@@ -67,12 +56,6 @@ const Link = ({ link, children, ...rest }) => {
           {...rest}
         >
           {link.title || children}
-
-          {isCollection && (
-            <span aria-hidden="true" className="collection-count">
-              {collectionCount}
-            </span>
-          )}
         </a>
       </NextLink>
     )
