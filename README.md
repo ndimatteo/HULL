@@ -98,7 +98,7 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 # 🔥 Automatic Set Up
 
 Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! Once deployed, simply follow step 2 and 3 below to connect your Shopify store.
-> ⚠️ **Important!** <br />Existing products will not automatically sync into Sanity. You will need to trigger this by making a change to your product(s) in Shopify.
+> ⚠️ **Important!** <br />Existing products will not automatically sync into Sanity. <br />You will need to trigger this by making a change to your product(s) in Shopify.
 
 
 <br />
@@ -191,6 +191,7 @@ This will essentially "pass-through" URLs accessed at your Shopify Store to your
 ### Sanity (Back End)
 `sanity start` in the `/studio` folder to start the studio locally
    - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
+> ⚠️ **Gotcha!** <br />If you did not manually set up your project, the `projectId` in `/studio/sanity.json` will still be set to the HULL demo project. Make sure to update this before starting the studio, otherwise you will be denied access when trying to access your studio.
 
 <br />
 
