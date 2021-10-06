@@ -1,4 +1,4 @@
-import qs from 'qs'
+import queryString from 'query-string'
 import axios from 'axios'
 
 export default async function send(req, res) {
@@ -23,7 +23,7 @@ export default async function send(req, res) {
       .json({ error: 'Must contain an email address and account ID' })
   }
 
-  const payload = qs.stringify({
+  const payload = queryString.stringify({
     a: accountID,
     platform: 'shopify',
     email: email,
