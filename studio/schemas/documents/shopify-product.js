@@ -153,12 +153,9 @@ export default {
               type: 'string',
               options: {
                 list: [{ title: 'All', value: '' }],
-                fromField: 'options',
-                fromSubField: 'values',
-                fromFieldData: {
-                  title: 'name',
-                  value: 'position'
-                }
+                from: 'options',
+                fromData: { title: 'name' },
+                joinWith: 'values'
               }
             }
           ],
@@ -212,8 +209,8 @@ export default {
         'Surface one of the product options for this product on Collection pages',
       options: {
         list: [{ title: 'None', value: '' }],
-        fromField: 'options',
-        fromFieldData: { title: 'name', value: 'position' }
+        from: 'options',
+        fromData: { title: 'name', value: 'position' }
       },
       fieldset: 'cards'
     },
