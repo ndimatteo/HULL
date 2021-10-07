@@ -24,7 +24,8 @@ const hiddenDocTypes = listItem =>
 
     'menu',
     'siteSettings',
-    'redirect'
+    'redirect',
+    'media.tag' // for media plugin
   ].includes(listItem.getId())
 
 export default () =>

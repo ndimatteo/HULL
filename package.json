@@ -16,7 +16,7 @@
     "node": "14.x"
   },
   "dependencies": {
-    "@mailchimp/mailchimp_marketing": "^3.0.25",
+    "@mailchimp/mailchimp_marketing": "^3.0.69",
     "@reach/rect": "^0.16.0",
     "@sanity/block-content-to-react": "^3.0.0",
     "@sanity/client": "^2.7.0",

@@ -22,6 +22,10 @@ const collectionsMenu = S.listItem()
           .schemaType('collection')
           .views(standardViews)
       )
+      .canHandleIntent(
+        (intent, { type }) =>
+          ['create', 'edit'].includes(intent) && type === 'collection'
+      )
   )
 
 const productsMenu = S.listItem()
@@ -102,6 +106,10 @@ const filtersMenu = S.listItem()
         S.document()
           .documentId(documentId)
           .schemaType('filter')
+      )
+      .canHandleIntent(
+        (intent, { type }) =>
+          ['create', 'edit'].includes(intent) && type === 'filter'
       )
   )
 

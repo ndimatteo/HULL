@@ -31,7 +31,7 @@ const link = `
 
 // Construct our "image meta" GROQ
 export const imageMeta = `
-  "alt": coalesce(alt, asset->alt),
+  "alt": coalesce(alt, asset->altText),
   asset,
   crop,
   customRatio,

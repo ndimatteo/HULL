@@ -24,7 +24,7 @@ const Icon = styled.div`
   width: auto;
   height: 2em;
   max-width: 100%;
-  margin: -1em auto;
+  margin: -0.75rem auto;
   color: white;
 
   ${props =>
@@ -32,14 +32,14 @@ const Icon = styled.div`
     css`
       display: block;
       margin: 0 auto;
-      height: 4em;
+      height: 4rem;
       color: black;
     `}
 
   svg {
     display: block;
     margin: 0 auto;
-    height: 100%;
+    height: 100% !important;
     width: auto;
     fill: currentColor;
   }
