@@ -146,6 +146,10 @@ export const pagesMenu = S.listItem()
                   .schemaType('page')
                   .views(standardViews)
               )
+              .canHandleIntent(
+                (intent, { type }) =>
+                  ['create', 'edit'].includes(intent) && type === 'page'
+              )
           )
       ])
   )

@@ -7,7 +7,8 @@ const singletons = [
   'headerSettings',
   'footerSettings',
   'shopSettings',
-  'seoSettings'
+  'seoSettings',
+  'media.tag' // for media plugin
 ]
 
 export default [
