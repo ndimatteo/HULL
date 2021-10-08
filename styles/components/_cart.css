@@ -135,6 +135,6 @@
   }
 
   &--tools {
-    @apply flex justify-between relative z-10 mt-auto pt-6;
+    @apply flex justify-between items-baseline relative z-10 mt-auto pt-6;
   }
 }

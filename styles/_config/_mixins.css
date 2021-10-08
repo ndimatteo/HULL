@@ -32,6 +32,22 @@
     background-position: 0 0, 8px 8px;
     background-size: 16px 16px;
   }
+
+  .has-indicator {
+    &::before {
+      @apply inline-block mr-2 rounded-full border w-[10px] h-[10px];
+      content: "";
+    }
+
+    &.is-open,
+    .is-open &,
+    &.is-active {
+      &::before {
+        @apply bg-pageText;
+        animation: pulse 2s infinite;
+      }
+    }
+  }
 }
 
 @keyframes pulse {

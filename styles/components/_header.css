@@ -41,9 +41,13 @@ a[href="#content"].skip-link {
     @apply absolute inset-x-0 bottom-0 z-20 border-t;
     transition: opacity 0s .6s linear;
 
+    .is-overlay:not(.has-bg) & {
+      transition-duration: .4s;
+      transition-delay: 0s;
+    }
+
     .is-white & {
       @apply border-white;
-      transition-duration: .2s;
       transition-delay: 0s;
     }
 
@@ -146,10 +150,11 @@ a[href="#content"].skip-link {
   font: inherit;
 
   &--count {
-    @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG opacity-30 text-xs leading-loose;
+    @apply flex flex-col justify-center relative w-8 h-8 ml-2 rounded-full bg-transparent border border-current text-current text-sm font-bold leading-loose;
 
     &.is-active {
-      @apply opacity-100;
+      @apply border-pageText bg-pageText text-pageBG;
+      animation: pulse 2s infinite;
     }
   }
 }

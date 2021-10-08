@@ -31,11 +31,15 @@
 
       .btn {
         @apply sm:ml-4 sm:w-auto;
+
+        &.is-text {
+          @apply border-pageText py-2 sm:border-transparent sm:py-1;
+        }
       }
     }
 
     &.is-clean {
-      @apply sm:border-b mb-4;
+      @apply sm:items-center sm:border-b mb-4;
 
       .control {
         @apply sm:border-0;
@@ -47,14 +51,6 @@
 
         &--error {
           @apply sm:left-0 sm:transform-none;
-        }
-      }
-
-      .btn {
-        @apply sm:px-0 sm:border-0 sm:bg-transparent sm:text-pageText;
-
-        &.is-disabled {
-          @apply opacity-60;
         }
       }
     }
