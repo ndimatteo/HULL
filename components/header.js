@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { m } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
-import { useIntersection } from 'use-intersection'
+import useInView from 'react-cool-inview'
 import { useRect } from '@reach/rect'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -34,8 +34,7 @@ const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
   // setup states
   const [isMobileNavOpen, setMobileNavOpen] = useState(false)
   const [headerHeight, setHeaderHeight] = useState(null)
-  const observerRef = useRef()
-  const observerIsVisible = useIntersection(observerRef)
+  const { observe, inView: observerIsVisible } = useInView()
   const headerRef = useRef()
   const headerRect = useRect(headerRef)
   const router = useRouter()
@@ -210,7 +209,7 @@ const Header = ({ data = {}, isTransparent, onSetup = () => {} }) => {
         </div>
       </header>
 
-      <span ref={observerRef} className="header--observer" />
+      <span ref={observe} className="header--observer" />
     </>
   )
 }
