@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { m } from 'framer-motion'
 import { useRouter } from 'next/router'
+import cx from 'classnames'
 
 import { getStaticRoute, getActive } from '@lib/routes'
 
@@ -27,7 +28,7 @@ const Dropdown = ({ id, title, items, onClick }) => {
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
         aria-controls={`dropdown-${id}`}
-        className="dropdown--toggle"
+        className={cx('dropdown--toggle', { 'is-open': isOpen })}
       >
         <span className="dropdown--icon" />
         {title}

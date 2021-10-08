@@ -130,7 +130,6 @@ export const MegaDropdownButton = ({ title, id }) => {
       aria-controls={`meganav-${id}`}
       onClick={() => toggleMegaNav(!isActive ? true : 'toggle', id)}
     >
-      <span className="mega-toggle--icon" />
       {title}
     </button>
   )

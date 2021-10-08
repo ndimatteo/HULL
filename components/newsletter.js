@@ -130,7 +130,7 @@ const Newsletter = ({ data = {} }) => {
 
               <button
                 type="submit"
-                className={cx('btn is-primary', {
+                className={cx('btn is-text', {
                   'is-loading': submitting,
                   'is-disabled': terms && !hasAgreed,
                 })}

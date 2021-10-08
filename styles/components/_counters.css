@@ -12,7 +12,7 @@
 
   &--down,
   &--up {
-    @apply w-8 h-8 -my-px p-2 bg-transparent rounded-full transition-colors duration-300;
+    @apply self-center w-8 h-8 -my-px p-2 bg-transparent rounded-full transition-colors duration-300;
 
     .cart & {
       @apply my-0;

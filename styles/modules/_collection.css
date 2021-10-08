@@ -89,12 +89,7 @@
   }
 
   &--icon {
-    @apply inline-block mr-2 w-[10px] h-[10px] rounded-full border;
-
-    .is-open & {
-      @apply bg-pageText;
-      animation: pulse 2s infinite;
-    }
+    @apply has-indicator;
   }
 }
 

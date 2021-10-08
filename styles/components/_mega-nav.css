@@ -50,14 +50,15 @@
 /* Customize megadropdown navigation buttons: */
 /* (you should mostly offload these to the general header links/button styles) */
 .mega-toggle {
-  &--icon {
+  @apply has-indicator;
+  /* &--icon {
     @apply inline-block mr-2 rounded-full border w-[10px] h-[10px];
 
     .is-open & {
       @apply bg-pageText;
       animation: pulse 2s infinite;
     }
-  }
+  } */
 }
 
 .mega-item {
