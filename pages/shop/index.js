@@ -21,7 +21,12 @@ const Shop = ({ data }) => {
   return (
     <Layout site={site} page={page}>
       {page.modules?.map((module, key) => (
-        <Module key={key} module={module} collectionProducts={page.products} />
+        <Module
+          key={key}
+          index={key}
+          module={module}
+          collectionProducts={page.products}
+        />
       ))}
     </Layout>
   )

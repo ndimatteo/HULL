@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { useIntersection } from 'use-intersection'
+import React, { useState, useEffect } from 'react'
+import useInView from 'react-cool-inview'
 import cx from 'classnames'
 
 import { buildSrcSet, buildSrc } from '@lib/helpers'
@@ -19,10 +19,9 @@ const Photo = ({
 }) => {
   if (!photo?.asset) return null
 
-  const imageRef = useRef()
   const [isLoaded, setIsLoaded] = useState(false)
-  const isIntersecting = useIntersection(imageRef, {
-    once: true,
+  const { observe, inView } = useInView({
+    unobserveOnEnter: true,
     threshold: 0.1,
   })
 
@@ -70,11 +69,11 @@ const Photo = ({
       >
         <picture>
           <img
-            ref={imageRef}
+            ref={observe}
             width={width}
             height={height}
-            src={forceLoad || isIntersecting ? src : null}
-            srcSet={forceLoad || isIntersecting ? srcset : null}
+            src={forceLoad || inView ? src : null}
+            srcSet={forceLoad || inView ? srcset : null}
             sizes={sizes}
             decoding="async"
             onLoad={handleLoad}

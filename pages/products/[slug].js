@@ -124,6 +124,7 @@ const Product = ({ data }) => {
           {page.modules?.map((module, key) => (
             <Module
               key={key}
+              index={key}
               module={module}
               product={product}
               activeVariant={product.variants.find(

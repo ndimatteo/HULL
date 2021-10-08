@@ -9,6 +9,7 @@ const ProductHero = dynamic(() => import('./product-hero'))
 const Collection = dynamic(() => import('./collection-grid'))
 
 export const Module = ({
+  index,
   module,
   product,
   activeVariant,
@@ -19,23 +20,29 @@ export const Module = ({
 
   switch (type) {
     case 'grid':
-      return <Grid data={module} />
+      return <Grid index={index} data={module} />
     case 'hero':
-      return <Hero data={module} />
+      return <Hero index={index} data={module} />
     case 'marquee':
-      return <Marquee data={module} />
+      return <Marquee index={index} data={module} />
     case 'dividerPhoto':
-      return <DividerPhoto data={module} />
+      return <DividerPhoto index={index} data={module} />
     case 'productHero':
       return (
         <ProductHero
+          index={index}
           product={product}
           activeVariant={activeVariant}
           onVariantChange={onVariantChange}
         />
       )
     case 'collectionGrid':
-      return <Collection data={{ ...module, products: collectionProducts }} />
+      return (
+        <Collection
+          index={index}
+          data={{ ...module, products: collectionProducts }}
+        />
+      )
     default:
       return null
   }

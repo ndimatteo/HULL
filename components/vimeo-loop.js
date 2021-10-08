@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Player from '@vimeo/player'
-import { useIntersection } from 'use-intersection'
+import useInView from 'react-cool-inview'
 import cx from 'classnames'
 
 const VideoLoop = ({
@@ -8,6 +8,7 @@ const VideoLoop = ({
   id,
   width = 16,
   height = 9,
+  initialState = false,
   className,
   ...rest
 }) => {
@@ -15,7 +16,7 @@ const VideoLoop = ({
 
   const videoRef = useRef()
   const [iframePlayer, setIframePlayer] = useState(null)
-  const isIntersecting = useIntersection(videoRef)
+  const { observe, inView } = useInView()
 
   useEffect(() => {
     if (videoRef.current && iframePlayer === null) {
@@ -25,18 +26,21 @@ const VideoLoop = ({
 
   useEffect(() => {
     if (iframePlayer) {
-      if (isIntersecting) {
+      if (inView) {
         iframePlayer.play().catch(() => {})
       } else {
         iframePlayer.pause()
       }
     }
-  }, [iframePlayer, isIntersecting])
+  }, [iframePlayer, inView])
 
   return (
     <div className={cx('video-loop', className)} {...rest}>
       <iframe
-        ref={videoRef}
+        ref={(node) => {
+          observe(node)
+          videoRef.current = node
+        }}
         title={title}
         src={`https://player.vimeo.com/video/${id}?background=1&autoplay=1&autopause=0&loop=1`}
         frameBorder="0"
