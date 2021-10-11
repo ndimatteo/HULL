@@ -22,7 +22,7 @@ export default function RadioItem({ title, value, children, ...rest }) {
     }
 
     if (isChecked) {
-      itemRef.current.focus()
+      itemRef.current.focus({ preventScroll: true })
     }
   }, [isChecked])
 
