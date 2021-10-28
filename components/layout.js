@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Script from 'next/script'
 import { m } from 'framer-motion'
 
-import { isBrowser, useWindowSize } from '@lib/helpers'
+import { isBrowser, isMobileSafari, useWindowSize } from '@lib/helpers'
 import { pageTransitionSpeed } from '@lib/animate'
 
 import HeadSEO from '@components/head-seo'
@@ -34,17 +34,20 @@ const variants = {
 }
 
 const Layout = ({ site = {}, page = {}, schema, children }) => {
-  // set window height var
+  // set window height var (w/ safari/iOS hack)
   const { height: windowHeight } = useWindowSize()
+  const [lockHeight, setLockHeight] = useState(false)
+  const hasChin = isMobileSafari()
 
   // set header height
   const [headerHeight, setHeaderHeight] = useState(null)
 
   useEffect(() => {
-    if (isBrowser) {
+    if (isBrowser && !lockHeight) {
       document.body.style.setProperty('--vh', `${windowHeight * 0.01}px`)
+      setLockHeight(hasChin)
     }
-  }, [windowHeight])
+  }, [windowHeight, hasChin])
 
   return (
     <>

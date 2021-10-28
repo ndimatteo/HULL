@@ -119,7 +119,7 @@ const Collection = ({ data = {} }) => {
     const newPage = Math.ceil(newCount / paginationLimit)
 
     setCurrentCount(newCount)
-    updateParams([{ name: 'page', value: `${newPage > 1 ? newPage : null}` }])
+    updateParams([{ name: 'page', value: newPage > 1 ? `${newPage}` : null }])
   }, [currentCount, orderedProducts, paginationLimit])
 
   // update pagination when the count or products change
