@@ -148,7 +148,7 @@ export default {
               to: [{ type: 'filter' }]
             },
             {
-              title: 'Wich option is this for?',
+              title: 'Which option is this for?',
               name: 'forOption',
               type: 'string',
               options: {
