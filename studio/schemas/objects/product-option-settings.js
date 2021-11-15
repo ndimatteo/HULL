@@ -10,7 +10,7 @@ export default {
   icon: () => <Gear />,
   fields: [
     {
-      title: 'Wich option is this for?',
+      title: 'Which option is this for?',
       name: 'forOption',
       type: 'string',
       options: {
