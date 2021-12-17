@@ -11,7 +11,6 @@ const ProductGallery = ({
   photosets,
   activeVariant,
   hasArrows,
-  hasThumbs,
   hasDots,
   hasDrag,
   hasCounter,
@@ -59,7 +58,6 @@ const ProductGallery = ({
               hasArrows={hasArrows}
               hasDots={hasDots}
               hasCounter={hasCounter}
-              thumbs={hasThumbs}
               hasDrag={hasDrag}
             >
               {photos.map((photo, key) => (

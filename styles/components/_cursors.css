@@ -8,7 +8,7 @@
 
   /* Simple dot cursor */
   span {
-    @apply block relative w-12 h-12 ;
+    @apply block relative w-40 h-40;
 
     &::before {
       @apply absolute inset-0 border rounded-full;

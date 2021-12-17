@@ -10,7 +10,7 @@ body {
 }
 
 .section {
-  @apply relative px-4 py-12 sm:p-8 md:py-16 lg:py-20 border-b;
+  @apply relative px-16 py-48 sm:p-32 md:py-64 lg:py-80 border-b;
 
   &--content {
     @apply mx-auto;

@@ -1,12 +1,12 @@
 .theme-switch {
-  @apply inline-block my-4;
+  @apply inline-block my-16;
 
   &--toggle {
-    @apply clean-btn flex items-center p-2 bg-transparent border rounded-full;
+    @apply clean-btn flex items-center p-8 bg-transparent border rounded-full;
   }
 
   &--label {
-    @apply mx-2 text-sm font-semibold;
+    @apply mx-8 text-14 font-semibold;
   }
 
   .swatch {
@@ -19,25 +19,19 @@
 }
 
 .swatch {
-  @apply relative p-0 block rounded-full;
-  width: 20px;
-  height: 20px;
+  @apply relative p-0 block rounded-full w-20 h-20;
   background-color: var(--swatchColor);
     
   /* ring */
   &::before {
-    @apply absolute inset-0 rounded-full opacity-10;
-    border: 1px solid var(--swatchBorder);
+    @apply absolute inset-0 rounded-full opacity-10 border;
+    border-color: var(--swatchBorder);
     content: "";
   }
 
   /* active */
   &::after {
-    @apply absolute rounded-full border border-transparent opacity-0 transition-opacity duration-200;
-    top: -3px;
-    bottom: -3px;
-    left: -3px;
-    right: -3px;
+    @apply absolute inset-[-3px] rounded-full border border-transparent opacity-0 transition-opacity duration-200;
     content: "";
 
     .is-active & {

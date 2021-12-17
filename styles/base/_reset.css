@@ -1,15 +1,18 @@
 *,
-::before,
-::after {
+*::before,
+*::after {
   border: 0px solid;
   box-sizing: border-box;
 }
- 
-::before,
-::after {
-  vertical-align: inherit;
+
+* {
+  margin: 0;
 }
- 
+
+html, body {
+  height: 100%;
+}
+
 html {
   -webkit-tap-highlight-color: transparent;
   -ms-text-size-adjust: 100%;
@@ -17,86 +20,12 @@ html {
 }
 
 body {
-  margin: 0;
+  -webkit-font-smoothing: antialiased;
 }
 
-main {
+img, picture, video, canvas, svg {
   display: block;
-}
-
-figure {
-  margin: 0;
-}
-
-hr {
-  color: inherit;
-  height: 0;
-  overflow: visible;
-}
-
-nav ol,
-nav ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-pre,
-code,
-kbd,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-a {
-  background-color: transparent;
-}
-
-abbr[title] {
-  text-decoration: underline;
-  text-decoration: underline dotted;
-}
-
-b,
-strong {
-  font-weight: inherit;
-}
-
-small {
-  font-size: 75%;
-}
-
-::-moz-selection {
-  text-shadow: none;
-}
-
-::selection {
-  text-shadow: none;
-}
-
-audio,
-canvas,
-iframe,
-img,
-svg,
-video {
-  vertical-align: middle;
-}
-
-audio,
-video {
-  display: inline-block;
-}
-
-audio:not([controls]) {
-  display: none;
-  height: 0;
-}
-
-img,
-iframe {
-  border-style: none;
+  max-width: 100%;
 }
 
 svg:not([fill]) {
@@ -107,23 +36,15 @@ svg:not(:root) {
   overflow: hidden;
 }
 
-table {
-  border-collapse: collapse;
-  border-color: inherit;
-  text-indent: 0;
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
 }
 
-button,
-input,
-select,
 textarea {
-  margin: 0;
-}
- 
-button {
-  overflow: visible;
-  text-transform: none;
-  color: inherit;
+  overflow: auto;
+  resize: vertical;
+  resize: block;
 }
 
 button,
@@ -131,6 +52,15 @@ button,
 [type="reset"],
 [type="submit"] {
   -webkit-appearance: button;
+}
+
+
+::-moz-selection {
+  text-shadow: none;
+}
+
+::selection {
+  text-shadow: none;
 }
 
 ::-moz-focus-inner {
@@ -144,25 +74,6 @@ button,
 
 :-moz-ui-invalid {
   box-shadow: none;
-}
-
-legend {
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  white-space: normal;
-}
-
-progress {
-  display: inline-block;
-  vertical-align: baseline;
-}
-
-textarea {
-  margin: 0;
-  overflow: auto;
-  resize: vertical;
-  resize: block;
 }
  
 ::-webkit-inner-spin-button,
@@ -184,21 +95,6 @@ textarea {
   font: inherit;
 }
 
-details {
-  display: block;
-}
- 
-summary {
-  display: list-item;
-}
-
-canvas {
-  display: inline-block;
-}
-
-template {
-  display: none;
-}
 
 a,
 area,
@@ -212,7 +108,6 @@ textarea,
   -ms-touch-action: manipulation;
 }
  
-
 [aria-busy="true"] {
   cursor: progress;
 }
@@ -233,4 +128,9 @@ textarea,
 [aria-hidden="false"][hidden]:not(:focus) {
   clip: rect(0, 0, 0, 0);
   position: absolute;
+}
+
+
+#root, #__next {
+  isolation: isolate;
 }

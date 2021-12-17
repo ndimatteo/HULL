@@ -72,11 +72,11 @@
   }
 
   &--text {
-    @apply block p-8 text-5xl leading-none;
+    @apply block p-32 text-48 leading-100;
   }
 
   &--photo {
-    @apply relative w-32 sm:w-48 px-8 py-4 sm:px-12 sm:py-8;
+    @apply relative w-120 sm:w-200 px-32 py-16 sm:px-48 sm:py-32;
 
     [data-theme='metal'] & {
       filter: invert(43%) sepia(83%) saturate(3151%) hue-rotate(337deg) brightness(92%) contrast(111%);
@@ -90,10 +90,8 @@
   }
 
   &--product {
-    @apply flex flex-col -my-px;
-    margin: -1px 0;
+    @apply flex flex-col -my-1 max-w-[450px];
     width: calc(80vw - 2rem);
-    max-width: 28rem;
 
     * {
       @apply whitespace-normal;

@@ -1,12 +1,12 @@
 .filters {
-  @apply max-w-md sm:max-w-sm;
+  @apply max-w-md;
 
-  @media (min-width: 449px) {
+  @media (min-width: 400px) {
     @apply border-r;
   }
 
   &--header {
-    @apply flex items-center relative px-4 py-3 sm:px-8 sm:py-6 text-sm leading-normal font-semibold uppercase;
+    @apply flex items-center relative px-16 py-12 sm:px-32 sm:py-24 text-14 leading-150 font-semibold uppercase;
 
     &::after {
       @apply absolute inset-x-0 bottom-0 border-t;
@@ -15,11 +15,11 @@
   }
 
   &--title {
-    @apply flex items-center h-12 mr-auto;
+    @apply flex items-center h-48 mr-auto;
   }
 
   &--count {
-    @apply opacity-30 ml-2;
+    @apply opacity-30 ml-8;
   }
 
   &--actions {
@@ -27,20 +27,20 @@
   }
 
   &--content {
-    @apply flex-1 flex flex-col overflow-y-scroll p-4 sm:px-8 sm:py-2;
+    @apply flex-1 flex flex-col overflow-y-scroll p-16 sm:px-32 sm:py-8;
   }
 
   &--footer {
-    @apply relative px-4 pb-4 sm:px-8 sm:pb-8;
+    @apply relative px-16 pb-16 sm:px-32 sm:pb-32;
   }
 
   &--footer-actions {
-    @apply border-t pt-4 sm:pt-8;
+    @apply border-t pt-16 sm:pt-32;
   }
 }
 
 .filters-close {
-  @apply clean-btn bg-transparent -mr-2 mx-2 p-2 text-sm leading-normal font-semibold uppercase;
+  @apply clean-btn bg-transparent -mr-8 mx-8 p-8 text-14 leading-150 font-semibold uppercase;
 }
 
 .filter-group {
@@ -49,14 +49,14 @@
   }
 
   &--count {
-    @apply inline-block align-middle opacity-30 ml-2 text-xs;
+    @apply inline-block align-middle opacity-30 ml-8 text-12;
   }
   
   &--options {
-    @apply flex flex-wrap gap-y-4 justify-items-start mt-2;
+    @apply flex flex-wrap gap-y-16 justify-items-start mt-8;
 
     &.is-grid {
-      @apply grid grid-cols-3 gap-4;
+      @apply grid grid-cols-3 gap-16;
     }
   }
 }
@@ -65,7 +65,7 @@
   @apply w-full;
 
   .is-grid & {
-    @apply border p-2 text-center transition-colors duration-200;
+    @apply border p-8 text-center transition-colors duration-200;
 
     &.is-active {
       @apply bg-pageBG text-pageText border-pageBG;
@@ -79,10 +79,10 @@
   }
   
   &.is-swatch {
-    @apply inline-flex flex-col w-auto ml-1 mr-5 text-center;
+    @apply inline-flex flex-col w-auto ml-4 mr-20 text-center;
 
     .swatch {
-      @apply w-[40px] h-[40px];
+      @apply w-40 h-40;
     }
 
     .control {
@@ -117,10 +117,10 @@
   }
   
   &--label {
-    @apply mt-1 text-xs font-semibold;
+    @apply mt-4 text-12 font-semibold;
 
     .is-swatch & {
-      @apply mt-2;
+      @apply mt-8;
     }
   }
 }

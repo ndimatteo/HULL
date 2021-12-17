@@ -1,6 +1,6 @@
 .accordion-group {
   &:not(:last-child) {
-    @apply mb-12;
+    @apply mb-48;
   }
 }
 
@@ -8,11 +8,11 @@
   @apply w-full border-t;
   
   &--toggle {
-    @apply clean-btn text-left flex justify-between items-center px-0 py-4 w-full bg-transparent font-semibold text-lg leading-snug;
+    @apply clean-btn text-left flex justify-between items-center px-0 py-16 w-full bg-transparent font-semibold text-18 leading-135;
   }
 
   &--icon {
-    @apply flex-shrink-0 block relative ml-8 w-3 h-3;
+    @apply flex-shrink-0 block relative ml-32 w-12 h-12;
     transition: .3s cubic-bezier(0.22, 1, 0.36, 1);
 
     svg {
@@ -29,6 +29,6 @@
   }
 
   &--inner {
-    @apply m-0 pb-12 max-w-2xl;
+    @apply m-0 pb-48 max-w-2xl;
   }
 }

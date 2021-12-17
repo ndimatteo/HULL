@@ -1,12 +1,12 @@
 .mega-nav {
-  @apply hidden sm:block absolute top-full inset-x-0 z-30 bg-pageBG;
+  @apply hidden sm:block absolute top-full inset-x-0 z-3 bg-pageBG;
 
   /* Background of opened mega nav */
   &--bg {
     @apply hidden sm:block;
 
     &::before {
-      @apply absolute top-full inset-x-0 z-10 h-px bg-pageBG;
+      @apply absolute top-full inset-x-0 z-1 h-1 bg-pageBG;
       will-change: transform;
       transform-origin: 0 0;
       transform: scaleY(var(--h));
@@ -20,7 +20,7 @@
     }
 
     &::after {
-      @apply absolute top-full inset-x-0 -mt-px z-20 border-t;
+      @apply absolute top-full inset-x-0 -mt-1 z-2 border-t;
       transform: translate3d(0, var(--hpx), 0);
       transition: transform .8s cubic-bezier(0.16, 1, 0.3, 1);
       content: "";
@@ -33,11 +33,11 @@
   }
 
   &--border {
-    @apply absolute inset-x-0 top-full z-10 h-px
+    @apply absolute inset-x-0 top-full z-1 h-1;
   }
 
   &--backdrop {
-    @apply fixed inset-0 z-0 bg-black bg-opacity-40 pointer-events-none opacity-0;
+    @apply fixed inset-0  bg-black bg-opacity-40 pointer-events-none opacity-0;
     transition: opacity .15s linear;
 
     &.is-active {
@@ -51,18 +51,10 @@
 /* (you should mostly offload these to the general header links/button styles) */
 .mega-toggle {
   @apply has-indicator;
-  /* &--icon {
-    @apply inline-block mr-2 rounded-full border w-[10px] h-[10px];
-
-    .is-open & {
-      @apply bg-pageText;
-      animation: pulse 2s infinite;
-    }
-  } */
 }
 
 .mega-item {
-  @apply absolute top-0 inset-x-0 z-10 -mt-px overflow-hidden invisible pointer-events-none;
+  @apply absolute top-0 inset-x-0 z-1 -mt-1 overflow-hidden invisible pointer-events-none;
   transition: visibility .2s .8s;
 
   &.is-active {
@@ -71,22 +63,22 @@
   }
 
   &--content {
-    @apply grid grid-cols-2 relative px-8 pt-1 pb-12;
+    @apply grid grid-cols-2 relative px-32 pt-4 pb-48;
     will-change: transform;
   }
 
   ul {
     a,
     button {
-      @apply inline-block text-4xl leading-normal hover:opacity-40 transition-opacity duration-200;
+      @apply inline-block text-36 leading-150 hover:opacity-40 transition-opacity duration-200;
     }
   }
 
   &--featured {
-    @apply grid grid-cols-2 gap-4 max-w-2xl relative w-full border-l pl-8;
+    @apply grid grid-cols-2 gap-16 max-w-[725px] relative w-full border-l pl-32;
 
     &-title {
-      @apply block absolute top-0 right-full w-2 text-xs uppercase tracking-widest font-semibold;
+      @apply block absolute top-0 right-full w-10 text-12 uppercase tracking-widest font-semibold;
       
       span {
         @apply block overflow-hidden absolute top-1/2 left-0 whitespace-nowrap rotate-90;

@@ -2,15 +2,15 @@
   @apply border-b;
   
   &--tools {
-    @apply sticky top-[var(--headerHeight)] z-10 flex justify-between bg-pageBG border-b;
+    @apply sticky top-[var(--headerHeight)] z-2 flex justify-between bg-pageBG border-b;
   }
 
   &--content {
-    @apply relative z-0 overflow-hidden;
+    @apply relative z-1 overflow-hidden;
   }
   
   &--grid {
-    @apply grid grid-cols-1 md:grid-cols-3 -m-px;
+    @apply grid grid-cols-1 md:grid-cols-3 -m-1;
 
     &.is-empty {
       @apply grid-cols-1;
@@ -26,26 +26,26 @@
   }
 
   &--pagination {
-    @apply relative p-4 sm:py-8 text-center is-textured bg-pageBG border-t;
+    @apply relative p-16 sm:py-32 text-center is-textured bg-pageBG border-t;
   }
 
   &--count {
-    @apply relative p-4 sm:py-8 text-center bg-pageBG border-t;
+    @apply relative p-16 sm:py-32 text-center bg-pageBG border-t;
   }
 
   &--filter-actions {
-    @apply flex items-center px-2 sm:px-4;
+    @apply flex items-center px-8 sm:px-16;
 
     .filters-toggle {
-      @apply clean-btn flex items-center relative p-4 bg-transparent text-sm leading-normal font-semibold uppercase;
+      @apply clean-btn flex items-center relative p-16 bg-transparent text-14 leading-150 font-semibold uppercase;
 
       &--count {
-        @apply w-6 h-6 ml-2 rounded-full bg-pageText text-pageBG text-xs leading-loose;
+        @apply w-24 h-24 ml-8 rounded-full bg-pageText text-pageBG text-12 leading-[2];
       }
     }
 
     .filters-reset {
-      @apply hidden sm:block ml-2;
+      @apply hidden sm:block ml-8;
     }
   }
 
@@ -63,7 +63,7 @@
 }
 
 .collection-count {
-  @apply hidden relative ml-2 leading-none;
+  @apply hidden relative ml-16 leading-100;
   vertical-align: super;
   font-size: .5em;
 
@@ -74,18 +74,18 @@
 }
 
 .collection-sort {
-  @apply flex ml-auto px-2 sm:px-4;
+  @apply flex ml-auto px-8 sm:px-16;
 
   .listbox {
     @apply flex;
 
     &--btn {
-      @apply p-4 text-sm leading-normal;
+      @apply p-16 text-14 leading-150;
     }
   }
 
   &--title {
-    @apply hidden sm:inline mr-2 font-semibold uppercase;
+    @apply hidden sm:inline mr-8 font-semibold uppercase;
   }
 
   &--icon {
@@ -98,26 +98,22 @@
 
   .collection &,
   .marquee & {
-    @apply p-8 m-[-0.5px] border;
+    @apply p-32 m-[-0.5px] border;
   }
 
   &.is-inline {
-    @apply my-4;
+    @apply my-16;
   }
 
   &--visuals {
     @apply relative;
-  }
-
-  &--thumb {
-    @apply z-0;
   }
   
   &--photo {
     @apply relative overflow-hidden;
 
     .is-hover {
-      @apply absolute inset-0 z-10 opacity-0 invisible transition-all;
+      @apply absolute inset-0 z-1 opacity-0 invisible transition-all;
 
       .product-card:hover & {
         @apply opacity-100 visible;
@@ -130,7 +126,7 @@
 
     .carousel {
       &--hud {
-        @apply z-30;
+        @apply z-3;
       }
     }
   }
@@ -139,7 +135,7 @@
     @apply text-center;
 
     .product-card--visuals + & {
-      @apply mt-4;
+      @apply mt-16;
     }
   }
 
@@ -147,15 +143,15 @@
     @apply m-0 !important;
 
     .is-featured & {
-      @apply text-base;
+      @apply text-16 font-semibold;
     }
 
     .is-inline & {
-      @apply text-2xl;
+      @apply text-24;
     }
 
     + .price {
-      @apply mt-2;
+      @apply mt-8;
     }
   }
 
@@ -163,13 +159,13 @@
     @apply block no-underline text-current;
 
     &::after {
-      @apply block absolute inset-0 z-20;
+      @apply block absolute inset-0 z-2;
       content: "";
     }
   }
 
   &--option {
-    @apply relative z-30 mt-4;
+    @apply relative z-3 mt-16;
 
     .option {
       @apply m-0 p-0 border-0;
@@ -181,7 +177,7 @@
   }
 
   &--add {
-    @apply absolute bottom-0 inset-x-0 z-30 text-center mx-4 mb-8 opacity-0 invisible translate-y-1/2 transition-all;
+    @apply absolute bottom-0 inset-x-0 z-3 text-center mx-16 mb-32 opacity-0 invisible translate-y-1/2 transition-all;
     will-change: transform;
 
     .product-card:hover & {
@@ -193,11 +189,11 @@
     @apply flex items-center justify-center;
 
     &--current {
-      @apply sm:text-base sm:leading-normal font-semibold;
+      @apply sm:text-16 sm:leading-150 font-semibold;
     }
 
     &--discount {
-      @apply ml-2 p-1 rounded-sm bg-pageText text-pageBG text-xxs leading-tight tracking-widest font-semibold uppercase;
+      @apply ml-8 px-6 py-4 rounded-md bg-pageText text-pageBG text-10 leading-125 tracking-widest font-semibold uppercase;
     }
   }
 }
@@ -206,7 +202,7 @@
   @apply flex flex-col relative;
 
   h2 {
-    @apply mt-4 text-center text-base font-semibold transition-opacity duration-200;
+    @apply mt-4 text-center text-16 font-semibold transition-opacity duration-200;
 
     .product-featured:hover & {
         @apply opacity-100 visible;

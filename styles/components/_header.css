@@ -1,5 +1,5 @@
 a[href="#content"].skip-link {
-  @apply block fixed top-0 left-1/2 -translate-x-1/2 -translate-y-full z-90 px-2 py-1 bg-pageBG text-pageText text-xs font-semibold uppercase;
+  @apply block fixed top-0 left-1/2 -translate-x-1/2 -translate-y-full z-9 px-8 py-4 bg-pageBG text-pageText text-12 leading-125 font-semibold uppercase;
 
   &:focus {
     @apply translate-y-0 outline-none;
@@ -7,7 +7,7 @@ a[href="#content"].skip-link {
 }
 
 .header {
-  @apply sticky top-0 inset-x-0 z-50;
+  @apply sticky top-0 inset-x-0 z-5;
 
   &.is-overlay {
     @apply h-0;
@@ -18,7 +18,7 @@ a[href="#content"].skip-link {
   }
   
   &--inner {
-    @apply relative z-20 p-1 sm:p-4 bg-pageBG;
+    @apply relative z-2 p-4 sm:p-16 bg-pageBG;
 
     .is-overlay & {
       @apply bg-transparent transition-colors duration-300;
@@ -34,11 +34,11 @@ a[href="#content"].skip-link {
   }
   
   &--content {
-    @apply flex flex-col items-center relative z-30;
+    @apply flex flex-col items-center relative z-3;
   }
 
   &--border {
-    @apply absolute inset-x-0 bottom-0 z-20 border-t;
+    @apply absolute inset-x-0 bottom-0 z-2 border-t;
     transition: opacity 0s .6s linear;
 
     .is-overlay:not(.has-bg) & {
@@ -59,19 +59,19 @@ a[href="#content"].skip-link {
 }
 
 .logo {
-  @apply flex flex-col relative z-10;
+  @apply flex flex-col relative z-1;
 
   &--link {
-    @apply clean-btn block p-2 bg-transparent;
+    @apply clean-btn block p-8 bg-transparent;
 
     svg {
-      @apply block fill-current w-auto h-12;
+      @apply block fill-current w-auto h-48;
     }
   }
 }
 
 .menu-toggle {
-  @apply sm:hidden absolute inset-y-0 left-0 z-60 clean-btn p-4 bg-transparent;
+  @apply sm:hidden absolute inset-y-0 left-0 z-6 clean-btn p-15 bg-transparent;
 
   .is-overlay:not(.has-bg) & {
     @apply transition-colors duration-300;
@@ -83,7 +83,7 @@ a[href="#content"].skip-link {
 }
 
 .hamburger {
-  @apply relative flex flex-col items-center justify-center mx-auto w-7;
+  @apply relative flex flex-col items-center justify-center mx-auto w-30;
 
   &::before,
   &::after {
@@ -146,11 +146,11 @@ a[href="#content"].skip-link {
 }
 
 .cart-toggle {
-  @apply clean-btn flex items-center relative bg-transparent -mr-2 p-2 font-semibold uppercase;
+  @apply clean-btn flex items-center relative bg-transparent -mr-8 p-8 font-semibold uppercase;
   font: inherit;
 
   &--count {
-    @apply flex flex-col justify-center relative w-8 h-8 ml-2 rounded-full bg-transparent border border-current text-current text-sm font-bold leading-loose;
+    @apply flex flex-col justify-center relative w-32 h-32 ml-8 rounded-full bg-transparent border border-current text-current text-14 font-bold leading-160;
 
     &.is-active {
       @apply border-pageText bg-pageText text-pageBG;
@@ -172,7 +172,7 @@ a[href="#content"].skip-link {
       @apply flex;
 
       li {
-        @apply mx-2;
+        @apply mx-8;
       }
 
       button {
@@ -182,7 +182,7 @@ a[href="#content"].skip-link {
 
       a,
       button {
-        @apply block p-2 text-sm leading-normal font-semibold uppercase;
+        @apply block p-8 text-14 leading-150 font-semibold uppercase;
       }
     }
   }
@@ -191,9 +191,8 @@ a[href="#content"].skip-link {
     @apply sm:hidden flex justify-end items-center absolute inset-0;
 
     .menu-mobile {
-      @apply fixed top-0 left-0 w-full h-screen z-50 flex flex-col bg-pageBG text-pageText;
+      @apply fixed top-0 left-0 w-full max-w-[420px] h-screen z-5 flex flex-col bg-pageBG text-pageText;
       height: calc(var(--vh, 1vh) * 100);
-      max-width: 420px;
       will-change: transform;
 
       @media (min-width: 421px) {
@@ -201,7 +200,7 @@ a[href="#content"].skip-link {
       }
 
       &--backdrop {
-        @apply fixed inset-0 z-40 bg-black bg-opacity-40 pointer-events-none opacity-0;
+        @apply fixed inset-0 z-4 bg-black bg-opacity-40 pointer-events-none opacity-0;
         transition: opacity .15s linear;
 
         &.is-active {
@@ -211,8 +210,8 @@ a[href="#content"].skip-link {
       }
 
       &--inner {
-        @apply flex-1 flex flex-col overflow-y-scroll px-4 pb-4;
-        padding-top: calc(var(--headerHeight, 10rem) + 1.5rem);
+        @apply flex-1 flex flex-col overflow-y-scroll px-16 pb-16;
+        padding-top: calc(var(--headerHeight, 10rem) + 2.5rem);
       }
 
       button {
@@ -232,12 +231,12 @@ a[href="#content"].skip-link {
 
         a,
         button {
-          @apply text-4xl leading-normal;
+          @apply text-36 leading-150;
         }
       }
 
       &--secondary {
-        @apply pt-8;
+        @apply pt-32;
 
         ul {
           @apply flex flex-col;
@@ -245,7 +244,7 @@ a[href="#content"].skip-link {
 
         a,
         button {
-          @apply text-xl leading-normal;
+          @apply text-20 leading-150;
         }
       }
 
@@ -256,6 +255,6 @@ a[href="#content"].skip-link {
   }
 
   .cart-toggle {
-    @apply mx-2 p-2 text-sm leading-normal font-semibold uppercase;
+    @apply mx-8 p-8 text-14 leading-150 font-semibold uppercase;
   }
 }

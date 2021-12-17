@@ -1,10 +1,10 @@
 .cart {
-  @apply fixed top-0 right-0 w-full h-screen max-w-2xl z-90 bg-pageText text-pageBG invisible pointer-events-none;
+  @apply fixed top-0 right-0 w-full h-screen max-w-2xl z-9 bg-pageText text-pageBG invisible pointer-events-none;
   height: calc(var(--vh, 1vh) * 100);
   will-change: transform;
   transition: visibility .2s .8s;
 
-  @media (min-width: 673px) {
+  @media (min-width: 700px) {
     border-left-width: 1px;
   }
 
@@ -18,7 +18,7 @@
   }
 
   &--backdrop {
-    @apply fixed inset-0 z-80 bg-black bg-opacity-40 pointer-events-none opacity-0;
+    @apply fixed inset-0 z-8 bg-black bg-opacity-40 pointer-events-none opacity-0;
     transition: opacity .15s linear;
 
     &.is-active {
@@ -32,7 +32,7 @@
   }
 
   &--header {
-    @apply flex items-center relative px-4 py-3 sm:px-8 sm:py-6 text-sm leading-normal font-semibold uppercase;
+    @apply flex items-center relative px-16 py-12 sm:px-32 sm:py-24 text-14 leading-150 font-semibold uppercase;
 
     &::after {
       @apply absolute inset-x-0 bottom-0 border-t;
@@ -41,35 +41,35 @@
   }
 
   &--title {
-    @apply flex items-center h-12 mr-auto;
+    @apply flex items-center h-48 mr-auto;
   }
 
   &--count {
-    @apply opacity-30 ml-2;
+    @apply opacity-30 ml-8;
   }
 
   &--content {
-    @apply flex-1 flex flex-col overflow-y-scroll p-4 sm:p-8;
+    @apply flex-1 flex flex-col overflow-y-scroll p-16 sm:p-32;
   }
 
   &--footer {
-    @apply relative px-4 pb-4 sm:px-8 sm:pb-8;
+    @apply relative px-16 pb-16 sm:px-32 sm:pb-32;
   }
 
   &--subtotal {
-    @apply flex justify-between py-4 sm:py-8 px-4 border-t;
+    @apply flex justify-between px-16 py-16 sm:py-32 border-t;
 
     span {
-      @apply font-semibold;
+      @apply text-16 font-semibold;
     }
   }
 
   &--message {
-    @apply mt-4 text-center text-xs sm:text-sm font-semibold;
+    @apply mt-16 text-center text-12 sm:text-14 font-semibold;
   }
 
   &--empty {
-    @apply my-auto pb-28 text-center;
+    @apply my-auto pb-112 text-center;
   }
 }
 
@@ -77,7 +77,7 @@
   @apply flex relative;
 
   &:not(:last-child) {
-    @apply mb-8 pb-8 border-b;
+    @apply mb-32 pb-32 border-b;
   }
 
   .is-updating & {
@@ -86,11 +86,11 @@
 
   &--photo {
     @apply flex-shrink-0 relative m-0 w-1/4 sm:w-1/3;
-    max-width: 10rem;
+    max-width: 16rem;
   }
 
   &--details {
-    @apply flex flex-col flex-grow pl-4;
+    @apply flex flex-col flex-grow pl-16;
   }
 
   &--header {
@@ -100,28 +100,28 @@
       @apply ml-auto;
 
       &--current {
-        @apply sm:text-lg sm:leading-normal font-semibold;
+        @apply sm:text-18 sm:leading-150 font-semibold;
       }
     }
   }
 
   &--title {
-    @apply sm:pr-12;
+    @apply sm:pr-48;
   }
 
   &--variant {
-    @apply mb-1 text-xs leading-relaxed tracking-wider font-semibold uppercase sm:text-sm sm:leading-relaxed;
+    @apply mb-4 text-12 leading-160 tracking-wider font-semibold uppercase sm:text-14 sm:leading-160;
   }
 
   &--name {
-    @apply mb-2 sm:mb-4 text-xl sm:text-3xl;
+    @apply mb-8 sm:mb-16 text-20 sm:text-30;
   }
 
   &--link {
     @apply block text-current;
 
     &::after {
-      @apply block absolute inset-0 z-10;
+      @apply block absolute inset-0 z-1;
       content: "";
     }
   }
@@ -131,10 +131,10 @@
   }
 
   &--price {
-    @apply ml-4;
+    @apply ml-16;
   }
 
   &--tools {
-    @apply flex justify-between items-baseline relative z-10 mt-auto pt-6;
+    @apply flex justify-between items-baseline relative z-1 mt-auto pt-24;
   }
 }

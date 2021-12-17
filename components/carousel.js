@@ -12,7 +12,6 @@ const Carousel = ({
   hasArrows,
   hasDots,
   hasCounter,
-  hasThumbs,
   hasDrag = true,
   className,
   children,
@@ -20,13 +19,13 @@ const Carousel = ({
   const [currentSlide, setCurrentSlide] = useState(0)
   const [sliderRef, slider] = useKeenSlider({
     initial: 0,
-    slides: '.carousel--slide',
+    selector: '.carousel--slide',
     loop: true,
     duration: 800,
     dragSpeed: 0.8,
     controls: hasDrag,
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide)
+    slideChanged(slider) {
+      setCurrentSlide(slider.track.details.rel)
     },
   })
 
@@ -40,12 +39,12 @@ const Carousel = ({
         ))}
       </div>
 
-      {slider && slider.details().size > 1 && (
+      {slider?.current && (
         <div className="carousel--hud">
           <div className="carousel--nav">
             {hasArrows && (
               <button
-                onClick={() => slider.prev()}
+                onClick={() => slider.current?.prev()}
                 className="carousel--prev"
                 aria-label="Previous slide"
               >
@@ -56,10 +55,12 @@ const Carousel = ({
             <div className="carousel--status">
               {hasDots && (
                 <div className="carousel--dots">
-                  {[...Array(slider.details().size).keys()].map((index) => (
+                  {[
+                    ...Array(slider.current.track.details.slides.length).keys(),
+                  ].map((index) => (
                     <button
                       key={index}
-                      onClick={() => slider.moveToSlideRelative(index)}
+                      onClick={() => slider.current?.moveToIdx(index)}
                       aria-label={`Go to slide ${index + 1}`}
                       className={cx('carousel--dot', {
                         'is-active': currentSlide === index,
@@ -87,7 +88,7 @@ const Carousel = ({
                     </div>
                   </div>
                   <div className="carousel--counter-item is-total">
-                    <span>{slider.details().size}</span>
+                    <span>{slider.current.track.details.slides.length}</span>
                   </div>
                 </div>
               )}
@@ -95,7 +96,7 @@ const Carousel = ({
 
             {hasArrows && (
               <button
-                onClick={() => slider.next()}
+                onClick={() => slider.current?.next()}
                 className="carousel--next"
                 aria-label="Next slide"
               >
