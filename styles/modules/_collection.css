@@ -18,10 +18,10 @@
   }
 
   &--empty {
-    @apply px-8 py-16 min-h-[35vh] text-center;
+    @apply px-16 py-64 min-h-[35vh] text-center;
 
     .filters-reset {
-      @apply mt-8;
+      @apply mt-32;
     }
   }
 

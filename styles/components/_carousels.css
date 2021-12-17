@@ -1,10 +1,18 @@
 .carousel {
   @apply relative w-full bg-black;
 
+  &--container {
+    @apply relative overflow-hidden;
+  }
+
   &--slides {
-    @apply flex relative overflow-hidden;
+    @apply flex relative;
     touch-action: pan-y;
     will-change: transform;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -webkit-tap-highlight-color: transparent;
 
     .has-drag & {
       cursor: move;
