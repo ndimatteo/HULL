@@ -1,8 +1,8 @@
 .dropdown {
-  @apply relative z-10;
+  @apply relative z-1;
 
   &.is-open {
-    @apply sm:z-30;
+    @apply sm:z-3;
     
     @media screen(sm) {
       .dropdown--content {
@@ -30,7 +30,7 @@
   }
 
   &--nav {
-    @apply block relative ml-2 pl-[10px];
+    @apply block relative ml-8 pl-[10px];
 
     a {
       color: hsla(var(--pageText-hsl), 0.3);

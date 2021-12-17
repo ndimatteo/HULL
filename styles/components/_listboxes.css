@@ -1,8 +1,8 @@
 .listbox {
-  @apply relative z-20;
+  @apply relative z-2;
   
   &--btn {
-    @apply clean-btn relative z-10 p-0 text-left bg-transparent text-base;
+    @apply clean-btn relative z-1 p-0 text-left bg-transparent text-16;
   }
 
   &--content {
@@ -22,10 +22,10 @@
   }
 
   &--options {
-    @apply flex flex-col p-2;
+    @apply flex flex-col p-8;
   }
   
   &--item {
-    @apply clean-btn bg-transparent text-pageBG text-left px-2 py-1 text-sm uppercase leading-normal transition-colors hover:bg-pageBG hover:text-pageText;
+    @apply clean-btn bg-transparent text-pageBG text-left px-8 py-4 text-14 uppercase leading-150 transition-colors hover:bg-pageBG hover:text-pageText;
   }
 }

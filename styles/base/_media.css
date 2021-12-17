@@ -6,7 +6,7 @@
   }
 
   img {
-    @apply block absolute top-1/2 left-1/2 z-10 opacity-0;
+    @apply block absolute top-1/2 left-1/2 z-1 opacity-0;
     width: calc(100% + 1px); /* helps with half pixel renderings */
     height: calc(100% + 1px); /* helps with half pixel renderings */
     transform: translate3d(-50%,-50%,0);
@@ -28,7 +28,7 @@
     }
 
     &::after {
-      @apply absolute inset-0 z-10;
+      @apply absolute inset-0 z-1;
       backdrop-filter: blur(1rem) contrast(1.5);
       content: "";
     }

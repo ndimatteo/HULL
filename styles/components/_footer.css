@@ -2,11 +2,11 @@
   @apply relative overflow-hidden;
   
   &--grid {
-    @apply grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-pageText;
+    @apply grid sm:grid-cols-2 lg:grid-cols-4 gap-1 bg-pageText;
   }
 
   &--block {
-    @apply flex flex-col p-8 md:p-8 bg-pageBG text-center lg:text-left;
+    @apply flex flex-col p-32 bg-pageBG text-center lg:text-left;
   }
 
   .form {
@@ -14,18 +14,18 @@
   }
 
   .menu-footer {
-    @apply flex flex-col lg:mb-8;
+    @apply flex flex-col lg:mb-32;
 
     a {
-      @apply inline-block py-2 hover:opacity-40;
+      @apply inline-block py-8 text-16 hover:opacity-40;
     }
   }
 
   .menu-social {
-    @apply inline-flex flex-wrap my-4 mx-auto lg:mt-0 lg:mx-0;
+    @apply inline-flex flex-wrap my-16 mx-auto lg:mt-0 lg:mx-0;
 
     a {
-      @apply block w-8 h-8 hover:opacity-40;
+      @apply block w-32 h-32 hover:opacity-40;
 
       svg {
         @apply block w-full h-full;
@@ -39,7 +39,7 @@
 
   &--disclaimer {
     p {
-      @apply text-sm;
+      @apply text-14;
     }
   }
 }

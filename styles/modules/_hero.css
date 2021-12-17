@@ -7,7 +7,7 @@
   }
   
   &--bg {
-    @apply relative w-full z-0 h-full;
+    @apply relative w-full  h-full;
     grid-area: 1/-1;
 
     &.is-desktop {
@@ -20,7 +20,7 @@
   }
 
   &--overlay {
-    @apply z-10 flex flex-col justify-center;
+    @apply z-2 flex flex-col justify-center;
     grid-area: 1/-1;
   }
 

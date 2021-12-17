@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { m, AnimatePresence } from 'framer-motion'
-import { useKeenSlider } from 'keen-slider/react'
+import useEmblaCarousel from 'embla-carousel-react'
 import cx from 'classnames'
 
 import { flipAnim } from '@lib/animate'
@@ -12,40 +12,55 @@ const Carousel = ({
   hasArrows,
   hasDots,
   hasCounter,
-  hasThumbs,
   hasDrag = true,
   className,
   children,
 }) => {
   const [currentSlide, setCurrentSlide] = useState(0)
-  const [sliderRef, slider] = useKeenSlider({
-    initial: 0,
-    slides: '.carousel--slide',
+  const [scrollSnaps, setScrollSnaps] = useState([])
+
+  const [sliderRef, slider] = useEmblaCarousel({
     loop: true,
-    duration: 800,
-    dragSpeed: 0.8,
-    controls: hasDrag,
-    slideChanged(s) {
-      setCurrentSlide(s.details().relativeSlide)
-    },
+    draggable: hasDrag,
   })
+
+  const scrollPrev = useCallback(() => slider && slider.scrollPrev(), [slider])
+  const scrollNext = useCallback(() => slider && slider.scrollNext(), [slider])
+  const scrollTo = useCallback(
+    (index) => slider && slider.scrollTo(index),
+    [slider]
+  )
+
+  const onSelect = useCallback(() => {
+    setCurrentSlide(slider.selectedScrollSnap())
+  }, [slider])
+
+  useEffect(() => {
+    if (slider) {
+      setScrollSnaps(slider.scrollSnapList())
+      slider.on('select', onSelect)
+      onSelect()
+    }
+  }, [slider])
 
   return (
     <div className={cx('carousel', { 'has-drag': hasDrag }, className)}>
-      <div ref={sliderRef} className="carousel--slides">
-        {React.Children.map(children, (child, index) => (
-          <div className="carousel--slide" key={index}>
-            {child}
-          </div>
-        ))}
+      <div ref={sliderRef} className="carousel--container">
+        <div className="carousel--slides">
+          {React.Children.map(children, (child, index) => (
+            <div className="carousel--slide" key={index}>
+              {child}
+            </div>
+          ))}
+        </div>
       </div>
 
-      {slider && slider.details().size > 1 && (
+      {slider && scrollSnaps.length > 1 && (
         <div className="carousel--hud">
           <div className="carousel--nav">
             {hasArrows && (
               <button
-                onClick={() => slider.prev()}
+                onClick={scrollPrev}
                 className="carousel--prev"
                 aria-label="Previous slide"
               >
@@ -56,10 +71,10 @@ const Carousel = ({
             <div className="carousel--status">
               {hasDots && (
                 <div className="carousel--dots">
-                  {[...Array(slider.details().size).keys()].map((index) => (
+                  {scrollSnaps.map((_, index) => (
                     <button
                       key={index}
-                      onClick={() => slider.moveToSlideRelative(index)}
+                      onClick={() => scrollTo(index)}
                       aria-label={`Go to slide ${index + 1}`}
                       className={cx('carousel--dot', {
                         'is-active': currentSlide === index,
@@ -87,7 +102,7 @@ const Carousel = ({
                     </div>
                   </div>
                   <div className="carousel--counter-item is-total">
-                    <span>{slider.details().size}</span>
+                    <span>{scrollSnaps.length}</span>
                   </div>
                 </div>
               )}
@@ -95,7 +110,7 @@ const Carousel = ({
 
             {hasArrows && (
               <button
-                onClick={() => slider.next()}
+                onClick={scrollNext}
                 className="carousel--next"
                 aria-label="Next slide"
               >

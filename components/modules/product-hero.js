@@ -18,7 +18,6 @@ const ProductHero = ({ product, activeVariant, onVariantChange }) => {
             activeVariant={activeVariant}
             hasArrows
             hasCounter
-            hasThumbs
           />
         </div>
 

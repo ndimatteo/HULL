@@ -1,5 +1,5 @@
 .label {
-  @apply inline-flex items-center mx-2 p-2 pr-3 rounded-full border border-transparent bg-pageText text-pageBG text-xs leading-none tracking-normal normal-case has-indicator;
+  @apply inline-flex items-center mx-8 p-8 pr-12 rounded-full border border-transparent bg-pageText text-pageBG text-12 leading-100 tracking-normal normal-case has-indicator;
 
   &.is-active:not(.is-secondary) {
     @apply bg-transparent border-pageText text-pageText;

@@ -1,5 +1,5 @@
 .drawer {
-  @apply fixed top-0 w-full h-screen max-w-3xl z-90 bg-pageText text-pageBG invisible pointer-events-none;
+  @apply fixed top-0 w-full h-screen max-w-3xl z-9 bg-pageText text-pageBG invisible pointer-events-none;
   height: calc(var(--vh, 1vh) * 100);
   will-change: transform;
   transition: visibility .2s .8s;
@@ -30,7 +30,7 @@
   }
 
   &--backdrop {
-    @apply fixed inset-0 z-80 bg-black bg-opacity-40 pointer-events-none opacity-0;
+    @apply fixed inset-0 z-8 bg-black bg-opacity-40 pointer-events-none opacity-0;
     transition: opacity .15s linear;
 
     &.is-active {

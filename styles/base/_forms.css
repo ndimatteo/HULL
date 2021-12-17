@@ -3,7 +3,7 @@
   
   &--error {
     /* Error Message styles */
-    @apply bg-pageBG border p-4 md:p-4 text-center;
+    @apply bg-pageBG border p-16 text-center;
 
     &-reset {
       @apply mt-2;
@@ -12,7 +12,7 @@
   
   &--success {
     /* Success Message styles */
-    @apply bg-pageBG border p-4 md:p-4 text-center;
+    @apply bg-pageBG border p-16 text-center;
   }
 }
 
@@ -20,7 +20,7 @@
   @apply flex flex-col relative text-left;
 
   &--group {
-    @apply grid gap-y-2 grid-cols-1 sm:grid-cols-2;
+    @apply grid gap-y-8 grid-cols-1 sm:grid-cols-2;
 
     &.is-inline {
       @apply sm:flex;
@@ -30,16 +30,16 @@
       }
 
       .btn {
-        @apply sm:ml-4 sm:w-auto;
+        @apply sm:ml-16 sm:w-auto;
 
         &.is-text {
-          @apply border-pageText py-2 sm:border-transparent sm:py-1;
+          @apply border-pageText py-8 sm:border-transparent sm:py-4;
         }
       }
     }
 
     &.is-clean {
-      @apply sm:items-center sm:border-b mb-4;
+      @apply sm:items-center sm:border-b mb-16;
 
       .control {
         @apply sm:border-0;
@@ -57,7 +57,7 @@
   }
 
   &--label {
-    @apply absolute top-1/2 -translate-y-1/2 left-0 px-4 py-2;
+    @apply absolute top-1/2 -translate-y-1/2 left-0 px-16 py-8 text-16 leading-100;
 
     .is-filled & {
       @apply hidden;
@@ -71,9 +71,7 @@
       @apply transform-none inline-flex relative top-auto left-auto p-0 cursor-pointer;
 
       svg {
-        @apply block flex-none mr-4 p-1 pointer-events-none border border-current transition-colors;
-        width: 20px;
-        height: 20px;
+        @apply block flex-none mr-16 p-4 w-20 h-20 pointer-events-none border border-current transition-colors;
         transition-delay: .15s;
 
         input:checked + & {
@@ -98,14 +96,14 @@
         @apply flex flex-col justify-center m-0 select-none;
 
         p {
-          @apply text-xs;
+          @apply text-12;
         }
       }
     }
   }
 
   &--error {
-    @apply absolute bottom-full left-1/2 -translate-x-1/2 translate-y-1/2 px-2 rounded-full bg-pageText text-pageBG text-xs leading-normal font-semibold;
+    @apply absolute bottom-full left-1/2 -translate-x-1/2 translate-y-1/2 px-8 rounded-full bg-pageText text-pageBG text-12 leading-150 font-semibold;
   }
 
   &--pot {
@@ -117,7 +115,7 @@
   input[type="number"],
   input[type="password"],
   textarea {
-    @apply relative appearance-none w-full h-full px-4 py-2 rounded-none border font-inherit text-base leading-none bg-transparent text-pageText;
+    @apply relative appearance-none w-full h-full px-16 py-8 rounded-none border font-inherit text-16 leading-100 bg-transparent text-pageText;
 
     .is-inline & {
       @apply border-0;
@@ -152,8 +150,7 @@
   }
 
   textarea {
-    @apply max-w-full;
-    min-height: 5rem;
+    @apply max-w-full min-h-[5rem];
   }
 
   &.has-error {

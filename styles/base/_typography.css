@@ -1,19 +1,24 @@
 @tailwind base;
 
 @layer base {
+  html {
+    @apply text-[10px];
+  }
+
   html,
   body {
     -webkit-tap-highlight-color: transparent;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
   body {
-    @apply bg-pageBG text-pageText font-sans leading-none;
+    @apply bg-pageBG text-pageText font-sans leading-100;
   }
 
   p {
-    @apply m-0 text-base leading-normal;
+    @apply m-0 text-16 leading-150;
   }
 
   strong {
@@ -27,30 +32,30 @@
   /* Headlines */
   h1,
   .is-h1 {
-    @apply m-0 text-5xl font-normal leading-tight;
+    @apply m-0 text-48 font-normal leading-125;
   }
 
   h2,
   .is-h2 {
-    @apply m-0 text-4xl font-normal leading-tight;
+    @apply m-0 text-36 font-normal leading-125;
   }
 
   h3,
   .is-h3 {
-    @apply m-0 text-3xl font-normal leading-tight;
+    @apply m-0 text-30 font-normal leading-125;
   }
 
   h4,
   .is-h4 {
-    @apply m-0 text-2xl font-normal leading-snug;
+    @apply m-0 text-24 font-normal leading-135;
   }
 
   h5 {
-    @apply m-0 text-xl font-normal leading-tight;
+    @apply m-0 text-20 font-normal leading-125;
   }
 
   h6 {
-    @apply m-0 text-xs font-normal leading-tight;
+    @apply m-0 text-12 font-normal leading-125;
   }
 
   /* Links */
@@ -69,16 +74,14 @@
 
   /* Misc. */
   hr {
-    @apply my-16 mx-0 border-0 h-px bg-pageText;
+    @apply my-60 mx-0 border-0 h-1 bg-pageText;
   }
   
   ::-moz-selection {
-    background: var(--pageText);
-    color: var(--pageBG);
+    @apply bg-pageText text-pageBG;
   }
   ::selection {
-    background: var(--pageText);
-    color: var(--pageBG);
+    @apply bg-pageText text-pageBG;
   }
 }
 
@@ -113,13 +116,13 @@ details {
 
 p {
   &:not(:last-child) {
-    @apply mb-6;
+    @apply mb-24;
   }
 }
 
 ul {
   .rc & {
-    @apply pl-8 text-base leading-normal;
+    @apply pl-8 text-16 leading-150;
 
     &:not(:last-child) {
       @apply mb-6;
@@ -139,7 +142,7 @@ ul {
 h1,
 .is-h1 {
   &:not(:last-child) {
-    @apply mb-4;
+    @apply mb-16;
   }
 
   &.has-btn {
@@ -152,9 +155,9 @@ h1,
 
   .hero & {
     font-size: clamp(
-      2.25rem,
-      calc(1rem + 3.5vw),
-      5rem
+      4rem,
+      calc(1.5rem + 3.5vw),
+      15rem
     )
   }
 }
@@ -162,21 +165,21 @@ h1,
 h2,
 .is-h2 {
   &:not(:last-child) {
-    @apply mb-4;
+    @apply mb-16;
   }
 }
 
 h3,
 .is-h3 {
   &:not(:last-child) {
-    @apply mb-4;
+    @apply mb-16;
   }
 }
 
 h4,
 .is-h4 {
   &:not(:last-child) {
-    @apply mb-6;
+    @apply mb-24;
   }
 }
 
@@ -195,7 +198,7 @@ a {
 figure {
   .rc & {
     &:not(:last-child) {
-      @apply mb-6;
+      @apply mb-24;
     }
   }
 }

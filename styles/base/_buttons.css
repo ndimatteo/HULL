@@ -1,6 +1,6 @@
 .btn {
   /* default style button */
-  @apply clean-btn inline-block relative bg-pageBG px-5 py-2 text-center rounded-full border font-sans font-semibold text-xs transition-colors;
+  @apply clean-btn inline-block relative bg-pageBG px-20 py-9 text-center rounded-full border font-sans font-semibold text-12 leading-125 transition-colors;
 
   /* default: hover */
   &:not(.is-primary):not(.is-white):not(.is-text):not(.is-disabled):not(.is-soldout) {
@@ -19,7 +19,7 @@
 
   /* text-based button */
   &.is-text {
-    @apply py-1 px-2 bg-transparent border-transparent;
+    @apply py-4 px-8 bg-transparent border-transparent;
 
     &:hover {
       background: hsla(var(--pageText-hsl), .1);
@@ -34,13 +34,13 @@
 
   /* small sized button */
   &.is-small {
-    @apply px-3 py-1;
+    @apply px-12 py-4;
   }
 
 
   /* large sized button */
   &.is-large {
-    @apply text-2xl font-normal px-7;
+    @apply text-24 leading-125 font-normal px-28;
   }
 
   /* full width button */
@@ -59,7 +59,7 @@
     @apply bg-pageBG text-current;
 
     &::after {
-      @apply absolute -inset-px bg-pageBG rounded-full opacity-50;
+      @apply absolute -inset-1 bg-pageBG rounded-full opacity-50;
       content: "";
     }
   }
