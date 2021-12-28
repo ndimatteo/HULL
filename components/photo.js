@@ -56,7 +56,7 @@ const Photo = ({
 
   // trigger any onLoad callbacks
   useEffect(() => {
-    if (isLoaded && onLoad) onLoad()
+    if (isLoaded) onLoad?.()
   }, [isLoaded])
 
   return (

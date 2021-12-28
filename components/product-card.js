@@ -66,10 +66,11 @@ const ProductCard = React.forwardRef(
         if (!currentFilter) return null
 
         const option = currentFilter.forOption.split(':')
+        const { 0: optionName, 1: optionValue } = option
 
         return {
-          name: option[0],
-          value: option[1],
+          name: optionName,
+          value: optionValue,
         }
       })
       .filter(Boolean)

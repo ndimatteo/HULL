@@ -2,7 +2,7 @@
 
 @layer base {
   html {
-    @apply text-[10px];
+    @apply bg-pageText text-[10px];
   }
 
   html,
