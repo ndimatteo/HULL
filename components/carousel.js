@@ -24,12 +24,9 @@ const Carousel = ({
     draggable: hasDrag,
   })
 
-  const scrollPrev = useCallback(() => slider && slider.scrollPrev(), [slider])
-  const scrollNext = useCallback(() => slider && slider.scrollNext(), [slider])
-  const scrollTo = useCallback(
-    (index) => slider && slider.scrollTo(index),
-    [slider]
-  )
+  const scrollPrev = useCallback(() => slider?.scrollPrev(), [slider])
+  const scrollNext = useCallback(() => slider?.scrollNext(), [slider])
+  const scrollTo = useCallback((index) => slider?.scrollTo(index), [slider])
 
   const onSelect = useCallback(() => {
     setCurrentSlide(slider.selectedScrollSnap())

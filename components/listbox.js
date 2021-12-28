@@ -19,7 +19,7 @@ const Listbox = ({
   const groupRef = useRef()
   const [isOpen, setIsOpen] = useState(false)
 
-  const defaultOption = options[0]
+  const { 0: defaultOption } = options
   const currentOption =
     options.find((option) => option.slug === activeOption) || defaultOption
 

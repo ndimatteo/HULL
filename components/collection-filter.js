@@ -13,7 +13,7 @@ const CollectionFilter = ({
   activeFilters = [],
   filtersTotal,
   itemTotal,
-  onChange,
+  onChange = () => {},
 }) => {
   const [filtersOpen, setFiltersOpen] = useState(false)
 
