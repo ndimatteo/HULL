@@ -25,7 +25,7 @@
     @apply inline-flex flex-wrap my-16 mx-auto lg:mt-0 lg:mx-0;
 
     a {
-      @apply block w-32 h-32 hover:opacity-40;
+      @apply block w-36 h-36 hover:opacity-40;
 
       svg {
         @apply block w-full h-full;
