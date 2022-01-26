@@ -9,7 +9,7 @@ export default {
   icon: Stack,
   fields: [
     {
-      title: 'Wich Variants is this for?',
+      title: 'Which Variants is this for?',
       name: 'forOption',
       type: 'string',
       options: {
