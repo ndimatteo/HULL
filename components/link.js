@@ -23,7 +23,7 @@ const Link = ({ link, children, ...rest }) => {
     return (
       <a
         href={link.url}
-        target={!link.url.match('^mailto:') ? '_blank' : null}
+        target={!link.url.match('^mailto:|^tel:') ? '_blank' : null}
         rel="noopener noreferrer"
         className={
           link.isButton

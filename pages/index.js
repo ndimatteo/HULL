@@ -31,9 +31,15 @@ export async function getStaticProps({ preview, previewData }) {
   const pageData = await getStaticPage(
     `
     *[_type == "page" && _id == ${queries.homeID}] | order(_updatedAt desc)[0]{
+      "id": _id,
       hasTransparentHeader,
       modules[]{
-        ${queries.modules}
+        defined(_ref) => { ...@->content[0] {
+          ${queries.modules}
+        }},
+        !defined(_ref) => {
+          ${queries.modules},
+        }
       },
       title,
       seo

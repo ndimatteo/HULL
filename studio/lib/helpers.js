@@ -1,6 +1,21 @@
 import React from 'react'
 import { Circle } from 'phosphor-react'
 
+export const getModuleName = type => {
+  switch (type) {
+    case 'grid':
+      return 'Content Grid'
+    case 'hero':
+      return 'Hero'
+    case 'marquee':
+      return 'Marquee'
+    case 'dividerPhoto':
+      return 'Divider Photo'
+    default:
+      return null
+  }
+}
+
 export const getTypeTitles = types => {
   const typeNames = types.map(type => {
     switch (type) {
@@ -94,5 +109,16 @@ export const decodeAssetUrl = id => {
     assetId,
     dimensions: { width, height },
     format
+  }
+}
+
+export const excludeCurrentReferences = ({ parent }) => {
+  const addedRefs = parent?.map(ref => ref._ref).filter(Boolean)
+
+  return {
+    filter: '!(_id in $ids)',
+    params: {
+      ids: addedRefs
+    }
   }
 }

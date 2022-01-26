@@ -4,7 +4,6 @@ export default {
   title: 'Header Settings',
   name: 'headerSettings',
   type: 'document',
-  // __experimental_actions: ['update', 'publish'], // disable for initial publish
   fieldsets: [
     {
       title: 'Desktop',

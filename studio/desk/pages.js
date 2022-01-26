@@ -150,6 +150,24 @@ export const pagesMenu = S.listItem()
                 (intent, { type }) =>
                   ['create', 'edit'].includes(intent) && type === 'page'
               )
+          ),
+        S.divider(),
+        S.listItem()
+          .title('Reusable Sections')
+          .schemaType('section')
+          .child(
+            S.documentTypeList('section')
+              .title('Reusable Sections')
+              .child(documentId =>
+                S.document()
+                  .documentId(documentId)
+                  .schemaType('section')
+                  .views(standardViews)
+              )
+              .canHandleIntent(
+                (intent, { type }) =>
+                  ['create', 'edit'].includes(intent) && type === 'section'
+              )
           )
       ])
   )

@@ -4,7 +4,6 @@ export default {
   title: 'Shop Settings',
   name: 'shopSettings',
   type: 'document',
-  // __experimental_actions: ['update', 'publish'], // disable for initial publish
   fields: [
     {
       title: 'Shopify Store URL',

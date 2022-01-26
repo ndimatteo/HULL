@@ -1,32 +1,30 @@
+import { PaperPlaneTilt, List, GlobeSimple } from 'phosphor-react'
+
 export default {
   title: 'Footer Settings',
   name: 'footerSettings',
   type: 'document',
-  // __experimental_actions: ['update', 'publish'], // disable for initial publish
-  fieldsets: [
+  groups: [
     {
-      title: 'Block One',
-      name: 'footerBlock1',
-      description: 'Settings for the first footer block',
-      options: { collapsible: true }
+      title: 'Block 1',
+      name: 'column1',
+      icon: PaperPlaneTilt,
+      default: true
     },
     {
-      title: 'Block Two',
-      name: 'footerBlock2',
-      description: 'Settings for the second footer block',
-      options: { collapsible: true }
+      title: 'Block 2',
+      name: 'column2',
+      icon: List
     },
     {
-      title: 'Block Three',
-      name: 'footerBlock3',
-      description: 'Settings for the third footer block',
-      options: { collapsible: true }
+      title: 'Block 3',
+      name: 'column3',
+      icon: List
     },
     {
-      title: 'Block Four',
-      name: 'footerBlock4',
-      description: 'Settings for the fourth footer block',
-      options: { collapsible: true }
+      title: 'Block 4',
+      name: 'column4',
+      icon: GlobeSimple
     }
   ],
   fields: [
@@ -34,52 +32,52 @@ export default {
       title: 'Block Title',
       name: 'blockTitle1',
       type: 'string',
-      fieldset: 'footerBlock1'
+      group: 'column1'
     },
     {
       title: 'Newsletter',
       name: 'newsletter',
       type: 'newsletter',
-      fieldset: 'footerBlock1'
+      group: 'column1'
     },
     {
       title: 'Block Title',
       name: 'blockTitle2',
       type: 'string',
-      fieldset: 'footerBlock2'
+      group: 'column2'
     },
     {
       title: 'Block Menu',
       name: 'blockMenu2',
       type: 'reference',
       to: [{ type: 'menu' }],
-      fieldset: 'footerBlock2'
+      group: 'column2'
     },
     {
       title: 'Block Title',
       name: 'blockTitle3',
       type: 'string',
-      fieldset: 'footerBlock3'
+      group: 'column3'
     },
     {
       title: 'Block Menu',
       name: 'blockMenu3',
       type: 'reference',
       to: [{ type: 'menu' }],
-      fieldset: 'footerBlock3'
+      group: 'column3'
     },
     {
       title: 'Block Title',
       name: 'blockTitle4',
       type: 'string',
-      fieldset: 'footerBlock4'
+      group: 'column4'
     },
     {
       title: 'Social Links',
       name: 'social',
       type: 'array',
       of: [{ type: 'socialLink' }],
-      fieldset: 'footerBlock4'
+      group: 'column4'
     }
   ],
   preview: {
