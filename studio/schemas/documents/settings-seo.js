@@ -5,7 +5,11 @@ export default {
   title: 'Default SEO / Share',
   name: 'seoSettings',
   type: 'document',
-  // __experimental_actions: ['update', 'publish'], // disable for initial publish
+  groups: [
+    { title: 'Global SEO', name: 'seo', default: true },
+    { title: 'Social Sharing', name: 'social' },
+    { title: 'Browser Icons', name: 'icons' }
+  ],
   fields: [
     {
       name: 'seoNote',
@@ -18,12 +22,13 @@ export default {
               You can use <code>{`{{ page_title }}`}</code> and{' '}
               <code>{`{{ site_title }}`}</code> to dynamically display the page
               title and global site title in the "Meta Title" and "Share Title"
-              fields below.
+              fields.
             </span>
           </>
         ),
         tone: 'primary'
-      }
+      },
+      group: ['seo', 'social']
     },
     {
       title: 'Default Meta Title',
@@ -31,7 +36,10 @@ export default {
       type: 'string',
       description: 'Title used for search engines and browsers',
       validation: Rule =>
-        Rule.max(50).warning('Longer titles may be truncated by search engines')
+        Rule.max(50).warning(
+          'Longer titles may be truncated by search engines'
+        ),
+      group: 'seo'
     },
     {
       title: 'Default Meta Description',
@@ -42,7 +50,8 @@ export default {
       validation: Rule =>
         Rule.max(150).warning(
           'Longer descriptions may be truncated by search engines'
-        )
+        ),
+      group: 'seo'
     },
     {
       title: 'Default Share Title',
@@ -50,7 +59,8 @@ export default {
       type: 'string',
       description: 'Title used for social sharing cards',
       validation: Rule =>
-        Rule.max(50).warning('Longer titles may be truncated by social sites')
+        Rule.max(50).warning('Longer titles may be truncated by social sites'),
+      group: 'social'
     },
     {
       title: 'Default Share Description',
@@ -61,13 +71,15 @@ export default {
       validation: Rule =>
         Rule.max(150).warning(
           'Longer descriptions may be truncated by social sites'
-        )
+        ),
+      group: 'social'
     },
     {
       title: 'Default Share Graphic',
       name: 'shareGraphic',
       type: 'image',
-      description: 'Recommended size: 1200x630 (PNG or JPG)'
+      description: 'Recommended size: 1200x630 (PNG or JPG)',
+      group: 'social'
     },
     {
       title: 'Browser Icon (Favicon)',
@@ -89,7 +101,8 @@ export default {
             return true
           }
         })
-      }
+      },
+      group: 'icons'
     },
     {
       title: 'Legacy Browser Icon (.ico)',
@@ -108,13 +121,15 @@ export default {
             return true
           }
         })
-      }
+      },
+      group: 'icons'
     },
     {
       title: 'Touch Icon',
       name: 'touchIcon',
       type: 'image',
-      description: 'Recommended size: 192x192 (PNG)'
+      description: 'Recommended size: 192x192 (PNG)',
+      group: 'icons'
     }
   ],
   preview: {

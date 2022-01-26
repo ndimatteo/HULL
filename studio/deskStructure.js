@@ -8,6 +8,7 @@ import { menusMenu } from './desk/menus'
 const hiddenDocTypes = listItem =>
   ![
     'page',
+    'section',
     'product',
     'productVariant',
     'collection',

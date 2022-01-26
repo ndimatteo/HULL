@@ -16,7 +16,11 @@ export default {
       title: 'URL',
       name: 'url',
       type: 'url',
-      description: 'enter an external URL'
+      description: 'enter an external URL',
+      validation: Rule =>
+        Rule.uri({
+          scheme: ['http', 'https', 'mailto', 'tel']
+        })
     }
   ],
   preview: {
@@ -26,8 +30,8 @@ export default {
     },
     prepare({ title, url }) {
       return {
-        title: title,
-        subtitle: url
+        title: title ?? url,
+        subtitle: title && url
       }
     }
   }

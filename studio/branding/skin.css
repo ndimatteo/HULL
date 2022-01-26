@@ -1,69 +1,127 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root {
-  --brand-primary: #000;
-  --brand-primary--inverted: #fff;
-  --brand-secondary: #000;
-  --brand-secondary--inverted: #fff;
+  /* sanity variables */
+  --brand-primary: #000000;
+  --brand-primary--inverted: #ffffff;
+  --brand-secondary: #000000;
+  --brand-secondary--inverted: #ffffff;
 
-  --main-navigation-color: var(--brand-secondary);
-  --main-navigation-color--inverted: var(--brand-secondary--inverted);
+  --main-navigation-color: var(--brand-primary);
+  --main-navigation-color--inverted: var(--brand-primary--inverted);
 
-  --theme-pageBG: #f4f4f0;
-  --theme-pageText: #000000;
+  /* custom variables */
+  --pt-bg: #ffffff;
+  --pt-text: #000000;
+
+  --button-bg: #000000;
+  --button-text: #ffffff;
+
+  --button-bg-active: rgba(0, 0, 0, 0.15);
+  --button-text-active: #000000;
 }
 
+/* theme UI overrides */
 
-/* correctly style active state on dark navbars */
-
-[data-tone="navbar"][class*="selected"] > span {
-  background: var(--brand-secondary--inverted) !important;
-  color: var(--brand-secondary) !important;
+[data-scheme='dark'] [data-ui='CollapseMenu'] [data-selected] > span {
+  background: var(--brand-primary--inverted) !important;
+}
+[data-scheme='dark'] [data-ui='CollapseMenu'] [data-selected] [data-ui='Text'] {
+  color: var(--brand-primary) !important;
 }
 
+[data-scheme='dark']
+  [data-ui='CollapseMenu']
+  [data-ui='CollapseMenuButton']:active {
+  background: hsla(0, 0%, 100%, 25%) !important;
+}
 
-/* more obvious cursors for studio elements */
+[data-scheme='dark']
+  [data-ui='CollapseMenu']
+  [data-ui='CollapseMenuButton']:active
+  [data-ui='Text'] {
+  color: var(--brand-primary--inverted) !important;
+}
 
-.item:not([disabled]),
-.title,
-button:not([disabled]) {
+[data-ui='PaneItem'][data-pressed],
+[data-ui='PaneItem'][data-selected],
+[data-ui='Button'][data-pressed],
+[data-ui='Button'][data-selected],
+[data-ui='Tab'][data-selected] {
+  background: var(--button-bg) !important;
+  border-color: var(--button-bg) !important;
+}
+
+[data-ui='PaneItem']:active,
+[data-ui='Button']:active,
+[data-ui='Tab']:active {
+  background: var(--button-bg-active) !important;
+}
+
+[data-ui='PaneItem'][data-pressed] [data-ui='Text'],
+[data-ui='PaneItem'][data-pressed] [data-ui='Flex'],
+[data-ui='PaneItem'][data-selected] [data-ui='Text'],
+[data-ui='PaneItem'][data-selected] [data-ui='Flex'],
+[data-ui='Button'][data-pressed] [data-ui='Text'],
+[data-ui='Button'][data-pressed] [data-ui='Flex'],
+[data-ui='Button'][data-selected] [data-ui='Text'],
+[data-ui='Button'][data-selected] [data-ui='Flex'],
+[data-ui='Tab'][data-selected] [data-ui='Text'],
+[data-ui='Tab'][data-selected] [data-ui='Flex'] {
+  color: var(--button-text) !important;
+}
+
+[data-ui='PaneItem']:active [data-ui='Text'],
+[data-ui='PaneItem']:active [data-ui='Flex'],
+[data-ui='Button']:active [data-ui='Text'],
+[data-ui='Button']:active [data-ui='Flex'],
+[data-ui='Tab']:active [data-ui='Text'],
+[data-ui='Tab']:active [data-ui='Flex'] {
+  color: var(--button-text-active) !important;
+}
+
+[data-ui='Tab']:focus:not(:focus-visible) {
+  box-shadow: inset 0 0 0 1px var(--button-bg-active) !important;
+}
+
+[data-ui='Tab'][data-selected] {
+  box-shadow: inset 0 0 0 1px var(--button-bg) !important;
+}
+
+/* more natural cursors for studio elements */
+
+button:not([disabled]),
+[data-ui='Button']:not([disabled]),
+[data-ui='Button']:not([disabled]) input[type='file'] {
   cursor: pointer !important;
 }
 
-.isCollapsed .title {
+[data-pane-collapsed] * {
   cursor: e-resize !important;
 }
 
-[class*="drag"] button {
-  cursor: grab !important;
-}
+/* custom portable text styles */
 
-li[class*="moving"],
-li[class*="moving"] * {
-  pointer-events: all !important;
-  cursor: grabbing !important;
-}
-
-/* high-fidelity renders */
 [data-slate-editor] {
-  background: var(--theme-pageBG);
-  color: var(--theme-pageText);
+  background: var(--pt-bg);
+  color: var(--pt-text);
 }
 
 .pt-editable * {
   font-family: 'Inter', 'Helvetica Neue', sans-serif !important;
+  color: var(--pt-text);
 }
 
 .btn {
   display: inline-block;
   position: relative;
-  padding: .5rem 1.25rem;
-  background: var(--theme-pageBG) !important;
-  color: var(--theme-pageText) !important;
+  padding: 0.5rem 1.25rem;
+  background: var(--button-bg) !important;
+  color: var(--button-text) !important;
   border: 1px solid;
   border-radius: 9999px;
-  box-shadow: 0 0 0 5px var(--theme-pageBG);
-  font-size: .75rem;
+  box-shadow: 0 0 0 5px var(--pt-bg); // covers the Sanity link outline
+  font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 600;
 }
@@ -73,19 +131,20 @@ li[class*="moving"] * {
 }
 
 .btn.is-primary {
-  background: var(--theme-pageText) !important;
-  color: var(--theme-pageBG) !important;
-  border-color: var(--theme-pageText);
+  background: var(--button-text) !important;
+  color: var(--button-bg) !important;
+  border-color: var(--button-bg);
 }
 
 .btn.is-white {
   background: white !important;
-  color: var(--theme-pageText) !important;
+  color: black !important;
   border-color: white;
+  box-shadow: 0 0 0 5px var(--pt-bg), 0 0 10px 5px hsla(0, 0%, 0%, 25%);
 }
 
 .btn.is-large {
-  padding: .5rem 1.75rem;
+  padding: 0.5rem 1.75rem;
   font-size: 1.5rem;
   line-height: 2rem;
   font-weight: 400;

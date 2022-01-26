@@ -1,7 +1,7 @@
 import S from '@sanity/desk-tool/structure-builder'
 import sanityClient from 'part:@sanity/base/client'
 
-import { Copy, Gift, Sliders, ShoppingCart } from 'phosphor-react'
+import { Copy, Gift, Sliders, ShoppingCart, LinkBreak } from 'phosphor-react'
 
 import { standardViews } from './previews/standard'
 
@@ -79,7 +79,7 @@ const productVariantsMenu = S.listItem()
           ),
         S.listItem()
           .title('Unattached Variants')
-          .icon(Copy)
+          .icon(LinkBreak)
           .child(async () => {
             const productIDs = await sanityClient.fetch(`
           *[_type == "product"][].productID

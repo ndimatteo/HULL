@@ -5,7 +5,7 @@ import EditIcon from 'part:@sanity/base/edit-icon'
 
 import SeoPreview from './seo/seo-preview'
 
-const remoteURL = 'https://insane.codes'
+const remoteURL = 'https://hull.dev'
 const localURL = 'http://localhost:3000'
 const previewURL =
   window.location.hostname === 'localhost' ? localURL : remoteURL

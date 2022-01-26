@@ -14,18 +14,14 @@
     "@sanity/components",
     "@sanity/default-layout",
     "@sanity/default-login",
-    "@sanity/dashboard",
     "@sanity/desk-tool",
-    "dashboard-widget-document-list",
     "vercel-deploy",
     "note-field",
     "media"
   ],
   "env": {
     "development": {
-      "plugins": [
-        "@sanity/vision"
-      ]
+      "plugins": ["@sanity/vision"]
     }
   },
   "parts": [
@@ -40,10 +36,6 @@
     {
       "implements": "part:@sanity/base/new-document-structure",
       "path": "./docStructure.js"
-    },
-    {
-      "implements": "part:@sanity/dashboard/config",
-      "path": "./dashboardConfig.js"
     },
     {
       "implements": "part:@sanity/base/brand-logo",

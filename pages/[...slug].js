@@ -1,5 +1,4 @@
 import React from 'react'
-import Error from 'next/error'
 import { useRouter } from 'next/router'
 
 import { getPage, getAllDocSlugs } from '@data'
@@ -50,7 +49,8 @@ export async function getStaticPaths() {
   return {
     paths:
       allPages?.map((page) => {
-        let slugs = page.slug.split('/').filter((e) => e)
+        const slugs = page.slug.split('/').filter(Boolean)
+
         return {
           params: {
             slug: slugs,

@@ -33,23 +33,27 @@ export async function getStaticPage(pageData, preview) {
 
 // Fetch a specific dynamic page with our global data
 export async function getPage(slug, preview) {
-  const slugs = [`/${slug}`, slug, `/${slug}/`]
+  const slugs = JSON.stringify([slug, `/${slug}`, `/${slug}/`])
 
   const query = `
     {
-      "page": *[_type == "page" && slug.current in ${JSON.stringify(
-        slugs
-      )}] | order(_updatedAt desc)[0]{
+      "page": *[_type == "page" && slug.current in ${slugs}] | order(_updatedAt desc)[0]{
+        "id": _id,
         hasTransparentHeader,
         modules[]{
-          ${queries.modules}
+          defined(_ref) => { ...@->content[0] {
+            ${queries.modules}
+          }},
+          !defined(_ref) => {
+            ${queries.modules},
+          }
         },
         title,
         seo
       },
       ${queries.site}
     }
-    `
+  `
 
   const data = await getSanityClient(preview).fetch(query)
 
@@ -61,9 +65,15 @@ export async function getProduct(slug, preview) {
   const query = `
     {
       "page": *[_type == "product" && slug.current == "${slug}" && wasDeleted != true && isDraft != true] | order(_updatedAt desc)[0]{
+        "id": _id,
         hasTransparentHeader,
         modules[]{
-          ${queries.modules}
+          defined(_ref) => { ...@->content[0] {
+            ${queries.modules}
+          }},
+          !defined(_ref) => {
+            ${queries.modules},
+          }
         },
         "product": ${queries.product},
         title,
@@ -83,9 +93,15 @@ export async function getCollection(slug, preview) {
   const query = `
     {
       "page": *[_type == "collection" && slug.current == "${slug}"] | order(_updatedAt desc)[0]{
+        "id": _id,
         hasTransparentHeader,
         modules[]{
-          ${queries.modules}
+          defined(_ref) => { ...@->content[0] {
+            ${queries.modules}
+          }},
+          !defined(_ref) => {
+            ${queries.modules},
+          }
         },
         products[wasDeleted != true && isDraft != true${
           preview?.active ? ' && _id in path("drafts.**")' : ''

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
 import Script from 'next/script'
 import { m } from 'framer-motion'
 
@@ -10,11 +10,8 @@ import CookieBar from '@components/cookie-bar'
 import Header from '@components/header'
 import Footer from '@components/footer'
 
-const variants = {
-  initial: {
-    opacity: 0,
-  },
-  enter: {
+const pageTransitionAnim = {
+  show: {
     opacity: 1,
     transition: {
       duration: pageTransitionSpeed / 1000,
@@ -23,7 +20,7 @@ const variants = {
       when: 'beforeChildren',
     },
   },
-  exit: {
+  hide: {
     opacity: 0,
     transition: {
       duration: pageTransitionSpeed / 1000,
@@ -43,7 +40,7 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
   const [headerHeight, setHeaderHeight] = useState(null)
 
   useEffect(() => {
-    if (isBrowser && !lockHeight) {
+    if ((isBrowser && !lockHeight) || !hasChin) {
       document.body.style.setProperty('--vh', `${windowHeight * 0.01}px`)
       setLockHeight(hasChin)
     }
@@ -67,10 +64,11 @@ const Layout = ({ site = {}, page = {}, schema, children }) => {
       )}
 
       <m.div
-        initial="initial"
-        animate="enter"
-        exit="exit"
-        variants={variants}
+        key={page.id}
+        initial="hide"
+        animate="show"
+        exit="hide"
+        variants={pageTransitionAnim}
         style={headerHeight ? { '--headerHeight': `${headerHeight}px` } : null}
       >
         <CookieBar data={site.cookieConsent} />

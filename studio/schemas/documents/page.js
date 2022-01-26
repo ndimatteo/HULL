@@ -6,11 +6,17 @@ export default {
   name: 'page',
   type: 'document',
   icon: () => <Browser />,
+  groups: [
+    { title: 'Content', name: 'content', default: true },
+    { title: 'Settings', name: 'settings' }
+  ],
   fields: [
     {
       name: 'title',
       title: 'Title',
-      type: 'string'
+      type: 'string',
+      validation: Rule => Rule.required(),
+      group: 'settings'
     },
     {
       title: 'URL Slug',
@@ -20,7 +26,9 @@ export default {
       options: {
         source: 'title',
         maxLength: 96
-      }
+      },
+      validation: Rule => Rule.required(),
+      group: 'settings'
     },
     {
       title: 'Overlay header with transparency?',
@@ -28,23 +36,31 @@ export default {
       type: 'boolean',
       description:
         'When activated the header will overlay the first content module with a transparent background and white text until scrolling is engaged.',
-      initialValue: false
+      initialValue: false,
+      group: 'settings'
     },
     {
-      title: 'Page Modules',
+      title: 'Page Content',
       name: 'modules',
       type: 'array',
       of: [
         { type: 'grid' },
         { type: 'hero' },
         { type: 'marquee' },
-        { type: 'dividerPhoto' }
-      ]
+        { type: 'dividerPhoto' },
+        {
+          title: 'Reusable Section',
+          type: 'reference',
+          to: [{ type: 'section' }]
+        }
+      ],
+      group: 'content'
     },
     {
       title: 'SEO / Share Settings',
       name: 'seo',
-      type: 'seo'
+      type: 'seo',
+      group: 'settings'
     }
   ],
   preview: {
