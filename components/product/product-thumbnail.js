@@ -54,7 +54,7 @@ const ProductThumbnail = ({ thumbnails = [], activeVariant }) => {
       >
         <Photo
           photo={photos?.default}
-          srcsetSizes={[400, 800, 1000]}
+          srcSizes={[400, 800, 1000]}
           sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
           width={1200}
           className="is-default"
@@ -63,7 +63,7 @@ const ProductThumbnail = ({ thumbnails = [], activeVariant }) => {
         {photos?.hover && (
           <Photo
             photo={photos.hover}
-            srcsetSizes={[400, 800, 1000]}
+            srcSizes={[400, 800, 1000]}
             sizes="(min-width: 1200px) 33vw, (min-width: 768px) 50vw, 100vw"
             width={1200}
             className="is-hover"
