@@ -35,7 +35,7 @@ function CartItem({ item }) {
       {photos && (
         <Photo
           photo={photos?.default}
-          srcsetSizes={[400]}
+          srcSizes={[400]}
           sizes="(min-width: 768px) 400px, 35vw'"
           className="cart-item--photo"
         />
