@@ -86,15 +86,26 @@ export const getSwatch = color => {
   )
 }
 
-export const assemblePageUrl = ({ document, options }) => {
+// replace template tags with values
+export function replaceTemplateTags(string, templateTags = []) {
+  let newString = string
+
+  templateTags.map(v => {
+    newString = newString?.replace(new RegExp(v.tag, 'g'), v.value)
+  })
+
+  return newString
+}
+
+export const assemblePageUrl = ({ document, domain }) => {
   const { slug } = document
-  const { previewURL } = options
-  if (!previewURL) {
-    console.warn('Missing preview URL', { slug, previewURL })
+
+  if (!domain) {
+    console.warn('Missing domain', { slug, domain })
     return ''
   }
 
-  return previewURL + (slug ? `/${slug.current}` : '')
+  return domain + (slug ? `/${slug.current}` : '')
 }
 
 export const decodeAssetUrl = id => {

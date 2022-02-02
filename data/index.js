@@ -103,9 +103,7 @@ export async function getCollection(slug, preview) {
             ${queries.modules},
           }
         },
-        products[wasDeleted != true && isDraft != true${
-          preview?.active ? ' && _id in path("drafts.**")' : ''
-        }]->${queries.product},
+        products[wasDeleted != true && isDraft != true]->${queries.product},
         title,
         seo
       },

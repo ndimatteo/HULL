@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp, react/no-did-mount-set-state, react/forbid-prop-types */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { assemblePageUrl } from '../../../lib/helpers'
+import { assemblePageUrl, replaceTemplateTags } from '../../../lib/helpers'
 import styles from './seo-preview.css'
 
 class GoogleSearchResult extends React.PureComponent {
@@ -18,13 +18,27 @@ class GoogleSearchResult extends React.PureComponent {
   }
 
   render() {
-    const { default: defaultSEO, document, options, width } = this.props
+    const { default: defaultSEO, document, width } = this.props
     const { seo } = document
 
-    const url = assemblePageUrl({ document, options })
+    const templateTags = [
+      {
+        tag: '{{page_title}}',
+        value: document.title
+      },
+      {
+        tag: '{{site_title}}',
+        value: defaultSEO?.siteTitle
+      }
+    ]
+
+    const url = assemblePageUrl({ document, domain: defaultSEO?.siteURL })
     const websiteUrlWithoutProtocol = url.split('://')[1]
 
-    const metaTitle = seo?.metaTitle || defaultSEO?.metaTitle
+    const metaTitle = replaceTemplateTags(
+      seo?.metaTitle || defaultSEO?.metaTitle,
+      templateTags
+    )
     const metaDesc = seo?.metaDesc || defaultSEO?.metaDesc
 
     return (

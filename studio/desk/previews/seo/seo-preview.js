@@ -34,7 +34,9 @@ class SeoPreviews extends React.PureComponent {
           metaDesc,
           shareTitle,
           shareDesc,
-          shareGraphic
+          shareGraphic,
+          "siteTitle": *[_type == "generalSettings"][0].siteTitle,
+          "siteURL": *[_type == "generalSettings"][0].siteURL
         }
       `
       )

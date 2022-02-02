@@ -19,7 +19,7 @@
     "@mailchimp/mailchimp_marketing": "^3.0.71",
     "@reach/rect": "^0.16.0",
     "@sanity/block-content-to-react": "^3.0.0",
-    "@sanity/client": "^2.21.7",
+    "@sanity/client": "^3.0.3",
     "@sanity/image-url": "^1.0.1",
     "@vimeo/player": "^2.15.3",
     "axios": "^0.25.0",

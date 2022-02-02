@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import imageUrlBuilder from '@sanity/image-url'
 import sanityClient from 'part:@sanity/base/client'
-import { assemblePageUrl } from '../../../lib/helpers'
+import { assemblePageUrl, replaceTemplateTags } from '../../../lib/helpers'
 import styles from './seo-preview.css'
 
 const builder = imageUrlBuilder(sanityClient)
@@ -33,13 +33,27 @@ class TwitterCard extends React.PureComponent {
   }
 
   render() {
-    const { default: defaultSEO, document, options, width } = this.props
+    const { default: defaultSEO, document, width } = this.props
     const { seo } = document
 
-    const url = assemblePageUrl({ document, options })
+    const templateTags = [
+      {
+        tag: '{{page_title}}',
+        value: document.title
+      },
+      {
+        tag: '{{site_title}}',
+        value: defaultSEO?.siteTitle
+      }
+    ]
+
+    const url = assemblePageUrl({ document, domain: defaultSEO?.siteURL })
     const websiteUrlWithoutProtocol = url.split('://')[1]
 
-    const shareTitle = seo?.shareTitle || defaultSEO?.shareTitle
+    const shareTitle = replaceTemplateTags(
+      seo?.shareTitle || defaultSEO?.shareTitle,
+      templateTags
+    )
     const shareDesc = seo?.shareDesc || defaultSEO?.shareDesc
     const shareGraphic = seo?.shareGraphic || defaultSEO?.shareGraphic
 

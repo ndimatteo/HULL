@@ -51,6 +51,7 @@ export default {
       description: 'The root domain or subdomain of your website',
       name: 'siteURL',
       type: 'url',
+      validation: Rule => Rule.required(),
       group: 'details'
     },
     {
