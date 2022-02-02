@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+import sanityClient from 'part:@sanity/base/client'
+
 import defaultResolve, {
   PublishAction,
   DiscardChangesAction,
@@ -10,11 +12,6 @@ import defaultResolve, {
 import { useToast } from '@sanity/ui'
 
 import { Eye, Storefront } from 'phosphor-react'
-
-const remoteURL = window.location.protocol + '//' + window.location.hostname
-const localURL = 'http://localhost:3000'
-const frontendURL =
-  window.location.hostname === 'localhost' ? localURL : remoteURL
 
 const singletons = [
   'generalSettings',
@@ -34,10 +31,19 @@ const PreviewAction = props => {
   const slug = props.draft
     ? props.draft.slug?.current
     : props.published?.slug?.current
+
   return {
     label: 'Open Preview',
     icon: () => <Eye weight="light" data-sanity-icon="eye" />,
-    onHandle: () => {
+    onHandle: async () => {
+      const localURL = 'http://localhost:3000'
+      const remoteURL = await sanityClient.fetch(
+        '*[_type == "generalSettings"][0].siteURL'
+      )
+
+      const frontendURL =
+        window.location.hostname === 'localhost' ? localURL : remoteURL
+
       window.open(
         `${frontendURL}/api/preview?token=HULL&type=${props.type}&slug=${slug ||
           ''}`
@@ -55,8 +61,15 @@ const ShopifyAction = props => {
     disabled: !props.published?.productID,
     label: isSyncing ? 'Syncing...' : 'Sync images to Shopify',
     icon: () => <Storefront weight="light" data-sanity-icon="storefront" />,
-    onHandle: () => {
+    onHandle: async () => {
       setIsSyncing(true)
+
+      const localURL = 'http://localhost:3000'
+      const remoteURL = await sanityClient.fetch(
+        '*[_type == "generalSettings"][0].siteURL'
+      )
+      const frontendURL =
+        window.location.hostname === 'localhost' ? localURL : remoteURL
 
       axios({
         url: `${frontendURL}/api/shopify/product-images`,
