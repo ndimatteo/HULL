@@ -51,7 +51,10 @@ export default async function send(req, res) {
   // construct our inventory object
   const product = {
     inStock: variants.some(
-      (v) => v.inventory_quantity > 0 || v.inventory_policy === 'continue'
+      (v) =>
+        v.inventory_quantity > 0 ||
+        v.inventory_policy === 'continue' ||
+        v.inventory_management === null
     ),
     lowStock:
       variants.reduce((a, b) => a + (b.inventory_quantity || 0), 0) <= 10,
@@ -59,7 +62,8 @@ export default async function send(req, res) {
       id: variant.id,
       inStock:
         variant.inventory_quantity > 0 ||
-        variant.inventory_policy === 'continue',
+        variant.inventory_policy === 'continue' ||
+        variant.inventory_management === null,
       lowStock: variant.inventory_quantity <= 5,
     })),
   }
