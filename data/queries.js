@@ -70,7 +70,9 @@ export const product = `
     title,
     price,
     comparePrice,
-    description,
+    description[]{
+      ${ptContent}
+    },
     "photos": {
       "main": galleryPhotos[]{
         forOption,
