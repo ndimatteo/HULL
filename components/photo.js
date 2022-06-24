@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import useInView from 'react-cool-inview'
+import { useInView } from 'react-cool-inview'
 import cx from 'classnames'
 
 import { buildSrcSet, buildSrc } from '@lib/helpers'

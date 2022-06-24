@@ -2,22 +2,14 @@
   @apply fixed top-0 w-full h-screen max-w-3xl z-9 bg-pageText text-pageBG invisible pointer-events-none;
   height: calc(var(--vh, 1vh) * 100);
   will-change: transform;
-  transition: visibility .2s .8s;
+  transition: visibility 0.2s 0.8s;
 
   &.is-left {
-    @apply left-0;
-
-    @media (min-width: 769px) {
-      @apply border-r;
-    }
+    @apply left-0 sm:border-r;
   }
 
   &.is-right {
-    @apply right-0;
-
-    @media (min-width: 769px) {
-      @apply border-l;
-    }
+    @apply right-0 sm:border-l;
   }
 
   &.is-active {
@@ -31,7 +23,7 @@
 
   &--backdrop {
     @apply fixed inset-0 z-8 bg-black bg-opacity-40 pointer-events-none opacity-0;
-    transition: opacity .15s linear;
+    transition: opacity 0.15s linear;
 
     &.is-active {
       @apply pointer-events-auto opacity-100;

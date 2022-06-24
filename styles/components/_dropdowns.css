@@ -3,11 +3,9 @@
 
   &.is-open {
     @apply sm:z-3;
-    
-    @media screen(sm) {
-      .dropdown--content {
-        @apply opacity-100 visible pointer-events-auto;
-      }
+
+    .dropdown--content {
+      @apply sm:opacity-100 sm:visible sm:pointer-events-auto;
     }
   }
 
@@ -23,10 +21,7 @@
   &--content {
     @apply relative h-0 overflow-y-hidden;
     @apply sm:absolute sm:top-full sm:whitespace-nowrap sm:overflow-y-visible sm:opacity-0 sm:invisible sm:pointer-events-none sm:transition-all;
-
-    @media screen(sm) {
-      height: auto !important; /* override mobile accordion styles */
-    }
+    @apply sm:!h-auto;
   }
 
   &--nav {

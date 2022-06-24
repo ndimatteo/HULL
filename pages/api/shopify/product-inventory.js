@@ -6,7 +6,7 @@ export default async function send(req, res) {
   } = req
 
   const hasShopify =
-    process.env.SHOPIFY_STORE_ID && process.env.SHOPIFY_API_PASSWORD
+    process.env.SHOPIFY_STORE_ID && process.env.SHOPIFY_ADMIN_API_TOKEN
 
   // Bail if no product ID was supplied
   if (!id) {
@@ -21,7 +21,7 @@ export default async function send(req, res) {
   // Setup our Shopify connection
   const shopifyConfig = {
     'Content-Type': 'application/json',
-    'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
+    'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_TOKEN,
   }
 
   // Fetch our product from Shopify

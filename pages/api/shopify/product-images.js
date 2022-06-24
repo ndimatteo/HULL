@@ -73,7 +73,7 @@ export default async function handler(req, res) {
 
   const shopifyConfig = {
     'Content-Type': 'application/json',
-    'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
+    'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_TOKEN,
   }
 
   // Write our images to Shopify

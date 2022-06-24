@@ -29,6 +29,7 @@ async function fetchSanityRedirects() {
 }
 
 module.exports = withBundleAnalyzer({
+  swcMinify: true,
   env: {
     // Needed for Sanity powered data
     SANITY_PROJECT_DATASET: process.env.SANITY_PROJECT_DATASET,
@@ -37,7 +38,7 @@ module.exports = withBundleAnalyzer({
 
     // Needed for Shopify product syncs
     SHOPIFY_STORE_ID: process.env.SHOPIFY_STORE_ID,
-    SHOPIFY_API_TOKEN: process.env.SHOPIFY_API_TOKEN,
+    SHOPIFY_STOREFRONT_API_TOKEN: process.env.SHOPIFY_STOREFRONT_API_TOKEN,
 
     // Needed for Klaviyo forms
     KLAVIYO_API_KEY: process.env.KLAVIYO_API_KEY,
@@ -56,5 +57,18 @@ module.exports = withBundleAnalyzer({
   async redirects() {
     const sanityRedirects = await fetchSanityRedirects()
     return sanityRedirects
+  },
+  async headers() {
+    return [
+      {
+        source: '/robots.txt',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: "connect-src 'self';",
+          },
+        ],
+      },
+    ]
   },
 })

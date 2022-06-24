@@ -1,5 +1,5 @@
-import React, { useRef } from 'react'
-import useInView from 'react-cool-inview'
+import React from 'react'
+import { useInView } from 'react-cool-inview'
 import { Marqy } from 'marqy'
 
 import Photo from '@components/photo'

@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { m } from 'framer-motion'
 import FocusTrap from 'focus-trap-react'
-import useInView from 'react-cool-inview'
+import { useInView } from 'react-cool-inview'
 import { useRect } from '@reach/rect'
 import { useRouter } from 'next/router'
 import Link from 'next/link'

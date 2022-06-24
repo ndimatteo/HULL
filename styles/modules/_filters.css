@@ -1,16 +1,12 @@
 .filters {
-  @apply max-w-md;
-
-  @media (min-width: 400px) {
-    @apply border-r;
-  }
+  @apply max-w-md border-r;
 
   &--header {
     @apply flex items-center relative px-16 py-12 sm:px-32 sm:py-24 text-14 leading-150 font-semibold uppercase;
 
     &::after {
       @apply absolute inset-x-0 bottom-0 border-t;
-      content: "";
+      content: '';
     }
   }
 
@@ -51,7 +47,7 @@
   &--count {
     @apply inline-block align-middle opacity-30 ml-8 text-12;
   }
-  
+
   &--options {
     @apply flex flex-wrap gap-y-16 justify-items-start mt-8;
 
@@ -77,7 +73,7 @@
       }
     }
   }
-  
+
   &.is-swatch {
     @apply inline-flex flex-col w-auto ml-4 mr-20 text-center;
 
@@ -91,7 +87,7 @@
 
         svg {
           @apply absolute left-1/2 top-1/2 -translate-y-1/2 -translate-x-1/2 bg-transparent border-none;
-          
+
           path {
             color: var(--swatchBorder);
           }
@@ -115,7 +111,7 @@
       @apply hidden;
     }
   }
-  
+
   &--label {
     @apply mt-4 text-12 font-semibold;
 

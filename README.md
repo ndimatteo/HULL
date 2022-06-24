@@ -111,54 +111,58 @@ Clone this repository from your GitHub account with the [Use this template](http
 
 ### 1) Sanity
 
-1. If you don't have the [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli) installed, first run `npm install -g @sanity/cli` to install it globally
-2. `npm install && sanity init` in the `/studio` folder
-3. During Sanity's initalization it will warn you, type `Y` and hit `enter`:
-
-```
-? The current folder contains a configured Sanity studio. Would you like to reconfigure it? (Y/n)
-```
-
-4. When it asks you what dataset configuration to use, go with the `default`
-5. Add CORS Origins to your newly created Sanity project (visit: [manage.sanity.io](https://manage.sanity.io) and go to Settings > API): - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio` - Add your front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
-   > ⚠️ **Important!** <br />For "singleton" documents, like settings sections, the schema uses a combination of `__experimental_actions` and the new [actions resolver](https://www.sanity.io/docs/document-actions). If you are using this outside of the official Sanity Starter, you will need to comment out the `__experimental_actions` line in "singleton" schemas to publish settings for the first time. This is because a singleton is still a document type, and one needs to exist first before it can be edited. Additionally, if you want to create additional "singleton" schemas, be sure to edit the `singletons` array in the following file: `/studio/parts/resolve-actions.js`.
+1. **Initialize and build the Sanity Studio**
+   - Make sure you have the [Sanity CLI](https://www.sanity.io/docs/getting-started-with-sanity-cli) installed globally first
+   - `yarn && sanity init` in the `/studio` folder
+   - During Sanity's initalization it will warn you that the Sanity Studio is already configured. Type `Y` and hit `enter` to reconfigure it to your own project
+   - When it asks you what dataset configuration to use, go with the `default`
+2. **Add CORS Origins to Sanity project**
+   - Visit [manage.sanity.io](https://manage.sanity.io) and go to [your-project] > API > "CORS origins"
+   - Add your Studio URLs **_with_** credentials: `http://localhost:3333` and `[subdomain].sanity.studio`
+   - Add your front-end URLs **_without_** credentials: `http://localhost:3000` and `https://[subdomain].vercel.app`
 
 ### 2) Shopify Storefront Access
 
-1. Enable Private Apps in Shopify
-   - Apps > "Manage Private Apps" _(text link in page footer)_
-   - Enable Private Apps
-2. Create new Private App
-   - Apps > Manage Private Apps > "Create private app"
-   - Give this a relevant name, I prefer: "Headless Storefront", so it's clear what it's being used for
-   - Use your dev email to know when there are issues
-   - Change Admin API permissions on "Products" to `Read and write`
-   - Allow this app to access your storefront data using the Storefront API, with at least the following permissions:
-     - Read inventory of products and their variants
-     - Read and modify checkouts
+1. **Allow custom app development in Shopify**
+   - Go to "Settings" _(bottom left)_ > "Apps and sales channels" > "Develop apps" _(top right)_
+   - click "Allow custom app development"
+2. **Create a custom app in Shopify**
+   - Go to "Settings" _(bottom left)_ > "Apps and sales channels" > "Develop apps" _(top right)_
+   - click "Create an app"
+   - Give this a relevant App name, I prefer: "Headless Storefront", so it's clear what it's being used for
+   - Use your dev account as the App developer to know when there are issues
+3. **Configure Admin API scopes**
+   - Configuration > Admin API integration > "Configure"
+   - Check the following boxes for the "Products" scope: `write_products` and `read_products`
+4. **Configure Storefront API scopes**
+   - Configuration > Storefront API integration > "Configure"
+   - Check the following boxes for the "Products" scope: `unauthenticated_read_product_listings` and `unauthenticated_read_product_inventory`
+   - Check the following boxes for the "Checkout" scope: `unauthenticated_write_checkouts` and `unauthenticated_read_checkouts`
+5. **Install the App**
 
 ### 3) Shopify Webhooks
 
 1. Go to "Settings" _(bottom left)_ -> "Notifications" -> "Webhooks" _(very bottom)_
-2. add the following webhooks:
-
-- product creation - `[your-domain]/api/shopify/product-update`
-- product update - `[your-domain]/api/shopify/product-update`
-- product deletion - `[your-domain]/api/shopify/product-delete`
-  > ⚠️ **Note** <br />You have to use a real domain name (no localhost). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You may not know your Vercel project URL until you deploy, feel free to enter something temporary, but make sure to update this once deployed!
+2. add the following webhooks with the (Latest) stable API version:
+   - Product creation - `[live-domain]/api/shopify/product-update`
+   - Product update - `[live-domain]/api/shopify/product-update`
+   - Product deletion - `[live-domain]/api/shopify/product-delete`
+     > ⚠️ **Note** <br />You have to use a real, live domain name (not localhost!). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You may not know your Vercel project URL until you deploy, feel free to enter something temporary, but make sure to update this once deployed!
 
 ### 4) NextJS
 
-1. `npm install` in the project root folder on local
+1. `yarn` in the project root folder on local
 2. Create an `.env.local` file in the project folder, and add the following variables:
 
 ```
 SANITY_PROJECT_DATASET=production
 SANITY_PROJECT_ID=XXXXXX
 SANITY_API_TOKEN=XXXXXX
+SANITY_STUDIO_PREVIEW_SECRET=XXXXXX
+
 SHOPIFY_STORE_ID=XXXXXX
-SHOPIFY_API_TOKEN=XXXXXX
-SHOPIFY_API_PASSWORD=XXXXXX
+SHOPIFY_STOREFRONT_API_TOKEN=XXXXXX
+SHOPIFY_ADMIN_API_TOKEN=XXXXXX
 SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
 
 // Needed for Klaviyo forms:
@@ -176,14 +180,21 @@ SENDGRID_API_KEY=XXXXXX
 
 - `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
 - `SANITY_API_TOKEN` - Generate an API token for your Sanity project. Access your project from the Sanity Manage dashboard, and navigate to: "Settings" -> "API" -> "Add New Token" button. Make sure you give `read + write` access!
+- `SANITY_STUDIO_PREVIEW_SECRET` - A unique string of your choice. This is used to confirm the authenticity of "preview mode" requests from the Sanity Studio
 - `SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
-- `SHOPIFY_API_TOKEN` - Copy the Storefront Access Token you copied from setting up your Private Shopify App. _(Note: This is **not** the Admin API Key, scroll to the bottom where it says "Storefront API" for the correct value)_
-- `SHOPIFY_API_PASSWORD` - Copy the Admin API password from "Apps" -> "Manage private apps" -> [your_private_app].
+- `SHOPIFY_ADMIN_API_TOKEN` - Copy the Admin API access token from "Apps" -> "Develop apps" -> [your_custom_app] -> "API credentials". (__Note: you’ll only be able to reveal your Admin API token once.__)
+- `SHOPIFY_STOREFRONT_API_TOKEN` - Copy the Storefront API access token from "Apps" -> "Develop apps" -> [your_custom_app] -> "API credentials".
 - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" _(very bottom of page)_
 - `KLAVIYO_API_KEY` - Create a Private API Key from your Klaviyo Account "Settings" -> "API Keys"
 - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
 - `MAILCHIMP_SERVER` - This is the server your account is from. It's in the URL when logged in and at the end of your API Key
 - `SENDGRID_API_KEY` - Create an API key from "Settings" -> "API Keys" with "Restricted Access" to only "Mail Send"
+
+4. Create an `.env.production` and `.env.development` file in the `/studio` folder, and add the following (using the same value as above):
+
+```
+SANITY_STUDIO_PREVIEW_SECRET=XXXXXX
+```
 
 ### 5) Shopify Store Theme
 
@@ -197,13 +208,13 @@ This will essentially "pass-through" URLs accessed at your Shopify Store to your
 
 ### Next (Front End)
 
-`npm run dev` in the project folder to start the front end locally
+`yarn dev` in the project folder to start the front end locally
 
 - Your front end should be running on [http://localhost:3000](http://localhost:3000)
 
 ### Sanity (Back End)
 
-`sanity start` in the `/studio` folder to start the studio locally
+`yarn dev` in the `/studio` folder to start the studio locally
 
 - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
   > ⚠️ **Gotcha!** <br />If you did not manually set up your project, the `projectId` in `/studio/sanity.json` will still be set to the HULL demo project. Make sure to update this before starting the studio, otherwise you will be denied access when trying to access your studio.
@@ -297,7 +308,7 @@ While not as easy as Netlify, what I prefer to do is:
 <details>
 <summary><strong>How can I see the bundle size of my website?</strong></summary>
 
-Simply run `npm run analyze` from the project folder. This will run a build of your site and automatically open the [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) visuals for your site's build files.
+Simply run `yarn analyze` from the project folder. This will run a build of your site and automatically open the [Webpack Bundle Analyzer](https://github.com/webpack-contrib/webpack-bundle-analyzer) visuals for your site's build files.
 
 </details>
 

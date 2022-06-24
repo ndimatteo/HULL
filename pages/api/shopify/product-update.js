@@ -173,7 +173,7 @@ export default async function send(req, res) {
   // Setup our Shopify connection
   const shopifyConfig = {
     'Content-Type': 'application/json',
-    'X-Shopify-Access-Token': process.env.SHOPIFY_API_PASSWORD,
+    'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_TOKEN,
   }
 
   // Fetch the metafields for this product

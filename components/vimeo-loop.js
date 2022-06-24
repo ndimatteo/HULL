@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import Player from '@vimeo/player'
-import useInView from 'react-cool-inview'
+import { useInView } from 'react-cool-inview'
 import cx from 'classnames'
 
 const VideoLoop = ({
