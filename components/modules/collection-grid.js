@@ -35,7 +35,7 @@ const Collection = ({ data = {} }) => {
     hasPagination ? paginationLimit : products.length
   )
 
-  const filterGroups = filter.groups
+  const filterGroups = filter.groups ?? []
 
   const [currentParams, setCurrentParams] = useParams([
     {
