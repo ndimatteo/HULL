@@ -43,7 +43,7 @@ const ProductThumbnail = ({ thumbnails = [], activeVariant }) => {
   const id = photos?.default?.id + photos?.hover?.id
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode="wait">
       <m.div
         key={id}
         initial="hide"

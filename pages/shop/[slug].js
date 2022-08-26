@@ -14,8 +14,7 @@ const CollectionPage = ({ data }) => {
         <Module
           key={key}
           index={key}
-          module={module}
-          collectionProducts={page.products}
+          data={{ ...module, products: page.products }}
         />
       ))}
     </Layout>

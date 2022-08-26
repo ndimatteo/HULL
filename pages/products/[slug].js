@@ -125,7 +125,7 @@ const Product = ({ data }) => {
             <Module
               key={key}
               index={key}
-              module={module}
+              data={module}
               product={product}
               activeVariant={product.variants.find(
                 (v) => v.id == activeVariantID

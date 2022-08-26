@@ -91,7 +91,7 @@ const Site = ({ Component, pageProps, router }) => {
   return (
     <LazyMotion features={domAnimation}>
       <AnimatePresence
-        exitBeforeEnter
+        mode="wait"
         onExitComplete={() => {
           document.body.classList.remove('overflow-hidden')
         }}

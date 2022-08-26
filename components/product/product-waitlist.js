@@ -79,7 +79,7 @@ const Waitlist = ({ variant, klaviyo }) => {
 
   return (
     <div className="product--waitlist">
-      <AnimatePresence exitBeforeEnter initial={false}>
+      <AnimatePresence mode="wait" initial={false}>
         {!error && !success && (
           <m.form
             key="form"

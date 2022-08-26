@@ -42,10 +42,25 @@ const ProductGallery = ({
   // generate a unique ID for this set of images (for framer animation)
   const id = photos && photos.map((p) => p.id).join('')
 
+  // // select the photoset with the most matched conditions
+  // const newPhotoset = photosets.find(set => {
+  //   const { condition, for: conditions } = set
+
+  //   if (condition === 'all') {
+  //     return conditions.every((option) => options.some(({ name: optionName, value: optionValue }) => option.split(':')[0] === optionName && option.split(':')[1] === optionValue))
+  //   }
+
+  //   if (condition === 'any') {
+  //     return conditions.some((option) => options.some(({ name: optionName, value: optionValue }) => option.split(':')[0] === optionName && option.split(':')[1] === optionValue))
+  //   }
+
+  //   return false
+  // }).sort((a, b) => b.for.length - a.for.length)[0]
+
   return (
     <>
       {photos && (
-        <AnimatePresence exitBeforeEnter>
+        <AnimatePresence mode="wait">
           <m.div
             key={id}
             initial="hide"
@@ -61,7 +76,11 @@ const ProductGallery = ({
               hasDrag={hasDrag}
             >
               {photos.map((photo, key) => (
-                <Photo key={key} photo={photo} className="carousel--photo" />
+                <Photo
+                  key={key}
+                  photo={photo}
+                  className="carousel--photo w-full"
+                />
               ))}
             </Carousel>
           </m.div>

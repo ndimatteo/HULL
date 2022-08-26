@@ -22,7 +22,7 @@ const Page = ({ data }) => {
       {!router.isFallback && (
         <Layout site={site} page={page}>
           {page.modules?.map((module, key) => (
-            <Module key={key} index={key} module={module} />
+            <Module key={key} index={key} data={module} />
           ))}
         </Layout>
       )}

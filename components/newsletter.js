@@ -77,7 +77,7 @@ const Newsletter = ({ data = {} }) => {
 
   return (
     <form className="form" onSubmit={handleSubmit(onSubmit)}>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         {!error && !success && (
           <m.div
             initial="hide"

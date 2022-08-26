@@ -27,7 +27,7 @@ const NotFoundPage = ({ data }) => {
       }}
     >
       {page.modules?.map((module, key) => (
-        <Module key={key} index={key} module={module} />
+        <Module key={key} index={key} data={module} />
       ))}
     </Layout>
   )

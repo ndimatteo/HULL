@@ -44,7 +44,7 @@ const Collection = ({ data = {} }) => {
     },
     {
       name: 'sort',
-      value: sort?.options[0]?.slug,
+      value: sort?.options?.[0]?.slug,
     },
     ...filterGroups.map((g) => ({
       name: g.slug,

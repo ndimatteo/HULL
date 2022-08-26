@@ -101,7 +101,7 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 
 Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! Once deployed, simply follow step 2 and 3 below to connect your Shopify store.
 
-> ⚠️ **Important!** <br />Existing products will not automatically sync into Sanity. <br />You will need to trigger this by making a change to your product(s) in Shopify.
+> ⚠️ **Important!** <br />You should delete the demo products once you connect your own Shopify account. Demo products will not function properly as they are not part of _your Shopify store_. Additionally, any existing products in your Shopify store will not automatically sync into Sanity. To trigger a sync, you must make a change to your existing product(s) in Shopify first.
 
 <br />
 
