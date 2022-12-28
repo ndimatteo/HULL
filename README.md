@@ -101,7 +101,7 @@ _Using the Sanity Vercel Deploy plugin, see how easy it is to empower your clien
 
 Quickly [deploy as a Sanity Starter](https://www.sanity.io/create?template=ndimatteo/HULL) on [Vercel](https://vercel.com) with a pre-populated store! Once deployed, simply follow step 2 and 3 below to connect your Shopify store.
 
-> ⚠️ **Important!** <br />You should delete the demo products once you connect your own Shopify account. Demo products will not function properly as they are not part of _your Shopify store_. Additionally, any existing products in your Shopify store will not automatically sync into Sanity. To trigger a sync, you must make a change to your existing product(s) in Shopify first.
+> **Warning** <br />You should delete the demo products once you connect your own Shopify account. Demo products will not function properly as they are not part of _your Shopify store_. Additionally, any existing products in your Shopify store will not automatically sync into Sanity. To trigger a sync, you must make a change to your existing product(s) in Shopify first.
 
 <br />
 
@@ -147,7 +147,7 @@ Clone this repository from your GitHub account with the [Use this template](http
    - Product creation - `[live-domain]/api/shopify/product-update`
    - Product update - `[live-domain]/api/shopify/product-update`
    - Product deletion - `[live-domain]/api/shopify/product-delete`
-     > ⚠️ **Note** <br />You have to use a real, live domain name (not localhost!). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You may not know your Vercel project URL until you deploy, feel free to enter something temporary, but make sure to update this once deployed!
+     > **Warning** <br />You have to use a real, live domain name (not localhost!). Be sure to use your Vercel project URL during development, and then switch to the production domain once live. You may not know your Vercel project URL until you deploy, feel free to enter something temporary, but make sure to update this once deployed!
 
 ### 4) NextJS
 
@@ -155,13 +155,13 @@ Clone this repository from your GitHub account with the [Use this template](http
 2. Create an `.env.local` file in the project folder, and add the following variables:
 
 ```
-SANITY_PROJECT_DATASET=production
-SANITY_PROJECT_ID=XXXXXX
+NEXT_PUBLIC_SANITY_PROJECT_DATASET=production
+NEXT_PUBLIC_SANITY_PROJECT_ID=XXXXXX
 SANITY_API_TOKEN=XXXXXX
 SANITY_STUDIO_PREVIEW_SECRET=XXXXXX
 
-SHOPIFY_STORE_ID=XXXXXX
-SHOPIFY_STOREFRONT_API_TOKEN=XXXXXX
+NEXT_PUBLIC_SHOPIFY_STORE_ID=XXXXXX
+NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN=XXXXXX
 SHOPIFY_ADMIN_API_TOKEN=XXXXXX
 SHOPIFY_WEBHOOK_INTEGRITY=XXXXXX
 
@@ -178,12 +178,12 @@ SENDGRID_API_KEY=XXXXXX
 
 3. Update all the `XXXXXX` values, here's where to find each:
 
-- `SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
+- `NEXT_PUBLIC_SANITY_PROJECT_ID` - You can grab this after you've initalized Sanity, either from the `studio/sanity.json` file, or from your Sanity Manage dashboard
 - `SANITY_API_TOKEN` - Generate an API token for your Sanity project. Access your project from the Sanity Manage dashboard, and navigate to: "Settings" -> "API" -> "Add New Token" button. Make sure you give `read + write` access!
 - `SANITY_STUDIO_PREVIEW_SECRET` - A unique string of your choice. This is used to confirm the authenticity of "preview mode" requests from the Sanity Studio
-- `SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
+- `NEXT_PUBLIC_SHOPIFY_STORE_ID` - This is your Shopify store ID, it's the subdomain behind `.myshopify.com`
+- `NEXT_PUBLIC_SHOPIFY_STOREFRONT_API_TOKEN` - Copy the Storefront API access token from "Apps" -> "Develop apps" -> [your_custom_app] -> "API credentials".
 - `SHOPIFY_ADMIN_API_TOKEN` - Copy the Admin API access token from "Apps" -> "Develop apps" -> [your_custom_app] -> "API credentials". (__Note: you’ll only be able to reveal your Admin API token once.__)
-- `SHOPIFY_STOREFRONT_API_TOKEN` - Copy the Storefront API access token from "Apps" -> "Develop apps" -> [your_custom_app] -> "API credentials".
 - `SHOPIFY_WEBHOOK_INTEGRITY` - Copy the Integrity hash from "Settings" -> "Notifications" -> "Webhooks" _(very bottom of page)_
 - `KLAVIYO_API_KEY` - Create a Private API Key from your Klaviyo Account "Settings" -> "API Keys"
 - `MAILCHIMP_API_KEY` - Create an API key from "Account -> "Extras" -> API Keys
@@ -217,7 +217,7 @@ This will essentially "pass-through" URLs accessed at your Shopify Store to your
 `yarn dev` in the `/studio` folder to start the studio locally
 
 - Your Sanity Studio should be running on [http://localhost:3333](http://localhost:3333)
-  > ⚠️ **Gotcha!** <br />If you did not manually set up your project, the `projectId` in `/studio/sanity.json` will still be set to the HULL demo project. Make sure to update this before starting the studio, otherwise you will be denied access when trying to access your studio.
+  > **Warning** <br />If you did not manually set up your project, the `projectId` in `/studio/sanity.json` will still be set to the HULL demo project. Make sure to update this before starting the studio, otherwise you will be denied access when trying to access your studio.
 
 <br />
 

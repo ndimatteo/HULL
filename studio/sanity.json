@@ -42,6 +42,10 @@
       "path": "./branding/logo.js"
     },
     {
+      "implements": "part:@sanity/base/app-loading-screen",
+      "path": "./branding/loader.js"
+    },
+    {
       "implements": "part:@sanity/base/theme/variables/override-style",
       "path": "./branding/skin.css"
     },

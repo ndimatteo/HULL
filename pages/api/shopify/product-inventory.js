@@ -6,7 +6,8 @@ export default async function send(req, res) {
   } = req
 
   const hasShopify =
-    process.env.SHOPIFY_STORE_ID && process.env.SHOPIFY_ADMIN_API_TOKEN
+    process.env.NEXT_PUBLIC_SHOPIFY_STORE_ID &&
+    process.env.SHOPIFY_ADMIN_API_TOKEN
 
   // Bail if no product ID was supplied
   if (!id) {
@@ -26,7 +27,7 @@ export default async function send(req, res) {
 
   // Fetch our product from Shopify
   const shopifyProduct = await axios({
-    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/api/2021-01/products/${id}.json`,
+    url: `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_ID}.myshopify.com/admin/api/2022-10/products/${id}.json`,
     method: 'GET',
     headers: shopifyConfig,
   })

@@ -1,55 +1,54 @@
 {
-    "version": 2,
-    "title": "HULL – Shopify Starter",
-    "description": "Headless Shopify starter powered by Next.js + Sanity.io",
-    "previewMedia": {
-      "type": "image",
-      "src": ".sanity-template/assets/HULL-cover.png",
-      "alt": "HULL"
+  "version": 2,
+  "title": "HULL – Shopify Starter",
+  "description": "Headless Shopify starter powered by Next.js + Sanity.io",
+  "previewMedia": {
+    "type": "image",
+    "src": ".sanity-template/assets/HULL-cover.png",
+    "alt": "HULL"
+  },
+  "technologies": [
+    {
+      "id": "nextjs",
+      "name": "Next.js",
+      "url": "https://nextjs.org/"
     },
-    "technologies": [
+    {
+      "id": "vercel",
+      "name": "Vercel",
+      "url": "https://vercel.com/"
+    },
+    {
+      "id": "shopify",
+      "name": "Shopify",
+      "url": "https://shopify.com/"
+    }
+  ],
+  "deployment": {
+    "provider": "vercel",
+    "studio": {
+      "basePath": "/studio"
+    },
+    "envVars": {
+      "dataset": ["NEXT_PUBLIC_SANITY_PROJECT_DATASET"],
+      "projectId": ["NEXT_PUBLIC_SANITY_PROJECT_ID"]
+    },
+    "tokens": [
       {
-        "id": "nextjs",
-        "name": "Next.js",
-        "url": "https://nextjs.org/"
-      },
-      {
-        "id": "vercel",
-        "name": "Vercel",
-        "url": "https://vercel.com/"
-      },
-      {
-        "id": "shopify",
-        "name": "Shopify",
-        "url": "https://shopify.com/"
+        "label": "Live Preview",
+        "role": "write",
+        "envVar": "SANITY_API_TOKEN"
       }
     ],
-    "deployment": {
-      "provider": "vercel",
-      "studio": {
-        "basePath": "/studio"
+    "corsOrigins": [
+      {
+        "origin": "https://*.vercel.app",
+        "allowCredentials": true
       },
-      "envVars": {
-        "dataset": ["SANITY_PROJECT_DATASET"],
-        "projectId": ["SANITY_PROJECT_ID"]
-      },
-      "tokens": [
-          {
-              "label": "Live Preview",
-              "role": "write",
-              "envVar": "SANITY_API_TOKEN"
-          }
-      ],
-      "corsOrigins": [
-        {
-          "origin": "https://*.vercel.app",
-          "allowCredentials": true
-        },
-        {
-          "origin": "http://localhost:3000",
-          "allowCredentials": true
-        }
-      ]
-    }
+      {
+        "origin": "http://localhost:3000",
+        "allowCredentials": true
+      }
+    ]
   }
-  
+}

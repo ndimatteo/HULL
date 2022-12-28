@@ -5,10 +5,10 @@ import { queries } from '@data'
 import { buildSrc } from '@lib/helpers'
 
 const sanity = sanityClient({
-  dataset: process.env.SANITY_PROJECT_DATASET,
-  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_PROJECT_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   token: process.env.SANITY_API_TOKEN,
-  apiVersion: '2021-03-25',
+  apiVersion: '2022-08-30',
   useCdn: false,
 })
 
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
 
   // Write our images to Shopify
   const shopifyProduct = await axios({
-    url: `https://${process.env.SHOPIFY_STORE_ID}.myshopify.com/admin/api/2021-04/products/${productID}.json`,
+    url: `https://${process.env.NEXT_PUBLIC_SHOPIFY_STORE_ID}.myshopify.com/admin/api/2022-10/products/${productID}.json`,
     method: 'PUT',
     headers: shopifyConfig,
     data: {

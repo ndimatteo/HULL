@@ -90,7 +90,7 @@ const Product = ({ data }) => {
   // check our product inventory is still correct
   const { data: productInventory } = useSWR(
     ['/api/shopify/product-inventory', page.product.id],
-    (url, id) => fetchInventory(url, id),
+    ([url, id]) => fetchInventory(url, id),
     { errorRetryCount: 3 }
   )
 

@@ -6,12 +6,11 @@ import sanityClient from 'part:@sanity/base/client'
 import defaultResolve, {
   PublishAction,
   DiscardChangesAction,
-  DeleteAction
+  DeleteAction,
 } from 'part:@sanity/base/document-actions'
 
 import { useToast } from '@sanity/ui'
-
-import { Eye, Storefront } from 'phosphor-react'
+import { EyeOpenIcon, BasketIcon, SyncIcon } from '@sanity/icons'
 
 const singletons = [
   'generalSettings',
@@ -20,21 +19,21 @@ const singletons = [
   'headerSettings',
   'footerSettings',
   'shopSettings',
-  'seoSettings'
+  'seoSettings',
 ]
 
 const editAndDelete = ['product', 'productVariant']
 
 const previews = ['page', 'product', 'collection']
 
-const PreviewAction = props => {
+const PreviewAction = (props) => {
   const slug = props.draft
     ? props.draft.slug?.current
     : props.published?.slug?.current
 
   return {
     label: 'Open Preview',
-    icon: () => <Eye weight="light" data-sanity-icon="eye" />,
+    icon: EyeOpenIcon,
     onHandle: async () => {
       const localURL = 'http://localhost:3000'
       const remoteURL = await sanityClient.fetch(
@@ -45,24 +44,30 @@ const PreviewAction = props => {
         window.location.hostname === 'localhost' ? localURL : remoteURL
 
       window.open(
-        `${frontendURL}/api/preview?token=HULL&type=${props.type}&slug=${slug ||
-          ''}`
+        `${frontendURL}/api/preview?token=HULL&type=${props.type}&slug=${
+          slug || ''
+        }`
       )
-    }
+    },
   }
 }
 
-const ShopifyAction = props => {
+const ShopifyAction = ({ draft, published }) => {
   const [isSyncing, setIsSyncing] = useState(false)
 
   const toast = useToast()
 
   return {
-    disabled: !props.published?.productID,
     label: isSyncing ? 'Syncing...' : 'Sync images to Shopify',
-    icon: () => <Storefront weight="light" data-sanity-icon="storefront" />,
+    icon: isSyncing ? SyncIcon : BasketIcon,
+    disabled: draft || !published?.productID,
+    title: draft ? 'Must be published first' : null,
     onHandle: async () => {
       setIsSyncing(true)
+
+      toast.push({
+        title: 'Beginning Sync...',
+      })
 
       const localURL = 'http://localhost:3000'
       const remoteURL = await sanityClient.fetch(
@@ -74,34 +79,35 @@ const ShopifyAction = props => {
       axios({
         url: `${frontendURL}/api/shopify/product-images`,
         method: 'POST',
-        data: props.published
+        data: published,
       })
-        .then(res => res.data)
-        .then(res => {
+        .then((res) => res.data)
+        .then((res) => {
           setIsSyncing(false)
 
           if (res.error) {
             toast.push({
               status: 'error',
-              description: res.error
+              title: 'Error',
+              description: res.error,
             })
           } else {
             toast.push({
               status: 'success',
-              description: 'Photos sync’d successfully!'
+              title: 'Photos sync’d to Shopify successfully!',
             })
           }
         })
-        .catch(err => {
+        .catch((err) => {
           setIsSyncing(false)
-          console.log(err)
 
           toast.push({
             status: 'error',
-            description: 'There was an error.'
+            title: 'Error!',
+            description: 'An unknown error occurred',
           })
         })
-    }
+    },
   }
 }
 
@@ -115,7 +121,7 @@ export default function resolveDocumentActions(props) {
     return [
       PublishAction,
       DiscardChangesAction,
-      ...(canPreview ? [PreviewAction] : [])
+      ...(canPreview ? [PreviewAction] : []),
     ]
   }
 
@@ -125,7 +131,7 @@ export default function resolveDocumentActions(props) {
       DiscardChangesAction,
       DeleteAction,
       ...(canPreview ? [PreviewAction] : []),
-      ...(isProduct ? [ShopifyAction] : [])
+      ...(isProduct ? [ShopifyAction] : []),
     ]
   }
 

@@ -3,10 +3,10 @@ import crypto from 'crypto'
 const getRawBody = require('raw-body')
 
 const sanity = sanityClient({
-  dataset: process.env.SANITY_PROJECT_DATASET,
-  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_PROJECT_DATASET,
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
   token: process.env.SANITY_API_TOKEN,
-  apiVersion: '2021-03-25',
+  apiVersion: '2022-08-30',
   useCdn: false,
 })
 
