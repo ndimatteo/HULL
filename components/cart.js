@@ -1,16 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import cx from 'classnames'
 import FocusTrap from 'focus-trap-react'
 import { m } from 'framer-motion'
-import cx from 'classnames'
+import { useEffect, useState } from 'react'
 
 import { centsToPrice } from '@lib/helpers'
 
 import {
-  useSiteContext,
-  useCartTotals,
   useCartCount,
   useCartItems,
+  useCartTotals,
   useCheckout,
+  useCheckoutCount,
+  useCheckoutItems,
+  useCheckoutTotals,
+  useSiteContext,
   useToggleCart,
 } from '@lib/context'
 
@@ -23,8 +26,11 @@ const Cart = ({ data }) => {
 
   const { isCartOpen, isUpdating } = useSiteContext()
   const { subTotal } = useCartTotals()
+  const { subTotalCheckout } = useCheckoutTotals()
+  const checkouttCount = useCheckoutCount()
   const cartCount = useCartCount()
-  const lineItems = useCartItems()
+  const lineItems = useCheckoutItems()
+  const cartLineItems = useCartItems()
   const checkoutURL = useCheckout()
   const toggleCart = useToggleCart()
 
@@ -52,7 +58,7 @@ const Cart = ({ data }) => {
       const buildCheckoutLink = shop.storeURL
         ? checkoutURL.replace(
             /^(?:https?:\/\/)?(?:[^@\/\n]+@)?(?:www\.)?([^:\/?\n]+)/g,
-            shop.storeURL
+            shop.storeURL,
           )
         : checkoutURL
       setCheckoutLink(buildCheckoutLink)
@@ -87,26 +93,26 @@ const Cart = ({ data }) => {
           <div className="cart--inner">
             <div className="cart--header">
               <div className="cart--title">
-                Your Cart <span className="cart--count">{cartCount}</span>
+                Votre panier <span className="cart--count">{cartCount}</span>
               </div>
               <button className="cart-toggle" onClick={() => toggleCart(false)}>
-                Done
+                Fini
               </button>
             </div>
 
             <div className="cart--content">
-              {lineItems?.length ? (
-                <CartItems items={lineItems} />
+              {cartLineItems?.length ? (
+                <CartItems items={cartLineItems} />
               ) : (
                 <EmptyCart />
               )}
             </div>
 
-            {lineItems?.length > 0 && (
+            {cartLineItems?.length > 0 && (
               <div className="cart--footer">
                 <div className="cart--subtotal">
                   <span>Subtotal</span>
-                  <span>${centsToPrice(subTotal)}</span>
+                  <span>{centsToPrice(subTotal * 100)}$</span>
                 </div>
 
                 <a
@@ -140,7 +146,7 @@ const CartItems = ({ items }) => {
   return (
     <div className="cart--items">
       {items.map((item) => {
-        return <CartItem key={item.id} item={item} />
+        return <CartItem key={item.node.id} item={item.node} />
       })}
     </div>
   )
