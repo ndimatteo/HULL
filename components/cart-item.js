@@ -1,11 +1,8 @@
-import React from 'react'
 import Link from 'next/link'
 
-import { hasObject } from '@lib/helpers'
 
-import { useUpdateItem, useRemoveItem, useToggleCart } from '@lib/context'
+import { useRemoveItem, useToggleCart, useUpdateItem } from '@lib/context'
 
-import Photo from '@components/photo'
 import { ProductCounter, ProductPrice } from '@components/product'
 
 function CartItem({ item }) {
@@ -14,24 +11,28 @@ function CartItem({ item }) {
   const toggleCart = useToggleCart()
 
   const changeQuantity = (quantity) => {
-    updateItem(item.lineID, quantity)
+    updateItem(item.id, quantity)
   }
 
-  const defaultPhoto = item.photos.cart?.find((set) => !set.forOption)
-  const variantPhoto = item.photos.cart?.find((set) => {
-    const option = set.forOption
-      ? {
-          name: set.forOption.split(':')[0],
-          value: set.forOption.split(':')[1],
-        }
-      : {}
-    return option.value && hasObject(item.options, option)
-  })
+  /*
+	const defaultPhoto = item.photos.cart?.find((set) => !set.forOption);
+	const variantPhoto = item.photos.cart?.find((set) => {
+		const option = set.forOption
+			? {
+					name: set.forOption.split(':')[0],
+					value: set.forOption.split(':')[1],
+			  }
+			: {};
+		return option.value && hasObject(item.options, option);
+	});
 
-  const photos = variantPhoto ? variantPhoto : defaultPhoto
+	const photos = variantPhoto ? variantPhoto : defaultPhoto;
+	*/
+  const photos = item.merchandise.product.images.edges[0].node.originalSrc
 
   return (
     <div className="cart-item">
+      {/*
       {photos && (
         <Photo
           photo={photos?.default}
@@ -39,26 +40,35 @@ function CartItem({ item }) {
           sizes="(min-width: 768px) 400px, 35vw'"
           className="cart-item--photo"
         />
-      )}
+      )} 
+      */}
+      {photos && <img src={photos} className="cart-item--photo" />}
       <div className="cart-item--details">
         <div className="cart-item--header">
           <div className="cart-item--title">
-            <div className="cart-item--variant">{item.title}</div>
+            {/* <div className="cart-item--variant">
+							{item.merchandise.product.title}
+			      </div> */}
             <h2 className="cart-item--name">
               <Link
-                href={`/products/${item.product.slug}?variant=${item.id}`}
+                href={`/products/${
+                  item.merchandise.product.handle
+                }?variant=${item.merchandise.id.replace(
+                  'gid://shopify/ProductVariant/',
+                  '',
+                )}`}
                 scroll={false}
               >
                 <a
                   onClick={() => toggleCart(false)}
                   className="cart-item--link"
                 >
-                  {item.product.title}
+                  {item.merchandise.product.title}
                 </a>
               </Link>
             </h2>
           </div>
-          <ProductPrice price={item.price} />
+          <ProductPrice price={item.cost.totalAmount.amount * 100} />
         </div>
         <div className="cart-item--tools">
           <div className="cart-item--quantity">
@@ -70,11 +80,8 @@ function CartItem({ item }) {
               className="is-small is-inverted"
             />
           </div>
-          <button
-            onClick={() => removeItem(item.lineID)}
-            className="btn is-text"
-          >
-            Remove
+          <button onClick={() => removeItem(item.id)} className="btn is-text">
+            Supprimer
           </button>
         </div>
       </div>
